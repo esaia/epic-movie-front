@@ -9,7 +9,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Helvetica: "Helvetica",
+      },
+      backgroundImage: {
+        imageOne: "url('/static/images/imageOne.png')",
+        imageTwo: "url('/static/images/imageTwo.png')",
+        imageThree: "url('/static/images/imageThree.png')",
+      },
+    },
   },
   plugins: [],
 };
