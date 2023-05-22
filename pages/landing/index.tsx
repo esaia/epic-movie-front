@@ -1,12 +1,19 @@
-import { Header, LandingQuote, LoginModal, Portal } from "@/components";
+import {
+  Header,
+  LandingQuote,
+  LoginModal,
+  Portal,
+  RegisterModal,
+} from "@/components";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Landing = () => {
   const router = useRouter();
   const [loginModal, setloginModal] = useState<boolean>(false);
+  const [registerModal, setRegisterModal] = useState<boolean>(false);
 
-  const closeLoginModal = () => {
+  const closeModal = () => {
     router.push("/landing");
     // setloginModal(false);
   };
@@ -14,8 +21,11 @@ const Landing = () => {
   useEffect(() => {
     if (router.query.modal === "login") {
       setloginModal(true);
+    } else if (router.query.modal === "register") {
+      setRegisterModal(true);
     } else {
       setloginModal(false);
+      setRegisterModal(false);
     }
   }, [router]);
 
@@ -23,8 +33,12 @@ const Landing = () => {
     <div className="bg-gray-950 h-screen overflow-y-scroll ">
       <Header />
 
-      <Portal isOpen={loginModal} closeModal={closeLoginModal}>
+      <Portal isOpen={loginModal} closeModal={closeModal}>
         <LoginModal />
+      </Portal>
+
+      <Portal isOpen={registerModal} closeModal={closeModal}>
+        <RegisterModal />
       </Portal>
 
       <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20  ">

@@ -2,7 +2,7 @@ import { Input } from "@/components";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FormProvider, useForm } from "react-hook-form";
 
-const LoginModal = () => {
+const RegisterModal = () => {
   const form = useForm();
   const { handleSubmit, register } = form;
   const submitForm = () => {};
@@ -13,17 +13,26 @@ const LoginModal = () => {
         onSubmit={handleSubmit(submitForm)}
         className="w-full h-full  m-auto"
       >
-        <h2 className="text-center text-2xl mb-2">Log in to your account</h2>
+        <h2 className="text-center text-2xl mb-2">Create an account</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
-          Welcome back! Please enter your details.
+          Start your journey!
         </p>
         <Input
           name="name"
           label="Name"
           required={true}
+          placeholder="At least 3 & max.15 lower case characters"
+          registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
+        />
+
+        <Input
+          name="email"
+          label="Email"
+          required={true}
           placeholder="Enter your email"
           registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
         />
+
         <Input
           name="password"
           label="Password"
@@ -32,35 +41,31 @@ const LoginModal = () => {
           placeholder="Password"
           registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
         />
-        {/* Remember me & Forger password */}
-        <div className="flex justify-between items-center">
-          <div className="flex justify-between items-center w-full">
-            <div className="flex gap-2">
-              <input {...register("remember")} type="checkbox" />
-              <label htmlFor="">Rememer me</label>
-            </div>
-            <p className="text-blue-700 underline cursor-pointer">
-              Forgot password
-            </p>
-          </div>
-        </div>
+
+        <Input
+          name="confirmation"
+          label="Confirm password"
+          type="password"
+          required={true}
+          placeholder="Confirm password"
+          registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
+        />
+
         {/* Buttons */}
         <button className="px-5 py-2 bg-red-500 text-white rounded-md w-full mt-5">
-          Sign in
+          Get started
         </button>
         <div className="px-5 py-2 bg-transparent text-white border border-white rounded-md w-full mt-5 flex justify-center items-center gap-3 cursor-pointer">
           <AiOutlineGoogle />
-          Sign in with Google
+          Sign up with Google
         </div>
-        <div className="mt-5 flex justify-center items-center gap-2  text-gray-500">
-          <p>Don't have an account</p>
-          <span className="text-blue-700 underline cursor-pointer">
-            Sign up
-          </span>
+        <div className="mt-5 flex justify-center items-center gap-2 text-gray-500">
+          <p>Already have an account?</p>
+          <span className="text-blue-700 underline cursor-pointer">Log in</span>
         </div>
       </form>
     </FormProvider>
   );
 };
 
-export default LoginModal;
+export default RegisterModal;
