@@ -1,11 +1,10 @@
 import { Input } from "@/components";
 import { AiOutlineGoogle } from "react-icons/ai";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
+import useLoginModal from "./useLoginModal";
 
 const LoginModal = () => {
-  const form = useForm();
-  const { handleSubmit, register } = form;
-  const submitForm = () => {};
+  const { handleSubmit, register, submitForm, form } = useLoginModal();
 
   return (
     <FormProvider {...form}>
@@ -22,7 +21,10 @@ const LoginModal = () => {
           label="Name"
           required={true}
           placeholder="Enter your email"
-          registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
+          registerOptions={{
+            required: "ამ ველის შევსება სავალდებულოა",
+            minLength: { value: 3, message: "შეიყვანეთ მინიმუმ 3 სიმბოლო" },
+          }}
         />
         <Input
           name="password"

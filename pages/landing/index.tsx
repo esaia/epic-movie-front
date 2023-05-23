@@ -1,4 +1,5 @@
 import {
+  EmailCheckModal,
   Header,
   LandingQuote,
   LoginModal,
@@ -12,6 +13,7 @@ const Landing = () => {
   const router = useRouter();
   const [loginModal, setloginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
+  const [emailCheckModal, setEmailCheckModal] = useState<boolean>(false);
 
   const closeModal = () => {
     router.push("/landing");
@@ -23,9 +25,12 @@ const Landing = () => {
       setloginModal(true);
     } else if (router.query.modal === "register") {
       setRegisterModal(true);
+    } else if (router.query.modal === "emailcheck") {
+      setEmailCheckModal(true);
     } else {
       setloginModal(false);
       setRegisterModal(false);
+      setEmailCheckModal(false);
     }
   }, [router]);
 
@@ -39,6 +44,10 @@ const Landing = () => {
 
       <Portal isOpen={registerModal} closeModal={closeModal}>
         <RegisterModal />
+      </Portal>
+
+      <Portal isOpen={emailCheckModal} closeModal={closeModal}>
+        <EmailCheckModal />
       </Portal>
 
       <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20  ">

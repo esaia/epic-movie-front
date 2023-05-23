@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import useInput from "./useInput";
 import { BiErrorCircle } from "react-icons/bi";
 import { IoMdCheckmark } from "react-icons/io";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface inputProps {
   name: string;
@@ -21,15 +20,8 @@ const Input = ({
   type = "text",
   registerOptions,
 }: inputProps) => {
-  const {
-    formState: { errors },
-    formState,
-    register,
-    getFieldState,
-  } = useFormContext();
-  const [showPassword, setShowPassword] = useState<boolean>(true);
-  const { isDirty } = getFieldState(name, formState);
-  const input = useWatch({ name });
+  const { showPassword, setShowPassword, isDirty, input, errors, register } =
+    useInput({ name });
 
   return (
     <div className="w-full flex  justify-center items-start gap-2 flex-col ">
@@ -50,7 +42,7 @@ const Input = ({
             <input
               type={showPassword ? "password" : "text"}
               {...register(name, registerOptions)}
-              className="outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2 "
+              className="outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2   mr-14 "
               placeholder={placeholder}
             />
             <div
@@ -75,7 +67,7 @@ const Input = ({
             <input
               type={type}
               {...register(name, registerOptions)}
-              className="outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2 "
+              className="outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2  mr-8 "
               placeholder={placeholder}
             />
             <div
