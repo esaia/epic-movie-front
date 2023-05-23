@@ -20,8 +20,14 @@ const Input = ({
   type = "text",
   registerOptions,
 }: inputProps) => {
-  const { showPassword, setShowPassword, isDirty, input, errors, register } =
-    useInput({ name });
+  const {
+    showPassword,
+    setShowPassword,
+    input,
+    errors,
+    register,
+    isSubmitted,
+  } = useInput({ name });
 
   return (
     <div className="w-full flex  justify-center items-start gap-2 flex-col ">
@@ -33,7 +39,7 @@ const Input = ({
         ${
           errors[name]
             ? "border-red-500"
-            : isDirty && input?.length !== 0 && "border-green-500"
+            : isSubmitted && input?.length !== 0 && "border-green-500"
         }
         `}
       >
@@ -52,10 +58,10 @@ const Input = ({
               {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
             </div>
             <div className="absolute right-7 cursor-pointer">
-              {errors["name"] ? (
+              {errors[name] ? (
                 <BiErrorCircle className="text-red-600 text-xl" />
               ) : (
-                isDirty &&
+                isSubmitted &&
                 input?.length !== 0 && (
                   <IoMdCheckmark className="text-green-600 text-xl" />
                 )
@@ -74,10 +80,10 @@ const Input = ({
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-2 cursor-pointer"
             >
-              {errors["name"] ? (
+              {errors[name] ? (
                 <BiErrorCircle className="text-red-600 text-xl" />
               ) : (
-                isDirty &&
+                isSubmitted &&
                 input?.length !== 0 && (
                   <IoMdCheckmark className="text-green-600 text-xl" />
                 )
