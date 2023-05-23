@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { PortalProps } from "./types";
+import usePortal from "./usePortal";
 
 const Portal = ({ children, isOpen, closeModal }: PortalProps) => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const { isClient } = usePortal();
 
   return isClient && isOpen
     ? createPortal(

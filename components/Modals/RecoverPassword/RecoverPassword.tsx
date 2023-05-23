@@ -1,6 +1,5 @@
-import { Input } from "components/Input";
+import { Input } from "@/components";
 import Link from "next/link";
-import React from "react";
 import { FormProvider } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import useRecoverPassword from "./useRecoverPassword";

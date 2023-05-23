@@ -74,7 +74,6 @@ const RegisterModal = () => {
           }}
         />
 
-        {/* Buttons */}
         <button className="px-5 py-2 bg-red-500 text-white rounded-md w-full mt-5">
           Get started
         </button>

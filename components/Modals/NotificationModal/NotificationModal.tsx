@@ -1,4 +1,3 @@
-import { CheckMark } from "components/icons";
 import Link from "next/link";
 import React from "react";
 

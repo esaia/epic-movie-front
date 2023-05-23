@@ -35,7 +35,7 @@ const LoginModal = () => {
           placeholder="Password"
           registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
         />
-        {/* Remember me & Forger password */}
+
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center w-full">
             <div className="flex gap-2">
@@ -49,7 +49,7 @@ const LoginModal = () => {
             </Link>
           </div>
         </div>
-        {/* Buttons */}
+
         <button className="px-5 py-2 bg-red-500 text-white rounded-md w-full mt-5">
           Sign in
         </button>
