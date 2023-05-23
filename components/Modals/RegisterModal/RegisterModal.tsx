@@ -12,7 +12,7 @@ const RegisterModal = () => {
         onSubmit={handleSubmit(submitForm)}
         className="w-full h-full  m-auto"
       >
-        <h2 className="text-center text-2xl mb-2">Create an account</h2>
+        <h2 className="text-center text-3xl mb-2">Create an account</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           Start your journey!
         </p>

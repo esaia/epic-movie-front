@@ -24,7 +24,7 @@ const Portal = ({ children, isOpen, closeModal }: PortalProps) => {
           <div className="fixed top-0 w-full h-screen backdrop-blur-[2px] "></div>
 
           <div
-            className="md:max-w-xl w-full h-screen md:h-fit md:pt-10 md:pb-10 pt-24 bg-[#222030] text-white  md:mx-10  px-10 md:px-20  relative md:rounded-md"
+            className="md:max-w-xl w-full h-screen md:h-fit bg-[#222030] text-white  px-6 md:px-20 py-32 md:py-10 relative md:rounded-md"
             onClick={(e) => e.stopPropagation()}
           >
             <div

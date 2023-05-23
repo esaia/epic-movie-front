@@ -1,9 +1,13 @@
 import {
-  EmailCheckModal,
+  CheckMark,
+  EmailCheckIcon,
+  ForgotPassword,
   Header,
   LandingQuote,
   LoginModal,
+  NotificationModal,
   Portal,
+  RecoverPassword,
   RegisterModal,
 } from "@/components";
 import { useRouter } from "next/router";
@@ -14,40 +18,99 @@ const Landing = () => {
   const [loginModal, setloginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [emailCheckModal, setEmailCheckModal] = useState<boolean>(false);
+  const [accountActivation, setAccountActivation] = useState<boolean>(false);
+  const [forgotPassword, setForgotPassword] = useState<boolean>(false);
+  const [forgotPasswordCheck, setForgotPasswordCheck] =
+    useState<boolean>(false);
+  const [recoverPassword, setRecoverPassword] = useState<boolean>(false);
+  const [emailChangeNotification, setEmailChangeNotification] =
+    useState<boolean>(false);
+
+  const [passwordChangeNotification, setPasswordChangeNotification] =
+    useState<boolean>(false);
 
   const closeModal = () => {
     router.push("/landing");
-    // setloginModal(false);
   };
 
   useEffect(() => {
-    if (router.query.modal === "login") {
-      setloginModal(true);
-    } else if (router.query.modal === "register") {
-      setRegisterModal(true);
-    } else if (router.query.modal === "emailcheck") {
-      setEmailCheckModal(true);
-    } else {
-      setloginModal(false);
-      setRegisterModal(false);
-      setEmailCheckModal(false);
-    }
+    const { modal } = router.query;
+
+    setloginModal(modal === "login");
+    setRegisterModal(modal === "register");
+    setEmailCheckModal(modal === "emailcheck");
+    setAccountActivation(modal === "account-activation");
+    setForgotPassword(modal === "forgot-password");
+    setForgotPasswordCheck(modal === "forgot-password-check");
+    setRecoverPassword(modal === "recover-password");
+    setEmailChangeNotification(modal === "email-change-notification");
+    setPasswordChangeNotification(modal === "password-change-notification");
   }, [router]);
 
   return (
     <div className="bg-gray-950 h-screen overflow-y-scroll ">
       <Header />
-
       <Portal isOpen={loginModal} closeModal={closeModal}>
         <LoginModal />
       </Portal>
-
       <Portal isOpen={registerModal} closeModal={closeModal}>
         <RegisterModal />
       </Portal>
-
       <Portal isOpen={emailCheckModal} closeModal={closeModal}>
-        <EmailCheckModal />
+        <NotificationModal
+          title="Thank you!"
+          desc="Please check your email and follow the instructions to activate your account."
+          link="/"
+          buttonText="Go to my email"
+          icon={<EmailCheckIcon />}
+        />
+      </Portal>
+      <Portal isOpen={accountActivation} closeModal={closeModal}>
+        <NotificationModal
+          title="Thank you!"
+          desc="Your account has been activated."
+          link="/landing?modal=login"
+          buttonText="Go to my news feed"
+          icon={<CheckMark />}
+        />
+      </Portal>
+
+      <Portal isOpen={forgotPassword} closeModal={closeModal}>
+        <ForgotPassword />
+      </Portal>
+
+      <Portal isOpen={forgotPasswordCheck} closeModal={closeModal}>
+        <NotificationModal
+          title="Check your email"
+          desc="We have sent a password recover instructions to your email"
+          link="/"
+          buttonText="Go to my email"
+          icon={<EmailCheckIcon />}
+        />
+      </Portal>
+
+      <Portal isOpen={recoverPassword} closeModal={closeModal}>
+        <RecoverPassword />
+      </Portal>
+
+      <Portal isOpen={emailChangeNotification} closeModal={closeModal}>
+        <NotificationModal
+          title="Success!"
+          desc="Your Email changed successfully"
+          link="/landing?modal=login"
+          buttonText="Log in"
+          icon={<CheckMark />}
+        />
+      </Portal>
+
+      <Portal isOpen={passwordChangeNotification} closeModal={closeModal}>
+        <NotificationModal
+          title="Success!"
+          desc="Your Password changed successfully"
+          link="/landing?modal=login"
+          buttonText="Log in"
+          icon={<CheckMark />}
+        />
       </Portal>
 
       <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20  ">

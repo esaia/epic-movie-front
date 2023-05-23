@@ -2,6 +2,7 @@ import { Input } from "@/components";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FormProvider } from "react-hook-form";
 import useLoginModal from "./useLoginModal";
+import Link from "next/link";
 
 const LoginModal = () => {
   const { handleSubmit, register, submitForm, form } = useLoginModal();
@@ -12,7 +13,7 @@ const LoginModal = () => {
         onSubmit={handleSubmit(submitForm)}
         className="w-full h-full  m-auto"
       >
-        <h2 className="text-center text-2xl mb-2">Log in to your account</h2>
+        <h2 className="text-center text-3xl mb-2">Log in to your account</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           Welcome back! Please enter your details.
         </p>
@@ -41,9 +42,11 @@ const LoginModal = () => {
               <input {...register("remember")} type="checkbox" />
               <label htmlFor="">Rememer me</label>
             </div>
-            <p className="text-blue-700 underline cursor-pointer">
-              Forgot password
-            </p>
+            <Link href="/landing?modal=forgot-password">
+              <p className="text-blue-700 underline cursor-pointer">
+                Forgot password
+              </p>
+            </Link>
           </div>
         </div>
         {/* Buttons */}

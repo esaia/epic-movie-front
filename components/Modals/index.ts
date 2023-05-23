@@ -1,3 +1,5 @@
 export * from "./LoginModal";
 export * from "./RegisterModal";
-export * from "./EmailCheckModal";
+export * from "./ForgotPassword";
+export * from "./NotificationModal";
+export * from "./RecoverPassword";
