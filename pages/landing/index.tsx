@@ -10,43 +10,21 @@ import {
   RecoverPassword,
   RegisterModal,
 } from "@/components";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import useLanding from "./useLanding";
 
 const Landing = () => {
-  const router = useRouter();
-  const [loginModal, setloginModal] = useState<boolean>(false);
-  const [registerModal, setRegisterModal] = useState<boolean>(false);
-  const [emailCheckModal, setEmailCheckModal] = useState<boolean>(false);
-  const [accountActivation, setAccountActivation] = useState<boolean>(false);
-  const [forgotPassword, setForgotPassword] = useState<boolean>(false);
-  const [forgotPasswordCheck, setForgotPasswordCheck] =
-    useState<boolean>(false);
-  const [recoverPassword, setRecoverPassword] = useState<boolean>(false);
-  const [emailChangeNotification, setEmailChangeNotification] =
-    useState<boolean>(false);
-
-  const [passwordChangeNotification, setPasswordChangeNotification] =
-    useState<boolean>(false);
-
-  const closeModal = () => {
-    router.push("/landing");
-  };
-
-  useEffect(() => {
-    const { modal } = router.query;
-
-    setloginModal(modal === "login");
-    setRegisterModal(modal === "register");
-    setEmailCheckModal(modal === "emailcheck");
-    setAccountActivation(modal === "account-activation");
-    setForgotPassword(modal === "forgot-password");
-    setForgotPasswordCheck(modal === "forgot-password-check");
-    setRecoverPassword(modal === "recover-password");
-    setEmailChangeNotification(modal === "email-change-notification");
-    setPasswordChangeNotification(modal === "password-change-notification");
-  }, [router]);
-
+  const {
+    loginModal,
+    registerModal,
+    emailCheckModal,
+    accountActivation,
+    forgotPassword,
+    forgotPasswordCheck,
+    recoverPassword,
+    emailChangeNotification,
+    passwordChangeNotification,
+    closeModal,
+  } = useLanding();
   return (
     <div className="bg-gray-950 h-screen overflow-y-scroll ">
       <Header />
