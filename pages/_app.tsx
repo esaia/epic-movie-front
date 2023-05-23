@@ -20,7 +20,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <Head>
         <title>Epic movie</title>
       </Head>
-      <Component {...pageProps} />
+      <div>
+        <Component {...pageProps} />
+      </div>
     </div>
   );
 }
