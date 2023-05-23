@@ -1,10 +1,6 @@
 import React from "react";
 import { AiOutlineMinus } from "react-icons/ai";
-interface propsType {
-  quote: string;
-  movie: string;
-  image: string;
-}
+import { propsType } from "./types";
 
 const LandingMovie = ({ quote, movie, image }: propsType) => {
   return (
