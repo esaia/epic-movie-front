@@ -4,3 +4,8 @@ export * from "./Portal";
 export * from "./Input";
 export * from "./Modals";
 export * from "./icons";
+export * from "./NewsFeedHeader";
+export * from "./Sidebar";
+export * from "./CreateQuote";
+export * from "./QuotePost";
+export * from "./Comments";
