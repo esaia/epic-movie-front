@@ -11,7 +11,7 @@ const Home = () => {
           <Sidebar />
         </div>
 
-        <div className="flex-3 py-5  max-w-[750px] text-white ">
+        <div className="flex-3 py-5  max-w-[650px] text-white ">
           <CreateQuote />
           <QuotePost />
           <QuotePost />
