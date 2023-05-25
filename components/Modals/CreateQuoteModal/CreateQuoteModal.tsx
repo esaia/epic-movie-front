@@ -35,7 +35,7 @@ const CreateQuoteModal = () => {
           </div>
 
           <div className="w-full border border-gray-600 rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
-            <AiOutlineCamera />
+            <AiOutlineCamera className="text-xl min-w-[30px]" />
             <p>Drag & drop your image here or</p>
             <label
               htmlFor="file"

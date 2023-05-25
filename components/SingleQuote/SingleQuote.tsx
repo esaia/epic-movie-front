@@ -2,14 +2,18 @@ import { VscComment } from "react-icons/vsc";
 import { BsThreeDots, BsTrash3 } from "react-icons/bs";
 import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { RiPencilLine } from "react-icons/ri";
-import { useState } from "react";
+import useSingleQuote from "./useSingleQuote";
 
 const SingleQuote = () => {
-  const [showDetails, setshowDetails] = useState(false);
-  const [showDetailsMobile, setshowDetailsMobile] = useState(false);
+  const {
+    showDetails,
+    setshowDetails,
+    showDetailsMobile,
+    setshowDetailsMobile,
+  } = useSingleQuote();
 
   return (
-    <div className="bg-[#11101a] p-4 rounded-md relative mb-5 ">
+    <div className="bg-[#11101a] p-4 rounded-md relative mb-5  ">
       <div
         className="absolute top-3 right-3 cursor-pointer hidden md:block"
         onClick={() => setshowDetails(!showDetails)}

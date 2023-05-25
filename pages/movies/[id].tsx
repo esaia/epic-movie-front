@@ -1,11 +1,24 @@
-import { MovieWrapper, SingleQuote } from "@/components";
+import {
+  DashboaradPortal,
+  EditMovieModal,
+  MovieWrapper,
+  SingleQuote,
+} from "@/components";
+import Link from "next/link";
 import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
+import useMovie from "./useMovie";
 
 const SingleMovie = () => {
+  const { editMovieModal, closeModal } = useMovie();
+
   return (
     <MovieWrapper>
+      <DashboaradPortal isOpen={editMovieModal} closeModal={closeModal}>
+        <EditMovieModal />
+      </DashboaradPortal>
+
       <h1 className="text-xl">Movie discription</h1>
 
       <div className="grid gap-5 md:grid-cols-column4 py-6 ">
@@ -34,7 +47,9 @@ const SingleMovie = () => {
           <div className="flex justify-between">
             <div className="flex justify-between">COMMITMENT HASAN (1999)</div>
             <div className="flex bg-secondary items-center gap-3 px-4 py-2 rounded-md">
-              <BiPencil className="cursor-pointer" />
+              <Link href={"/movies/id?modal=edit-movie"}>
+                <BiPencil className="cursor-pointer" />
+              </Link>
               |
               <BsTrash3 className="cursor-pointer" />
             </div>

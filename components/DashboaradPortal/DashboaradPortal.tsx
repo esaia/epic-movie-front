@@ -15,17 +15,17 @@ const DashboaradPortal = ({ children, isOpen, closeModal }: PortalProps) => {
   return isClient && isOpen
     ? createPortal(
         <div
-          className="bg-gray-900/30  absolute left-0 top-0 h-screen w-full flex justify-center items-center "
+          className="bg-gray-900/30  absolute  left-0 top-0  w-full h-screen  flex justify-center items-center   "
           onClick={closeModal}
         >
-          <div className="fixed top-0 w-full h-screen backdrop-blur-[2px]  "></div>
+          <div className="fixed top-0 w-full h-full backdrop-blur-[2px]  "></div>
 
           <div
-            className="md:max-w-xl w-full h-screen md:h-fit bg-[#222030] text-white  relative  rounded-md z-[100] "
+            className="md:max-w-xl w-full md:h-fit bg-[#222030] text-white  relative  rounded-md z-[100] overflow-y-auto  "
             onClick={(e) => e.stopPropagation()}
           >
             <div
-              className="absolute right-4 top-4 cursor-pointer text-xl z-30 "
+              className="absolute right-4 top-4 cursor-pointer text-xl  "
               onClick={closeModal}
             >
               <AiOutlineClose />

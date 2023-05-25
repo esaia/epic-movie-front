@@ -11,7 +11,7 @@ const NewsFeedHeader = () => {
   const { showNotification, setShowNotification } = useNewsFeedHeader();
 
   return (
-    <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary  py-3 md:px-7 md:py-5 flex justify-between items-center w-full  font-Helvetica  z-20 md:z-30 fixed top-0">
+    <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary  py-3 md:px-7 md:py-5 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
       <h1 className="uppercase text-white hidden md:block">Movie quotes</h1>
       <CiMenuBurger className="md:hidden block text-2xl ml-7 cursor-pointer" />
       <div className="flex gap-4 items-center ">

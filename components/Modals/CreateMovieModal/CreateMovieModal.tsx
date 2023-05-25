@@ -1,12 +1,16 @@
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 import useCreateMovieModal from "./useCreateMovieModal";
+import { AiOutlineCamera } from "react-icons/ai";
 
 const CreateMovieModal = () => {
   const { handleSubmit, register, submitForm, form } = useCreateMovieModal();
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit(submitForm)} className="w-full text-center ">
+      <form
+        onSubmit={handleSubmit(submitForm)}
+        className="w-full text-center  h-[90vh]"
+      >
         <h2 className="py-5 border-b border-gray-600 text-xl">add movie</h2>
 
         <div className="p-5">
@@ -116,7 +120,26 @@ const CreateMovieModal = () => {
               ></textarea>
             </div>
 
-            <button className="w-full bg-red-600 p-1 rounded-md">Post</button>
+            <div className="w-full border border-gray-600 rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
+              <AiOutlineCamera className="text-xl min-w-[30px]" />
+              <p>Drag & drop your image here or</p>
+              <label
+                htmlFor="file"
+                className="px-2 py-1 bg-purple-900 cursor-pointer"
+              >
+                Choose file
+              </label>
+              <input id="file" type="file" className="hidden" />
+            </div>
+
+            <button
+              className="w-full bg-red-600 p-1 rounded-md"
+              {...register("image", {
+                required: "ამ ველის შევსება სავალდებულოა",
+              })}
+            >
+              Add movie
+            </button>
           </div>
         </div>
       </form>
