@@ -3,17 +3,29 @@ import { BsThreeDots, BsTrash3 } from "react-icons/bs";
 import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { RiPencilLine } from "react-icons/ri";
 import useSingleQuote from "./useSingleQuote";
-
+import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
+import Link from "next/link";
 const SingleQuote = () => {
   const {
     showDetails,
     setshowDetails,
     showDetailsMobile,
     setshowDetailsMobile,
+    viewQuote,
+    editQuote,
+    closeModal,
   } = useSingleQuote();
 
   return (
-    <div className="bg-[#11101a] p-4 rounded-md relative mb-5  ">
+    <div className="bg-[#11101a] p-4 rounded-md relative mb-5  z-4">
+      <DashboaradPortal isOpen={viewQuote} closeModal={closeModal}>
+        <ViewQuote />
+      </DashboaradPortal>
+
+      <DashboaradPortal isOpen={editQuote} closeModal={closeModal}>
+        <EditQuote />
+      </DashboaradPortal>
+
       <div
         className="absolute top-3 right-3 cursor-pointer hidden md:block"
         onClick={() => setshowDetails(!showDetails)}
@@ -23,15 +35,19 @@ const SingleQuote = () => {
 
       {showDetails && (
         <div className="absolute top-8 right-[-40px] bg-secondary rounded-md p-5 hidden md:block">
-          <div className="flex gap-3 mb-2 cursor-pointer items-center">
-            <AiOutlineEye />
-            <p>view quote</p>
-          </div>
+          <Link href={"/movies/id?modal=view-quote"}>
+            <div className="flex gap-3 mb-2 cursor-pointer items-center">
+              <AiOutlineEye />
+              <p>view quote</p>
+            </div>
+          </Link>
 
-          <div className="flex gap-3 mb-2 cursor-pointer items-center">
-            <RiPencilLine />
-            <p>Edit </p>
-          </div>
+          <Link href={"/movies/id?modal=edit-quote"}>
+            <div className="flex gap-3 mb-2 cursor-pointer items-center">
+              <RiPencilLine />
+              <p>Edit </p>
+            </div>
+          </Link>
 
           <div className="flex gap-3 mb-2 cursor-pointer items-center">
             <BsTrash3 />

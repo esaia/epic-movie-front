@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const useMovie = () => {
-  const [editMovieModal, setEditMovieModal] = useState<boolean>(true);
+  const [editMovieModal, setEditMovieModal] = useState<boolean>(false);
+  const [addQuote, setAddQuote] = useState<boolean>(false);
+
   const router = useRouter();
   const closeModal = () => {
     router.push("/movies/id");
@@ -11,9 +13,10 @@ const useMovie = () => {
   useEffect(() => {
     const { modal } = router.query;
     setEditMovieModal(modal === "edit-movie");
-  }, [router]);
+    setAddQuote(modal === "add-quote");
+  }, [router, router.query]);
 
-  return { editMovieModal, closeModal };
+  return { editMovieModal, addQuote, closeModal };
 };
 
 export default useMovie;

@@ -9,7 +9,7 @@ const CreateMovieModal = () => {
     <FormProvider {...form}>
       <form
         onSubmit={handleSubmit(submitForm)}
-        className="w-full text-center  h-[90vh]"
+        className="w-full text-center  h-screen md:h-[90vh]"
       >
         <h2 className="py-5 border-b border-gray-600 text-xl">add movie</h2>
 

@@ -6,3 +6,6 @@ export * from "./RecoverPassword";
 export * from "./CreateQuoteModal";
 export * from "./CreateMovieModal";
 export * from "./EditMovieModal";
+export * from "./ViewQuote";
+export * from "./EditQuote";
+export * from "./AddQuote";

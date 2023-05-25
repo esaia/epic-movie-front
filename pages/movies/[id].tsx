@@ -1,4 +1,5 @@
 import {
+  AddQuote,
   DashboaradPortal,
   EditMovieModal,
   MovieWrapper,
@@ -11,12 +12,16 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 import useMovie from "./useMovie";
 
 const SingleMovie = () => {
-  const { editMovieModal, closeModal } = useMovie();
+  const { editMovieModal, addQuote, closeModal } = useMovie();
 
   return (
     <MovieWrapper>
       <DashboaradPortal isOpen={editMovieModal} closeModal={closeModal}>
         <EditMovieModal />
+      </DashboaradPortal>
+
+      <DashboaradPortal isOpen={addQuote} closeModal={closeModal}>
+        <AddQuote />
       </DashboaradPortal>
 
       <h1 className="text-xl">Movie discription</h1>
@@ -33,7 +38,9 @@ const SingleMovie = () => {
               <p>Quotes (Total 7) </p>|
               <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
                 <AiOutlinePlusSquare />
-                <button>Add quote</button>
+                <Link href={"/movies/id?modal=add-quote"}>
+                  <button>Add quote</button>
+                </Link>
               </div>
             </div>
             <SingleQuote />
