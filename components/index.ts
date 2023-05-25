@@ -11,3 +11,7 @@ export * from "./QuotePost";
 export * from "./Comments";
 export * from "./Notification";
 export * from "./DashboaradPortal";
+export * from "./DashboardWrapper";
+export * from "./MoviePost";
+export * from "./MovieWrapper";
+export * from "./SingleQuote";

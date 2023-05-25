@@ -25,6 +25,12 @@ module.exports = {
         background: "#181825",
         secondary: "#1f1d2a",
       },
+
+      gridTemplateColumns: {
+        column2: "250px 1fr",
+        column3: "250px 1fr 250px",
+        column4: "55% 45%",
+      },
     },
   },
   plugins: [],

@@ -1,5 +1,6 @@
 import React from "react";
-import { AiOutlineCamera } from "react-icons/ai";
+import { AiOutlineCamera, AiOutlineCaretDown } from "react-icons/ai";
+import { BsCameraReels } from "react-icons/bs";
 
 const CreateQuoteModal = () => {
   return (
@@ -36,11 +37,24 @@ const CreateQuoteModal = () => {
           <div className="w-full border border-gray-600 rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
             <AiOutlineCamera />
             <p>Drag & drop your image here or</p>
+            <label
+              htmlFor="file"
+              className="px-2 py-1 bg-purple-900 cursor-pointer"
+            >
+              Choose file
+            </label>
+            <input id="file" type="file" className="hidden" />
           </div>
 
           <div className="w-full  bg-black  rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
-            <AiOutlineCamera />
-            <p>Drag & drop your image here or</p>
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-3">
+                <BsCameraReels />
+                <p>Choose movie</p>
+              </div>
+
+              <AiOutlineCaretDown className="text-white" />
+            </div>
           </div>
 
           <button className="w-full bg-red-600 p-1">Post</button>
