@@ -1,7 +1,9 @@
-import React from "react";
+import Link from "next/link";
 import { BsHouseDoor, BsCameraReels } from "react-icons/bs";
+import useSidebar from "./useSidebar";
 
 const Sidebar = () => {
+  const { router } = useSidebar();
   return (
     <div>
       <div className="flex items-center gap-5 ">
@@ -16,14 +18,24 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-4 my-9 text-md cursor-pointer text-md mt-10">
-        <BsHouseDoor className="text-2xl" />
-        <p>News feed</p>
-      </div>
-      <div className="flex items-center gap-4 my-9 text-md cursor-pointer text-md">
-        <BsCameraReels className="text-2xl" />
-        <p>BsCameraReels</p>
-      </div>
+      <Link href={"/"}>
+        <div className="flex items-center gap-4 my-9 text-md cursor-pointer text-md mt-10">
+          <BsHouseDoor
+            className={`text-2xl ${router.route === "/" && "text-red-600"}`}
+          />
+          <p>News feed</p>
+        </div>
+      </Link>
+      <Link href={"/movies"}>
+        <div className="flex items-center gap-4 my-9 text-md cursor-pointer text-md">
+          <BsCameraReels
+            className={`text-2xl ${
+              router.route === "/movies" && "text-red-600"
+            }`}
+          />
+          <p>List of movies</p>
+        </div>
+      </Link>
     </div>
   );
 };

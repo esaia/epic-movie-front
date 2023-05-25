@@ -9,6 +9,10 @@ const useSingleQuote = () => {
   const [viewQuote, setViewQuote] = useState<boolean>(false);
   const [editQuote, seteditQuote] = useState<boolean>(false);
 
+  const closeShowDetails = () => {
+    setshowDetails(false);
+  };
+
   const closeModal = () => {
     router.push("/movies/id");
   };
@@ -27,6 +31,7 @@ const useSingleQuote = () => {
     viewQuote,
     editQuote,
     closeModal,
+    closeShowDetails,
   };
 };
 

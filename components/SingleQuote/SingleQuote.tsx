@@ -5,6 +5,8 @@ import { RiPencilLine } from "react-icons/ri";
 import useSingleQuote from "./useSingleQuote";
 import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
 import Link from "next/link";
+import OutsideClickHandler from "react-outside-click-handler";
+
 const SingleQuote = () => {
   const {
     showDetails,
@@ -14,6 +16,7 @@ const SingleQuote = () => {
     viewQuote,
     editQuote,
     closeModal,
+    closeShowDetails,
   } = useSingleQuote();
 
   return (
@@ -34,26 +37,28 @@ const SingleQuote = () => {
       </div>
 
       {showDetails && (
-        <div className="absolute top-8 right-[-40px] bg-secondary rounded-md p-5 hidden md:block">
-          <Link href={"/movies/id?modal=view-quote"}>
-            <div className="flex gap-3 mb-2 cursor-pointer items-center">
-              <AiOutlineEye />
-              <p>view quote</p>
-            </div>
-          </Link>
+        <OutsideClickHandler onOutsideClick={closeShowDetails}>
+          <div className="absolute top-8 right-[-40px] bg-secondary rounded-md p-5 hidden md:block">
+            <Link href={"/movies/id?modal=view-quote"}>
+              <div className="flex gap-3 mb-2 cursor-pointer items-center">
+                <AiOutlineEye />
+                <p>view quote</p>
+              </div>
+            </Link>
 
-          <Link href={"/movies/id?modal=edit-quote"}>
-            <div className="flex gap-3 mb-2 cursor-pointer items-center">
-              <RiPencilLine />
-              <p>Edit </p>
-            </div>
-          </Link>
+            <Link href={"/movies/id?modal=edit-quote"}>
+              <div className="flex gap-3 mb-2 cursor-pointer items-center">
+                <RiPencilLine />
+                <p>Edit </p>
+              </div>
+            </Link>
 
-          <div className="flex gap-3 mb-2 cursor-pointer items-center">
-            <BsTrash3 />
-            <p>Delete </p>
+            <div className="flex gap-3 mb-2 cursor-pointer items-center">
+              <BsTrash3 />
+              <p>Delete </p>
+            </div>
           </div>
-        </div>
+        </OutsideClickHandler>
       )}
 
       {showDetailsMobile && (
@@ -79,7 +84,7 @@ const SingleQuote = () => {
         <img
           src="https://media.istockphoto.com/id/1237804526/vector/movie-night-concept-with-popcorn-cinema-tickets-drink-tape-in-cartoon-style-movie-or-cinema.jpg?s=612x612&w=0&k=20&c=FWIp6SXBqUg-_PWtoTxOy00b2aeg5xNDiRcFr6IF4l4="
           alt=""
-          className="rounded-sm object-cover md:w-36 w-full h-full "
+          className="rounded-sm object-cover  md:w-36 w-full h-36 md:h-full "
         />
         <p>"Frankly, my dear, I don'tgive a damn."</p>
       </div>

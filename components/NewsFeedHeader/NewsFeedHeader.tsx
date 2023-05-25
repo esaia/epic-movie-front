@@ -6,9 +6,11 @@ import { CiMenuBurger } from "react-icons/ci";
 import { BiSearch } from "react-icons/bi";
 import { RiArrowUpSFill } from "react-icons/ri";
 import useNewsFeedHeader from "./useNewsFeedHeader";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const NewsFeedHeader = () => {
-  const { showNotification, setShowNotification } = useNewsFeedHeader();
+  const { showNotification, handleToggleNotification, handleClickOutside } =
+    useNewsFeedHeader();
 
   return (
     <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary  py-3 md:px-7 md:py-5 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
@@ -17,7 +19,7 @@ const NewsFeedHeader = () => {
       <div className="flex gap-4 items-center ">
         <div
           className="relative cursor-pointer "
-          onClick={() => setShowNotification(!showNotification)}
+          onClick={handleToggleNotification}
         >
           <div className="bg-red-600 rounded-full w-4 h-4 absolute right-0 text-white flex justify-center items-center text-sm">
             1
@@ -25,20 +27,22 @@ const NewsFeedHeader = () => {
           <IoMdNotificationsOutline className="text-3xl text-white" />
 
           {showNotification && (
-            <div className=" hidden md:block md:absolute max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3">
-              <RiArrowUpSFill className="absolute top-[-14px] right-[152px] text-black text-2xl " />
+            <OutsideClickHandler onOutsideClick={handleClickOutside}>
+              <div className=" hidden md:block md:absolute max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3 ">
+                <RiArrowUpSFill className="absolute top-[-14px] right-[152px] text-black text-2xl " />
 
-              <div className="mb-5 ">
-                <div className="flex justify-between items-center">
-                  <p className="text-xl">Notifications</p>
-                  <p className="underline text-sm">Mark as all read</p>
+                <div className="mb-5 ">
+                  <div className="flex justify-between items-center">
+                    <p className="text-xl">Notifications</p>
+                    <p className="underline text-sm">Mark as all read</p>
+                  </div>
                 </div>
-              </div>
 
-              <Notification />
-              <Notification />
-              <Notification />
-            </div>
+                <Notification />
+                <Notification />
+                <Notification />
+              </div>
+            </OutsideClickHandler>
           )}
         </div>
 
