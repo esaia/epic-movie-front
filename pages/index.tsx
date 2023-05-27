@@ -2,7 +2,7 @@ import { CreateQuote, DashboardWrapper, QuotePost } from "@/components";
 
 const Home = () => {
   return (
-    <DashboardWrapper gridColumn="md:grid-cols-column3">
+    <DashboardWrapper>
       <CreateQuote />
       <QuotePost />
       <QuotePost />

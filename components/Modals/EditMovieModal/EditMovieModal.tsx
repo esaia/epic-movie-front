@@ -1,9 +1,11 @@
 import { AiOutlineCamera } from "react-icons/ai";
 import { FormProvider } from "react-hook-form";
 import useEditMovieModal from "./useEditMovieModal";
+import Select from "react-select";
 
 const EditMovieModal = () => {
-  const { handleSubmit, register, submitForm, form } = useEditMovieModal();
+  const { handleSubmit, register, submitForm, form, colourOptions } =
+    useEditMovieModal();
   return (
     <FormProvider {...form}>
       <form
@@ -58,10 +60,13 @@ const EditMovieModal = () => {
               <div className="w-16"></div>
             </div>
 
-            <div className="relative w-full flex  items-center  border border-gray-600 rounded-md overflow-hidden">
-              <div className="h-7"></div>
-              <div className="w-16"></div>
-            </div>
+            <Select
+              isMulti
+              name="colors"
+              options={colourOptions}
+              className="my-react-select-container "
+              classNamePrefix="my-react-select"
+            />
 
             <div className="relative w-full flex  items-center  border border-gray-600 rounded-md overflow-hidden">
               <label className="text-sm text-gray-500 min-w-fit pl-3 ">

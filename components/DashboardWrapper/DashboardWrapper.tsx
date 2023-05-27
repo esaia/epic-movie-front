@@ -3,15 +3,11 @@ import { ReactNode } from "react";
 
 interface DashboardWrapperProps {
   children: ReactNode;
-  gridColumn?: string;
 }
 
-const DashboardWrapper: React.FC<DashboardWrapperProps> = ({
-  children,
-  gridColumn = "md:grid-cols-column2",
-}) => {
+const DashboardWrapper: React.FC<DashboardWrapperProps> = ({ children }) => {
   return (
-    <div className="bg-background  text-white  ">
+    <div className="bg-background  text-white  min-h-screen">
       <NewsFeedHeader />
       <div className="pt-16"></div>
 

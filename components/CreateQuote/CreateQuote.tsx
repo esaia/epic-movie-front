@@ -1,8 +1,7 @@
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { BiSearch } from "react-icons/bi";
 import useCreateQuote from "./useCreateQuote";
-import { DashboaradPortal } from "..";
-import { CreateQuoteModal } from "@/components";
+import { CreateQuoteModal, DashboaradPortal } from "@/components";
 import Link from "next/link";
 
 const CreateQuote = () => {
