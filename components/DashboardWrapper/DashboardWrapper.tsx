@@ -16,7 +16,7 @@ const DashboardWrapper: React.FC<DashboardWrapperProps> = ({ children }) => {
           <Sidebar />
         </div>
 
-        <div className="py-5  max-w-[650px] text-white  justify-self-center ">
+        <div className="py-5  max-w-[650px] text-white  justify-self-center w-full  ">
           {children}
         </div>
       </div>
