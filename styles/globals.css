@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .input {
+    @apply outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2  mr-8;
+  }
+}
+
 @layer base {
   @font-face {
     font-family: "Helvetica";
@@ -16,4 +22,33 @@
     rgba(0, 0, 0, 0.49625787815126055) 43%,
     rgba(0, 212, 255, 0) 99%
   );
+}
+
+@layer components {
+  .my-react-select-container .my-react-select__control {
+    @apply bg-transparent outline-none ring-0 border-gray-500  text-left;
+  }
+
+  .my-react-select-container .my-react-select__control--is-focused {
+    @apply border-gray-500 ring-0;
+  }
+
+  .my-react-select-container .my-react-select__menu {
+    @apply bg-[#374151] text-white;
+  }
+
+  .my-react-select-container .my-react-select__option {
+    @apply text-white bg-gray-600  hover:bg-gray-800 cursor-pointer;
+  }
+  .my-react-select-container .my-react-select__multi-value {
+    @apply text-white bg-gray-400;
+  }
+
+  .my-react-select-container .my-react-select__multi-value__label {
+    @apply text-white;
+  }
+
+  .my-react-select-container .my-react-select__indicator-separator {
+    @apply bg-gray-700;
+  }
 }

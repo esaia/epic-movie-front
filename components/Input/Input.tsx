@@ -73,7 +73,7 @@ const Input = ({
             <input
               type={type}
               {...register(name, registerOptions)}
-              className="outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2  mr-8 "
+              className="input"
               placeholder={placeholder}
             />
             <div

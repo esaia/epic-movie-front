@@ -5,20 +5,17 @@ import useLoginModal from "./useLoginModal";
 import Link from "next/link";
 
 const LoginModal = () => {
-  const { handleSubmit, register, submitForm, form } = useLoginModal();
+  const { handleSubmit, register, onSubmit, form } = useLoginModal();
 
   return (
     <FormProvider {...form}>
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        className="w-full h-full  m-auto"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
         <h2 className="text-center text-3xl mb-2">Log in to your account</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           Welcome back! Please enter your details.
         </p>
         <Input
-          name="name"
+          name="email"
           label="Name"
           required={true}
           placeholder="Enter your email"
@@ -59,9 +56,11 @@ const LoginModal = () => {
         </div>
         <div className="mt-5 flex justify-center items-center gap-2  text-gray-500">
           <p>Don't have an account</p>
-          <span className="text-blue-700 underline cursor-pointer">
-            Sign up
-          </span>
+          <Link href={"/landing?modal=register"}>
+            <span className="text-blue-700 underline cursor-pointer">
+              Sign up
+            </span>
+          </Link>
         </div>
       </form>
     </FormProvider>

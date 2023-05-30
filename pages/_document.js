@@ -5,9 +5,10 @@ export default function Document() {
     <Html>
       <Head />
 
-      <body>
-        <Main />
+      <body id="bodyid">
         <div id="myportal" />
+
+        <Main />
         <NextScript />
       </body>
     </Html>

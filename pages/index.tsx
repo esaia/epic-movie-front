@@ -1,7 +1,14 @@
-import React from "react";
+import { CreateQuote, DashboardWrapper, QuotePost } from "@/components";
 
 const Home = () => {
-  return <div>Home Page</div>;
+  return (
+    <DashboardWrapper>
+      <CreateQuote />
+      <QuotePost />
+      <QuotePost />
+      <QuotePost />
+    </DashboardWrapper>
+  );
 };
 
 export default Home;

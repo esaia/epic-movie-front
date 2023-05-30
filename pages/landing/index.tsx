@@ -10,6 +10,7 @@ import {
   RecoverPassword,
   RegisterModal,
 } from "@/components";
+
 import useLanding from "./useLanding";
 
 const Landing = () => {

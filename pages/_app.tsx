@@ -2,6 +2,8 @@ import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -14,15 +16,17 @@ type AppPropsWithLayout = AppProps & {
 
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
+  const queryClient = new QueryClient();
 
   return getLayout(
-    <div>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <title>Epic movie</title>
       </Head>
       <div>
         <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </div>
-    </div>
+    </QueryClientProvider>
   );
 }

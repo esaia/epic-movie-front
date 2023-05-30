@@ -4,7 +4,6 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -16,6 +15,21 @@ module.exports = {
         imageOne: "url('/static/images/imageOne.png')",
         imageTwo: "url('/static/images/imageTwo.png')",
         imageThree: "url('/static/images/imageThree.png')",
+      },
+      flex: {
+        2: "2 2 0%",
+        3: "3 3 0%",
+      },
+
+      colors: {
+        background: "#181825",
+        secondary: "#1f1d2a",
+      },
+
+      gridTemplateColumns: {
+        column2: "250px 1fr",
+        column3: "250px 1fr 250px",
+        column4: "55% 45%",
       },
     },
   },

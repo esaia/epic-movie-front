@@ -2,16 +2,17 @@ import { Input } from "@/components";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FormProvider } from "react-hook-form";
 import useRegisterModal from "./useRegisterModal";
+import Link from "next/link";
+import { DevTool } from "@hookform/devtools";
 
 const RegisterModal = () => {
-  const { handleSubmit, form, submitForm, password } = useRegisterModal();
+  const { handleSubmit, form, password, control, onSubmit } =
+    useRegisterModal();
 
   return (
     <FormProvider {...form}>
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        className="w-full h-full  m-auto"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
+        <DevTool control={control} />
         <h2 className="text-center text-3xl mb-2">Create an account</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           Start your journey!
@@ -62,7 +63,7 @@ const RegisterModal = () => {
         />
 
         <Input
-          name="confirmation"
+          name="password_confirmation"
           label="Confirm password"
           type="password"
           required={true}
@@ -83,7 +84,11 @@ const RegisterModal = () => {
         </div>
         <div className="mt-5 flex justify-center items-center gap-2 text-gray-500">
           <p>Already have an account?</p>
-          <span className="text-blue-700 underline cursor-pointer">Log in</span>
+          <Link href={"/landing?modal=login"}>
+            <span className="text-blue-700 underline cursor-pointer">
+              Log in
+            </span>
+          </Link>
         </div>
       </form>
     </FormProvider>
