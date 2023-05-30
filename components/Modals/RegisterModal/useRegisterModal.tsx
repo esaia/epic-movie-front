@@ -1,6 +1,9 @@
+import axiosAPI from "lib/axios";
+import { useRouter } from "next/router";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { useMutation } from "react-query";
 
-interface loginDataType {
+interface registerUserType {
   name: string;
   email: string;
   password: string;
@@ -8,10 +11,24 @@ interface loginDataType {
 }
 
 const useRegisterModal = () => {
-  const form = useForm<loginDataType>();
+  const form = useForm<registerUserType>();
   const { handleSubmit, register, control } = form;
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<loginDataType> = () => {};
+  const storeUser = (user: registerUserType) => {
+    return axiosAPI.post("/register", user);
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: storeUser,
+    onSuccess: () => {
+      router.push("/landing?modal=emailcheck");
+    },
+  });
+
+  const onSubmit: SubmitHandler<registerUserType> = (user) => {
+    return mutate(user);
+  };
 
   const password = useWatch({
     control,
