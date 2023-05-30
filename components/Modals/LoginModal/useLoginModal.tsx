@@ -1,11 +1,18 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+interface loginDataType {
+  email: string;
+  password: string;
+  remember?: boolean;
+}
 
 const useLoginModal = () => {
-  const form = useForm();
-  const { handleSubmit, register, control, formState } = form;
-  const submitForm = () => {};
+  const form = useForm<loginDataType>();
+  const { handleSubmit, register, control } = form;
 
-  return { handleSubmit, register, submitForm, form, control };
+  const onSubmit: SubmitHandler<loginDataType> = () => {};
+
+  return { handleSubmit, register, onSubmit, form, control };
 };
 
 export default useLoginModal;

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Notification } from "@/components";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -9,8 +8,12 @@ import useNewsFeedHeader from "./useNewsFeedHeader";
 import OutsideClickHandler from "react-outside-click-handler";
 
 const NewsFeedHeader = () => {
-  const { showNotification, handleToggleNotification, handleClickOutside } =
-    useNewsFeedHeader();
+  const {
+    showNotification,
+    handleToggleNotification,
+    handleClickOutside,
+    logout,
+  } = useNewsFeedHeader();
 
   return (
     <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary  py-3 md:px-7 md:py-5 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
@@ -39,8 +42,6 @@ const NewsFeedHeader = () => {
                 </div>
 
                 <Notification />
-                <Notification />
-                <Notification />
               </div>
             </OutsideClickHandler>
           )}
@@ -56,8 +57,6 @@ const NewsFeedHeader = () => {
               </div>
             </div>
             <Notification />
-            <Notification />
-            <Notification />
           </div>
         )}
 
@@ -68,11 +67,12 @@ const NewsFeedHeader = () => {
 
         <BiSearch className="md:hidden block text-2xl" />
 
-        <Link href={"/landing?modal=login"}>
-          <button className="px-5 py-2 text-sm bg-transparent text-white rounded-md border border-white md:block hidden">
-            Log out
-          </button>
-        </Link>
+        <button
+          className="px-5 py-2 text-sm bg-transparent text-white rounded-md border border-white md:block hidden"
+          onClick={logout}
+        >
+          Log out
+        </button>
       </div>
     </div>
   );
