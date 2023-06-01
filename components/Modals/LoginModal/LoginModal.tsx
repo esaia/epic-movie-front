@@ -5,7 +5,8 @@ import useLoginModal from "./useLoginModal";
 import Link from "next/link";
 
 const LoginModal = () => {
-  const { handleSubmit, register, onSubmit, form } = useLoginModal();
+  const { handleSubmit, register, onSubmit, form, errorMessage } =
+    useLoginModal();
 
   return (
     <FormProvider {...form}>
@@ -24,6 +25,7 @@ const LoginModal = () => {
             minLength: { value: 3, message: "შეიყვანეთ მინიმუმ 3 სიმბოლო" },
           }}
         />
+
         <Input
           name="password"
           label="Password"
@@ -32,6 +34,7 @@ const LoginModal = () => {
           placeholder="Password"
           registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
         />
+        {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
 
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center w-full">

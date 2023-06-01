@@ -5,14 +5,12 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import useForgotPassword from "./useForgotPassword";
 
 const ForgotPassword = () => {
-  const { form, handleSubmit, submitForm } = useForgotPassword();
+  const { form, handleSubmit, onSubmit, errorMessage, isLoading } =
+    useForgotPassword();
 
   return (
     <FormProvider {...form}>
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        className="w-full h-full  m-auto"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
         <h2 className="text-center text-2xl mb-2">Forgot password?</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           Enter the email and we’ll send an email with instructions to reset
@@ -33,7 +31,14 @@ const ForgotPassword = () => {
           }}
         />
 
-        <button className="px-10 md:px-28 py-2 bg-red-500 text-white rounded-md w-full mt-5">
+        {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
+
+        <button
+          type="submit"
+          className={`px-10 md:px-28 py-2  text-white rounded-md w-full mt-5 
+                  ${isLoading ? "bg-gray-600" : "bg-red-500"} `}
+          disabled={isLoading}
+        >
           Send instructions
         </button>
 
