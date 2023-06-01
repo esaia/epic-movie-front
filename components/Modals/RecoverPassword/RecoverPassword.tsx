@@ -5,7 +5,8 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import useRecoverPassword from "./useRecoverPassword";
 
 const RecoverPassword = () => {
-  const { form, handleSubmit, submitForm, password } = useRecoverPassword();
+  const { form, handleSubmit, submitForm, password, isLoading } =
+    useRecoverPassword();
 
   return (
     <FormProvider {...form}>
@@ -34,7 +35,7 @@ const RecoverPassword = () => {
         />
 
         <Input
-          name="confirmation"
+          name="password_confirmation"
           label="Confirm password"
           type="password"
           required={true}
@@ -46,7 +47,11 @@ const RecoverPassword = () => {
           }}
         />
 
-        <button className="px-10 md:px-28 py-2 bg-red-500 text-white rounded-md w-full mt-5">
+        <button
+          className={`px-10 md:px-28 py-2  text-white rounded-md w-full mt-5 
+          ${isLoading ? "bg-gray-600" : "bg-red-500"}`}
+          disabled={isLoading}
+        >
           Reset password
         </button>
 

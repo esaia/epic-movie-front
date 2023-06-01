@@ -17,6 +17,8 @@ const useLanding = () => {
   const [passwordChangeNotification, setPasswordChangeNotification] =
     useState<boolean>(false);
 
+  const [linkExpired, setlinkExpired] = useState<boolean>(false);
+
   const closeModal = () => {
     router.push("/landing");
   };
@@ -33,6 +35,7 @@ const useLanding = () => {
     setRecoverPassword(modal === "recover-password");
     setEmailChangeNotification(modal === "email-change-notification");
     setPasswordChangeNotification(modal === "password-change-notification");
+    setlinkExpired(modal === "expired");
   }, [router]);
 
   return {
@@ -46,6 +49,7 @@ const useLanding = () => {
     emailChangeNotification,
     passwordChangeNotification,
     closeModal,
+    linkExpired,
   };
 };
 

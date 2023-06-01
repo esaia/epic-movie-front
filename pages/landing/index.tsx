@@ -1,6 +1,7 @@
 import {
   CheckMark,
   EmailCheckIcon,
+  ExpiredIcon,
   ForgotPassword,
   Header,
   LandingQuote,
@@ -24,6 +25,7 @@ const Landing = () => {
     recoverPassword,
     emailChangeNotification,
     passwordChangeNotification,
+    linkExpired,
     closeModal,
   } = useLanding();
   return (
@@ -39,7 +41,7 @@ const Landing = () => {
         <NotificationModal
           title="Thank you!"
           desc="Please check your email and follow the instructions to activate your account."
-          link="/"
+          link="/landing?modal=login"
           buttonText="Go to my email"
           icon={<EmailCheckIcon />}
         />
@@ -62,7 +64,7 @@ const Landing = () => {
         <NotificationModal
           title="Check your email"
           desc="We have sent a password recover instructions to your email"
-          link="/"
+          link="/landing?modal=login"
           buttonText="Go to my email"
           icon={<EmailCheckIcon />}
         />
@@ -89,6 +91,16 @@ const Landing = () => {
           link="/landing?modal=login"
           buttonText="Log in"
           icon={<CheckMark />}
+        />
+      </Portal>
+
+      <Portal isOpen={linkExpired} closeModal={closeModal}>
+        <NotificationModal
+          title="Link expired!"
+          desc="Login link has expired, because you haven’t used it."
+          link="/landing?modal=login"
+          buttonText="Request another link"
+          icon={<ExpiredIcon />}
         />
       </Portal>
 

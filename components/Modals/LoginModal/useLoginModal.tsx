@@ -1,6 +1,7 @@
+import axios from "axios";
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -31,6 +32,14 @@ const useLoginModal = () => {
   });
 
   const onSubmit: SubmitHandler<loginDataType> = (user) => {
+    const fetch = async () => {
+      await axios.get("http://localhost:8000/sanctum/csrf-cookie", {
+        headers: { Accept: "application/json" },
+        withCredentials: true,
+      });
+    };
+    fetch();
+
     return mutate(user);
   };
 

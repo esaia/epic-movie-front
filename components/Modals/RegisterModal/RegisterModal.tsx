@@ -3,16 +3,14 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import { FormProvider } from "react-hook-form";
 import useRegisterModal from "./useRegisterModal";
 import Link from "next/link";
-import { DevTool } from "@hookform/devtools";
 
 const RegisterModal = () => {
-  const { handleSubmit, form, password, control, onSubmit } =
+  const { handleSubmit, form, password, onSubmit, isLoading, errorMessage } =
     useRegisterModal();
 
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
-        <DevTool control={control} />
         <h2 className="text-center text-3xl mb-2">Create an account</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           Start your journey!
@@ -55,6 +53,8 @@ const RegisterModal = () => {
           placeholder="Password"
           registerOptions={{
             required: "ამ ველის შევსება სავალდებულოა",
+            minLength: { value: 8, message: "შეიყვანეთ მინიმუმ 8 სიმბოლო" },
+            maxLength: { value: 15, message: "შეიყვანეთ მაქსიმუმ 15 სიმბოლო" },
             pattern: {
               value: /^[a-z0-9]+$/,
               message: "შეიყვანეთ დაბალი რეგისტრის სიმბოლო ან რიცხვი",
@@ -75,7 +75,13 @@ const RegisterModal = () => {
           }}
         />
 
-        <button className="px-5 py-2 bg-red-500 text-white rounded-md w-full mt-5">
+        {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
+
+        <button
+          className={`px-10 md:px-28 py-2  text-white rounded-md w-full mt-5  
+          ${isLoading ? "bg-gray-600" : "bg-red-500"} `}
+          disabled={isLoading}
+        >
           Get started
         </button>
         <div className="px-5 py-2 bg-transparent text-white border border-white rounded-md w-full mt-5 flex justify-center items-center gap-3 cursor-pointer">
