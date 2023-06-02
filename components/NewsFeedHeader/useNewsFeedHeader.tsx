@@ -1,6 +1,7 @@
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const useNewsFeedHeader = () => {
   const [showNotification, setShowNotification] = useState(false);
@@ -14,6 +15,7 @@ const useNewsFeedHeader = () => {
   };
 
   const logout = () => {
+    Cookies.remove("user-email", { path: "" });
     const logout = async () => {
       await axiosAPI.post("/logout");
     };
