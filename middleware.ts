@@ -7,8 +7,6 @@ import type {
 export async function middleware(req: NextRequest): Promise<NextResponseType> {
   const hasCookie = req.cookies.has("user-email");
 
-  console.log(req.nextUrl.pathname);
-
   if (!hasCookie) {
     const signinUrl = new URL("/landing?modal=login", req.url);
     return NextResponse.redirect(signinUrl);
@@ -18,5 +16,5 @@ export async function middleware(req: NextRequest): Promise<NextResponseType> {
 }
 
 export const config = {
-  matcher: ["/api/auth/:path*", "/", "/movies"],
+  matcher: ["/api/auth/:path*", "/", "/movies", "/movies/:path*"],
 };
