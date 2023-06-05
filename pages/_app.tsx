@@ -5,6 +5,7 @@ import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
+import { AuthProvider } from "context/AuthContext";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,13 +21,15 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <QueryClientProvider client={queryClient}>
-      <Head>
-        <title>Epic movie</title>
-      </Head>
-      <div>
-        <Component {...pageProps} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </div>
+      <AuthProvider>
+        <Head>
+          <title>Epic movie</title>
+        </Head>
+        <div>
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </div>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

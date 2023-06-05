@@ -1,3 +1,4 @@
+import { ProfilePic } from "@/components";
 import React from "react";
 import { AiOutlineCamera, AiOutlineCaretDown } from "react-icons/ai";
 import { BsCameraReels } from "react-icons/bs";
@@ -9,11 +10,8 @@ const CreateQuoteModal = () => {
 
       <div className="p-5">
         <div className="flex items-center gap-2  mb-7">
-          <img
-            src="https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?cs=srgb&dl=pexels-tony-jamesandersson-1674752.jpg&fm=jpg"
-            alt="profile"
-            className="aspect-square w-10 h-10 object-cover rounded-full "
-          />
+          <ProfilePic size="10" />
+
           <p>Nino Tabagari</p>
         </div>
 

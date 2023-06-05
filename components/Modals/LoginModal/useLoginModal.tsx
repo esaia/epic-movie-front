@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
+import { AuthContext } from "context/AuthContext";
 import Cookies from "js-cookie";
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -20,6 +21,8 @@ interface User {
   creemail_verified_atated_at: string;
   id: number;
   name: string;
+  img: string;
+  google_id: string;
   updated_at: string;
 }
 
@@ -27,6 +30,8 @@ const useLoginModal = () => {
   const form = useForm<loginDataType>();
   const { handleSubmit, register, control } = form;
   const [errorMessage, setErrorMessage] = useState("");
+  const { setUser } = useContext(AuthContext);
+
   const router = useRouter();
 
   const loginUser = (user: loginDataType) => {
@@ -36,7 +41,9 @@ const useLoginModal = () => {
   const { mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: ({ data }: AxiosResponse<axiosRes>) => {
-      Cookies.set("user-email", data.user.email, { expires: 120 });
+      Cookies.set("user-email", data.user.email, { expires: 600 });
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user));
       router.push("/");
     },
     onError: () => {
@@ -46,17 +53,27 @@ const useLoginModal = () => {
 
   const onSubmit: SubmitHandler<loginDataType> = (user) => {
     const fetch = async () => {
-      await axios.get("http://localhost:8000/sanctum/csrf-cookie", {
-        headers: { Accept: "application/json" },
-        withCredentials: true,
-      });
+      await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/sanctum/csrf-cookie`,
+        {
+          headers: { Accept: "application/json" },
+          withCredentials: true,
+        }
+      );
     };
     fetch();
 
     return mutate(user);
   };
 
-  return { handleSubmit, register, onSubmit, form, control, errorMessage };
+  return {
+    handleSubmit,
+    register,
+    onSubmit,
+    form,
+    control,
+    errorMessage,
+  };
 };
 
 export default useLoginModal;

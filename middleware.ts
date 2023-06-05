@@ -16,5 +16,5 @@ export async function middleware(req: NextRequest): Promise<NextResponseType> {
 }
 
 export const config = {
-  matcher: ["/api/auth/:path*", "/", "/movies", "/movies/:path*"],
+  matcher: ["/api/auth/:path*", "/", "/movies", "/movies/:path*", "/profile"],
 };

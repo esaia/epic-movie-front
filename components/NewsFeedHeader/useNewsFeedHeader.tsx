@@ -16,6 +16,7 @@ const useNewsFeedHeader = () => {
 
   const logout = () => {
     Cookies.remove("user-email", { path: "" });
+    localStorage.removeItem("user");
     const logout = async () => {
       await axiosAPI.post("/logout");
     };

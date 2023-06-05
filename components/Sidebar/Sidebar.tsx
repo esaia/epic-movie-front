@@ -1,21 +1,21 @@
 import Link from "next/link";
 import { BsHouseDoor, BsCameraReels } from "react-icons/bs";
 import useSidebar from "./useSidebar";
+import { ProfilePic } from "@/components";
 
 const Sidebar = () => {
-  const { router } = useSidebar();
+  const { router, user } = useSidebar();
   return (
     <div>
       <div className="flex items-center gap-5 ">
-        <img
-          src="https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?cs=srgb&dl=pexels-tony-jamesandersson-1674752.jpg&fm=jpg"
-          alt="profile"
-          className="aspect-square w-12 object-cover rounded-full "
-        />
-        <div>
-          <h2 className="text-md ">Nino Tabagari</h2>
-          <p className="text-xs text-gray-100">Edit your profile</p>
-        </div>
+        <ProfilePic size="12" />
+
+        <Link href={"/profile"}>
+          <div>
+            <h2 className="text-md ">{user?.name}</h2>
+            <p className="text-xs text-gray-100">Edit your profile</p>
+          </div>
+        </Link>
       </div>
 
       <Link href={"/"}>
