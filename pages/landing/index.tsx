@@ -11,6 +11,7 @@ import {
   RecoverPassword,
   RegisterModal,
 } from "@/components";
+import { GetServerSidePropsContext } from "next";
 
 import useLanding from "./useLanding";
 
@@ -129,6 +130,24 @@ const Landing = () => {
       />
     </div>
   );
+};
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context;
+  const cookieValue = req.cookies?.["user-email"];
+  if (cookieValue) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export default Landing;

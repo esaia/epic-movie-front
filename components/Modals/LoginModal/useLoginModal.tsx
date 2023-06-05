@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import Cookies from "js-cookie";
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -9,6 +10,17 @@ interface loginDataType {
   email: string;
   password: string;
   remember?: boolean;
+}
+interface axiosRes {
+  user: User;
+}
+interface User {
+  created_at: string;
+  email: string;
+  creemail_verified_atated_at: string;
+  id: number;
+  name: string;
+  updated_at: string;
 }
 
 const useLoginModal = () => {
@@ -23,7 +35,8 @@ const useLoginModal = () => {
 
   const { mutate } = useMutation({
     mutationFn: loginUser,
-    onSuccess: () => {
+    onSuccess: ({ data }: AxiosResponse<axiosRes>) => {
+      Cookies.set("user-email", data.user.email, { expires: 120 });
       router.push("/");
     },
     onError: () => {
