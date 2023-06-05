@@ -15,7 +15,7 @@ const DashboaradPortal = ({ children, isOpen, closeModal }: PortalProps) => {
   return isClient && isOpen
     ? createPortal(
         <div
-          className="bg-gray-900/30  absolute  left-0 top-0  w-full h-screen  flex justify-center items-center  z-[100] "
+          className="bg-gray-900/30  fixed  left-0 top-0  w-full h-screen  flex justify-center items-center  z-[100] "
           onClick={closeModal}
         >
           <div className="fixed top-0 w-full h-full backdrop-blur-[2px]  "></div>

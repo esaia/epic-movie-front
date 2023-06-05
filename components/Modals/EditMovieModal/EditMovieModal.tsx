@@ -2,7 +2,7 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { FormProvider } from "react-hook-form";
 import useEditMovieModal from "./useEditMovieModal";
 import Select from "react-select";
-import { ProfilePic } from "components/ProfilePic";
+import { ProfilePic } from "@/components";
 
 const EditMovieModal = () => {
   const { handleSubmit, register, submitForm, form, colourOptions } =

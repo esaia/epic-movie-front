@@ -53,10 +53,13 @@ const useLoginModal = () => {
 
   const onSubmit: SubmitHandler<loginDataType> = (user) => {
     const fetch = async () => {
-      await axios.get("http://localhost:8000/sanctum/csrf-cookie", {
-        headers: { Accept: "application/json" },
-        withCredentials: true,
-      });
+      await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/sanctum/csrf-cookie`,
+        {
+          headers: { Accept: "application/json" },
+          withCredentials: true,
+        }
+      );
     };
     fetch();
 

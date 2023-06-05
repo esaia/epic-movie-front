@@ -6,6 +6,7 @@ import useSingleQuote from "./useSingleQuote";
 import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
 import Link from "next/link";
 import OutsideClickHandler from "react-outside-click-handler";
+import { useState } from "react";
 
 const SingleQuote = () => {
   const {
@@ -13,15 +14,20 @@ const SingleQuote = () => {
     setshowDetails,
     showDetailsMobile,
     setshowDetailsMobile,
-    viewQuote,
+    // viewQuote,
     editQuote,
     closeModal,
     closeShowDetails,
   } = useSingleQuote();
 
+  const [viewQuote, setViewQuote] = useState(false);
+  const closeQuote = () => {
+    setViewQuote(false);
+  };
+
   return (
     <div className="bg-[#11101a] p-4 rounded-md relative mb-5  z-4">
-      <DashboaradPortal isOpen={viewQuote} closeModal={closeModal}>
+      <DashboaradPortal isOpen={viewQuote} closeModal={closeQuote}>
         <ViewQuote />
       </DashboaradPortal>
 
@@ -39,12 +45,17 @@ const SingleQuote = () => {
       {showDetails && (
         <OutsideClickHandler onOutsideClick={closeShowDetails}>
           <div className="absolute top-8 right-[-40px] bg-secondary rounded-md p-5 hidden md:block">
-            <Link href={"/movies/id?modal=view-quote"}>
-              <div className="flex gap-3 mb-2 cursor-pointer items-center">
-                <AiOutlineEye />
-                <p>view quote</p>
-              </div>
-            </Link>
+            {/* <Link href={"/movies/id?modal=view-quote"}> */}
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={() => {
+                setViewQuote(true);
+              }}
+            >
+              <AiOutlineEye />
+              <p>view quote</p>
+            </div>
+            {/* </Link> */}
 
             <Link href={"/movies/id?modal=edit-quote"}>
               <div className="flex gap-3 mb-2 cursor-pointer items-center">

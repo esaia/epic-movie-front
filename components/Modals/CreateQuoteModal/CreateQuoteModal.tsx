@@ -1,4 +1,4 @@
-import { ProfilePic } from "components/ProfilePic";
+import { ProfilePic } from "@/components";
 import React from "react";
 import { AiOutlineCamera, AiOutlineCaretDown } from "react-icons/ai";
 import { BsCameraReels } from "react-icons/bs";

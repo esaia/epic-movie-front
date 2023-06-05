@@ -3,7 +3,7 @@ import { FormProvider } from "react-hook-form";
 import useCreateMovieModal from "./useCreateMovieModal";
 import { AiOutlineCamera } from "react-icons/ai";
 import Select from "react-select";
-import { ProfilePic } from "components/ProfilePic";
+import { ProfilePic } from "@/components";
 
 const CreateMovieModal = () => {
   const { handleSubmit, register, submitForm, form, colourOptions } =

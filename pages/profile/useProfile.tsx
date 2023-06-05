@@ -1,14 +1,8 @@
 import { AuthContext } from "context/AuthContext";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
-import axios from "axios";
-
-interface inputType {
-  name: string;
-  password: string;
-  password_confirmation: string;
-  img: string;
-}
+import axiosAPI from "lib/axios";
+import { inputType } from "./types";
 
 const useProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -50,8 +44,8 @@ const useProfile = () => {
 
     const update = async () => {
       try {
-        const { data } = await axios.post(
-          `http://localhost:8000/api/updateUser/${user?.id}`,
+        const { data } = await axiosAPI.post(
+          `/updateUser/${user?.id}`,
           formData,
           {
             headers: {
