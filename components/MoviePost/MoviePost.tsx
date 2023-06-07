@@ -1,15 +1,20 @@
 import React from "react";
 import { BsChatQuote } from "react-icons/bs";
 
-const MoviePost = () => {
+interface moviePostProps {
+  title: string;
+  img: string;
+}
+
+const MoviePost = ({ title, img }: moviePostProps) => {
   return (
     <div>
       <img
-        src="https://media.istockphoto.com/id/1237804526/vector/movie-night-concept-with-popcorn-cinema-tickets-drink-tape-in-cartoon-style-movie-or-cinema.jpg?s=612x612&w=0&k=20&c=FWIp6SXBqUg-_PWtoTxOy00b2aeg5xNDiRcFr6IF4l4="
+        src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${img}`}
         alt=""
-        className="rounded-md w-full md:h-56 xl:h-96 object-cover"
+        className="rounded-md aspect-square w-full md:h-56 xl:h-80 object-cover"
       />
-      <p className="py-2 text-xl">Loki Mobius (2021) </p>
+      <p className="py-2 text-xl">{title} (2021) </p>
       <div className="flex items-center gap-2 text-xl">
         <div>10</div>
         <BsChatQuote />

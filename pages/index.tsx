@@ -1,4 +1,5 @@
 import { CreateQuote, DashboardWrapper, QuotePost } from "@/components";
+import { GetStaticPropsContext } from "next";
 
 const Home = () => {
   return (
@@ -10,5 +11,14 @@ const Home = () => {
     </DashboardWrapper>
   );
 };
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../locales/${context.locale}/common.json`))
+        .default,
+    },
+  };
+}
 
 export default Home;

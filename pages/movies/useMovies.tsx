@@ -1,18 +1,41 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import axiosAPI from "lib/axios";
+import { AxiosResponse } from "axios";
+import { Movie } from "./types";
 
 const useMovies = () => {
   const [createMovieModal, setcreateMovieModal] = useState<boolean>(false);
-  const router = useRouter();
+  const { push, locale, query } = useRouter();
   const closeModal = () => {
-    router.push("/movies");
+    push("/movies");
   };
-  useEffect(() => {
-    const { modal } = router.query;
-    setcreateMovieModal(modal === "create-movie");
-  }, [router]);
 
-  return { createMovieModal, closeModal };
+  const fetchMovies = () => {
+    return axiosAPI.get("/movies");
+  };
+
+  const { data: movies, refetch } = useQuery<AxiosResponse<Movie[]>>(
+    "users",
+    fetchMovies
+  );
+
+  useEffect(() => {
+    const { modal } = query;
+    setcreateMovieModal(modal === "create-movie");
+  }, [query]);
+
+  useEffect(() => {
+    refetch();
+  }, [createMovieModal]);
+
+  return {
+    createMovieModal,
+    closeModal,
+    movies: movies?.data,
+    locale,
+  };
 };
 
 export default useMovies;

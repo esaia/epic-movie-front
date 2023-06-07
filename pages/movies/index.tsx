@@ -8,9 +8,11 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import Link from "next/link";
 import useMovies from "./useMovies";
+import { GetStaticPropsContext } from "next";
 
 const Movies = () => {
-  const { createMovieModal, closeModal } = useMovies();
+  const { createMovieModal, closeModal, movies, locale } = useMovies();
+
   return (
     <MovieWrapper>
       <DashboaradPortal isOpen={createMovieModal} closeModal={closeModal}>
@@ -33,20 +35,30 @@ const Movies = () => {
           </div>
         </div>
       </div>
-
       <div className="grid md:grid-cols-3 gap-6">
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
-        <MoviePost />
+        {movies &&
+          movies.map((movie) => {
+            return (
+              <Link key={movie.id} href={`/movies/${movie.id}`}>
+                <MoviePost
+                  title={movie.title[locale || "en"]}
+                  img={movie.img}
+                />
+              </Link>
+            );
+          })}
       </div>
     </MovieWrapper>
   );
 };
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../locales/${context.locale}/common.json`))
+        .default,
+    },
+  };
+}
 
 export default Movies;

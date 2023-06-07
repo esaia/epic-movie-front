@@ -6,6 +6,8 @@ import { BiSearch } from "react-icons/bi";
 import { RiArrowUpSFill } from "react-icons/ri";
 import useNewsFeedHeader from "./useNewsFeedHeader";
 import OutsideClickHandler from "react-outside-click-handler";
+import Link from "next/link";
+import { MouseEvent } from "react";
 
 const NewsFeedHeader = () => {
   const {
@@ -13,6 +15,11 @@ const NewsFeedHeader = () => {
     handleToggleNotification,
     handleClickOutside,
     logout,
+    showLanguageDropDown,
+    setShowLanguageDropDown,
+    locale,
+    locales,
+    changeLanguage,
   } = useNewsFeedHeader();
 
   return (
@@ -60,9 +67,22 @@ const NewsFeedHeader = () => {
           </div>
         )}
 
-        <div className="hidden md:flex justify-center items-center gap-2 cursor-pointer ">
-          <p className="text-white">Eng</p>
-          <AiOutlineCaretDown className="text-white" />
+        <div
+          className="hidden md:flex justify-center items-center gap-2 cursor-pointer relative "
+          onClick={() => setShowLanguageDropDown(true)}
+        >
+          <p className="text-white"> {locale}</p>
+          <AiOutlineCaretDown className="text-white " />
+
+          {showLanguageDropDown && (
+            <div className="absolute px-6 py-1 top-8 left-[50%] translate-x-[-50%] bg-gray-800 rounded-md">
+              <OutsideClickHandler onOutsideClick={handleClickOutside}>
+                <p onClick={(e) => changeLanguage(e)}>
+                  {locales?.find((localee) => localee !== locale)}
+                </p>
+              </OutsideClickHandler>
+            </div>
+          )}
         </div>
 
         <BiSearch className="md:hidden block text-2xl" />

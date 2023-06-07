@@ -16,10 +16,9 @@ const axiosAPI = axios.create({
 axiosAPI.interceptors.response.use(
   (response) => response,
   (error) => {
-    Cookies.remove("user-email", { path: "" });
-
     const statusCode = error.response?.status;
     if (statusCode === 401) {
+      Cookies.remove("user-email", { path: "" });
       Router.push("/landing?modal=login");
     }
     return Promise.reject(error);

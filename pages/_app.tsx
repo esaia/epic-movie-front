@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
 import { AuthProvider } from "context/AuthContext";
+import { NextIntlProvider } from "next-intl";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -15,21 +16,25 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const queryClient = new QueryClient();
 
   return getLayout(
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Head>
-          <title>Epic movie</title>
-        </Head>
-        <div>
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </div>
-      </AuthProvider>
-    </QueryClientProvider>
+    <NextIntlProvider messages={pageProps.messages}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Head>
+            <title>Epic movie</title>
+          </Head>
+          <div>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </div>
+        </AuthProvider>
+      </QueryClientProvider>
+    </NextIntlProvider>
   );
 }
+
+export default MyApp;

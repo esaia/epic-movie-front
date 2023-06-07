@@ -15,6 +15,7 @@ const ProfilePic = ({ size }: { size: string }) => {
               ? user?.img
               : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${user?.img}`
           }
+          referrerPolicy="no-referrer"
           alt="profile"
           className={`aspect-square  object-cover rounded-full ${widthClass} ${heightClass}`}
         />

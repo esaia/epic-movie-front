@@ -16,3 +16,4 @@ export * from "./MoviePost";
 export * from "./MovieWrapper";
 export * from "./SingleQuote";
 export * from "./ProfilePic";
+export * from "./DashboardInput";
