@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import axiosAPI from "lib/axios";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
@@ -13,6 +14,9 @@ interface registerUserType {
 }
 
 const useRegisterModal = () => {
+  const t = useTranslations("Register");
+  const v = useTranslations("Validations");
+
   const [errorMessage, setErrorMessage] = useState("");
   const form = useForm<registerUserType>();
   const { handleSubmit, register, control } = form;
@@ -28,7 +32,8 @@ const useRegisterModal = () => {
       router.push("/landing?modal=emailcheck");
     },
     onError: (err: AxiosError) => {
-      if (err?.response?.status === 422) setErrorMessage("duplicate error");
+      if (err?.response?.status === 422)
+        setErrorMessage(t("This user already exists"));
     },
   });
 
@@ -50,6 +55,8 @@ const useRegisterModal = () => {
     onSubmit,
     isLoading,
     errorMessage,
+    t,
+    v,
   };
 };
 

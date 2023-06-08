@@ -1,8 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
 const useLanding = () => {
   const router = useRouter();
+  const t = useTranslations("Header");
+  const n = useTranslations("NotificationModal");
+
   const [loginModal, setloginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [emailCheckModal, setEmailCheckModal] = useState<boolean>(false);
@@ -50,6 +54,8 @@ const useLanding = () => {
     passwordChangeNotification,
     closeModal,
     linkExpired,
+    t,
+    n,
   };
 };
 

@@ -4,9 +4,12 @@ import { useQuery } from "react-query";
 import axiosAPI from "lib/axios";
 import { AxiosResponse } from "axios";
 import { Movie } from "./types";
+import { useTranslations } from "next-intl";
 
 const useMovies = () => {
   const [createMovieModal, setcreateMovieModal] = useState<boolean>(false);
+  const t = useTranslations("Movies");
+
   const { push, locale, query } = useRouter();
   const closeModal = () => {
     push("/movies");
@@ -35,6 +38,7 @@ const useMovies = () => {
     closeModal,
     movies: movies?.data,
     locale,
+    t,
   };
 };
 

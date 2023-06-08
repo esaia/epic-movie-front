@@ -6,8 +6,17 @@ import Select from "react-select";
 import { DashboardInput, ProfilePic } from "@/components";
 
 const CreateMovieModal = () => {
-  const { handleSubmit, register, form, genres, control, errors, onSubmit } =
-    useCreateMovieModal();
+  const {
+    user,
+    handleSubmit,
+    register,
+    form,
+    genres,
+    control,
+    errors,
+    onSubmit,
+    t,
+  } = useCreateMovieModal();
 
   return (
     <FormProvider {...form}>
@@ -15,13 +24,15 @@ const CreateMovieModal = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full text-center  h-screen md:h-[90vh]"
       >
-        <h2 className="py-5 border-b border-gray-600 text-xl">add movie</h2>
+        <h2 className="py-5 border-b border-gray-600 text-xl">
+          {t("Add movie")}
+        </h2>
 
         <div className="p-5">
           <div className="flex items-center gap-2  mb-7">
             <ProfilePic size="10" />
 
-            <p>Nino Tabagari</p>
+            <p>{user?.name}</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -152,7 +163,7 @@ const CreateMovieModal = () => {
             </div>
 
             <button className="w-full bg-red-600 p-1 rounded-md">
-              Add movie
+              {t("Add movie")}
             </button>
           </div>
         </div>

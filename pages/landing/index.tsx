@@ -28,6 +28,8 @@ const Landing = () => {
     passwordChangeNotification,
     linkExpired,
     closeModal,
+    t,
+    n,
   } = useLanding();
   return (
     <div className="bg-gray-950 h-screen overflow-y-scroll ">
@@ -40,19 +42,19 @@ const Landing = () => {
       </Portal>
       <Portal isOpen={emailCheckModal} closeModal={closeModal}>
         <NotificationModal
-          title="Thank you!"
-          desc="Please check your email and follow the instructions to activate your account."
+          title={n("Thank you")}
+          desc={n("Please check your email and follow")}
           link="/landing?modal=login"
-          buttonText="Go to my email"
+          buttonText={n("Go to my email")}
           icon={<EmailCheckIcon />}
         />
       </Portal>
       <Portal isOpen={accountActivation} closeModal={closeModal}>
         <NotificationModal
-          title="Thank you!"
-          desc="Your account has been activated."
+          title={n("Thank you")}
+          desc={n("Your account has been activated")}
           link="/landing?modal=login"
-          buttonText="Go to my news feed"
+          buttonText={n("Go to my news feed")}
           icon={<CheckMark />}
         />
       </Portal>
@@ -63,10 +65,10 @@ const Landing = () => {
 
       <Portal isOpen={forgotPasswordCheck} closeModal={closeModal}>
         <NotificationModal
-          title="Check your email"
-          desc="We have sent a password recover instructions to your email"
+          title={n("Check your email")}
+          desc={n("We have sent a password recover instructions to your email")}
           link="/landing?modal=login"
-          buttonText="Go to my email"
+          buttonText={n("Go to my email")}
           icon={<EmailCheckIcon />}
         />
       </Portal>
@@ -77,40 +79,40 @@ const Landing = () => {
 
       <Portal isOpen={emailChangeNotification} closeModal={closeModal}>
         <NotificationModal
-          title="Success!"
-          desc="Your Email changed successfully"
+          title={n("Success")}
+          desc={n("Your Email changed successfully")}
           link="/landing?modal=login"
-          buttonText="Log in"
+          buttonText={n("Log in")}
           icon={<CheckMark />}
         />
       </Portal>
 
       <Portal isOpen={passwordChangeNotification} closeModal={closeModal}>
         <NotificationModal
-          title="Success!"
-          desc="Your Password changed successfully"
+          title={n("Success")}
+          desc={n("Your Password changed successfully")}
           link="/landing?modal=login"
-          buttonText="Log in"
+          buttonText={n("Log in")}
           icon={<CheckMark />}
         />
       </Portal>
 
       <Portal isOpen={linkExpired} closeModal={closeModal}>
         <NotificationModal
-          title="Link expired!"
-          desc="Login link has expired, because you haven’t used it."
+          title={n("Link expired")}
+          desc={n("Login link has expired")}
           link="/landing?modal=login"
-          buttonText="Request another link"
+          buttonText={n("Request another link")}
           icon={<ExpiredIcon />}
         />
       </Portal>
 
       <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20  ">
         <h2 className="text-orange-200 text-4xl md:text-6xl md:leading-[80px] font-Helvetica  font-bold md:w-[700px] text-center">
-          Find any quote in millions of movie lines
+          {t("Find any quote")}
         </h2>
-        <button className="px-5 py-2 bg-red-500 text-white rounded-md">
-          Get started
+        <button className="px-5 py-2 bg-red-500 text-white rounded-md w-32">
+          {t("Get started")}
         </button>
       </div>
       <LandingQuote
@@ -137,6 +139,7 @@ export const getServerSideProps = async (
 ) => {
   const { req } = context;
   const cookieValue = req.cookies?.["user-email"];
+
   if (cookieValue) {
     return {
       redirect: {
@@ -146,7 +149,10 @@ export const getServerSideProps = async (
     };
   }
   return {
-    props: {},
+    props: {
+      messages: (await import(`../../locales/${context.locale}/common.json`))
+        .default,
+    },
   };
 };
 

@@ -16,7 +16,7 @@ const DashboardInput = ({
 }: inputProps) => {
   const {
     register,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = useFormContext();
 
   return (

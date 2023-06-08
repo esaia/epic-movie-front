@@ -5,7 +5,7 @@ import { CreateQuoteModal, DashboaradPortal } from "@/components";
 import Link from "next/link";
 
 const CreateQuote = () => {
-  const { isSearching, setisSearching, createQuoteModal, closeModal } =
+  const { isSearching, setisSearching, createQuoteModal, closeModal, t } =
     useCreateQuote();
 
   return (
@@ -13,7 +13,7 @@ const CreateQuote = () => {
       <div className="flex w-full flex-3 items-center gap-3 bg-secondary px-3 py-2 cursor-pointer rounded-md">
         <HiOutlinePencilSquare />
         <Link href={"/?modal=create-quote"}>
-          <p>Write new quote</p>
+          <p>{t("Write new quote")}</p>
         </Link>
       </div>
 
@@ -23,24 +23,25 @@ const CreateQuote = () => {
 
       <div
         className={`hidden md:flex items-center gap-2 text-gray-200  ${
-          isSearching && "w-8/12 border-b border-gray-500"
+          isSearching && "w-7/12 border-b border-gray-500"
         } `}
         onClick={() => setisSearching(true)}
       >
         {!isSearching && (
-          <>
+          <div className="flex items-center gap-2 justify-center w-28">
             <BiSearch className="text-xl" />
-            <p>Search by </p>
-          </>
+            <p>{t("Search by")} </p>
+          </div>
         )}
+
         {isSearching && (
           <div className="w-full flex items-center gap-1">
             <BiSearch className="text-xl" />
 
             <input
               type="text"
-              placeholder="Enter @ to search movies, Enter # to search quotes"
-              className="w-full outline-none px-2 bg-transparent"
+              placeholder={t("add quote placeholder")}
+              className="w-full outline-none px-2 bg-transparent text-sm"
               onBlur={() => setisSearching(false)}
             />
           </div>

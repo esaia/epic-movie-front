@@ -6,9 +6,12 @@ import { genresOption, movieTypeForm } from "./types";
 import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
 const useCreateMovieModal = () => {
   const { user } = useContext(AuthContext);
+  const t = useTranslations("Movies");
+
   const formData = new FormData();
   const { push, pathname } = useRouter();
   const form = useForm<movieTypeForm>();
@@ -58,6 +61,7 @@ const useCreateMovieModal = () => {
   };
 
   return {
+    user,
     handleSubmit,
     register,
     form,
@@ -65,6 +69,7 @@ const useCreateMovieModal = () => {
     errors,
     control,
     onSubmit,
+    t,
   };
 };
 

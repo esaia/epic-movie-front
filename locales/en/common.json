@@ -1,0 +1,136 @@
+{
+  "Home": {
+    "Write new quote": "Write new quote",
+    "Search by": "Search by",
+    "add quote placeholder": "Enter @ to search movies, Enter # to search quotes",
+    "write new quote": "write new quote",
+    "Post": "Post"
+  },
+
+  "Sidebar": {
+    "Edit your profile": "Edit your profile",
+    "News feed": "News feed",
+    "List of movies": "List of movies"
+  },
+
+  "Notifications": {
+    "notifications": "Notifications",
+    "mark as read": "Mark as all read",
+    "log out": "Log out"
+  },
+
+  "Movies": {
+    "My list of movies": "My list of movies (Total 25)",
+    "Search": "Search",
+    "Add movie": "Add movie"
+  },
+
+  "SingleMovie": {
+    "Movie discription": "Movie discription",
+    "Quotes (Total 7)": "Quotes (Total 7)",
+    "Add quote": "Add quote",
+    "director": "DIRECTOR:",
+    "view quote": "view quote",
+    "Edit": "Edit",
+    "Delete": "Delete"
+  },
+
+  "Profile": {
+    "My profile": "My profile",
+    "Upload new photo": "Upload new photo",
+    "Username": "Username",
+    "Email": "Email",
+    "Password": "Password",
+    "Edit": "Edit",
+    "New username": "New username",
+    "New password": "New password",
+    "Confirm new password": "Confirm new password",
+    "Passwords should contain": "Passwords should contain:",
+    "8 or more characters": "8 or more characters",
+    "15 lowercase character": "15 lowercase character",
+    "Enter new usarname": "Enter new usarname"
+  },
+
+  "Header": {
+    "Sign Up": "Sign Up",
+    "Log In": "Log in",
+    "Find any quote": "Find any quote in millions of movie lines",
+    "Get started": "Get started"
+  },
+
+  "Login": {
+    "Log in to your account": "Log in to your account",
+    "Welcome back! Please enter your details": "Welcome back! Please enter your details",
+    "name": "Name",
+    "Enter your email": "Enter your email",
+    "password": "Password",
+    "Rememer me": "Rememer me",
+    "Forgot password": "Forgot password",
+    "Sign in": "Sign in",
+    "Sign in with google": "Sign in with google",
+    "Don't have an account": "Don't have an account",
+    "Sign up": "Sign up",
+    "Unauthorized": "Please check your credentials."
+  },
+
+  "Register": {
+    "Create an account": "Create an account",
+    "Start your journey!": "Start your journey!",
+    "At least 3 max 15 characters": "At least 3 & max.15 lower case characters",
+    "name": "Name",
+    "Email": "Email",
+    "Enter your email": "Enter your email",
+    "password": "Password",
+    "Confirm password": "Confirm password",
+    "Get started": "Get started",
+    "Sign up with google": "Sign up with google",
+    "Already have an account": "Already have an account?",
+    "Log in": "Log in",
+    "This user already exists": "This user already exists"
+  },
+
+  "Validations": {
+    "Enter at least 3 characters": "Enter at least 3 characters",
+    "Enter a maximum of 15 characters": "Enter a maximum of 15 characters",
+    "This field is required": "This field is required",
+    "Enter lower case characters": "Enter lower case characters",
+    "Enter the email in the correct format": "Enter the email in the correct format",
+    "Enter at least 8 characters": "Enter at least 8 characters",
+    "Enter a lower case character or number": "Enter a lower case character or number",
+    "Password does not match": "Password does not match"
+  },
+
+  "Forgot": {
+    "Forgot password": "Forgot password?",
+    "Enter the email": "Enter the email and we’ll send an email with instructions to reset your password",
+    "Email": "Email",
+    "Enter your email": "Enter your email",
+    "send": "Send instructions",
+    "back": "Back to log in"
+  },
+
+  "NotificationModal": {
+    "Thank you": "Thank you!",
+    "Please check your email and follow": "Please check your email and follow the instructions to activate your account.",
+    "Go to my email": "Go to my email",
+    "Your account has been activated": "Your account has been activated.",
+    "Go to my news feed": "Go to my news feed",
+    "Check your email": "Check your email",
+    "We have sent a password recover instructions to your email": "We have sent a password recover instructions to your email",
+    "Success": "Success!",
+    "Your Email changed successfully": "Your Email changed successfully",
+    "Log in": "Log in",
+    "Your Password changed successfully": "Your Password changed successfully",
+    "Link expired": "Link expired!",
+    "Login link has expired": "Login link has expired, because you haven’t used it.",
+    "Request another link": "Request another link",
+
+    "Create new password": "Create new password",
+    "Your new password must be different": "Your new password must be different from previous used passwords",
+    "password": "Password",
+    "At least 3 max 15 characters": "At least 3 & max.15 lower case characters",
+    "Confirm password": "Confirm password",
+    "reset password": "Reset Password",
+    "back": "Back to log in"
+  }
+}

@@ -5,67 +5,67 @@ import useLoginModal from "./useLoginModal";
 import Link from "next/link";
 
 const LoginModal = () => {
-  const { handleSubmit, register, onSubmit, form, errorMessage } =
+  const { handleSubmit, register, onSubmit, form, errorMessage, t, v } =
     useLoginModal();
 
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
-        <h2 className="text-center text-3xl mb-2">Log in to your account</h2>
+        <h2 className="text-center text-3xl mb-2">
+          {t("Log in to your account")}
+        </h2>
         <p className="text-center text-sm text-gray-600 mb-5">
-          Welcome back! Please enter your details.
+          {t("Welcome back! Please enter your details")}
         </p>
         <Input
           name="email"
-          label="Name"
+          label={t("name")}
           required={true}
-          placeholder="Enter your email"
+          placeholder={t("Enter your email")}
           registerOptions={{
-            required: "ამ ველის შევსება სავალდებულოა",
-            minLength: { value: 3, message: "შეიყვანეთ მინიმუმ 3 სიმბოლო" },
+            required: v("This field is required"),
+            minLength: { value: 3, message: v("Enter at least 3 characters") },
           }}
         />
-
         <Input
           name="password"
-          label="Password"
+          label={t("password")}
           type="password"
           required={true}
-          placeholder="Password"
-          registerOptions={{ required: "ამ ველის შევსება სავალდებულოა" }}
+          placeholder={t("password")}
+          registerOptions={{ required: v("This field is required") }}
         />
-        {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
+        <div className="h-7">
+          {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
+        </div>
 
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center w-full">
             <div className="flex gap-2">
               <input {...register("remember")} type="checkbox" />
-              <label htmlFor="">Rememer me</label>
+              <label htmlFor="">{t("Rememer me")}</label>
             </div>
             <Link href="/landing?modal=forgot-password">
               <p className="text-blue-700 underline cursor-pointer">
-                Forgot password
+                {t("Forgot password")}
               </p>
             </Link>
           </div>
         </div>
-
         <button className="px-5 py-2 bg-red-500 text-white rounded-md w-full mt-5">
-          Sign in
+          {t("Sign in")}
         </button>
-
         <Link href={`${process.env.NEXT_PUBLIC_BASE_URL_API}/auth/redirect`}>
           <div className="px-5 py-2 bg-transparent text-white border border-white rounded-md w-full mt-5 flex justify-center items-center gap-3 cursor-pointer">
             <AiOutlineGoogle />
-            Sign in with Google
+            {t("Sign in with google")}
           </div>
         </Link>
-
         <div className="mt-5 flex justify-center items-center gap-2  text-gray-500">
-          <p>Don't have an account</p>
+          <p> {t("Don't have an account")}</p>
           <Link href={"/landing?modal=register"}>
             <span className="text-blue-700 underline cursor-pointer">
-              Sign up
+              {t("Sign up")}
             </span>
           </Link>
         </div>

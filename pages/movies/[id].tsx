@@ -10,9 +10,10 @@ import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import useMovie from "./useMovie";
+import { GetStaticPaths, GetStaticPropsContext } from "next";
 
 const SingleMovie = () => {
-  const { editMovieModal, addQuote, closeModal } = useMovie();
+  const { editMovieModal, addQuote, closeModal, t } = useMovie();
 
   return (
     <MovieWrapper>
@@ -24,7 +25,7 @@ const SingleMovie = () => {
         <AddQuote />
       </DashboaradPortal>
 
-      <h1 className="text-xl">Movie discription</h1>
+      <h1 className="text-xl">{t("Movie discription")}</h1>
 
       <div className="grid gap-5 md:grid-cols-column4 py-6 ">
         <div>
@@ -34,12 +35,13 @@ const SingleMovie = () => {
             className="flex-1  rounded-md w-full md:h-56 xl:h-96 object-cover "
           />
           <div className="hidden md:block">
-            <div className="flex gap-2 items-center py-6 ">
-              <p>Quotes (Total 7) </p>|
+            <div className="flex gap-3  items-center py-6 ">
+              <p>{t("Quotes (Total 7)")}</p>
+              <span>|</span>
               <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
                 <AiOutlinePlusSquare />
                 <Link href={"/movies/id?modal=add-quote"}>
-                  <button>Add quote</button>
+                  <button>{t("Add quote")}</button>
                 </Link>
               </div>
             </div>
@@ -72,7 +74,7 @@ const SingleMovie = () => {
           </div>
 
           <div className="flex items-center gap-2 pb-4 ">
-            <p className="text-gray-300">DIRECTOR: </p>
+            <p className="text-gray-300">{t("director")} </p>
             <h3>NICK CASSAVETES</h3>
           </div>
 
@@ -92,10 +94,13 @@ const SingleMovie = () => {
 
         <div className="block md:hidden">
           <div className="flex gap-2 items-center py-6 ">
-            <p>Quotes (Total 7) </p>|
+            <p>{t("Quotes (Total 7)")}</p>
+            <span>|</span>
             <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
               <AiOutlinePlusSquare />
-              <button>Add quote</button>
+              <Link href={"/movies/id?modal=add-quote"}>
+                <button>{t("Add quote")}</button>
+              </Link>
             </div>
           </div>
           <SingleQuote />
@@ -107,5 +112,45 @@ const SingleMovie = () => {
     </MovieWrapper>
   );
 };
+
+export async function getStaticPaths(context: GetStaticPaths) {
+  interface Movie {
+    id: number;
+  }
+
+  const fetchMovieIds = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL_API}/movies`
+    );
+    const data = await response.json();
+    const movieIds = data.map((movie: Movie) => movie.id);
+    return movieIds;
+  };
+
+  const movieIds = await fetchMovieIds();
+
+  const locales: string[] = ["en", "ka"];
+  const paths: { params: { id: string }; locale: string }[] = [];
+
+  movieIds.forEach((id: number) => {
+    locales.forEach((locale) => {
+      paths.push({ params: { id: id.toString() }, locale });
+    });
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../locales/${context.locale}/common.json`))
+        .default,
+    },
+  };
+}
 
 export default SingleMovie;

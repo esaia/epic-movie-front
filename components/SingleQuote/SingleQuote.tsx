@@ -17,6 +17,7 @@ const SingleQuote = () => {
     editQuote,
     closeModal,
     closeShowDetails,
+    t,
   } = useSingleQuote();
 
   return (
@@ -42,20 +43,20 @@ const SingleQuote = () => {
             <Link href={"/movies/id?modal=view-quote"}>
               <div className="flex gap-3 mb-2 cursor-pointer items-center">
                 <AiOutlineEye />
-                <p>view quote</p>
+                <p>{t("view quote")}</p>
               </div>
             </Link>
 
             <Link href={"/movies/id?modal=edit-quote"}>
               <div className="flex gap-3 mb-2 cursor-pointer items-center">
                 <RiPencilLine />
-                <p>Edit </p>
+                <p>{t("Edit")}</p>
               </div>
             </Link>
 
             <div className="flex gap-3 mb-2 cursor-pointer items-center">
               <BsTrash3 />
-              <p>Delete </p>
+              <p>{t("Delete")}</p>
             </div>
           </div>
         </OutsideClickHandler>

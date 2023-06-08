@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { AuthContext } from "context/AuthContext";
 import Cookies from "js-cookie";
 import axiosAPI from "lib/axios";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -27,6 +28,8 @@ interface User {
 }
 
 const useLoginModal = () => {
+  const t = useTranslations("Login");
+  const v = useTranslations("Validations");
   const form = useForm<loginDataType>();
   const { handleSubmit, register, control } = form;
   const [errorMessage, setErrorMessage] = useState("");
@@ -47,7 +50,7 @@ const useLoginModal = () => {
       router.push("/");
     },
     onError: () => {
-      setErrorMessage("Unauthorized. Please check your credentials.");
+      setErrorMessage(t("Unauthorized"));
     },
   });
 
@@ -73,6 +76,8 @@ const useLoginModal = () => {
     form,
     control,
     errorMessage,
+    t,
+    v,
   };
 };
 

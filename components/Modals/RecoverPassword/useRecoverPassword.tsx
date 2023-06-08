@@ -1,4 +1,5 @@
 import axiosAPI from "lib/axios";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useMutation } from "react-query";
@@ -9,6 +10,9 @@ interface recoveryPassType {
 }
 
 const useRecoverPassword = () => {
+  const n = useTranslations("NotificationModal");
+  const v = useTranslations("Validations");
+
   const form = useForm<recoveryPassType>();
   const { handleSubmit, control } = form;
   const router = useRouter();
@@ -33,7 +37,7 @@ const useRecoverPassword = () => {
     mutate(data);
   };
 
-  return { form, handleSubmit, submitForm, password, isLoading };
+  return { form, handleSubmit, submitForm, password, isLoading, n, v };
 };
 
 export default useRecoverPassword;

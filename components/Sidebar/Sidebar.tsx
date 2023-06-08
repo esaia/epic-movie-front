@@ -4,7 +4,8 @@ import useSidebar from "./useSidebar";
 import { ProfilePic } from "@/components";
 
 const Sidebar = () => {
-  const { router, user } = useSidebar();
+  const { router, user, t } = useSidebar();
+
   return (
     <div>
       <div className="flex items-center gap-5 ">
@@ -13,7 +14,7 @@ const Sidebar = () => {
         <Link href={"/profile"}>
           <div>
             <h2 className="text-md ">{user?.name}</h2>
-            <p className="text-xs text-gray-100">Edit your profile</p>
+            <p className="text-xs text-gray-100">{t("Edit your profile")}</p>
           </div>
         </Link>
       </div>
@@ -23,7 +24,7 @@ const Sidebar = () => {
           <BsHouseDoor
             className={`text-2xl ${router.route === "/" && "text-red-600"}`}
           />
-          <p>News feed</p>
+          <p>{t("News feed")}</p>
         </div>
       </Link>
       <Link href={"/movies"}>
@@ -33,7 +34,7 @@ const Sidebar = () => {
               router.route === "/movies" && "text-red-600"
             }`}
           />
-          <p>List of movies</p>
+          <p>{t("List of movies")}</p>
         </div>
       </Link>
     </div>
