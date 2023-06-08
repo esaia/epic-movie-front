@@ -67,7 +67,7 @@ const CreateMovieModal = () => {
                   <Select
                     {...field}
                     isMulti
-                    options={genres}
+                    options={genres?.data}
                     className="my-react-select-container"
                     classNamePrefix="my-react-select"
                   />

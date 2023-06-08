@@ -11,7 +11,7 @@ import useMovies from "./useMovies";
 import { GetStaticPropsContext } from "next";
 
 const Movies = () => {
-  const { createMovieModal, closeModal, movies, locale, t } = useMovies();
+  const { createMovieModal, closeModal, movies, t } = useMovies();
 
   return (
     <MovieWrapper>
@@ -40,10 +40,7 @@ const Movies = () => {
           movies.map((movie) => {
             return (
               <Link key={movie.id} href={`/movies/${movie.id}`}>
-                <MoviePost
-                  title={movie.title[locale || "en"]}
-                  img={movie.img}
-                />
+                <MoviePost movie={movie} />
               </Link>
             );
           })}

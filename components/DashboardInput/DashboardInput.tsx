@@ -1,12 +1,6 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-
-interface inputProps {
-  name: string;
-  lang: string;
-  placeholder?: string;
-  registerOptions?: object;
-}
+import { inputProps } from "./types";
 
 const DashboardInput = ({
   name,

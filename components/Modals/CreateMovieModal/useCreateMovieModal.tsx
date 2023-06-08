@@ -1,8 +1,8 @@
 import { AxiosError } from "axios";
 import axiosAPI from "lib/axios";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import { genresOption, movieTypeForm } from "./types";
+import { useMutation, useQuery } from "react-query";
+import { movieTypeForm } from "./types";
 import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
@@ -22,12 +22,15 @@ const useCreateMovieModal = () => {
     formState: { errors },
   } = form;
 
-  const genres: genresOption[] = [
-    { value: "Drama", label: "Drama" },
-    { value: "Romance", label: "Romance" },
-  ];
+  const getAllgenres = () => {
+    return axiosAPI.get("/genres");
+  };
 
-  const storeUser = () => {
+  const { data: genres } = useQuery({
+    queryFn: getAllgenres,
+  });
+
+  const storeMovie = () => {
     return axiosAPI.post("/movies", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -37,7 +40,7 @@ const useCreateMovieModal = () => {
   };
 
   const { mutate } = useMutation({
-    mutationFn: storeUser,
+    mutationFn: storeMovie,
     onSuccess: () => {
       push(pathname);
     },

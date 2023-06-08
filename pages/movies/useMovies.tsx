@@ -10,7 +10,7 @@ const useMovies = () => {
   const [createMovieModal, setcreateMovieModal] = useState<boolean>(false);
   const t = useTranslations("Movies");
 
-  const { push, locale, query } = useRouter();
+  const { push, query } = useRouter();
   const closeModal = () => {
     push("/movies");
   };
@@ -37,7 +37,6 @@ const useMovies = () => {
     createMovieModal,
     closeModal,
     movies: movies?.data,
-    locale,
     t,
   };
 };

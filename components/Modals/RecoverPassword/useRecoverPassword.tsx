@@ -3,11 +3,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useMutation } from "react-query";
-
-interface recoveryPassType {
-  password: string;
-  password_confirmation: string;
-}
+import { recoveryPassType } from "./types";
 
 const useRecoverPassword = () => {
   const n = useTranslations("NotificationModal");

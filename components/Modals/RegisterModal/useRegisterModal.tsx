@@ -5,13 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useMutation } from "react-query";
-
-interface registerUserType {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
+import { registerUserType } from "./types";
 
 const useRegisterModal = () => {
   const t = useTranslations("Register");
