@@ -1,11 +1,14 @@
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 
 const useNewsFeedHeader = () => {
   const [showNotification, setShowNotification] = useState(false);
   const router = useRouter();
+  const t = useTranslations("Notifications");
+
   const handleToggleNotification = () => {
     setShowNotification(!showNotification);
   };
@@ -18,7 +21,7 @@ const useNewsFeedHeader = () => {
     Cookies.remove("user-email", { path: "" });
     localStorage.removeItem("user");
     const logout = async () => {
-      await axiosAPI.post("/logout");
+      await axiosAPI.get("/logout");
     };
     logout();
     router.push("/landing");
@@ -27,8 +30,9 @@ const useNewsFeedHeader = () => {
   return {
     showNotification,
     handleToggleNotification,
-    handleClickOutside,
     logout,
+    handleClickOutside,
+    t,
   };
 };
 

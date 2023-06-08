@@ -1,131 +1,149 @@
 import React from "react";
-import { FormProvider } from "react-hook-form";
+import { FormProvider, Controller } from "react-hook-form";
 import useCreateMovieModal from "./useCreateMovieModal";
 import { AiOutlineCamera } from "react-icons/ai";
 import Select from "react-select";
-import { ProfilePic } from "@/components";
+import { DashboardInput, ProfilePic } from "@/components";
 
 const CreateMovieModal = () => {
-  const { handleSubmit, register, submitForm, form, colourOptions } =
-    useCreateMovieModal();
+  const {
+    user,
+    handleSubmit,
+    register,
+    form,
+    genres,
+    control,
+    errors,
+    onSubmit,
+    t,
+  } = useCreateMovieModal();
 
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={handleSubmit(submitForm)}
+        onSubmit={handleSubmit(onSubmit)}
         className="w-full text-center  h-screen md:h-[90vh]"
       >
-        <h2 className="py-5 border-b border-gray-600 text-xl">add movie</h2>
+        <h2 className="py-5 border-b border-gray-600 text-xl">
+          {t("Add movie")}
+        </h2>
 
         <div className="p-5">
           <div className="flex items-center gap-2  mb-7">
             <ProfilePic size="10" />
 
-            <p>Nino Tabagari</p>
+            <p>{user?.name}</p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <div className="relative w-full flex  border border-gray-600 rounded-md overflow-hidden">
-              <p className="absolute right-2 top-1 text-gray-400">Eng</p>
-              <input
-                type="text"
-                className="w-full px-3 py-1 outline-none bg-transparent "
-                placeholder="Movie name"
-                {...register("movieNameEn", {
-                  required: "ამ ველის შევსება სავალდებულოა",
-                })}
-              />
-
-              <div className="w-16"></div>
-            </div>
-
-            <div className="relative w-full flex  border border-gray-600 rounded-md overflow-hidden">
-              <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
-              <input
-                type="text"
-                className="w-full px-3 py-1 outline-none bg-transparent "
-                placeholder="ფილმის სახელი"
-                {...register("movieNameKa", {
-                  required: "ამ ველის შევსება სავალდებულოა",
-                })}
-              />
-
-              <div className="w-16"></div>
-            </div>
-
-            <Select
-              defaultValue={[colourOptions[2], colourOptions[3]]}
-              isMulti
-              name="colors"
-              options={colourOptions}
-              className="my-react-select-container "
-              classNamePrefix="my-react-select"
+            <DashboardInput
+              name="title_en"
+              lang="Eng"
+              placeholder="Movie name"
+              registerOptions={{
+                required: true,
+              }}
             />
 
-            <div className="relative w-full flex  border border-gray-600 rounded-md overflow-hidden">
+            <DashboardInput
+              name="title_ka"
+              lang="ქარ"
+              placeholder="ფილმის სახელი"
+              registerOptions={{
+                required: true,
+              }}
+            />
+
+            <div
+              className={`border rounded-md ${
+                errors.genre ? "border-red-600" : "border-gray-600"
+              }`}
+            >
+              <Controller
+                name="genre"
+                rules={{ required: "ამ ველის შევსება სავალდებულოა" }}
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    isMulti
+                    options={genres?.data}
+                    className="my-react-select-container"
+                    classNamePrefix="my-react-select"
+                  />
+                )}
+              />
+            </div>
+
+            <div
+              className={`relative w-full flex  border rounded-md overflow-hidden ${
+                errors.date ? "border-red-600" : "border-gray-600"
+              }`}
+            >
               <input
                 type="date"
-                className="w-full px-3 py-1 outline-none bg-transparent "
+                className="w-full px-3 py-1 outline-none bg-transparent text-white date-input "
                 placeholder="წელი/year"
-                {...register("year", {
+                {...register("date", {
                   required: "ამ ველის შევსება სავალდებულოა",
                 })}
               />
             </div>
 
-            <div className="relative w-full flex  border border-gray-600 rounded-md overflow-hidden">
-              <p className="absolute right-2 top-1 text-gray-400">Eng</p>
-              <input
-                type="text"
-                className="w-full px-3 py-1 outline-none bg-transparent "
-                placeholder="Director"
-                {...register("directorEn", {
-                  required: "ამ ველის შევსება სავალდებულოა",
-                })}
-              />
+            <DashboardInput
+              name="director_en"
+              lang="Eng"
+              placeholder="Director"
+              registerOptions={{
+                required: true,
+              }}
+            />
 
-              <div className="w-16"></div>
-            </div>
+            <DashboardInput
+              name="director_ka"
+              lang="ქარ"
+              placeholder="რეჟისორი"
+              registerOptions={{
+                required: true,
+              }}
+            />
 
-            <div className="relative w-full flex  border border-gray-600 rounded-md overflow-hidden">
-              <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
-              <input
-                type="text"
-                className="w-full px-3 py-1 outline-none bg-transparent "
-                placeholder="რეჟისორი"
-                {...register("directorKa", {
-                  required: "ამ ველის შევსება სავალდებულოა",
-                })}
-              />
-
-              <div className="w-16"></div>
-            </div>
-
-            <div className="relative w-full  border border-gray-600 rounded-md">
+            <div
+              className={`relative w-full  border  rounded-md ${
+                errors.description_en ? "border-red-600" : "border-gray-600"
+              }`}
+            >
               <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
               <textarea
                 className="w-full outline-none bg-transparent placeholder:italic p-2 "
                 placeholder="Movie discription"
-                {...register("descEn", {
+                {...register("description_en", {
                   required: "ამ ველის შევსება სავალდებულოა",
                 })}
               ></textarea>
             </div>
 
-            <div className="relative w-full  border border-gray-600 rounded-md">
+            <div
+              className={`relative w-full  border  rounded-md ${
+                errors.description_ka ? "border-red-600" : "border-gray-600"
+              }`}
+            >
               <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
               <textarea
                 className="w-full outline-none bg-transparent placeholder:italic p-2 "
                 placeholder="ფილმის აღწერა"
-                {...register("descKa", {
+                {...register("description_ka", {
                   required: "ამ ველის შევსება სავალდებულოა",
                 })}
               ></textarea>
             </div>
 
-            <div className="w-full border border-gray-600 rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
+            <div
+              className={`w-full border rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md
+            ${errors.img ? "border-red-600" : "border-gray-600"}`}
+            >
               <AiOutlineCamera className="text-xl min-w-[30px]" />
               <p>Drag & drop your image here or</p>
               <label
@@ -134,16 +152,18 @@ const CreateMovieModal = () => {
               >
                 Choose file
               </label>
-              <input id="file" type="file" className="hidden" />
+              <input
+                id="file"
+                type="file"
+                className="hidden"
+                {...register("img", {
+                  required: "ამ ველის შევსება სავალდებულოა",
+                })}
+              />
             </div>
 
-            <button
-              className="w-full bg-red-600 p-1 rounded-md"
-              {...register("image", {
-                required: "ამ ველის შევსება სავალდებულოა",
-              })}
-            >
-              Add movie
+            <button className="w-full bg-red-600 p-1 rounded-md">
+              {t("Add movie")}
             </button>
           </div>
         </div>

@@ -1,0 +1,136 @@
+{
+  "Home": {
+    "Write new quote": "დაამატე ახალი ციტატა",
+    "Search by": "მოძებნე",
+    "add quote placeholder": "ჩაწერე @ ფილმების ხოლო # ციტატების მოსაძებნად",
+    "write new quote": "დაამატე ახალი ციტატა",
+    "Post": "დამატება"
+  },
+
+  "Sidebar": {
+    "Edit your profile": "პროფილის რედაქტირება",
+    "News feed": "სიახლეები",
+    "List of movies": "ფილმების სია"
+  },
+
+  "Notifications": {
+    "notifications": "შეტყობინებები",
+    "mark as read": "მონიშნე ყველა წაკითხულად",
+    "log out": "გასვლა"
+  },
+
+  "Movies": {
+    "My list of movies": "ფილმების სია (სულ 25)",
+    "Search": "ძებნა",
+    "Add movie": "დაამატე ფილმი"
+  },
+
+  "SingleMovie": {
+    "Movie discription": "ფილმის აღწერა",
+    "Quotes (Total 7)": "ციტატები (სულ 7)",
+    "Add quote": "დაამატე ციტატა",
+    "director": "რეჟისორი",
+    "view quote": "ნახეთ ციტატა",
+    "Edit": "რედაქტირება",
+    "Delete": "წაშლა"
+  },
+
+  "Profile": {
+    "My profile": "ჩემი პროფილი",
+    "Upload new photo": "ატვირთე ახალი სურათი",
+    "Username": "სახელი",
+    "Email": "ელ-ფოსტა",
+    "Password": "პაროლი",
+    "Edit": "რედაქტირება",
+    "New username": "ახალი სახელი",
+    "New password": "ახალი პაროლი",
+    "Confirm new password": "გაიმეორეთ პაროლი",
+    "Passwords should contain": "პაროლი უნდა შეიცავდეს:",
+    "8 or more characters": "8 ან მეტ სიმბოლოს",
+    "15 lowercase character": "15 დაბალი რეგისტრის სიმბოლოებს",
+    "Enter new usarname": "ჩაწერეთ ახალი სახელი"
+  },
+
+  "Header": {
+    "Sign Up": "რეგისტრაცია",
+    "Log In": "შესვლა",
+    "Find any quote": "მოძებნე ნებისმიერი ციტატა მილიონობით ფილმის სტრიქონში",
+    "Get started": "დაიწყე"
+  },
+
+  "Login": {
+    "Log in to your account": "შედით თქვენს ექაუნთში",
+    "Welcome back! Please enter your details": "მოგესალმებით! გთხოვთ შეიყვანეთ მონაცემები",
+    "name": "სახელი",
+    "Enter your email": "შეიყვანეთ თქვენი მეილი",
+    "password": "პაროლი",
+    "Rememer me": "Rememer me",
+    "Forgot password": "დამავიწყდა პაროლი",
+    "Sign in": "შესვლა",
+    "Sign in with google": "გაიარეთ ავტორიზაცია გუგლით",
+    "Don't have an account": "არ გაქვთ ექაუნთი?",
+    "Sign up": "რეგისტრაცია",
+    "Unauthorized": "ასეთი მომხმარებელი არ არსებობს"
+  },
+
+  "Register": {
+    "Create an account": "შექმენი ექაუნთი",
+    "Start your journey!": "დაიწყე მოგზაურობა!",
+    "name": "სახელი",
+    "At least 3 max 15 characters": "მინიმუმ 3 და მაქსიმუმ 15 ასო",
+    "Email": "ელ-ფოსტა",
+    "Enter your email": "შეიყვანეთ თქვენი მეილი",
+    "password": "პაროლი",
+    "Confirm password": "გაიმეორეთ პაროლი",
+    "Get started": "რეგისტრაცია",
+    "Sign up with google": "შედით გუგლის ექაუნთით",
+    "Already have an account": "უკვე გაქვს ექაუნთი?",
+    "Log in": "შესვლა",
+    "This user already exists": "ესეთი მომხმარებელი უკვე არსებობს"
+  },
+
+  "Validations": {
+    "Enter at least 3 characters": "შეიყვანეთ მინიმუმ 3 სიმბოლო",
+    "Enter a maximum of 15 characters": "შეიყვანეთ მაქსიმუმ 15 სიმბოლო",
+    "This field is required": "ამ ველის შევსება სავალდებულოა",
+    "Enter lower case characters": "შეიყვანეთ დაბალი რეგისტრის სიმბოლოები",
+    "Enter the email in the correct format": "ჩაწერეთ მეილი სწორი ფორმატით",
+    "Enter at least 8 characters": "შეიყვანეთ მინიმუმ 8 სიმბოლო",
+    "Enter a lower case character or number": "შეიყვანეთ დაბალი რეგისტრის სიმბოლო ან რიცხვი",
+    "Password does not match": "პაროლი არ ემთხვევა"
+  },
+
+  "Forgot": {
+    "Forgot password": "დაგავიწყდა პაროლი?",
+    "Enter the email": "შეიყვანეთ ელ-ფოსტა და ჩვენ გამოგიგზავნით პაროლის აღდგენის ინსტრუქციას",
+    "Email": "ელ-ფოსტა",
+    "Enter your email": "შეიყვანეთ თქვენი მეილი",
+    "send": "გაგზავნა",
+    "back": "დაბრუნდით უკან"
+  },
+
+  "NotificationModal": {
+    "Thank you": "გმადლობთ!",
+    "Please check your email and follow": "გთხოვთ შეამოწმეთ მეილი და მიყევით ექაუნთის გააქტიურების ინსტრუქციას",
+    "Go to my email": "გადადით მეილზე",
+    "Your account has been activated": "თქვენი ექაუნთ გააქტიურდა.",
+    "Go to my news feed": "გადადით ნიუს ფიდზე",
+    "Check your email": "შეამოწმეთ მეილი",
+    "We have sent a password recover instructions to your email": "ჩვენ გამოგიგზავნეთ პაროლის აღდგენის ინსტრუქცია მეილზე",
+    "Success": "გილოცავთ!",
+    "Your Email changed successfully": "თქვენი მეილი შეიცვალა",
+    "Log in": "შესვლა",
+    "Your Password changed successfully": "თქვენი პაროლი შეიცვალა",
+    "Link expired": "ლინკს გაუვიდა ვადა!",
+    "Login link has expired": "შესვლის ლინკს ვადა გაუვიდა, რადგან თქვენ ის არ გამოგიყენებიათ.",
+    "Request another link": "მოითხოვე ახალი ლინკი",
+
+    "Create new password": "შექმენით ახალი პაროლი",
+    "Your new password must be different": "პაროლი განსხვავებული უნდა იყოს წინა პაროლებისგან",
+    "password": "პაროლუ",
+    "At least 3 max 15 characters": "მინიმუმ 3 და მაქსიმუმ 15 ასო",
+    "Confirm password": "გაიმეორეთ პაროლი",
+    "reset password": "შეცვალეთ პაროლი",
+    "back": "დაბრუნდით უკან"
+  }
+}

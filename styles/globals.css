@@ -24,13 +24,17 @@
   );
 }
 
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 @layer components {
   .my-react-select-container .my-react-select__control {
-    @apply bg-transparent outline-none ring-0 border-gray-500  text-left;
+    @apply bg-transparent outline-none ring-0  text-left border-transparent hover:border-transparent;
   }
 
   .my-react-select-container .my-react-select__control--is-focused {
-    @apply border-gray-500 ring-0;
+    @apply border-gray-500 ring-0 active:border-transparent;
   }
 
   .my-react-select-container .my-react-select__menu {

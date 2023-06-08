@@ -2,11 +2,15 @@ import { ProfilePic } from "@/components";
 import React from "react";
 import { AiOutlineCamera, AiOutlineCaretDown } from "react-icons/ai";
 import { BsCameraReels } from "react-icons/bs";
+import useCreateQuoteModal from "./useCreateQuoteModal";
 
 const CreateQuoteModal = () => {
+  const { t } = useCreateQuoteModal();
   return (
     <div className="w-full text-center z-40">
-      <h2 className="py-5 border-b border-gray-600 text-xl">write new quote</h2>
+      <h2 className="py-5 border-b border-gray-600 text-xl">
+        {t("Write new quote")}
+      </h2>
 
       <div className="p-5">
         <div className="flex items-center gap-2  mb-7">
@@ -55,7 +59,7 @@ const CreateQuoteModal = () => {
             </div>
           </div>
 
-          <button className="w-full bg-red-600 p-1">Post</button>
+          <button className="w-full bg-red-600 p-1">{t("Post")}</button>
         </div>
       </div>
     </div>

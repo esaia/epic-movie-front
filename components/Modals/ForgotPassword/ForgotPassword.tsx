@@ -5,28 +5,27 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import useForgotPassword from "./useForgotPassword";
 
 const ForgotPassword = () => {
-  const { form, handleSubmit, onSubmit, errorMessage, isLoading } =
+  const { form, handleSubmit, onSubmit, errorMessage, isLoading, t, v } =
     useForgotPassword();
 
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
-        <h2 className="text-center text-2xl mb-2">Forgot password?</h2>
+        <h2 className="text-center text-2xl mb-2">{t("Forgot password")}</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
-          Enter the email and we’ll send an email with instructions to reset
-          your password
+          {t("Enter the email")}
         </p>
 
         <Input
           name="email"
-          label="Email"
+          label={t("Email")}
           required={true}
-          placeholder="Enter your email"
+          placeholder={t("Enter your email")}
           registerOptions={{
-            required: "ამ ველის შევსება სავალდებულოა",
+            required: v("This field is required"),
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-              message: "ჩაწერეთ მეილი სწორი ფორმატით",
+              message: v("Enter the email in the correct format"),
             },
           }}
         />
@@ -39,13 +38,13 @@ const ForgotPassword = () => {
                   ${isLoading ? "bg-gray-600" : "bg-red-500"} `}
           disabled={isLoading}
         >
-          Send instructions
+          {t("send")}
         </button>
 
         <Link href={"/landing?modal=login"}>
           <div className="flex justify-center items-center mt-5 gap-2 ">
             <AiOutlineArrowLeft />
-            <p className="text-sm text-gray-500">Back to log in</p>
+            <p className="text-sm text-gray-500"> {t("back")}</p>
           </div>
         </Link>
       </form>

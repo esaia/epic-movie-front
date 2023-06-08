@@ -3,9 +3,12 @@ import { useContext, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import axiosAPI from "lib/axios";
 import { inputType } from "./types";
+import { useTranslations } from "next-intl";
 
 const useProfile = () => {
   const { user, setUser } = useContext(AuthContext);
+  const t = useTranslations("Profile");
+
   const [editUsername, seteditUsername] = useState(false);
   const [editPassword, seteditPassword] = useState(false);
   const [errorMsg, seterrorMsg] = useState("");
@@ -96,6 +99,7 @@ const useProfile = () => {
     editPassword,
     img,
     errorMsg,
+    t,
   };
 };
 

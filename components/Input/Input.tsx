@@ -30,12 +30,12 @@ const Input = ({
   } = useInput({ name });
 
   return (
-    <div className="w-full flex  justify-center items-start gap-2 flex-col ">
-      <label htmlFor="">
+    <div className="w-full">
+      <label>
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <div
-        className={`relative flex items-center bg-gray-300 text-gray-900 w-full rounded-sm overflow-hidden border 
+        className={`relative flex items-center bg-gray-300 text-gray-900 w-full rounded-sm overflow-hidden border  mt-2
         ${
           errors[name]
             ? "border-red-500"
@@ -92,7 +92,7 @@ const Input = ({
           </>
         )}
       </div>
-      <div className="h-5 mt-[-5px]">
+      <div className="h-5 mt-[6px]">
         <ErrorMessage
           errors={errors}
           name={name}
