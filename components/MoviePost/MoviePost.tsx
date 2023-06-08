@@ -1,9 +1,9 @@
 import React from "react";
 import { BsChatQuote } from "react-icons/bs";
-import { moviePostProps } from "./types";
+import { Movie } from "../../global";
 import useMoviePost from "./useMoviePost";
 
-const MoviePost = ({ movie }: moviePostProps) => {
+const MoviePost = ({ movie }: { movie: Movie }) => {
   const { locale } = useMoviePost();
 
   return (

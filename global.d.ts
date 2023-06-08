@@ -3,19 +3,22 @@ interface Title {
   [locale: string]: string;
 }
 
-interface Genre {
+export interface Genre {
+  id: number;
   label: string;
   value: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface Director {
-  en: string;
-  ka: string;
+  [locale: string]: string;
+  [locale: string]: string;
 }
 
 interface Description {
-  en: string;
-  ka: string;
+  [locale: string]: string;
+  [locale: string]: string;
 }
 
 interface User {
@@ -40,5 +43,18 @@ export interface Movie {
   img: string;
   created_at: string;
   updated_at: string;
-  user: User;
+  user?: User;
+}
+
+export interface movieTypeForm {
+  title_en: string;
+  title_ka: string;
+  genre: genresOption[];
+  date: date;
+  director_en: string;
+  director_ka: string;
+  description_en: string;
+  description_ka: string;
+  img: File[];
+  user_id: number | undefined;
 }

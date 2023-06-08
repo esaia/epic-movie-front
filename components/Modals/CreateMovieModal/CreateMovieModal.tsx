@@ -23,7 +23,7 @@ const CreateMovieModal = () => {
     <FormProvider {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full text-center  h-screen md:h-[90vh]"
+        className="w-full text-center h-screen md:h-[90vh]"
       >
         <h2 className="py-5 border-b border-gray-600 text-xl">
           {t("Add movie")}
@@ -165,7 +165,7 @@ const CreateMovieModal = () => {
 
             <ErrorText errors={errors} name="img" />
 
-            <button className="w-full bg-red-600 p-1 rounded-md">
+            <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
               {t("Add movie")}
             </button>
           </div>
