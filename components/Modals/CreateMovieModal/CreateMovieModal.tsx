@@ -3,7 +3,7 @@ import { FormProvider, Controller } from "react-hook-form";
 import useCreateMovieModal from "./useCreateMovieModal";
 import { AiOutlineCamera } from "react-icons/ai";
 import Select from "react-select";
-import { DashboardInput, ProfilePic } from "@/components";
+import { DashboardInput, ErrorText, ProfilePic } from "@/components";
 
 const CreateMovieModal = () => {
   const {
@@ -16,6 +16,7 @@ const CreateMovieModal = () => {
     errors,
     onSubmit,
     t,
+    v,
   } = useCreateMovieModal();
 
   return (
@@ -35,25 +36,23 @@ const CreateMovieModal = () => {
             <p>{user?.name}</p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
             <DashboardInput
               name="title_en"
               lang="Eng"
               placeholder="Movie name"
               registerOptions={{
-                required: true,
+                required: v("This field is required"),
               }}
             />
-
             <DashboardInput
               name="title_ka"
               lang="ქარ"
               placeholder="ფილმის სახელი"
               registerOptions={{
-                required: true,
+                required: v("This field is required"),
               }}
             />
-
             <div
               className={`border rounded-md ${
                 errors.genre ? "border-red-600" : "border-gray-600"
@@ -61,7 +60,7 @@ const CreateMovieModal = () => {
             >
               <Controller
                 name="genre"
-                rules={{ required: "ამ ველის შევსება სავალდებულოა" }}
+                rules={{ required: v("This field is required") }}
                 control={control}
                 render={({ field }) => (
                   <Select
@@ -74,6 +73,7 @@ const CreateMovieModal = () => {
                 )}
               />
             </div>
+            <ErrorText errors={errors} name="genre" />
 
             <div
               className={`relative w-full flex  border rounded-md overflow-hidden ${
@@ -85,29 +85,28 @@ const CreateMovieModal = () => {
                 className="w-full px-3 py-1 outline-none bg-transparent text-white date-input "
                 placeholder="წელი/year"
                 {...register("date", {
-                  required: "ამ ველის შევსება სავალდებულოა",
+                  required: v("This field is required"),
                 })}
               />
             </div>
+            <ErrorText errors={errors} name="date" />
 
             <DashboardInput
               name="director_en"
               lang="Eng"
               placeholder="Director"
               registerOptions={{
-                required: true,
+                required: v("This field is required"),
               }}
             />
-
             <DashboardInput
               name="director_ka"
               lang="ქარ"
               placeholder="რეჟისორი"
               registerOptions={{
-                required: true,
+                required: v("This field is required"),
               }}
             />
-
             <div
               className={`relative w-full  border  rounded-md ${
                 errors.description_en ? "border-red-600" : "border-gray-600"
@@ -119,10 +118,11 @@ const CreateMovieModal = () => {
                 className="w-full outline-none bg-transparent placeholder:italic p-2 "
                 placeholder="Movie discription"
                 {...register("description_en", {
-                  required: "ამ ველის შევსება სავალდებულოა",
+                  required: v("This field is required"),
                 })}
               ></textarea>
             </div>
+            <ErrorText errors={errors} name="description_en" />
 
             <div
               className={`relative w-full  border  rounded-md ${
@@ -135,10 +135,11 @@ const CreateMovieModal = () => {
                 className="w-full outline-none bg-transparent placeholder:italic p-2 "
                 placeholder="ფილმის აღწერა"
                 {...register("description_ka", {
-                  required: "ამ ველის შევსება სავალდებულოა",
+                  required: v("This field is required"),
                 })}
               ></textarea>
             </div>
+            <ErrorText errors={errors} name="description_ka" />
 
             <div
               className={`w-full border rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md
@@ -157,10 +158,12 @@ const CreateMovieModal = () => {
                 type="file"
                 className="hidden"
                 {...register("img", {
-                  required: "ამ ველის შევსება სავალდებულოა",
+                  required: v("This field is required"),
                 })}
               />
             </div>
+
+            <ErrorText errors={errors} name="img" />
 
             <button className="w-full bg-red-600 p-1 rounded-md">
               {t("Add movie")}
