@@ -39,9 +39,9 @@ const Movies = () => {
         {movies &&
           movies.map((movie) => {
             return (
-              <Link key={movie.id} href={`/movies/${movie.id}`}>
+              <a key={movie.id} href={`/movies/${movie.id}`}>
                 <MoviePost movie={movie} />
-              </Link>
+              </a>
             );
           })}
       </div>

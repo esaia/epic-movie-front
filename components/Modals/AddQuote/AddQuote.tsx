@@ -40,7 +40,7 @@ const AddQuote = ({
             />
           </div>
           <div className="flex gap-3 flex-col flex-2  justify-center  items-start text-left">
-            <h2 className="text-orange-200">
+            <h2 className="text-orange-200 ">
               {movie?.title[`${locale}`] +
                 " " +
                 `(${movie?.date?.slice(0, 4)})`}
@@ -50,7 +50,7 @@ const AddQuote = ({
               {movie?.genre.map((genre: Genre) => {
                 return (
                   <p
-                    className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
+                    className="px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
                     key={genre.value}
                   >
                     {genre.label}
@@ -109,7 +109,7 @@ const AddQuote = ({
           <p>Drag & drop your image here or</p>
           <label
             htmlFor="file"
-            className="px-2 py-1 bg-purple-900 cursor-pointer"
+            className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
           >
             Choose file
           </label>

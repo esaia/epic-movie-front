@@ -4,11 +4,16 @@ import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { RiPencilLine } from "react-icons/ri";
 import useSingleQuote from "./useSingleQuote";
 import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
-import Link from "next/link";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Quote } from "global";
 
-const SingleQuote = ({ quote }: { quote: Quote }) => {
+const SingleQuote = ({
+  quote,
+  reFetchMovie,
+}: {
+  quote: Quote;
+  reFetchMovie: () => void;
+}) => {
   const {
     showDetails,
     setshowDetails,
@@ -19,17 +24,27 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
     closeModal,
     closeShowDetails,
     locale,
+    setViewQuote,
+    seteditQuote,
     t,
   } = useSingleQuote();
 
   return (
     <div className="bg-[#11101a] p-4 rounded-md relative mb-5  z-4">
       <DashboaradPortal isOpen={viewQuote} closeModal={closeModal}>
-        <ViewQuote />
+        <ViewQuote
+          quote={quote}
+          setViewQuote={setViewQuote}
+          seteditQuote={seteditQuote}
+        />
       </DashboaradPortal>
 
       <DashboaradPortal isOpen={editQuote} closeModal={closeModal}>
-        <EditQuote />
+        <EditQuote
+          quote={quote}
+          closeModal={closeModal}
+          reFetchMovie={reFetchMovie}
+        />
       </DashboaradPortal>
 
       <div
@@ -42,19 +57,21 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
       {showDetails && (
         <OutsideClickHandler onOutsideClick={closeShowDetails}>
           <div className="absolute top-8 right-[-40px] bg-secondary rounded-md p-5 hidden md:block">
-            <Link href={"/movies/id?modal=view-quote"}>
-              <div className="flex gap-3 mb-2 cursor-pointer items-center">
-                <AiOutlineEye />
-                <p>{t("view quote")}</p>
-              </div>
-            </Link>
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={() => setViewQuote(true)}
+            >
+              <AiOutlineEye />
+              <p>{t("view quote")}</p>
+            </div>
 
-            <Link href={"/movies/id?modal=edit-quote"}>
-              <div className="flex gap-3 mb-2 cursor-pointer items-center">
-                <RiPencilLine />
-                <p>{t("Edit")}</p>
-              </div>
-            </Link>
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={() => seteditQuote(true)}
+            >
+              <RiPencilLine />
+              <p>{t("Edit")}</p>
+            </div>
 
             <div className="flex gap-3 mb-2 cursor-pointer items-center">
               <BsTrash3 />

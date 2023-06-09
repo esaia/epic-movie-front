@@ -29,12 +29,12 @@ const useMovie = () => {
     return data;
   };
 
-  const { data: movie, refetch } = useQuery({
+  const { data: movie, refetch: reFetchMovie } = useQuery({
     queryFn: fetchMovie,
   });
 
   useEffect(() => {
-    refetch();
+    reFetchMovie();
   }, [editMovieModal, addQuote]);
 
   const deleteMovie = async () => {
@@ -55,7 +55,7 @@ const useMovie = () => {
     showEditMovie,
     showAddQuotes,
     movie,
-    refetch,
+    reFetchMovie,
     deleteMovie,
   };
 };

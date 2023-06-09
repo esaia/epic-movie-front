@@ -25,6 +25,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
     showAddQuotes,
     movie,
     deleteMovie,
+    reFetchMovie,
   } = useMovie();
 
   return (
@@ -53,7 +54,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             />
           }
 
-          <div className="hidden md:block">
+          <div className="hidden md:block ">
             <div className="flex gap-3  items-center py-6 ">
               <p>{t("Quotes (Total 7)")}</p>
               <span>|</span>
@@ -71,7 +72,13 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
               <h1>There are not quotes</h1>
             ) : (
               movie?.quote.map((quote: Quote) => {
-                return <SingleQuote key={quote.id} quote={quote} />;
+                return (
+                  <SingleQuote
+                    key={quote.id}
+                    quote={quote}
+                    reFetchMovie={reFetchMovie}
+                  />
+                );
               })
             )}
           </div>
@@ -94,27 +101,29 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
           </div>
 
           <div className="flex gap-2 pb-4 my-3">
-            {movie
-              ? movie?.genre.map((genre: Genre) => {
-                  return (
-                    <h4
-                      className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
-                      key={genre.value}
-                    >
-                      {genre.label}
-                    </h4>
-                  );
-                })
-              : initialMovie?.genre.map((genre: Genre) => {
-                  return (
-                    <h4
-                      className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
-                      key={genre.value}
-                    >
-                      {genre.label}
-                    </h4>
-                  );
-                })}
+            <div className="flex flex-wrap gap-3">
+              {movie
+                ? movie?.genre.map((genre: Genre) => {
+                    return (
+                      <h4
+                        className=" px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
+                        key={genre.value}
+                      >
+                        {genre.label}
+                      </h4>
+                    );
+                  })
+                : initialMovie?.genre.map((genre: Genre) => {
+                    return (
+                      <h4
+                        className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
+                        key={genre.value}
+                      >
+                        {genre.label}
+                      </h4>
+                    );
+                  })}
+            </div>
           </div>
 
           <div className="flex items-center gap-2 pb-4 ">
@@ -178,20 +187,29 @@ export async function getStaticPaths(context: GetStaticPaths) {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const { data } = await axiosAPI.get(`/movies/${context?.params?.id}`);
+  try {
+    const { data } = await axiosAPI.get(`/movies/${context?.params?.id}`);
 
-  return {
-    props: {
-      initialMovie: data,
-      messages: (await import(`../../locales/${context.locale}/common.json`))
-        .default,
-    },
-  };
+    return {
+      props: {
+        initialMovie: data,
+        messages: (await import(`../../locales/${context.locale}/common.json`))
+          .default,
+      },
+    };
+  } catch (error) {
+    console.log("testing");
+    return {
+      redirect: {
+        destination: "/404",
+      },
+    };
+  }
 }
 
 export default SingleMovie;

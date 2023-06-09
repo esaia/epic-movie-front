@@ -127,7 +127,7 @@ const EditMovieModal = ({
               <p className="text-xs pl-2 pt-3">Discription: </p>
 
               <textarea
-                className="w-full outline-none bg-transparent placeholder:italic p-2 "
+                className="w-full outline-none bg-transparent placeholder:italic p-2  mr-12 "
                 placeholder="Movie discription"
                 {...register("description_en", {
                   required: v("This field is required"),
@@ -148,7 +148,7 @@ const EditMovieModal = ({
               </p>
 
               <textarea
-                className="w-full outline-none bg-transparent placeholder:italic p-2 "
+                className="w-full outline-none bg-transparent placeholder:italic p-2 mr-12 "
                 placeholder="ფილმის აღწერა"
                 {...register("description_ka", {
                   required: v("This field is required"),
@@ -178,7 +178,7 @@ const EditMovieModal = ({
 
                 <label
                   htmlFor="file"
-                  className="px-2 py-1 bg-purple-900 cursor-pointer"
+                  className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
                 >
                   Choose file
                 </label>

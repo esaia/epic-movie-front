@@ -108,14 +108,14 @@ const CreateMovieModal = () => {
               }}
             />
             <div
-              className={`relative w-full  border  rounded-md ${
+              className={`relative flex w-full  border  rounded-md ${
                 errors.description_en ? "border-red-600" : "border-gray-600"
               }`}
             >
               <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
               <textarea
-                className="w-full outline-none bg-transparent placeholder:italic p-2 "
+                className="w-full outline-none bg-transparent placeholder:italic p-2 mr-12"
                 placeholder="Movie discription"
                 {...register("description_en", {
                   required: v("This field is required"),
@@ -125,14 +125,14 @@ const CreateMovieModal = () => {
             <ErrorText errors={errors} name="description_en" />
 
             <div
-              className={`relative w-full  border  rounded-md ${
+              className={`relative flex w-full  border  rounded-md ${
                 errors.description_ka ? "border-red-600" : "border-gray-600"
               }`}
             >
               <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
               <textarea
-                className="w-full outline-none bg-transparent placeholder:italic p-2 "
+                className="w-full outline-none bg-transparent placeholder:italic p-2 mr-12"
                 placeholder="ფილმის აღწერა"
                 {...register("description_ka", {
                   required: v("This field is required"),
@@ -149,7 +149,7 @@ const CreateMovieModal = () => {
               <p>Drag & drop your image here or</p>
               <label
                 htmlFor="file"
-                className="px-2 py-1 bg-purple-900 cursor-pointer"
+                className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
               >
                 Choose file
               </label>
