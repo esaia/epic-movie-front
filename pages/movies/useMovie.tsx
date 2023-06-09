@@ -35,7 +35,7 @@ const useMovie = () => {
 
   useEffect(() => {
     refetch();
-  }, [editMovieModal]);
+  }, [editMovieModal, addQuote]);
 
   const deleteMovie = async () => {
     try {

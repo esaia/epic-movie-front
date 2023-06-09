@@ -46,7 +46,7 @@ const useCreateMovieModal = () => {
       push(pathname);
     },
     onError: (err: AxiosError) => {
-      console.log(err);
+      console.error(err);
     },
   });
 

@@ -11,9 +11,10 @@ import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import useMovie from "./useMovie";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
-import type { Genre } from "../../global";
+import type { Genre, Movie, Quote } from "global";
+import axiosAPI from "lib/axios";
 
-const SingleMovie = () => {
+const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
   const {
     editMovieModal,
     addQuote,
@@ -33,23 +34,24 @@ const SingleMovie = () => {
       </DashboaradPortal>
 
       <DashboaradPortal isOpen={addQuote} closeModal={closeModal}>
-        <AddQuote />
+        <AddQuote movie={movie} closeModal={closeModal} />
       </DashboaradPortal>
 
       <h1 className="text-xl">{t("Movie discription")}</h1>
 
       <div className="grid gap-5 md:grid-cols-column4 py-6 ">
         <div>
-          {movie && (
+          {
             <img
               src={
-                movie &&
-                `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie.img}`
+                movie
+                  ? `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie.img}`
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${initialMovie.img}`
               }
               alt=""
               className="flex-1  rounded-md w-full md:h-56 xl:h-96 object-cover "
             />
-          )}
+          }
 
           <div className="hidden md:block">
             <div className="flex gap-3  items-center py-6 ">
@@ -64,17 +66,25 @@ const SingleMovie = () => {
                 <button>{t("Add quote")}</button>
               </div>
             </div>
-            <SingleQuote />
-            <SingleQuote />
-            <SingleQuote />
-            <SingleQuote />
+
+            {movie?.quote?.length === 0 ? (
+              <h1>There are not quotes</h1>
+            ) : (
+              movie?.quote.map((quote: Quote) => {
+                return <SingleQuote key={quote.id} quote={quote} />;
+              })
+            )}
           </div>
         </div>
 
         <div>
           <div className="flex justify-between">
             <div className="flex justify-between">
-              {locale && `${movie?.title[locale]} ${movie?.date?.slice(0, 4)}`}
+              {movie
+                ? `${movie?.title[`${locale}`]} ${movie?.date?.slice(0, 4)}`
+                : `${
+                    initialMovie?.title[`${locale}`]
+                  } ${initialMovie?.date?.slice(0, 4)}`}
             </div>
             <div className="flex bg-secondary items-center gap-3 px-4 py-2 rounded-md">
               <BiPencil className="cursor-pointer" onClick={showEditMovie} />
@@ -83,26 +93,43 @@ const SingleMovie = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 pb-4">
-            {movie?.genre.map((genre: Genre) => {
-              return (
-                <h4
-                  className="py-1 px-3 bg-gray-400 text-white w-fit rounded-md cursor-pointer"
-                  key={genre.value}
-                >
-                  {genre.label}
-                </h4>
-              );
-            })}
+          <div className="flex gap-2 pb-4 my-3">
+            {movie
+              ? movie?.genre.map((genre: Genre) => {
+                  return (
+                    <h4
+                      className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
+                      key={genre.value}
+                    >
+                      {genre.label}
+                    </h4>
+                  );
+                })
+              : initialMovie?.genre.map((genre: Genre) => {
+                  return (
+                    <h4
+                      className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
+                      key={genre.value}
+                    >
+                      {genre.label}
+                    </h4>
+                  );
+                })}
           </div>
 
           <div className="flex items-center gap-2 pb-4 ">
             <p className="text-gray-300">{t("director")} </p>
-            <h3>{locale && movie?.director[locale]}</h3>
+            <h3>
+              {movie
+                ? movie?.director[`${locale}`]
+                : initialMovie?.director[`${locale}`]}
+            </h3>
           </div>
 
           <p className="text-gray-300">
-            {locale && movie && movie?.description[locale]}
+            {movie
+              ? movie?.description[`${locale}`]
+              : initialMovie?.description[`${locale}`]}
           </p>
         </div>
 
@@ -117,10 +144,10 @@ const SingleMovie = () => {
               </Link>
             </div>
           </div>
+          {/* <SingleQuote />
           <SingleQuote />
           <SingleQuote />
-          <SingleQuote />
-          <SingleQuote />
+          <SingleQuote /> */}
         </div>
       </div>
     </MovieWrapper>
@@ -133,16 +160,13 @@ export async function getStaticPaths(context: GetStaticPaths) {
   }
 
   const fetchMovieIds = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL_API}/movies`
-    );
-    const data = await response.json();
+    const { data } = await axiosAPI.get("/movies");
+
     const movieIds = data.map((movie: Movie) => movie.id);
     return movieIds;
   };
 
   const movieIds = await fetchMovieIds();
-
   const locales: string[] = ["en", "ka"];
   const paths: { params: { id: string }; locale: string }[] = [];
 
@@ -159,8 +183,11 @@ export async function getStaticPaths(context: GetStaticPaths) {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
+  const { data } = await axiosAPI.get(`/movies/${context?.params?.id}`);
+
   return {
     props: {
+      initialMovie: data,
       messages: (await import(`../../locales/${context.locale}/common.json`))
         .default,
     },

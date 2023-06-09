@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 
 const useEditMovieModal = (movie: Movie, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
+  const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
   const { query } = useRouter();
   const formData = new FormData();
@@ -60,7 +61,6 @@ const useEditMovieModal = (movie: Movie, closeModal: () => void) => {
 
   const submitForm = (movie: movieTypeForm) => {
     Object.entries(movie).map((item) => {
-      console.log();
       if (item[0] === "img") {
         return;
       }
@@ -83,6 +83,7 @@ const useEditMovieModal = (movie: Movie, closeModal: () => void) => {
     form,
     errors,
     v,
+    t,
     control,
     genres: genresQuery.data,
   };

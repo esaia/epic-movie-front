@@ -6,8 +6,9 @@ import useSingleQuote from "./useSingleQuote";
 import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
 import Link from "next/link";
 import OutsideClickHandler from "react-outside-click-handler";
+import { Quote } from "global";
 
-const SingleQuote = () => {
+const SingleQuote = ({ quote }: { quote: Quote }) => {
   const {
     showDetails,
     setshowDetails,
@@ -17,6 +18,7 @@ const SingleQuote = () => {
     editQuote,
     closeModal,
     closeShowDetails,
+    locale,
     t,
   } = useSingleQuote();
 
@@ -82,12 +84,13 @@ const SingleQuote = () => {
       )}
 
       <div className="flex items-center md:flex-row flex-col gap-6 border-b border-gray-600 pb-5 select-none">
-        <img
-          src="https://media.istockphoto.com/id/1237804526/vector/movie-night-concept-with-popcorn-cinema-tickets-drink-tape-in-cartoon-style-movie-or-cinema.jpg?s=612x612&w=0&k=20&c=FWIp6SXBqUg-_PWtoTxOy00b2aeg5xNDiRcFr6IF4l4="
-          alt=""
-          className="rounded-sm object-cover  md:w-36 w-full h-36 md:h-full "
-        />
-        <p>"Frankly, my dear, I don'tgive a damn."</p>
+        <div className="h-24 w-32">
+          <img
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
+            className="rounded-sm object-cover w-full h-full "
+          />
+        </div>
+        <p>"{quote.quote[`${locale}`]}"</p>
       </div>
 
       <div className="flex justify-between  mt-2">

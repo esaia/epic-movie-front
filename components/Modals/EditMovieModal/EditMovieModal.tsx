@@ -20,6 +20,7 @@ const EditMovieModal = ({
     form,
     errors,
     v,
+    t,
     control,
     genres,
   } = useEditMovieModal(movie, closeModal);
@@ -30,7 +31,9 @@ const EditMovieModal = ({
         onSubmit={handleSubmit(submitForm)}
         className="w-full text-center h-screen md:h-[90vh]"
       >
-        <h2 className="py-5 border-b border-gray-600 text-xl">Update Movie</h2>
+        <h2 className="py-5 border-b border-gray-600 text-xl">
+          {t("Update Movie")}
+        </h2>
 
         <div className="p-5">
           <div className="flex items-center gap-2  mb-7">
@@ -155,29 +158,43 @@ const EditMovieModal = ({
             <ErrorText errors={errors} name="description_ka" />
 
             <div
-              className={`w-full border rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md
+              className={`w-full border rounded-m flex justify-between items-center gap-3  px-3 py-5 rounded-md max-h-32 
             ${errors.img ? "border-red-600" : "border-gray-600"}`}
             >
-              <AiOutlineCamera className="text-xl min-w-[30px]" />
-              <p>Drag & drop your image here or</p>
-              <label
-                htmlFor="file"
-                className="px-2 py-1 bg-purple-900 cursor-pointer"
-              >
-                Choose file
-              </label>
-              <input
-                id="file"
-                type="file"
-                className="hidden"
-                {...register("img")}
-              />
+              <div className="flex-1 h-28 ">
+                <img
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie.img}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center items-center gap-2">
+                <p className="text-orange-200">REPLACE PHOTO</p>
+                <div className="flex items-center">
+                  <AiOutlineCamera className="text-xl min-w-[30px]" />
+
+                  <p>Drag & drop your image here or</p>
+                </div>
+
+                <label
+                  htmlFor="file"
+                  className="px-2 py-1 bg-purple-900 cursor-pointer"
+                >
+                  Choose file
+                </label>
+                <input
+                  id="file"
+                  type="file"
+                  className="hidden"
+                  {...register("img")}
+                />
+              </div>
             </div>
 
             <ErrorText errors={errors} name="img" />
 
             <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
-              Edit
+              {t("Edit")}
             </button>
           </div>
         </div>

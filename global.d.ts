@@ -32,6 +32,18 @@ interface User {
   img: string;
 }
 
+export interface Quote {
+  id: number;
+  quote: {
+    [locale: string]: string;
+    [locale: string]: string;
+  };
+  img: string;
+  movie_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Movie {
   id: number;
   user_id: number;
@@ -44,6 +56,7 @@ export interface Movie {
   created_at: string;
   updated_at: string;
   user?: User;
+  quote?: Quote;
 }
 
 export interface movieTypeForm {
@@ -57,4 +70,10 @@ export interface movieTypeForm {
   description_ka: string;
   img: File[];
   user_id: number | undefined;
+}
+
+export interface quoteForm {
+  quote_en: string;
+  quote_ka: string;
+  img: file[];
 }

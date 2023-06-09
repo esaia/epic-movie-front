@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const useSingleQuote = () => {
   const [showDetails, setshowDetails] = useState(false);
   const [showDetailsMobile, setshowDetailsMobile] = useState(false);
-  const router = useRouter();
+  const { locale, query, push } = useRouter();
   const t = useTranslations("SingleMovie");
 
   const [viewQuote, setViewQuote] = useState<boolean>(false);
@@ -16,14 +16,14 @@ const useSingleQuote = () => {
   };
 
   const closeModal = () => {
-    router.push("/movies/id");
+    push("/movies/id");
   };
 
   useEffect(() => {
-    const { modal } = router.query;
+    const { modal } = query;
     setViewQuote(modal === "view-quote");
     seteditQuote(modal === "edit-quote");
-  }, [router, router.query]);
+  }, [query]);
 
   return {
     showDetails,
@@ -34,6 +34,7 @@ const useSingleQuote = () => {
     editQuote,
     closeModal,
     closeShowDetails,
+    locale,
     t,
   };
 };
