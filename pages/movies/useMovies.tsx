@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axiosAPI from "lib/axios";
 import { AxiosResponse } from "axios";
-import { Movie } from "./types";
+import { Movie } from "global";
 import { useTranslations } from "next-intl";
 
 const useMovies = () => {

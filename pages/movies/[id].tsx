@@ -10,9 +10,10 @@ import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import useMovie from "./useMovie";
-import { GetStaticPaths, GetStaticPropsContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Genre, Movie, Quote } from "global";
 import axiosAPI from "lib/axios";
+import { parseCookies } from "nookies";
 
 const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
   const {
@@ -163,38 +164,23 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
   );
 };
 
-export async function getStaticPaths(context: GetStaticPaths) {
-  interface Movie {
-    id: number;
-  }
-
-  const fetchMovieIds = async () => {
-    const { data } = await axiosAPI.get("/movies");
-
-    const movieIds = data.map((movie: Movie) => movie.id);
-    return movieIds;
-  };
-
-  const movieIds = await fetchMovieIds();
-  const locales: string[] = ["en", "ka"];
-  const paths: { params: { id: string }; locale: string }[] = [];
-
-  movieIds.forEach((id: number) => {
-    locales.forEach((locale) => {
-      paths.push({ params: { id: id.toString() }, locale });
-    });
-  });
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
-
-export async function getStaticProps(context: GetStaticPropsContext) {
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   try {
-    const { data } = await axiosAPI.get(`/movies/${context?.params?.id}`);
+    const { params, req } = context;
+    const { id } = params as { id: string };
 
+    const cookies = parseCookies({ req });
+    const cookiesString = Object.keys(cookies)
+      .map((key) => `${key}=${cookies[key]}`)
+      .join("; ");
+
+    const { data } = await axiosAPI.get(`/movies/${id}`, {
+      headers: {
+        Cookie: cookiesString,
+      },
+    });
     return {
       props: {
         initialMovie: data,
@@ -203,13 +189,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       },
     };
   } catch (error) {
-    console.log("testing");
     return {
       redirect: {
         destination: "/404",
+        permanent: false,
       },
     };
   }
-}
+};
 
 export default SingleMovie;
