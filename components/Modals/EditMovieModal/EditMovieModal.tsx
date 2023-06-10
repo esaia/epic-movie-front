@@ -9,7 +9,7 @@ const EditMovieModal = ({
   movie,
   closeModal,
 }: {
-  movie: Movie;
+  movie: Movie | undefined;
   closeModal: () => void;
 }) => {
   const {
@@ -163,7 +163,7 @@ const EditMovieModal = ({
             >
               <div className="flex-1 h-28 ">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie.img}`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie?.img}`}
                   className="w-full h-full object-cover"
                 />
               </div>

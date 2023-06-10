@@ -7,7 +7,7 @@ const AddQuote = ({
   movie,
   closeModal,
 }: {
-  movie: Movie;
+  movie: Movie | undefined;
   closeModal: () => void;
 }) => {
   const { user, locale, t, v, register, errors, handleSubmit, onSubmit } =
@@ -61,7 +61,7 @@ const AddQuote = ({
 
             <div className="flex items-center gap-2 ">
               <p className="text-gray-200 ">{t("director")}: </p>
-              <p>{movie.director[`${locale}`]}</p>
+              <p>{movie?.director[`${locale}`]}</p>
             </div>
           </div>
         </div>

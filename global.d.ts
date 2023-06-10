@@ -56,7 +56,7 @@ export interface Movie {
   created_at: string;
   updated_at: string;
   user?: User;
-  quote?: Quote;
+  quote?: Quote[];
 }
 
 export interface movieTypeForm {

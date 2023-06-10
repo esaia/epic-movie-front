@@ -12,6 +12,7 @@ const useEditQuote = (
   reFetchMovie: () => void
 ) => {
   const { user } = useContext(AuthContext);
+  const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
 
   const formData = new FormData();
@@ -59,7 +60,7 @@ const useEditQuote = (
     mutate();
   };
 
-  return { v, user, handleSubmit, register, errors, submitForm };
+  return { v, t, user, handleSubmit, register, errors, submitForm };
 };
 
 export default useEditQuote;

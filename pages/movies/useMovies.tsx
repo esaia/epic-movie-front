@@ -16,7 +16,9 @@ const useMovies = () => {
   };
 
   const fetchMovies = () => {
-    return axiosAPI.get("/movies");
+    return axiosAPI.get("/movies", {
+      withCredentials: true,
+    });
   };
 
   const { data: movies, refetch } = useQuery<AxiosResponse<Movie[]>>(

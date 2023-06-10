@@ -57,7 +57,8 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
           <div className="hidden md:block ">
             <div className="flex gap-3  items-center py-6 ">
-              <p>{t("Quotes (Total 7)")}</p>
+              <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
+
               <span>|</span>
               <div
                 className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md "
@@ -72,7 +73,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             {movie?.quote?.length === 0 ? (
               <h1>There are not quotes</h1>
             ) : (
-              movie?.quote.map((quote: Quote) => {
+              movie?.quote?.map((quote: Quote) => {
                 return (
                   <SingleQuote
                     key={quote.id}
@@ -145,7 +146,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
         <div className="block md:hidden">
           <div className="flex gap-2 items-center py-6 ">
-            <p>{t("Quotes (Total 7)")}</p>
+            <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
             <span>|</span>
             <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
               <AiOutlinePlusSquare />

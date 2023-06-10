@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
-const useAddQuote = (movie: Movie, closeModal: () => void) => {
+const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
@@ -40,7 +40,7 @@ const useAddQuote = (movie: Movie, closeModal: () => void) => {
     Object.entries(quote).map((item) => {
       return formData.append(item[0], item[1]);
     });
-    formData.append("movie_id", movie.id.toString());
+    if (movie) formData.append("movie_id", movie?.id?.toString());
     formData.append("img", quote.img[0]);
 
     mutate();

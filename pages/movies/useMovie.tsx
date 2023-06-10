@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 import { useQuery } from "react-query";
 import axiosAPI from "lib/axios";
+import { AxiosResponse } from "axios";
+import { Movie } from "global";
 
 const useMovie = () => {
   const [editMovieModal, setEditMovieModal] = useState<boolean>(false);
@@ -24,7 +26,7 @@ const useMovie = () => {
     setAddQuote(true);
   };
 
-  const fetchMovie = async () => {
+  const fetchMovie = async (): Promise<Movie> => {
     const { data } = await axiosAPI.get(`/movies/${query.id}`);
     return data;
   };

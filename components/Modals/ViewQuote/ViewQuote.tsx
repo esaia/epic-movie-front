@@ -16,7 +16,7 @@ const ViewQuote = ({
   setViewQuote: Dispatch<SetStateAction<boolean>>;
   seteditQuote: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { user } = useViewQuote();
+  const { user, t } = useViewQuote();
   return (
     <div className="w-full text-center h-screen md:h-fit md:max-h-[90vh] ">
       <div className="absolute left-4 top-4 flex items-center gap-2">
@@ -30,7 +30,9 @@ const ViewQuote = ({
         |
         <BsTrash3 className="cursor-pointer" />
       </div>
-      <h2 className="py-3 border-b border-gray-600 text-xl">View Quote</h2>
+      <h2 className="py-3 border-b border-gray-600 text-xl">
+        {t("view quote")}
+      </h2>
 
       <div className="p-5">
         <div className="flex items-center gap-2  ">

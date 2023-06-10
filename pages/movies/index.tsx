@@ -8,9 +8,12 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import Link from "next/link";
 import useMovies from "./useMovies";
-import { GetStaticPropsContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import axiosAPI from "lib/axios";
+import { parseCookies } from "nookies";
+import { Movie } from "global";
 
-const Movies = () => {
+const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
   const { createMovieModal, closeModal, movies, t } = useMovies();
 
   return (
@@ -20,7 +23,11 @@ const Movies = () => {
       </DashboaradPortal>
 
       <div className="flex justify-between items-center  pb-10 w-full">
-        <p className="md:text-xl">{t("My list of movies")}</p>
+        <p className="md:text-xl">
+          {t("My list of movies", {
+            number: movies ? movies?.length : initialMovies.length,
+          })}
+        </p>
         <div className="flex items-center md:gap-6 gap-3">
           <div className=" justify-center items-center gap-2 text-gray-200 hidden md:flex">
             <BiSearch />
@@ -36,26 +43,56 @@ const Movies = () => {
         </div>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
-        {movies &&
-          movies.map((movie) => {
-            return (
-              <a key={movie.id} href={`/movies/${movie.id}`}>
-                <MoviePost movie={movie} />
-              </a>
-            );
-          })}
+        {movies
+          ? movies.map((movie) => {
+              return (
+                <a key={movie.id} href={`/movies/${movie.id}`}>
+                  <MoviePost movie={movie} />
+                </a>
+              );
+            })
+          : initialMovies.map((movie) => {
+              return (
+                <a key={movie.id} href={`/movies/${movie.id}`}>
+                  <MoviePost movie={movie} />
+                </a>
+              );
+            })}
       </div>
     </MovieWrapper>
   );
 };
 
-export async function getServerSideProps(context: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: (await import(`../../locales/${context.locale}/common.json`))
-        .default,
-    },
-  };
-}
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  try {
+    const { req } = context;
 
+    const cookies = parseCookies({ req });
+    const cookiesString = Object.keys(cookies)
+      .map((key) => `${key}=${cookies[key]}`)
+      .join("; ");
+
+    const { data } = await axiosAPI.get("/movies", {
+      headers: {
+        Cookie: cookiesString,
+      },
+    });
+    return {
+      props: {
+        initialMovies: data,
+        messages: (await import(`../../locales/${context.locale}/common.json`))
+          .default,
+      },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
+};
 export default Movies;

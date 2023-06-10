@@ -1,11 +1,13 @@
+import { Quote } from "global";
+import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const useSingleQuote = () => {
+const useSingleQuote = (quote: Quote, reFetchMovie: () => void) => {
   const [showDetails, setshowDetails] = useState(false);
   const [showDetailsMobile, setshowDetailsMobile] = useState(false);
-  const { locale } = useRouter();
+  const { locale, query } = useRouter();
   const t = useTranslations("SingleMovie");
 
   const [viewQuote, setViewQuote] = useState<boolean>(false);
@@ -20,6 +22,16 @@ const useSingleQuote = () => {
     seteditQuote(false);
   };
 
+  const deleteQuote = async () => {
+    try {
+      const res = await axiosAPI.delete(`/quotes/${quote.id}`);
+      reFetchMovie();
+      return res;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     showDetails,
     setshowDetails,
@@ -32,6 +44,7 @@ const useSingleQuote = () => {
     locale,
     setViewQuote,
     seteditQuote,
+    deleteQuote,
     t,
   };
 };

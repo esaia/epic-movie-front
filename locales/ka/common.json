@@ -20,15 +20,16 @@
   },
 
   "Movies": {
-    "My list of movies": "ფილმების სია (სულ 25)",
+    "My list of movies": "ფილმების სია (სულ {number})",
     "Search": "ძებნა",
     "Add movie": "დაამატე ფილმი"
   },
 
   "SingleMovie": {
     "Movie discription": "ფილმის აღწერა",
-    "Quotes (Total 7)": "ციტატები (სულ 7)",
+    "Quotes total": "ციტატები (სულ {number})",
     "Add quote": "დაამატე ციტატა",
+    "Edit quote": "ციტატის რედაქტირება",
     "director": "რეჟისორი",
     "view quote": "ნახეთ ციტატა",
     "Edit": "რედაქტირება",

@@ -27,7 +27,8 @@ const SingleQuote = ({
     setViewQuote,
     seteditQuote,
     t,
-  } = useSingleQuote();
+    deleteQuote,
+  } = useSingleQuote(quote, reFetchMovie);
 
   return (
     <div className="bg-[#11101a] p-4 rounded-md relative mb-5  z-4">
@@ -73,7 +74,10 @@ const SingleQuote = ({
               <p>{t("Edit")}</p>
             </div>
 
-            <div className="flex gap-3 mb-2 cursor-pointer items-center">
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={deleteQuote}
+            >
               <BsTrash3 />
               <p>{t("Delete")}</p>
             </div>

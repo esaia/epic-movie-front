@@ -7,7 +7,10 @@ import { useMutation, useQuery } from "react-query";
 import type { movieTypeForm, Movie } from "global";
 import { useRouter } from "next/router";
 
-const useEditMovieModal = (movie: Movie, closeModal: () => void) => {
+const useEditMovieModal = (
+  movie: Movie | undefined,
+  closeModal: () => void
+) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
@@ -16,14 +19,14 @@ const useEditMovieModal = (movie: Movie, closeModal: () => void) => {
 
   const form = useForm<movieTypeForm>({
     defaultValues: {
-      title_en: movie.title.en,
-      title_ka: movie.title.ka,
-      genre: movie.genre,
-      date: movie.date,
-      director_en: movie.director.en,
-      director_ka: movie.director.ka,
-      description_en: movie.director.en,
-      description_ka: movie.director.ka,
+      title_en: movie?.title.en,
+      title_ka: movie?.title.ka,
+      genre: movie?.genre,
+      date: movie?.date,
+      director_en: movie?.director.en,
+      director_ka: movie?.director.ka,
+      description_en: movie?.director.en,
+      description_ka: movie?.director.ka,
     },
   });
 

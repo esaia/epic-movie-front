@@ -3,6 +3,7 @@ import { BsTrash3 } from "react-icons/bs";
 import useEditQuote from "./useEditQuote";
 import { ProfilePic } from "@/components";
 import { AiOutlineCamera } from "react-icons/ai";
+import { t } from "i18next";
 
 const EditQuote = ({
   quote,
@@ -13,11 +14,8 @@ const EditQuote = ({
   closeModal: () => void;
   reFetchMovie: () => void;
 }) => {
-  const { v, user, handleSubmit, register, errors, submitForm } = useEditQuote(
-    quote,
-    closeModal,
-    reFetchMovie
-  );
+  const { v, t, user, handleSubmit, register, errors, submitForm } =
+    useEditQuote(quote, closeModal, reFetchMovie);
 
   return (
     <form
@@ -27,7 +25,9 @@ const EditQuote = ({
       <div className="absolute left-4 top-4 flex items-center gap-2">
         <BsTrash3 className="cursor-pointer" />
       </div>
-      <h2 className="py-3 border-b border-gray-600 text-xl">Edit Quote</h2>
+      <h2 className="py-3 border-b border-gray-600 text-xl">
+        {t("Edit quote")}
+      </h2>
 
       <div className="p-5">
         <div className="flex items-center gap-2  ">
