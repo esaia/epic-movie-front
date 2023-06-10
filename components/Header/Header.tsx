@@ -11,7 +11,7 @@ const Header = () => {
       <div className="flex gap-4 ">
         <LanguageSwitcher />
         <Link href={"/landing?modal=register"}>
-          <button className="px-5 py-2 bg-red-500 text-white rounded-md text-sm w-32">
+          <button className=" py-2 bg-red-500 text-white  rounded-md text-sm w-28  ">
             {t("Sign Up")}
           </button>
         </Link>

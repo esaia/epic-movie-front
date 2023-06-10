@@ -17,9 +17,9 @@ const NewsFeedHeader = () => {
   } = useNewsFeedHeader();
 
   return (
-    <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary  py-3 md:px-7 md:py-5 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
+    <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary p-5 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
       <h1 className="uppercase text-white hidden md:block">Movie quotes</h1>
-      <CiMenuBurger className="md:hidden block text-2xl ml-7 cursor-pointer" />
+      <CiMenuBurger className="md:hidden block text-2xl  cursor-pointer" />
       <div className="flex gap-4 items-center ">
         <div
           className="relative cursor-pointer "
@@ -50,11 +50,13 @@ const NewsFeedHeader = () => {
 
         {showNotification && (
           <div className="absolute  top-16 left-0  min-h-fit w-full select-none  bg-black p-4   md:hidden">
-            <RiArrowUpSFill className=" absolute top-[-17px] right-[72px] text-black text-3xl " />
+            <RiArrowUpSFill className=" absolute top-[-17px] right-[65px] text-black text-3xl " />
             <div className=" mb-5 ">
               <div className="flex justify-between items-center  ">
                 <p className="text-xl">{t("notifications")}</p>
-                <p className="underline text-sm">{t("mark as read")}</p>
+                <p className="underline text-sm text-right">
+                  {t("mark as read")}
+                </p>
               </div>
             </div>
             <Notification />
@@ -63,7 +65,7 @@ const NewsFeedHeader = () => {
 
         <LanguageSwitcher />
 
-        <BiSearch className="md:hidden block text-2xl" />
+        <BiSearch className="md:hidden block text-2xl " />
 
         <button
           className="px-5 py-2 text-sm bg-transparent text-white rounded-md border border-white md:block hidden w-28"

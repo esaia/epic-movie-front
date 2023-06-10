@@ -15,6 +15,7 @@ const useSingleQuote = (quote: Quote, reFetchMovie: () => void) => {
 
   const closeShowDetails = () => {
     setshowDetails(false);
+    setshowDetailsMobile(false);
   };
 
   const closeModal = () => {

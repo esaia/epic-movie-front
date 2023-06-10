@@ -5,7 +5,6 @@ import {
   MovieWrapper,
   SingleQuote,
 } from "@/components";
-import Link from "next/link";
 import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
@@ -41,7 +40,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
       <h1 className="text-xl">{t("Movie discription")}</h1>
 
-      <div className="grid gap-5 md:grid-cols-column4 py-6 ">
+      <div className="grid gap-0 md:grid-cols-column4 py-6 ">
         <div>
           {
             <img
@@ -51,7 +50,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
                   : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${initialMovie.img}`
               }
               alt=""
-              className="flex-1  rounded-md w-full md:h-56 xl:h-96 object-cover "
+              className="flex-1  rounded-md w-full h-72  md:h-56 xl:h-96 object-cover "
             />
           }
 
@@ -86,8 +85,8 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
           </div>
         </div>
 
-        <div>
-          <div className="flex justify-between">
+        <div className="mt-4 md:mt-0 md:pl-3">
+          <div className="flex justify-between items-center">
             <div className="flex justify-between">
               {movie
                 ? `${movie?.title[`${locale}`]} ${movie?.date?.slice(0, 4)}`
@@ -148,17 +147,27 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
           <div className="flex gap-2 items-center py-6 ">
             <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
             <span>|</span>
-            <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
+            <div
+              className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md "
+              onClick={showAddQuotes}
+            >
               <AiOutlinePlusSquare />
-              <Link href={"/movies/id?modal=add-quote"}>
-                <button>{t("Add quote")}</button>
-              </Link>
+              <button>{t("Add quote")}</button>
             </div>
           </div>
-          {/* <SingleQuote />
-          <SingleQuote />
-          <SingleQuote />
-          <SingleQuote /> */}
+          {movie?.quote?.length === 0 ? (
+            <h1>There are not quotes</h1>
+          ) : (
+            movie?.quote?.map((quote: Quote) => {
+              return (
+                <SingleQuote
+                  key={quote.id}
+                  quote={quote}
+                  reFetchMovie={reFetchMovie}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </MovieWrapper>

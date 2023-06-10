@@ -28,7 +28,7 @@ const AddQuote = ({
       </div>
 
       <form className="m-5" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex gap-4 items-center text-sm">
+        <div className="flex gap-4 items-center text-sm h-28">
           <div className="flex-1">
             <img
               src={
@@ -36,7 +36,7 @@ const AddQuote = ({
                 `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie.img}`
               }
               alt="profile"
-              className="w-full h-28 rounded-md object-cover"
+              className="w-full h-full min-w-[100px] rounded-md object-cover"
             />
           </div>
           <div className="flex gap-3 flex-col flex-2  justify-center  items-start text-left">
@@ -102,11 +102,14 @@ const AddQuote = ({
         <ErrorText errors={errors} name="quote_ka" />
 
         <div
-          className={`w-full border  rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md my-2
+          className={`w-full border  rounded-m flex justify-between items-center gap-3  px-3 py-5 rounded-md my-2
          ${errors.img ? "border-red-600" : "border-gray-600"}`}
         >
-          <AiOutlineCamera className="text-xl min-w-[30px]" />
-          <p>Drag & drop your image here or</p>
+          <div className="flex items-center gap-2">
+            <AiOutlineCamera className="text-xl min-w-[30px]" />
+            <p className="hidden md:block">Drag & drop your image here or</p>
+            <p className="block md:hidden">Upload Photo</p>
+          </div>
           <label
             htmlFor="file"
             className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"

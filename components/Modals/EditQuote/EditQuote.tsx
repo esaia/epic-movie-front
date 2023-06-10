@@ -83,8 +83,10 @@ const EditQuote = ({
               className="hidden"
               {...register("img")}
             />
-            <label htmlFor="quoteimage">Change Photo</label>
-            <AiOutlineCamera className="text-xl min-w-[30px] cursor-pointer" />
+            <label htmlFor="quoteimage" className="cursor-pointer">
+              Change Photo
+            </label>
+            <AiOutlineCamera className="text-xl min-w-[30px] " />
           </div>
         </div>
 

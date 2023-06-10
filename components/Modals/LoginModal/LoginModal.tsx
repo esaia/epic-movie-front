@@ -10,7 +10,7 @@ const LoginModal = () => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <h2 className="text-center text-3xl mb-2">
           {t("Log in to your account")}
         </h2>

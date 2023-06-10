@@ -25,6 +25,7 @@ const useNewsFeedHeader = () => {
     };
     logout();
     router.push("/landing");
+    router.reload();
   };
 
   return {

@@ -45,11 +45,11 @@ const ViewQuote = ({
       </div>
 
       <div className="m-3">
-        <div className="w-full flex  relative border border-b-gray-600 rounded-md px-3 py-1 mb-4 ">
+        <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">Eng</p>
           <p>"{quote.quote["en"]}"</p>
         </div>
-        <div className="w-full flex  relative border border-b-gray-600 rounded-md px-3 py-1 mb-4 ">
+        <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">ქარ</p>
           <p>“{quote.quote["ka"]}”</p>
         </div>

@@ -88,32 +88,43 @@ const SingleQuote = ({
       )}
 
       {showDetailsMobile && (
-        <div className="absolute bottom-14 right-3 bg-secondary rounded-md p-5 block md:hidden">
-          <div className="flex gap-3 mb-2 cursor-pointer items-center">
-            <AiOutlineEye />
-            <p>view quote</p>
-          </div>
+        <OutsideClickHandler onOutsideClick={closeShowDetails}>
+          <div className="absolute bottom-14 right-3 bg-secondary rounded-md p-5 block md:hidden">
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={() => setViewQuote(true)}
+            >
+              <AiOutlineEye />
+              <p>view quote</p>
+            </div>
 
-          <div className="flex gap-3 mb-2 cursor-pointer items-center">
-            <RiPencilLine />
-            <p>Edit </p>
-          </div>
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={() => seteditQuote(true)}
+            >
+              <RiPencilLine />
+              <p>Edit </p>
+            </div>
 
-          <div className="flex gap-3 mb-2 cursor-pointer items-center">
-            <BsTrash3 />
-            <p>Delete </p>
+            <div
+              className="flex gap-3 mb-2 cursor-pointer items-center"
+              onClick={deleteQuote}
+            >
+              <BsTrash3 />
+              <p>Delete </p>
+            </div>
           </div>
-        </div>
+        </OutsideClickHandler>
       )}
 
       <div className="flex items-center md:flex-row flex-col gap-6 border-b border-gray-600 pb-5 select-none">
-        <div className="h-24 w-32">
+        <div className="w-full h-48 md:h-24 md:w-40">
           <img
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
             className="rounded-sm object-cover w-full h-full "
           />
         </div>
-        <p>"{quote.quote[`${locale}`]}"</p>
+        <p className="w-full">"{quote.quote[`${locale}`]}"</p>
       </div>
 
       <div className="flex justify-between  mt-2">

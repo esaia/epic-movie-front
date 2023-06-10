@@ -18,7 +18,7 @@ const RegisterModal = () => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full  m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
         <h2 className="text-center text-3xl mb-2">{t("Create an account")}</h2>
         <p className="text-center text-sm text-gray-600 mb-5">
           {t("Start your journey!")}

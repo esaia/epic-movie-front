@@ -1,5 +1,6 @@
 import {
   CheckMark,
+  DashboaradPortal,
   EmailCheckIcon,
   ExpiredIcon,
   ForgotPassword,
@@ -32,7 +33,7 @@ const Landing = () => {
     n,
   } = useLanding();
   return (
-    <div className="bg-gray-950 h-screen overflow-y-scroll ">
+    <div className="bg-gray-950 max-h-screen  overflow-y-scroll   ">
       <Header />
       <Portal isOpen={loginModal} closeModal={closeModal}>
         <LoginModal />
