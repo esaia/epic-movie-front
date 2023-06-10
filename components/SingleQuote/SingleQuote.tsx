@@ -37,6 +37,7 @@ const SingleQuote = ({
           quote={quote}
           setViewQuote={setViewQuote}
           seteditQuote={seteditQuote}
+          deleteQuote={deleteQuote}
         />
       </DashboaradPortal>
 
@@ -45,6 +46,7 @@ const SingleQuote = ({
           quote={quote}
           closeModal={closeModal}
           reFetchMovie={reFetchMovie}
+          deleteQuote={deleteQuote}
         />
       </DashboaradPortal>
 

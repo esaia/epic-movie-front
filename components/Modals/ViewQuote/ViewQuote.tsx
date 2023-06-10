@@ -11,10 +11,12 @@ const ViewQuote = ({
   quote,
   setViewQuote,
   seteditQuote,
+  deleteQuote,
 }: {
   quote: Quote;
   setViewQuote: Dispatch<SetStateAction<boolean>>;
   seteditQuote: Dispatch<SetStateAction<boolean>>;
+  deleteQuote: () => void;
 }) => {
   const { user, t } = useViewQuote();
   return (
@@ -28,7 +30,7 @@ const ViewQuote = ({
           }}
         />
         |
-        <BsTrash3 className="cursor-pointer" />
+        <BsTrash3 className="cursor-pointer" onClick={deleteQuote} />
       </div>
       <h2 className="py-3 border-b border-gray-600 text-xl">
         {t("view quote")}

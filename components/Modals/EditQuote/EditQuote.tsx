@@ -9,10 +9,12 @@ const EditQuote = ({
   quote,
   closeModal,
   reFetchMovie,
+  deleteQuote,
 }: {
   quote: Quote;
   closeModal: () => void;
   reFetchMovie: () => void;
+  deleteQuote: () => void;
 }) => {
   const { v, t, user, handleSubmit, register, errors, submitForm } =
     useEditQuote(quote, closeModal, reFetchMovie);
@@ -23,7 +25,7 @@ const EditQuote = ({
       onSubmit={handleSubmit(submitForm)}
     >
       <div className="absolute left-4 top-4 flex items-center gap-2">
-        <BsTrash3 className="cursor-pointer" />
+        <BsTrash3 className="cursor-pointer" onClick={deleteQuote} />
       </div>
       <h2 className="py-3 border-b border-gray-600 text-xl">
         {t("Edit quote")}
