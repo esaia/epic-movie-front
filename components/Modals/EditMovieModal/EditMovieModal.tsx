@@ -2,7 +2,13 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { Controller, FormProvider } from "react-hook-form";
 import useEditMovieModal from "./useEditMovieModal";
 import Select from "react-select";
-import { DashboardInput, ErrorText, ProfilePic } from "@/components";
+import {
+  DashboardInput,
+  ErrorText,
+  ProfilePic,
+  UploadImage,
+  UploadeImageVertical,
+} from "@/components";
 import { Movie } from "global";
 
 const EditMovieModal = ({
@@ -157,41 +163,7 @@ const EditMovieModal = ({
             </div>
             <ErrorText errors={errors} name="description_ka" />
 
-            <div
-              className={`w-full border rounded-m flex justify-between items-center gap-3  px-3 py-5 rounded-md max-h-32 
-            ${errors.img ? "border-red-600" : "border-gray-600"}`}
-            >
-              <div className="flex-1 h-28 ">
-                <img
-                  src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie?.img}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center items-center gap-2">
-                <p className="text-orange-200">REPLACE PHOTO</p>
-                <div className="flex items-center">
-                  <AiOutlineCamera className="text-xl min-w-[30px]" />
-
-                  <p>Drag & drop your image here or</p>
-                </div>
-
-                <label
-                  htmlFor="file"
-                  className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
-                >
-                  Choose file
-                </label>
-                <input
-                  id="file"
-                  type="file"
-                  className="hidden"
-                  {...register("img")}
-                />
-              </div>
-            </div>
-
-            <ErrorText errors={errors} name="img" />
+            <UploadeImageVertical movie={movie} />
 
             <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
               {t("Edit")}

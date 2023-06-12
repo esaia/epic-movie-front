@@ -75,5 +75,5 @@ export interface movieTypeForm {
 export interface quoteForm {
   quote_en: string;
   quote_ka: string;
-  img: file[];
+  img: File[0];
 }

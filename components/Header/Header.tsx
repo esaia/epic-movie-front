@@ -17,7 +17,7 @@ const Header = () => {
         </Link>
 
         <Link href={"/landing?modal=login"}>
-          <button className="px-5 py-2 bg-transparent text-white rounded-md mr-5 border border-white text-sm w-24">
+          <button className="px-5 py-2 bg-transparent text-white rounded-md  border border-white text-sm w-24">
             {t("Log In")}
           </button>
         </Link>

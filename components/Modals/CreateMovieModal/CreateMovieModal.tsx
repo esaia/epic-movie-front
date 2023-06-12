@@ -3,7 +3,12 @@ import { FormProvider, Controller } from "react-hook-form";
 import useCreateMovieModal from "./useCreateMovieModal";
 import { AiOutlineCamera } from "react-icons/ai";
 import Select from "react-select";
-import { DashboardInput, ErrorText, ProfilePic } from "@/components";
+import {
+  DashboardInput,
+  ErrorText,
+  ProfilePic,
+  UploadImage,
+} from "@/components";
 
 const CreateMovieModal = () => {
   const {
@@ -141,29 +146,7 @@ const CreateMovieModal = () => {
             </div>
             <ErrorText errors={errors} name="description_ka" />
 
-            <div
-              className={`w-full border rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md
-            ${errors.img ? "border-red-600" : "border-gray-600"}`}
-            >
-              <AiOutlineCamera className="text-xl min-w-[30px]" />
-              <p>Drag & drop your image here or</p>
-              <label
-                htmlFor="file"
-                className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
-              >
-                Choose file
-              </label>
-              <input
-                id="file"
-                type="file"
-                className="hidden"
-                {...register("img", {
-                  required: v("This field is required"),
-                })}
-              />
-            </div>
-
-            <ErrorText errors={errors} name="img" />
+            <UploadImage />
 
             <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
               {t("Add movie")}

@@ -16,7 +16,7 @@ const MovieWrapper: React.FC<DashboardWrapperProps> = ({ children }) => {
           <Sidebar />
         </div>
 
-        <div className="    text-white  justify-self-center w-full ">
+        <div className="  text-white  justify-self-center w-full ">
           {children}
         </div>
       </div>

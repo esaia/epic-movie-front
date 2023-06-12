@@ -33,7 +33,6 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
       <DashboaradPortal isOpen={editMovieModal} closeModal={closeModal}>
         <EditMovieModal movie={movie} closeModal={closeModal} />
       </DashboaradPortal>
-
       <DashboaradPortal isOpen={addQuote} closeModal={closeModal}>
         <AddQuote movie={movie} closeModal={closeModal} />
       </DashboaradPortal>
