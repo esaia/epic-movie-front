@@ -1,7 +1,6 @@
 import type { Genre, Movie } from "global";
 import { ErrorText, ProfilePic, UploadImage } from "@/components";
 import useAddQuote from "./useAddQuote";
-import { DevTool } from "@hookform/devtools";
 import { FormProvider } from "react-hook-form";
 
 const AddQuote = ({
@@ -115,7 +114,6 @@ const AddQuote = ({
           <button type="submit" className="w-full py-1 bg-red-600 mt-3">
             {t("Add quote")}
           </button>
-          <DevTool control={control} />
         </form>
       </div>
     </FormProvider>

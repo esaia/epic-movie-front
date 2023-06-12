@@ -59,7 +59,7 @@ const SingleQuote = ({
 
       {showDetails && (
         <OutsideClickHandler onOutsideClick={closeShowDetails}>
-          <div className="absolute top-8 right-[-40px] bg-secondary rounded-md p-5 hidden md:block">
+          <div className="absolute top-9 right-[-3rem] bg-secondary rounded-md p-5 hidden md:block">
             <div
               className="flex gap-3 mb-2 cursor-pointer items-center"
               onClick={() => setViewQuote(true)}
@@ -118,7 +118,7 @@ const SingleQuote = ({
       )}
 
       <div className="flex items-center md:flex-row flex-col gap-6 border-b border-gray-600 pb-5 select-none">
-        <div className="w-full h-48 md:h-24 md:w-40">
+        <div className="w-full h-48 md:h-24 md:w-60">
           <img
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
             className="rounded-sm object-cover w-full h-full "

@@ -88,10 +88,10 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
           <div className="flex justify-between items-center">
             <div className="flex justify-between">
               {movie
-                ? `${movie?.title[`${locale}`]} ${movie?.date?.slice(0, 4)}`
+                ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
                 : `${
                     initialMovie?.title[`${locale}`]
-                  } ${initialMovie?.date?.slice(0, 4)}`}
+                  } (${initialMovie?.date?.slice(0, 4)})`}
             </div>
             <div className="flex bg-secondary items-center gap-3 px-4 py-2 rounded-md">
               <BiPencil className="cursor-pointer" onClick={showEditMovie} />

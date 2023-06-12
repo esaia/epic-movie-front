@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 interface propsType {
   isOpen: boolean;
@@ -11,7 +11,7 @@ const useDashboardPortal = ({ isOpen }: propsType) => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isOpen) {
       document.querySelector("#bodyid")!.classList.add("overflow-hidden");
     } else {

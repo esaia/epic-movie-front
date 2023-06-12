@@ -1,6 +1,6 @@
 import React from "react";
 import { BsChatQuote } from "react-icons/bs";
-import { Movie } from "../../global";
+import { Movie } from "global";
 import useMoviePost from "./useMoviePost";
 
 const MoviePost = ({ movie }: { movie: Movie }) => {
