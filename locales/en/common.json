@@ -16,7 +16,10 @@
   "Notifications": {
     "notifications": "Notifications",
     "mark as read": "Mark as all read",
-    "log out": "Log out"
+    "log out": "Log out",
+    "Edit your profile": "Edit your profile",
+    "News feed": "News feed",
+    "List of movies": "List of movies"
   },
 
   "Movies": {

@@ -11,8 +11,8 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 import useMovie from "./useMovie";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Genre, Movie, Quote } from "global";
-import axiosAPI from "lib/axios";
-import { parseCookies } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
+import axios from "axios";
 
 const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
   const {
@@ -185,11 +185,14 @@ export const getServerSideProps: GetServerSideProps = async (
       .map((key) => `${key}=${cookies[key]}`)
       .join("; ");
 
-    const { data } = await axiosAPI.get(`/movies/${id}`, {
-      headers: {
-        Cookie: cookiesString,
-      },
-    });
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL_API}/movies/${id}`,
+      {
+        headers: {
+          Cookie: cookiesString,
+        },
+      }
+    );
     return {
       props: {
         initialMovie: data,
@@ -197,7 +200,18 @@ export const getServerSideProps: GetServerSideProps = async (
           .default,
       },
     };
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.response?.status === 401) {
+      destroyCookie(context, "user-email");
+
+      return {
+        redirect: {
+          destination: "/landing",
+          permanent: false,
+        },
+      };
+    }
+
     return {
       redirect: {
         destination: "/404",

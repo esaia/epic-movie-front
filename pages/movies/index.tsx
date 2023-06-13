@@ -9,9 +9,9 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 import Link from "next/link";
 import useMovies from "./useMovies";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import axiosAPI from "lib/axios";
-import { parseCookies } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
 import { Movie } from "global";
+import axios from "axios";
 
 const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
   const { createMovieModal, closeModal, movies, t } = useMovies();
@@ -74,11 +74,14 @@ export const getServerSideProps: GetServerSideProps = async (
       .map((key) => `${key}=${cookies[key]}`)
       .join("; ");
 
-    const { data } = await axiosAPI.get("/movies", {
-      headers: {
-        Cookie: cookiesString,
-      },
-    });
+    const { data } = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL_API + "/movies",
+      {
+        headers: {
+          Cookie: cookiesString,
+        },
+      }
+    );
     return {
       props: {
         initialMovies: data,
@@ -86,7 +89,18 @@ export const getServerSideProps: GetServerSideProps = async (
           .default,
       },
     };
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.response?.status === 401) {
+      destroyCookie(context, "user-email");
+
+      return {
+        redirect: {
+          destination: "/landing",
+          permanent: false,
+        },
+      };
+    }
+
     return {
       redirect: {
         destination: "/404",

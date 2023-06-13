@@ -1,11 +1,13 @@
-import { LanguageSwitcher, Notification } from "@/components";
-import { AiOutlineCaretDown } from "react-icons/ai";
+import { LanguageSwitcher, Notification, ProfilePic } from "@/components";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { CiMenuBurger } from "react-icons/ci";
 import { BiSearch } from "react-icons/bi";
 import { RiArrowUpSFill } from "react-icons/ri";
 import useNewsFeedHeader from "./useNewsFeedHeader";
 import OutsideClickHandler from "react-outside-click-handler";
+import Link from "next/link";
+import { BsCameraReels, BsHouseDoor } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 
 const NewsFeedHeader = () => {
   const {
@@ -14,12 +16,69 @@ const NewsFeedHeader = () => {
     logout,
     handleClickOutside,
     t,
+    router,
+    user,
+    showMobileMenu,
+    asPath,
+    setshowMobileMenu,
   } = useNewsFeedHeader();
 
   return (
-    <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary p-5 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
+    <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary py-5 px-8 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
       <h1 className="uppercase text-white hidden md:block">Movie quotes</h1>
-      <CiMenuBurger className="md:hidden block text-2xl  cursor-pointer" />
+      <CiMenuBurger
+        className="md:hidden block text-2xl  cursor-pointer"
+        onClick={() => setshowMobileMenu(true)}
+      />
+
+      {showMobileMenu && (
+        <div className="absolute w-full h-screen bg-background top-0 left-0 z-40  md:hidden">
+          <AiOutlineClose
+            onClick={() => setshowMobileMenu(false)}
+            className="right-10 top-10 absolute text-xl cursor-pointer"
+          />
+          <div className="flex items-center gap-5  px-10 pt-10   ">
+            <ProfilePic size="12" />
+
+            <Link href={"/profile"}>
+              <div>
+                <h2 className="text-md ">{user?.name}</h2>
+                <p className="text-xs text-gray-100">
+                  {t("Edit your profile")}
+                </p>
+              </div>
+            </Link>
+          </div>
+          <Link href={"/"}>
+            <div className="flex items-center gap-4 mb-2 text-md cursor-pointer text-md mt-7 hover:bg-secondary px-10 py-3">
+              <BsHouseDoor
+                className={`text-2xl ${router.route === "/" && "text-red-600"}`}
+              />
+              <p>{t("News feed")}</p>
+            </div>
+          </Link>
+          <Link href={"/movies"}>
+            <div className="flex items-center gap-4  text-md cursor-pointer text-md  hover:bg-secondary px-10 py-3">
+              <BsCameraReels
+                className={`text-2xl ${
+                  router.route === "/movies" && "text-red-600"
+                }`}
+              />
+              <p>{t("List of movies")}</p>
+            </div>
+          </Link>
+
+          <div className="px-10 py-3 flex gap-4">
+            <Link href={asPath} locale="en">
+              <p>en</p>
+            </Link>
+            <Link href={asPath} locale="ka">
+              <p>ka</p>
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="flex gap-4 items-center ">
         <div
           className="relative cursor-pointer "

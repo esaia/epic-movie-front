@@ -16,7 +16,10 @@
   "Notifications": {
     "notifications": "შეტყობინებები",
     "mark as read": "მონიშნე ყველა წაკითხულად",
-    "log out": "გასვლა"
+    "log out": "გასვლა",
+    "Edit your profile": "პროფილის რედაქტირება",
+    "News feed": "სიახლეები",
+    "List of movies": "ფილმების სია"
   },
 
   "Movies": {
