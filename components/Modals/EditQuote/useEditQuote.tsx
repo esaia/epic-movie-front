@@ -2,7 +2,7 @@ import { AuthContext } from "context/AuthContext";
 import { Quote, quoteForm } from "global";
 import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
@@ -54,6 +54,7 @@ const useEditQuote = (
       return formData.append(item[0], item[1]);
     });
 
+    if (user?.id !== undefined) formData.append("user_id", String(user.id));
     if (quote.img.length > 0) {
       formData.append("img", quote.img[0]);
     }

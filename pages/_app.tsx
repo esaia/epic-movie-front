@@ -28,6 +28,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <AuthProvider>
           <Head>
             <title>Epic movie</title>
+            <meta name="referrer" content="no-referrer" />
           </Head>
           <div className={locale === "ka" ? "font-Helvetica" : ""}>
             <Component {...pageProps} />

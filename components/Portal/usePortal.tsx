@@ -7,7 +7,7 @@ const usePortal = (isOpen: boolean) => {
     setIsClient(true);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       document.querySelector("#bodyid")!.classList.add("overflow-hidden");
     } else {

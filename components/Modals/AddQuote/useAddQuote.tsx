@@ -16,8 +16,6 @@ const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
   const {
     handleSubmit,
     register,
-    control,
-
     formState: { errors },
   } = form;
 
@@ -43,6 +41,7 @@ const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
       return formData.append(item[0], item[1]);
     });
     if (movie) formData.append("movie_id", movie?.id?.toString());
+    if (user?.id !== undefined) formData.append("user_id", String(user.id));
     formData.append("img", quote.img[0]);
 
     mutate();
@@ -57,7 +56,6 @@ const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
     errors,
     handleSubmit,
     onSubmit,
-    control,
     form,
   };
 };

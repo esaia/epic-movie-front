@@ -1,19 +1,24 @@
+import { User } from "global";
 import React from "react";
 
 interface commentsProps {
-  name: string;
+  user: User;
   comment: string;
 }
-const Comments = ({ name, comment }: commentsProps) => {
+const Comments = ({ user, comment }: commentsProps) => {
   return (
     <div className="flex gap-4 py-4 text-left">
       <img
-        src="https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?cs=srgb&dl=pexels-tony-jamesandersson-1674752.jpg&fm=jpg"
+        src={
+          user?.google_id
+            ? user?.img
+            : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${user?.img}`
+        }
         alt="profile"
         className="aspect-square w-10 h-10 object-cover rounded-full "
       />
-      <div>
-        <h3 className="font-bold">{name}</h3>
+      <div className="w-full">
+        <h3 className="font-bold">{user.name}</h3>
         <p className="border-b border-gray-600 pb-4">{comment}</p>
       </div>
     </div>
