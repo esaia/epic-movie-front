@@ -1,4 +1,4 @@
-import { Gandolf } from "components/icons";
+import { Gandolf } from "@/components";
 import Link from "next/link";
 import React from "react";
 

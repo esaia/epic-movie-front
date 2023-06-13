@@ -5,152 +5,220 @@ import {
   MovieWrapper,
   SingleQuote,
 } from "@/components";
-import Link from "next/link";
 import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import useMovie from "./useMovie";
-import { GetStaticPaths, GetStaticPropsContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import type { Genre, Movie, Quote } from "global";
+import { destroyCookie, parseCookies } from "nookies";
+import axios from "axios";
 
-const SingleMovie = () => {
-  const { editMovieModal, addQuote, closeModal, t } = useMovie();
+const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
+  const {
+    editMovieModal,
+    addQuote,
+    closeModal,
+    locale,
+    t,
+    showEditMovie,
+    showAddQuotes,
+    movie,
+    deleteMovie,
+    reFetchMovie,
+  } = useMovie();
 
   return (
     <MovieWrapper>
       <DashboaradPortal isOpen={editMovieModal} closeModal={closeModal}>
-        <EditMovieModal />
+        <EditMovieModal movie={movie} closeModal={closeModal} />
       </DashboaradPortal>
-
       <DashboaradPortal isOpen={addQuote} closeModal={closeModal}>
-        <AddQuote />
+        <AddQuote movie={movie} closeModal={closeModal} />
       </DashboaradPortal>
 
       <h1 className="text-xl">{t("Movie discription")}</h1>
 
-      <div className="grid gap-5 md:grid-cols-column4 py-6 ">
+      <div className="grid gap-0 md:grid-cols-column4 py-6 ">
         <div>
-          <img
-            src="https://media.istockphoto.com/id/1237804526/vector/movie-night-concept-with-popcorn-cinema-tickets-drink-tape-in-cartoon-style-movie-or-cinema.jpg?s=612x612&w=0&k=20&c=FWIp6SXBqUg-_PWtoTxOy00b2aeg5xNDiRcFr6IF4l4="
-            alt=""
-            className="flex-1  rounded-md w-full md:h-56 xl:h-96 object-cover "
-          />
-          <div className="hidden md:block">
+          {
+            <img
+              src={
+                movie
+                  ? `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie.img}`
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${initialMovie.img}`
+              }
+              alt=""
+              className="flex-1  rounded-md w-full h-72  md:h-56 xl:h-96 object-cover "
+            />
+          }
+
+          <div className="hidden md:block ">
             <div className="flex gap-3  items-center py-6 ">
-              <p>{t("Quotes (Total 7)")}</p>
+              <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
+
               <span>|</span>
-              <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
+              <div
+                className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md "
+                onClick={showAddQuotes}
+              >
                 <AiOutlinePlusSquare />
-                <Link href={"/movies/id?modal=add-quote"}>
-                  <button>{t("Add quote")}</button>
-                </Link>
+
+                <button>{t("Add quote")}</button>
               </div>
             </div>
-            <SingleQuote />
-            <SingleQuote />
-            <SingleQuote />
-            <SingleQuote />
+
+            {movie?.quote?.length === 0 ? (
+              <h1>There are not quotes</h1>
+            ) : (
+              movie?.quote?.map((quote: Quote) => {
+                return (
+                  <SingleQuote
+                    key={quote.id}
+                    quote={quote}
+                    reFetchMovie={reFetchMovie}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
 
-        <div>
-          <div className="flex justify-between">
-            <div className="flex justify-between">COMMITMENT HASAN (1999)</div>
+        <div className="mt-4 md:mt-0 md:pl-3">
+          <div className="flex justify-between items-center">
+            <div className="flex justify-between">
+              {movie
+                ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
+                : `${
+                    initialMovie?.title[`${locale}`]
+                  } (${initialMovie?.date?.slice(0, 4)})`}
+            </div>
             <div className="flex bg-secondary items-center gap-3 px-4 py-2 rounded-md">
-              <Link href={"/movies/id?modal=edit-movie"}>
-                <BiPencil className="cursor-pointer" />
-              </Link>
+              <BiPencil className="cursor-pointer" onClick={showEditMovie} />
               |
-              <BsTrash3 className="cursor-pointer" />
+              <BsTrash3 className="cursor-pointer" onClick={deleteMovie} />
             </div>
           </div>
 
-          <div className="flex gap-2 pb-4">
-            <h4 className="py-1 px-3 bg-gray-400 text-white w-fit rounded-md cursor-pointer">
-              Drama
-            </h4>
-            <h4 className="py-1 px-3 bg-gray-400 text-white w-fit rounded-md cursor-pointer">
-              Romance
-            </h4>
+          <div className="flex gap-2 pb-4 my-3">
+            <div className="flex flex-wrap gap-3">
+              {movie
+                ? movie?.genre.map((genre: Genre) => {
+                    return (
+                      <h4
+                        className=" px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
+                        key={genre.value}
+                      >
+                        {genre.label}
+                      </h4>
+                    );
+                  })
+                : initialMovie?.genre.map((genre: Genre) => {
+                    return (
+                      <h4
+                        className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
+                        key={genre.value}
+                      >
+                        {genre.label}
+                      </h4>
+                    );
+                  })}
+            </div>
           </div>
 
           <div className="flex items-center gap-2 pb-4 ">
             <p className="text-gray-300">{t("director")} </p>
-            <h3>NICK CASSAVETES</h3>
+            <h3>
+              {movie
+                ? movie?.director[`${locale}`]
+                : initialMovie?.director[`${locale}`]}
+            </h3>
           </div>
 
           <p className="text-gray-300">
-            In a nursing home, resident Duke reads a romance story to an old
-            woman who has senile dementia with memory loss. In the late 1930s,
-            wealthy seventeen year-old Allie Hamilton is spending summer
-            vacation in Seabrook. Local worker Noah Calhoun meets Allie at a
-            carnival
-          </p>
-
-          <p className="text-gray-300 mt-2">
-            In a nursing home, resident Duke reads a romance story to an old
-            woman who has senile dementia with memory loss.
+            {movie
+              ? movie?.description[`${locale}`]
+              : initialMovie?.description[`${locale}`]}
           </p>
         </div>
 
         <div className="block md:hidden">
           <div className="flex gap-2 items-center py-6 ">
-            <p>{t("Quotes (Total 7)")}</p>
+            <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
             <span>|</span>
-            <div className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md ">
+            <div
+              className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md "
+              onClick={showAddQuotes}
+            >
               <AiOutlinePlusSquare />
-              <Link href={"/movies/id?modal=add-quote"}>
-                <button>{t("Add quote")}</button>
-              </Link>
+              <button>{t("Add quote")}</button>
             </div>
           </div>
-          <SingleQuote />
-          <SingleQuote />
-          <SingleQuote />
-          <SingleQuote />
+          {movie?.quote?.length === 0 ? (
+            <h1>There are not quotes</h1>
+          ) : (
+            movie?.quote?.map((quote: Quote) => {
+              return (
+                <SingleQuote
+                  key={quote.id}
+                  quote={quote}
+                  reFetchMovie={reFetchMovie}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </MovieWrapper>
   );
 };
 
-export async function getStaticPaths(context: GetStaticPaths) {
-  interface Movie {
-    id: number;
-  }
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  try {
+    const { params, req } = context;
+    const { id } = params as { id: string };
 
-  const fetchMovieIds = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL_API}/movies`
+    const cookies = parseCookies({ req });
+    const cookiesString = Object.keys(cookies)
+      .map((key) => `${key}=${cookies[key]}`)
+      .join("; ");
+
+    const { data } = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL_API}/movies/${id}`,
+      {
+        headers: {
+          Cookie: cookiesString,
+        },
+      }
     );
-    const data = await response.json();
-    const movieIds = data.map((movie: Movie) => movie.id);
-    return movieIds;
-  };
+    return {
+      props: {
+        initialMovie: data,
+        messages: (await import(`../../locales/${context.locale}/common.json`))
+          .default,
+      },
+    };
+  } catch (error: any) {
+    if (error?.response?.status === 401) {
+      destroyCookie(context, "user-email");
 
-  const movieIds = await fetchMovieIds();
+      return {
+        redirect: {
+          destination: "/landing",
+          permanent: false,
+        },
+      };
+    }
 
-  const locales: string[] = ["en", "ka"];
-  const paths: { params: { id: string }; locale: string }[] = [];
-
-  movieIds.forEach((id: number) => {
-    locales.forEach((locale) => {
-      paths.push({ params: { id: id.toString() }, locale });
-    });
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps(context: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: (await import(`../../locales/${context.locale}/common.json`))
-        .default,
-    },
-  };
-}
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
+};
 
 export default SingleMovie;

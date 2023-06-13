@@ -1,7 +1,6 @@
 export * from "./Header";
 export * from "./LandingQuote";
 export * from "./Portal";
-export * from "./Input";
 export * from "./Modals";
 export * from "./icons";
 export * from "./NewsFeedHeader";
@@ -17,4 +16,8 @@ export * from "./MovieWrapper";
 export * from "./SingleQuote";
 export * from "./ProfilePic";
 export * from "./DashboardInput";
+export * from "./Input";
+export * from "./ErrorText";
 export * from "./LanguageSwitcher";
+export * from "./UploadImage";
+export * from "./UploadeImageVertical";

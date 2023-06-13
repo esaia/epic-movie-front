@@ -1,9 +1,9 @@
 import React from "react";
 import { BsChatQuote } from "react-icons/bs";
-import { moviePostProps } from "./types";
+import { Movie } from "global";
 import useMoviePost from "./useMoviePost";
 
-const MoviePost = ({ movie }: moviePostProps) => {
+const MoviePost = ({ movie }: { movie: Movie }) => {
   const { locale } = useMoviePost();
 
   return (
@@ -17,7 +17,7 @@ const MoviePost = ({ movie }: moviePostProps) => {
         {movie.title[locale || "en"]} ({movie.date.slice(0, 4)})
       </p>
       <div className="flex items-center gap-2 text-xl">
-        <div>10</div>
+        <div>{movie.quote?.length}</div>
         <BsChatQuote />
       </div>
     </div>

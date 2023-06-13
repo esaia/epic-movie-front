@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
-const usePortal = () => {
+const usePortal = (isOpen: boolean) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useLayoutEffect(() => {
+    if (isOpen) {
+      document.querySelector("#bodyid")!.classList.add("overflow-hidden");
+    } else {
+      document.querySelector("#bodyid")!.classList.remove("overflow-hidden");
+    }
+  }, [isOpen]);
 
   return { isClient, setIsClient };
 };

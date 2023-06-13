@@ -1,42 +1,61 @@
-import { Comments } from "@/components";
+import { Comments, ProfilePic } from "@/components";
 import { VscComment } from "react-icons/vsc";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TfiPencil } from "react-icons/tfi";
+import { Quote } from "global";
+import useViewQuote from "./useViewQuote";
+import { Dispatch, SetStateAction } from "react";
 
-const ViewQuote = () => {
+const ViewQuote = ({
+  quote,
+  setViewQuote,
+  seteditQuote,
+  deleteQuote,
+}: {
+  quote: Quote;
+  setViewQuote: Dispatch<SetStateAction<boolean>>;
+  seteditQuote: Dispatch<SetStateAction<boolean>>;
+  deleteQuote: () => void;
+}) => {
+  const { user, t } = useViewQuote();
   return (
     <div className="w-full text-center h-screen md:h-fit md:max-h-[90vh] ">
       <div className="absolute left-4 top-4 flex items-center gap-2">
-        <TfiPencil className="cursor-pointer" />
+        <TfiPencil
+          className="cursor-pointer"
+          onClick={() => {
+            setViewQuote(false);
+            seteditQuote(true);
+          }}
+        />
         |
-        <BsTrash3 className="cursor-pointer" />
+        <BsTrash3 className="cursor-pointer" onClick={deleteQuote} />
       </div>
-      <h2 className="py-3 border-b border-gray-600 text-xl">View Quote</h2>
+      <h2 className="py-3 border-b border-gray-600 text-xl">
+        {t("view quote")}
+      </h2>
 
       <div className="p-5">
         <div className="flex items-center gap-2  ">
-          <img
-            src="https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?cs=srgb&dl=pexels-tony-jamesandersson-1674752.jpg&fm=jpg"
-            alt="profile"
-            className="aspect-square w-10 h-10 object-cover rounded-full "
-          />
-          <p>Nino Tabagari</p>
+          <ProfilePic size="10" />
+
+          <p>{user?.name}</p>
         </div>
       </div>
 
       <div className="m-3">
-        <div className="w-full flex  relative border border-b-gray-600 rounded-md px-3 py-1 mb-4 ">
+        <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">Eng</p>
-          <p>"Frankly, my dear, I don'tgive a damn."</p>
+          <p>"{quote.quote["en"]}"</p>
         </div>
-        <div className="w-full flex  relative border border-b-gray-600 rounded-md px-3 py-1 mb-4 ">
+        <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">ქარ</p>
-          <p>“ციტატა ქართულ ენაზე”</p>
+          <p>“{quote.quote["ka"]}”</p>
         </div>
 
         <img
-          src="https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?cs=srgb&dl=pexels-tony-jamesandersson-1674752.jpg&fm=jpg"
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
           alt="profile"
           className="w-full h-72 rounded-md object-cover "
         />

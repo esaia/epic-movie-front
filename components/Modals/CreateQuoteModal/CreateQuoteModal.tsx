@@ -41,7 +41,7 @@ const CreateQuoteModal = () => {
             <p>Drag & drop your image here or</p>
             <label
               htmlFor="file"
-              className="px-2 py-1 bg-purple-900 cursor-pointer"
+              className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
             >
               Choose file
             </label>

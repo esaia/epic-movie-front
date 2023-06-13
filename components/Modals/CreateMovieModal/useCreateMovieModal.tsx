@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 const useCreateMovieModal = () => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("Movies");
+  const v = useTranslations("Validations");
 
   const formData = new FormData();
   const { push, pathname } = useRouter();
@@ -45,7 +46,7 @@ const useCreateMovieModal = () => {
       push(pathname);
     },
     onError: (err: AxiosError) => {
-      console.log(err);
+      console.error(err);
     },
   });
 
@@ -73,6 +74,7 @@ const useCreateMovieModal = () => {
     control,
     onSubmit,
     t,
+    v,
   };
 };
 

@@ -16,23 +16,28 @@
   "Notifications": {
     "notifications": "შეტყობინებები",
     "mark as read": "მონიშნე ყველა წაკითხულად",
-    "log out": "გასვლა"
+    "log out": "გასვლა",
+    "Edit your profile": "პროფილის რედაქტირება",
+    "News feed": "სიახლეები",
+    "List of movies": "ფილმების სია"
   },
 
   "Movies": {
-    "My list of movies": "ფილმების სია (სულ 25)",
+    "My list of movies": "ფილმების სია (სულ {number})",
     "Search": "ძებნა",
     "Add movie": "დაამატე ფილმი"
   },
 
   "SingleMovie": {
     "Movie discription": "ფილმის აღწერა",
-    "Quotes (Total 7)": "ციტატები (სულ 7)",
+    "Quotes total": "ციტატები (სულ {number})",
     "Add quote": "დაამატე ციტატა",
+    "Edit quote": "ციტატის რედაქტირება",
     "director": "რეჟისორი",
     "view quote": "ნახეთ ციტატა",
     "Edit": "რედაქტირება",
-    "Delete": "წაშლა"
+    "Delete": "წაშლა",
+    "Update Movie": "ფილმის რედაქტირება"
   },
 
   "Profile": {

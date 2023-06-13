@@ -3,4 +3,5 @@ export interface inputProps {
   lang: string;
   placeholder?: string;
   registerOptions?: object;
+  prefix?: string;
 }

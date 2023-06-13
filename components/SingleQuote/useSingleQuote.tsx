@@ -1,11 +1,13 @@
+import { Quote } from "global";
+import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const useSingleQuote = () => {
+const useSingleQuote = (quote: Quote, reFetchMovie: () => void) => {
   const [showDetails, setshowDetails] = useState(false);
   const [showDetailsMobile, setshowDetailsMobile] = useState(false);
-  const router = useRouter();
+  const { locale, query } = useRouter();
   const t = useTranslations("SingleMovie");
 
   const [viewQuote, setViewQuote] = useState<boolean>(false);
@@ -13,17 +15,23 @@ const useSingleQuote = () => {
 
   const closeShowDetails = () => {
     setshowDetails(false);
+    setshowDetailsMobile(false);
   };
 
   const closeModal = () => {
-    router.push("/movies/id");
+    setViewQuote(false);
+    seteditQuote(false);
   };
 
-  useEffect(() => {
-    const { modal } = router.query;
-    setViewQuote(modal === "view-quote");
-    seteditQuote(modal === "edit-quote");
-  }, [router, router.query]);
+  const deleteQuote = async () => {
+    try {
+      const res = await axiosAPI.delete(`/quotes/${quote.id}`);
+      reFetchMovie();
+      return res;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return {
     showDetails,
@@ -34,6 +42,10 @@ const useSingleQuote = () => {
     editQuote,
     closeModal,
     closeShowDetails,
+    locale,
+    setViewQuote,
+    seteditQuote,
+    deleteQuote,
     t,
   };
 };

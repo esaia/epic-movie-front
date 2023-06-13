@@ -11,12 +11,12 @@ const MovieWrapper: React.FC<DashboardWrapperProps> = ({ children }) => {
       <NewsFeedHeader />
       <div className="pt-16"></div>
 
-      <div className="grid md:grid-cols-column2 xl:grid-cols-column2  px-7  max-w-[1920px] m-auto ">
+      <div className="grid md:grid-cols-column2 xl:grid-cols-column2 py-5 px-8  max-w-[1920px] m-auto ">
         <div className="py-5 hidden md:block min-w-[200px]  ">
           <Sidebar />
         </div>
 
-        <div className="py-5 px-1 md:px-4   text-white  justify-self-center w-full ">
+        <div className="  text-white  justify-self-center w-full ">
           {children}
         </div>
       </div>

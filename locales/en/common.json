@@ -16,23 +16,28 @@
   "Notifications": {
     "notifications": "Notifications",
     "mark as read": "Mark as all read",
-    "log out": "Log out"
+    "log out": "Log out",
+    "Edit your profile": "Edit your profile",
+    "News feed": "News feed",
+    "List of movies": "List of movies"
   },
 
   "Movies": {
-    "My list of movies": "My list of movies (Total 25)",
+    "My list of movies": "My list of movies (Total {number})",
     "Search": "Search",
     "Add movie": "Add movie"
   },
 
   "SingleMovie": {
     "Movie discription": "Movie discription",
-    "Quotes (Total 7)": "Quotes (Total 7)",
+    "Quotes total": "Quotes (Total {number})",
     "Add quote": "Add quote",
     "director": "DIRECTOR:",
     "view quote": "view quote",
+    "Edit quote": "Edit quote",
     "Edit": "Edit",
-    "Delete": "Delete"
+    "Delete": "Delete",
+    "Update Movie": "Update Movie"
   },
 
   "Profile": {

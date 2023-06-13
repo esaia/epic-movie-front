@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
 import { AuthProvider } from "context/AuthContext";
-import { NextIntlProvider, IntlErrorCode } from "next-intl";
+import { NextIntlProvider } from "next-intl";
 import { useRouter } from "next/router";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
