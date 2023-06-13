@@ -1,35 +1,17 @@
-import { useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { useFormContext } from "react-hook-form";
 import { AiOutlineCamera } from "react-icons/ai";
+import useUploadImage from "./useUploadImage";
 
 const UploadImage = () => {
   const {
     register,
-    formState: { isSubmitted },
-    setValue,
-  } = useFormContext();
-  const [isFileUploaded, setisFileUploaded] = useState(false);
-
-  const onDrop = (acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      setValue("img", acceptedFiles);
-      setisFileUploaded(true);
-    } else {
-      setisFileUploaded(false);
-    }
-  };
-
-  const {
+    isSubmitted,
     getRootProps,
     getInputProps,
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone({
-    onDrop,
-  });
-
+    isFileUploaded,
+  } = useUploadImage();
   return (
     <div>
       <div

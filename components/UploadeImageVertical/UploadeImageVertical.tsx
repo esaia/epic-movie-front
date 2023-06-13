@@ -1,35 +1,16 @@
 import { Movie } from "global";
-import { useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { useFormContext } from "react-hook-form";
 import { AiOutlineCamera } from "react-icons/ai";
+import useUploadImageVertical from "./useUploadImageVertical";
 
 const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
-  const {
-    register,
-    formState: { isSubmitted },
-    setValue,
-  } = useFormContext();
-  const [isFileUploaded, setisFileUploaded] = useState(false);
-
-  const onDrop = (acceptedFiles: File[]) => {
-    if (acceptedFiles.length > 0) {
-      setValue("img", acceptedFiles);
-      setisFileUploaded(true);
-    } else {
-      setisFileUploaded(false);
-    }
-  };
-
   const {
     getRootProps,
     getInputProps,
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone({
-    onDrop,
-  });
+    register,
+  } = useUploadImageVertical();
 
   return (
     <div>
