@@ -8,7 +8,7 @@ const notFound = () => {
       <Ghost />
       <p className="font-bold text-4xl text-white">Whoops!</p>
       <p className="text-md text-white">
-        We can't see the page you are looking for
+        We can not see the page you are looking for
       </p>
       <Link href={"/"}>
         <button className="bg-red-600 py-1 px-3 rounded-md text-white">

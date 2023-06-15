@@ -3,7 +3,7 @@ import { FormProvider } from "react-hook-form";
 import useProfile from "./useProfile";
 import { GetStaticPropsContext } from "next";
 
-const index = () => {
+const Profile = () => {
   const {
     form,
     handleSubmit,
@@ -206,4 +206,4 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   };
 }
 
-export default index;
+export default Profile;
