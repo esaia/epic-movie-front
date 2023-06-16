@@ -10,18 +10,8 @@ const AddQuote = ({
   movie: Movie | undefined;
   closeModal: () => void;
 }) => {
-  const {
-    user,
-    locale,
-    t,
-    v,
-    register,
-    errors,
-    handleSubmit,
-    onSubmit,
-    form,
-    control,
-  } = useAddQuote(movie, closeModal);
+  const { user, locale, t, v, register, errors, handleSubmit, onSubmit, form } =
+    useAddQuote(movie, closeModal);
 
   return (
     <FormProvider {...form}>

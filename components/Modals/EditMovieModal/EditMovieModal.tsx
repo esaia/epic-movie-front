@@ -1,4 +1,3 @@
-import { AiOutlineCamera } from "react-icons/ai";
 import { Controller, FormProvider } from "react-hook-form";
 import useEditMovieModal from "./useEditMovieModal";
 import Select from "react-select";
@@ -6,7 +5,6 @@ import {
   DashboardInput,
   ErrorText,
   ProfilePic,
-  UploadImage,
   UploadeImageVertical,
 } from "@/components";
 import { Movie } from "global";

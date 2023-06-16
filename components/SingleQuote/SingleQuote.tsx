@@ -124,7 +124,7 @@ const SingleQuote = ({
             className="rounded-sm object-cover w-full h-full "
           />
         </div>
-        <p className="w-full">"{quote.quote[`${locale}`]}"</p>
+        <p className="w-full">{quote.quote[`${locale}`]}</p>
       </div>
 
       <div className="flex justify-between  mt-2">

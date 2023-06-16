@@ -3,7 +3,6 @@ import { BsTrash3 } from "react-icons/bs";
 import useEditQuote from "./useEditQuote";
 import { ProfilePic } from "@/components";
 import { AiOutlineCamera } from "react-icons/ai";
-import { t } from "i18next";
 
 const EditQuote = ({
   quote,

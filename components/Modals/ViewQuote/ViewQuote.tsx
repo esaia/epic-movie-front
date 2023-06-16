@@ -47,7 +47,7 @@ const ViewQuote = ({
       <div className="m-3">
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">Eng</p>
-          <p>"{quote.quote["en"]}"</p>
+          <p>{quote.quote.en}</p>
         </div>
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">ქარ</p>
@@ -71,10 +71,12 @@ const ViewQuote = ({
           </div>
         </div>
 
-        <Comments
-          name="Nina Baldadze"
-          comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa facilisis consequat elit morbi convallis convallis. Volutpat vitae et nisl et. Adipiscing enim integer mi leo nisl. Arcu vitae mauris odio eget."
-        />
+        {user && (
+          <Comments
+            user={user}
+            comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa facilisis consequat elit morbi convallis convallis. Volutpat vitae et nisl et. Adipiscing enim integer mi leo nisl. Arcu vitae mauris odio eget."
+          />
+        )}
 
         <div className="flex  gap-3 pb-7">
           <img
