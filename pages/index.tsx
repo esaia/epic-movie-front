@@ -3,7 +3,7 @@ import axios from "axios";
 import { Quote } from "global";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { destroyCookie, parseCookies } from "nookies";
-import useHome from "./useHome";
+import useHome from "../Hooks/useHome";
 
 const Home = ({ initialQuotes }: { initialQuotes: Quote[] }) => {
   const { mappedQuotes, status, quotes } = useHome(initialQuotes);

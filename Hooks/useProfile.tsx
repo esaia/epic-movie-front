@@ -2,7 +2,7 @@ import { AuthContext } from "context/AuthContext";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import axiosAPI from "lib/axios";
-import { inputType } from "./types";
+import { inputType } from "../pages/profile/types";
 import { useTranslations } from "next-intl";
 
 const useProfile = () => {
