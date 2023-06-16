@@ -1,4 +1,10 @@
-import { LanguageSwitcher, Notification, ProfilePic } from "@/components";
+import {
+  DashboaradPortal,
+  LanguageSwitcher,
+  Notification,
+  ProfilePic,
+  ViewQuote,
+} from "@/components";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { CiMenuBurger } from "react-icons/ci";
 import { BiSearch } from "react-icons/bi";
@@ -8,6 +14,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import Link from "next/link";
 import { BsCameraReels, BsHouseDoor } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
+import { notification } from "global";
 
 const NewsFeedHeader = () => {
   const {
@@ -21,11 +28,24 @@ const NewsFeedHeader = () => {
     showMobileMenu,
     asPath,
     setshowMobileMenu,
+    notifications,
+    modalQuote,
+    setModalQuote,
+    showViewQuoteModal,
+    setShowViewQuoteModal,
+    closeModal,
   } = useNewsFeedHeader();
 
   return (
     <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary py-5 px-8 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
+      {modalQuote && (
+        <DashboaradPortal isOpen={showViewQuoteModal} closeModal={closeModal}>
+          <ViewQuote quote={modalQuote} />
+        </DashboaradPortal>
+      )}
+
       <h1 className="uppercase text-white hidden md:block">Movie quotes</h1>
+
       <CiMenuBurger
         className="md:hidden block text-2xl  cursor-pointer"
         onClick={() => setshowMobileMenu(true)}
@@ -90,8 +110,16 @@ const NewsFeedHeader = () => {
           <IoMdNotificationsOutline className="text-3xl text-white" />
 
           {showNotification && (
-            <OutsideClickHandler onOutsideClick={handleClickOutside}>
-              <div className=" hidden md:block md:absolute max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3 ">
+            <OutsideClickHandler
+              onOutsideClick={handleClickOutside}
+              useCapture={true}
+            >
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                className=" hidden md:block md:absolute max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3 "
+              >
                 <RiArrowUpSFill className="absolute top-[-14px] right-[152px] text-black text-2xl " />
 
                 <div className="mb-5 ">
@@ -100,8 +128,21 @@ const NewsFeedHeader = () => {
                     <p className="underline text-sm">{t("mark as read")}</p>
                   </div>
                 </div>
-
-                <Notification />
+                {notifications && notifications.length === 0 ? (
+                  <h2>You do not have notifications </h2>
+                ) : (
+                  notifications.map((notification: notification) => {
+                    return (
+                      <Notification
+                        key={notification.id}
+                        notification={notification}
+                        setModalQuote={setModalQuote}
+                        setShowViewQuoteModal={setShowViewQuoteModal}
+                        handleClickOutside={handleClickOutside}
+                      />
+                    );
+                  })
+                )}
               </div>
             </OutsideClickHandler>
           )}
@@ -118,7 +159,7 @@ const NewsFeedHeader = () => {
                 </p>
               </div>
             </div>
-            <Notification />
+            {/* <Notification /> */}
           </div>
         )}
 

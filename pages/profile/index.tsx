@@ -1,6 +1,6 @@
 import { DashboardWrapper, Input, ProfilePic } from "@/components";
 import { FormProvider } from "react-hook-form";
-import useProfile from "hooks/useProfile";
+import { useProfile } from "@/hooks";
 import { GetStaticPropsContext } from "next";
 
 const Profile = () => {

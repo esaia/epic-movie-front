@@ -14,23 +14,27 @@ const ViewQuote = ({
   deleteQuote,
 }: {
   quote: Quote;
-  setViewQuote: Dispatch<SetStateAction<boolean>>;
-  seteditQuote: Dispatch<SetStateAction<boolean>>;
-  deleteQuote: () => void;
+  setViewQuote?: Dispatch<SetStateAction<boolean>>;
+  seteditQuote?: Dispatch<SetStateAction<boolean>>;
+  deleteQuote?: () => void;
 }) => {
   const { user, t } = useViewQuote();
   return (
     <div className="w-full text-center h-screen md:h-fit md:max-h-[90vh] ">
       <div className="absolute left-4 top-4 flex items-center gap-2">
-        <TfiPencil
-          className="cursor-pointer"
-          onClick={() => {
-            setViewQuote(false);
-            seteditQuote(true);
-          }}
-        />
-        |
-        <BsTrash3 className="cursor-pointer" onClick={deleteQuote} />
+        {setViewQuote && seteditQuote && deleteQuote && (
+          <>
+            <TfiPencil
+              className="cursor-pointer"
+              onClick={() => {
+                setViewQuote(false);
+                seteditQuote(true);
+              }}
+            />
+            |
+            <BsTrash3 className="cursor-pointer" onClick={deleteQuote} />
+          </>
+        )}
       </div>
       <h2 className="py-3 border-b border-gray-600 text-xl">
         {t("view quote")}

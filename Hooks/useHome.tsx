@@ -21,6 +21,8 @@ const useHome = (initialQuotes: Quote[]) => {
 
       const combinedArray = quotes.concat(data.quotes);
       setQuotes(combinedArray);
+
+      setPage((prevPage) => prevPage + 1);
       setMaxPage(data.maxPage);
     },
   });
@@ -34,7 +36,6 @@ const useHome = (initialQuotes: Quote[]) => {
         return;
       } else {
         refetch();
-        setPage((prevPage) => prevPage + 1);
       }
     }
   };

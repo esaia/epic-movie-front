@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { AuthContext } from "context/AuthContext";
+import { useQuery } from "react-query";
+import { Quote } from "global";
 
 const useNewsFeedHeader = () => {
   const [showNotification, setShowNotification] = useState(false);
@@ -11,7 +13,14 @@ const useNewsFeedHeader = () => {
   const { asPath } = router;
   const { user } = useContext(AuthContext);
   const t = useTranslations("Notifications");
+
   const [showMobileMenu, setshowMobileMenu] = useState(false);
+  const [modalQuote, setModalQuote] = useState<Quote | null>(null);
+  const [showViewQuoteModal, setShowViewQuoteModal] = useState(false);
+
+  const closeModal = () => {
+    setShowViewQuoteModal(false);
+  };
 
   const handleToggleNotification = () => {
     setShowNotification(!showNotification);
@@ -32,6 +41,15 @@ const useNewsFeedHeader = () => {
     router.reload();
   };
 
+  const fetchNotiifcations = async () => {
+    const { data } = await axiosAPI.get("/notifications");
+    return data;
+  };
+
+  const { data: notifications } = useQuery(
+    "fetchNotification",
+    fetchNotiifcations
+  );
   return {
     showNotification,
     handleToggleNotification,
@@ -43,6 +61,12 @@ const useNewsFeedHeader = () => {
     showMobileMenu,
     setshowMobileMenu,
     asPath,
+    notifications,
+    modalQuote,
+    setModalQuote,
+    showViewQuoteModal,
+    setShowViewQuoteModal,
+    closeModal,
   };
 };
 

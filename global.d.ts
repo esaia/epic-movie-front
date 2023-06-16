@@ -94,6 +94,23 @@ export interface comment {
   user: User;
 }
 
+enum NotificationStatus {
+  Comment = "comment",
+  Like = "like",
+}
+
+export interface notification {
+  id: number;
+  sender_id: number;
+  quote_id: number;
+  seen: number;
+  status: NotificationStatus;
+  sender: User;
+  quote: Quote;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface profileInputType {
   name: string;
   password: string;

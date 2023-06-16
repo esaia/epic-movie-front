@@ -8,7 +8,7 @@ import {
 import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
-import { useMovie } from "hooks";
+import { useMovie } from "@/hooks";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Genre, Movie, Quote } from "global";
 import { destroyCookie, parseCookies } from "nookies";

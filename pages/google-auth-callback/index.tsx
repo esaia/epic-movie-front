@@ -1,4 +1,4 @@
-import useGoogleAuth from "hooks/useGoogleAuth";
+import { useGoogleAuth } from "@/hooks";
 
 const GoogleAuthCallback = () => {
   useGoogleAuth();
