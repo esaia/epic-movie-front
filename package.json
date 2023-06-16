@@ -13,7 +13,6 @@
     "@tanstack/react-query": "^4.29.11",
     "@tanstack/react-query-devtools": "^4.29.11",
     "@types/node": "20.2.0",
-    "@types/pusher-js": "^5.1.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "axios": "^0.25.0",
