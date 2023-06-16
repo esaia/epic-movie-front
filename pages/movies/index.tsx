@@ -7,7 +7,7 @@ import {
 import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlusSquare } from "react-icons/ai";
 import Link from "next/link";
-import useMovies from "../../Hooks/useMovies";
+import useMovies from "hooks/useMovies";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { destroyCookie, parseCookies } from "nookies";
 import { Movie } from "global";

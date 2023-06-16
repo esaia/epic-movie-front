@@ -14,7 +14,7 @@ import {
 } from "@/components";
 import { GetServerSidePropsContext } from "next";
 
-import useLanding from "../../Hooks/useLanding";
+import useLanding from "hooks/useLanding";
 
 const Landing = () => {
   const {
