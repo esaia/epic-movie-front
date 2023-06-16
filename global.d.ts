@@ -93,3 +93,10 @@ export interface comment {
   comment: string;
   user: User;
 }
+
+export interface profileInputType {
+  name: string;
+  password: string;
+  password_confirmation: string;
+  img: string;
+}
