@@ -2,7 +2,7 @@ import { AuthContext } from "context/AuthContext";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import axiosAPI from "lib/axios";
-import { inputType } from "pages/profile/types";
+import { profileInputType } from "global";
 import { useTranslations } from "next-intl";
 
 const useProfile = () => {
@@ -12,7 +12,7 @@ const useProfile = () => {
   const [editUsername, seteditUsername] = useState(false);
   const [editPassword, seteditPassword] = useState(false);
   const [errorMsg, seterrorMsg] = useState("");
-  const form = useForm<inputType>();
+  const form = useForm<profileInputType>();
 
   const { resetField, control, handleSubmit, register } = form;
 
@@ -26,7 +26,7 @@ const useProfile = () => {
     name: "password",
   });
 
-  const updateUser: SubmitHandler<inputType> = (data) => {
+  const updateUser: SubmitHandler<profileInputType> = (data) => {
     let inputes = Object.fromEntries(
       Object.entries(data).filter(([key, value]) => value !== undefined)
     );
