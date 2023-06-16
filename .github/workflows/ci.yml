@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 18
       - name: copy env file
-        run: cp .env.example .env
+        run: cp .env.local .env
       - name: install npm dependencies
         run: npm ci
       - name: run linter
