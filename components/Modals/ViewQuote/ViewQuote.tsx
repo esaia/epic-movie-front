@@ -3,7 +3,7 @@ import { VscComment } from "react-icons/vsc";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TfiPencil } from "react-icons/tfi";
-import { Quote } from "global";
+import { Quote, comment } from "global";
 import useViewQuote from "./useViewQuote";
 import { Dispatch, SetStateAction } from "react";
 
@@ -18,7 +18,9 @@ const ViewQuote = ({
   seteditQuote?: Dispatch<SetStateAction<boolean>>;
   deleteQuote?: () => void;
 }) => {
-  const { user, t } = useViewQuote();
+  const { user, t, comments, handleSubmit, register, submitForm } =
+    useViewQuote(quote);
+
   return (
     <div className="w-full text-center h-screen md:h-fit md:max-h-[90vh] ">
       <div className="absolute left-4 top-4 flex items-center gap-2">
@@ -64,9 +66,9 @@ const ViewQuote = ({
           className="w-full h-72 rounded-md object-cover "
         />
 
-        <div className="flex gap-4 mt-4 pb-3 mb-3">
+        <div className="flex gap-4 border-b border-gray-700 pb-3 my-3">
           <div className="flex items-center gap-1">
-            <p>3</p>
+            <p>{comments.length}</p>
             <VscComment className="text-2xl" />
           </div>
           <div className="flex items-center gap-1">
@@ -74,27 +76,29 @@ const ViewQuote = ({
             <AiOutlineHeart className="text-2xl" />
           </div>
         </div>
+        {comments &&
+          comments.map((comment: comment, i: number) => {
+            return (
+              <Comments key={i} user={comment.user} comment={comment.comment} />
+            );
+          })}
 
-        {user && (
-          <Comments
-            user={user}
-            comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa facilisis consequat elit morbi convallis convallis. Volutpat vitae et nisl et. Adipiscing enim integer mi leo nisl. Arcu vitae mauris odio eget."
-          />
-        )}
+        <div className="flex  gap-3 pb-4">
+          <div className="w-12">
+            <ProfilePic size="10" />
+          </div>
 
-        <div className="flex  gap-3 pb-7">
-          <img
-            src="https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?cs=srgb&dl=pexels-tony-jamesandersson-1674752.jpg&fm=jpg"
-            alt="profile"
-            className="aspect-square w-10 h-10 object-cover rounded-full "
-          />
-          <div className="bg-secondary w-full flex items-center rounded-md">
+          <form
+            className="bg-secondary w-full flex items-center rounded-md"
+            onSubmit={handleSubmit(submitForm)}
+          >
             <input
               type="text"
               placeholder="Write a comment"
+              {...register("comment")}
               className="w-full px-5 py-2 bg-transparent outline-none"
             />
-          </div>
+          </form>
         </div>
       </div>
     </div>

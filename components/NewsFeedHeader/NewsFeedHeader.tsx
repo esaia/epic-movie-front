@@ -34,6 +34,11 @@ const NewsFeedHeader = () => {
     showViewQuoteModal,
     setShowViewQuoteModal,
     closeModal,
+    seenNotification,
+    notificationTotalNumber,
+    showNotificationMobile,
+    handleClickOutsideNotificationMobile,
+    markNotificationAsRead,
   } = useNewsFeedHeader();
 
   return (
@@ -44,7 +49,11 @@ const NewsFeedHeader = () => {
         </DashboaradPortal>
       )}
 
-      <h1 className="uppercase text-white hidden md:block">Movie quotes</h1>
+      <Link href={"/"}>
+        <h1 className="uppercase text-white hidden md:block cursor-pointer">
+          Movie quotes
+        </h1>
+      </Link>
 
       <CiMenuBurger
         className="md:hidden block text-2xl  cursor-pointer"
@@ -99,14 +108,17 @@ const NewsFeedHeader = () => {
         </div>
       )}
 
-      <div className="flex gap-4 items-center ">
+      <div className="flex  w-80  justify-end items-center ">
         <div
-          className="relative cursor-pointer "
+          className="relative cursor-pointer"
           onClick={handleToggleNotification}
         >
-          <div className="bg-red-600 rounded-full w-4 h-4 absolute right-0 text-white flex justify-center items-center text-sm">
-            1
-          </div>
+          {notificationTotalNumber > 0 && (
+            <div className="bg-red-600 rounded-full w-4 h-4 absolute right-0 text-white flex justify-center items-center text-sm">
+              {notificationTotalNumber}
+            </div>
+          )}
+
           <IoMdNotificationsOutline className="text-3xl text-white" />
 
           {showNotification && (
@@ -118,52 +130,100 @@ const NewsFeedHeader = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className=" hidden md:block md:absolute max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3 "
+                className=" hidden md:block  max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3 "
               >
-                <RiArrowUpSFill className="absolute top-[-14px] right-[152px] text-black text-2xl " />
+                <RiArrowUpSFill className="absolute top-[-.8rem] right-[9.5rem] text-black text-2xl " />
 
                 <div className="mb-5 ">
                   <div className="flex justify-between items-center">
                     <p className="text-xl">{t("notifications")}</p>
-                    <p className="underline text-sm">{t("mark as read")}</p>
+                    <p
+                      onClick={markNotificationAsRead}
+                      className="underline text-sm"
+                    >
+                      {t("mark as read")}
+                    </p>
                   </div>
                 </div>
-                {notifications && notifications.length === 0 ? (
-                  <h2>You do not have notifications </h2>
-                ) : (
-                  notifications.map((notification: notification) => {
-                    return (
-                      <Notification
-                        key={notification.id}
-                        notification={notification}
-                        setModalQuote={setModalQuote}
-                        setShowViewQuoteModal={setShowViewQuoteModal}
-                        handleClickOutside={handleClickOutside}
-                      />
-                    );
-                  })
-                )}
+
+                <div className="overflow-y-auto h-fit max-h-[30rem]">
+                  {notifications && notifications?.length === 0 ? (
+                    <h2>You do not have notifications </h2>
+                  ) : (
+                    notifications?.map((notification: notification) => {
+                      return (
+                        <div
+                          key={notification.id}
+                          onClick={() => {
+                            setModalQuote(notification.quote);
+                            setShowViewQuoteModal(true);
+                            handleClickOutside();
+                            seenNotification(notification.id);
+                          }}
+                        >
+                          <Notification notification={notification} />
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
               </div>
             </OutsideClickHandler>
           )}
         </div>
 
-        {showNotification && (
-          <div className="absolute  top-16 left-0  min-h-fit w-full select-none  bg-black p-4   md:hidden">
-            <RiArrowUpSFill className=" absolute top-[-17px] right-[65px] text-black text-3xl " />
-            <div className=" mb-5 ">
-              <div className="flex justify-between items-center  ">
-                <p className="text-xl">{t("notifications")}</p>
-                <p className="underline text-sm text-right">
-                  {t("mark as read")}
-                </p>
+        {showNotificationMobile && (
+          <OutsideClickHandler
+            onOutsideClick={handleClickOutsideNotificationMobile}
+            useCapture={true}
+          >
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              className="absolute  top-16 left-0  min-h-fit w-full select-none  bg-black p-4   md:hidden"
+            >
+              <RiArrowUpSFill className=" absolute top-[-1rem] right-[4.5rem] text-black text-3xl " />
+              <div className=" mb-5 ">
+                <div className="flex justify-between items-center  ">
+                  <p className="text-xl">{t("notifications")}</p>
+                  <p
+                    className="underline cursor-pointer text-sm text-right"
+                    onClick={markNotificationAsRead}
+                  >
+                    {t("mark as read")}
+                  </p>
+                </div>
+              </div>
+
+              <div className="overflow-y-auto h-fit max-h-[25rem]">
+                {notifications && notifications.length === 0 ? (
+                  <h2>You do not have notifications </h2>
+                ) : (
+                  notifications?.map((notification: notification) => {
+                    return (
+                      <div
+                        key={notification.id}
+                        onClick={() => {
+                          setModalQuote(notification.quote);
+                          setShowViewQuoteModal(true);
+                          handleClickOutside();
+                          seenNotification(notification.id);
+                        }}
+                      >
+                        <Notification notification={notification} />
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
-            {/* <Notification /> */}
-          </div>
+          </OutsideClickHandler>
         )}
 
-        <LanguageSwitcher />
+        <div className="px-2">
+          <LanguageSwitcher />
+        </div>
 
         <BiSearch className="md:hidden block text-2xl " />
 
