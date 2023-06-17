@@ -146,7 +146,7 @@ const NewsFeedHeader = () => {
 
                 <div className="overflow-y-auto h-fit max-h-[30rem]">
                   {notifications && notifications?.length === 0 ? (
-                    <h2>You do not have notifications </h2>
+                    <h2>{t("You do not have notifications")} </h2>
                   ) : (
                     notifications?.map((notification: notification) => {
                       return (

@@ -95,7 +95,7 @@ const SingleQuote = ({
               onClick={() => setViewQuote(true)}
             >
               <AiOutlineEye />
-              <p>view quote</p>
+              <p>{t("view quote")}</p>
             </div>
 
             <div
@@ -103,7 +103,7 @@ const SingleQuote = ({
               onClick={() => seteditQuote(true)}
             >
               <RiPencilLine />
-              <p>Edit </p>
+              <p>{t("Edit")}</p>
             </div>
 
             <div
@@ -111,7 +111,7 @@ const SingleQuote = ({
               onClick={deleteQuote}
             >
               <BsTrash3 />
-              <p>Delete </p>
+              <p>{t("Delete")}</p>
             </div>
           </div>
         </OutsideClickHandler>
@@ -130,7 +130,7 @@ const SingleQuote = ({
       <div className="flex justify-between  mt-2">
         <div className="flex gap-4">
           <div className="flex items-center gap-1">
-            <p>3</p>
+            <p>{quote.comment?.length}</p>
             <VscComment className="text-2xl" />
           </div>
           <div className="flex items-center gap-1">

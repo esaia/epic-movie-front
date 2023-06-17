@@ -29,6 +29,7 @@ const useQuotePost = (quote: Quote) => {
   });
 
   const submitForm = (data: { comment: string }) => {
+    if (!data.comment) return;
     if (user)
       mutate({
         ...data,

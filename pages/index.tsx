@@ -44,6 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   } catch (error: any) {
+    console.log(error);
     if (error?.response?.status === 401) {
       destroyCookie(context, "user-email");
 

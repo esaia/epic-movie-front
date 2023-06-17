@@ -9,3 +9,4 @@ export * from "./EditMovieModal";
 export * from "./ViewQuote";
 export * from "./EditQuote";
 export * from "./AddQuote";
+export * from "./UpdateUserConfirmation";

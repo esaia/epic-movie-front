@@ -8,13 +8,24 @@ import { useTranslations } from "next-intl";
 const useProfile = () => {
   const { user, setUser } = useContext(AuthContext);
   const t = useTranslations("Profile");
+  const v = useTranslations("Validations");
+
+  const [status, setStatus] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSuccessNotif, setshowSuccessNotif] = useState(false);
 
   const [editUsername, seteditUsername] = useState(false);
   const [editPassword, seteditPassword] = useState(false);
   const [errorMsg, seterrorMsg] = useState("");
   const form = useForm<profileInputType>();
 
-  const { resetField, control, handleSubmit, register } = form;
+  const {
+    resetField,
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = form;
 
   const img = useWatch({
     control,
@@ -62,6 +73,10 @@ const useProfile = () => {
         localStorage.setItem("user", JSON.stringify(data));
         seteditUsername(false);
         seteditPassword(false);
+        setshowSuccessNotif(true);
+        setShowConfirmationModal(false);
+        setStatus("");
+        resetFields();
       } catch (error) {
         seterrorMsg("user already exists");
         console.error(error);
@@ -85,6 +100,10 @@ const useProfile = () => {
     seteditPassword(!editPassword);
     resetFields();
   };
+  const hideInputes = () => {
+    seteditUsername(false);
+    seteditPassword(false);
+  };
 
   return {
     form,
@@ -98,8 +117,17 @@ const useProfile = () => {
     register,
     editPassword,
     img,
+    errors,
     errorMsg,
     t,
+    v,
+    hideInputes,
+    status,
+    setStatus,
+    showConfirmationModal,
+    setShowConfirmationModal,
+    showSuccessNotif,
+    setshowSuccessNotif,
   };
 };
 
