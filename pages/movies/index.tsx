@@ -34,12 +34,12 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
             <p className="text-gray">{t("Search")}</p>
           </div>
 
-          <div className="bg-red-600 flex justify-center items-center  py-1  md:gap-3 gap-1 min-w-[120px] w-44 ">
-            <AiOutlinePlusSquare className="text-xl" />
-            <Link href={"/movies?modal=create-movie"}>
+          <Link href={"/movies?modal=create-movie"}>
+            <div className="bg-red-600 flex justify-center items-center  py-1  md:gap-3 gap-1 min-w-[120px] w-44 ">
+              <AiOutlinePlusSquare className="text-xl" />
               <button>{t("Add movie")}</button>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </div>
       <div className="grid md:grid-cols-3 gap-6">

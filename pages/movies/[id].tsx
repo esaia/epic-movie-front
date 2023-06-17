@@ -86,7 +86,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
         <div className="mt-4 md:mt-0 md:pl-3">
           <div className="flex justify-between items-center">
-            <div className="flex justify-between">
+            <div className="flex justify-between text-orange-200">
               {movie
                 ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
                 : `${

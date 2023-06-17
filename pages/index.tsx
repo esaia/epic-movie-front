@@ -5,8 +5,8 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { destroyCookie, parseCookies } from "nookies";
 import { useHome } from "@/hooks";
 
-const Home = ({ initialQuotes }: { initialQuotes: Quote[] }) => {
-  const { mappedQuotes, status, quotes } = useHome(initialQuotes);
+const Home = () => {
+  const { status, quotes } = useHome();
 
   return (
     <DashboardWrapper>
@@ -32,17 +32,13 @@ export const getServerSideProps: GetServerSideProps = async (
       .map((key) => `${key}=${cookies[key]}`)
       .join("; ");
 
-    const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_BASE_URL_API + "/quotes?page=1",
-      {
-        headers: {
-          Cookie: cookiesString,
-        },
-      }
-    );
+    await axios.get(process.env.NEXT_PUBLIC_BASE_URL_API + "/quotes?page=1", {
+      headers: {
+        Cookie: cookiesString,
+      },
+    });
     return {
       props: {
-        initialQuotes: data,
         messages: (await import(`../locales/${context.locale}/common.json`))
           .default,
       },

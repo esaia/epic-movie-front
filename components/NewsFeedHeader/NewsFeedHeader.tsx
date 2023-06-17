@@ -49,10 +49,8 @@ const NewsFeedHeader = () => {
         </DashboaradPortal>
       )}
 
-      <Link href={"/"}>
-        <h1 className="uppercase text-white hidden md:block cursor-pointer">
-          Movie quotes
-        </h1>
+      <Link href={"/"} className="hidden md:block">
+        <h1 className="uppercase text-white cursor-pointer">Movie quotes</h1>
       </Link>
 
       <CiMenuBurger

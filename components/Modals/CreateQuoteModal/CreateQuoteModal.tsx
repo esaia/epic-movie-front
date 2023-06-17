@@ -1,68 +1,124 @@
-import { ProfilePic } from "@/components";
+import { ErrorText, ProfilePic, UploadImage } from "@/components";
 import React from "react";
-import { AiOutlineCamera, AiOutlineCaretDown } from "react-icons/ai";
+import { AiOutlineCaretDown } from "react-icons/ai";
 import { BsCameraReels } from "react-icons/bs";
 import useCreateQuoteModal from "./useCreateQuoteModal";
+import { FormProvider } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 
 const CreateQuoteModal = () => {
-  const { t } = useCreateQuoteModal();
+  const {
+    v,
+    t,
+    locale,
+    user,
+    handleSubmit,
+    register,
+    form,
+    onSubmit,
+    errors,
+    showMovies,
+    setShowMovies,
+    movies,
+    setMovieId,
+    movieId,
+    control,
+  } = useCreateQuoteModal();
+
   return (
-    <div className="w-full text-center z-40">
-      <h2 className="py-5 border-b border-gray-600 text-xl">
-        {t("Write new quote")}
-      </h2>
+    <FormProvider {...form}>
+      <div className="w-full text-center z-40">
+        <h2 className="py-5 border-b border-gray-600 text-xl">
+          {t("Write new quote")}
+        </h2>
 
-      <div className="p-5">
-        <div className="flex items-center gap-2  mb-7">
-          <ProfilePic size="10" />
-
-          <p>Nino Tabagari</p>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <div className="relative w-full  border border-gray-600 rounded-md">
-            <p className="absolute right-2 top-1">Eng</p>
-            <textarea
-              className="w-full outline-none bg-transparent placeholder:italic p-2 "
-              placeholder="Start create new quote"
-            ></textarea>
+        <div className="p-5">
+          <div className="flex items-center gap-2  mb-7">
+            <ProfilePic size="12" />
+            <h2 className="text-md ">{user?.name}</h2>
           </div>
 
-          <div className="relative w-full  border border-gray-600 rounded-md ">
-            <p className="absolute right-2 top-1">Geo</p>
-            <textarea
-              className="w-full outline-none bg-transparent placeholder:italic p-2 "
-              placeholder="ახალი ციტატა"
-            ></textarea>
-          </div>
-
-          <div className="w-full border border-gray-600 rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
-            <AiOutlineCamera className="text-xl min-w-[30px]" />
-            <p>Drag & drop your image here or</p>
-            <label
-              htmlFor="file"
-              className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
+          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+            <div
+              className={`relative w-full  border rounded-md my-2  mt-6  ${
+                errors.quote_en ? "border-red-600" : "border-gray-600"
+              }  `}
             >
-              Choose file
-            </label>
-            <input id="file" type="file" className="hidden" />
-          </div>
+              <p className="absolute right-2 top-1 text-gray-400">eng</p>
 
-          <div className="w-full  bg-black  rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md">
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-3">
-                <BsCameraReels />
-                <p>Choose movie</p>
-              </div>
-
-              <AiOutlineCaretDown className="text-white" />
+              <textarea
+                className="w-full outline-none bg-transparent placeholder:italic p-2 "
+                placeholder="quote..."
+                {...register("quote_en", {
+                  required: v("This field is required"),
+                })}
+              ></textarea>
             </div>
-          </div>
+            <ErrorText errors={errors} name="quote_en" />
+            <div
+              className={`relative w-full  border rounded-md my-2  ${
+                errors.quote_ka ? "border-red-600" : "border-gray-600"
+              }`}
+            >
+              <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
-          <button className="w-full bg-red-600 p-1">{t("Post")}</button>
+              <textarea
+                className="w-full outline-none bg-transparent placeholder:italic p-2 "
+                placeholder="ციტატა..."
+                {...register("quote_ka", {
+                  required: v("This field is required"),
+                })}
+              ></textarea>
+            </div>
+            <ErrorText errors={errors} name="quote_ka" />
+
+            <UploadImage />
+
+            <div
+              onClick={() => setShowMovies(!showMovies)}
+              className="w-full relative cursor-pointer  bg-black  rounded-m flex items-center gap-3 justify-start px-3 py-5 rounded-md"
+            >
+              <div className="flex justify-between items-center w-full">
+                <div className="flex items-center gap-3">
+                  <BsCameraReels className="text-2xl min-w-[10px] " />
+                  <p>Choose movie</p>
+                </div>
+
+                <p>
+                  {movies &&
+                    movies.find((movie) => movie.id === movieId)?.title[
+                      `${locale}`
+                    ]}
+                </p>
+
+                <AiOutlineCaretDown className="text-white" />
+              </div>
+              {showMovies && (
+                <div className="absolute w-full h-fit bg-background top-16 rounded-md left-0 overflow-hidden">
+                  {movies &&
+                    movies?.map((movie) => {
+                      return (
+                        <h2
+                          key={movie.id}
+                          onClick={() => setMovieId(movie.id)}
+                          className="p-2 border border-gray-500 m-2 hover:bg-secondary  "
+                        >
+                          {movie.title[`${locale}`]}
+                        </h2>
+                      );
+                    })}
+                </div>
+              )}
+            </div>
+
+            <button type="submit" className="w-full bg-red-600 p-1 mt-5">
+              {t("Post")}
+            </button>
+          </form>
         </div>
       </div>
-    </div>
+      <DevTool control={control} />
+    </FormProvider>
   );
 };
 

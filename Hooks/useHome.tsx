@@ -3,7 +3,7 @@ import axiosAPI from "lib/axios";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
-const useHome = (initialQuotes: Quote[]) => {
+const useHome = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(10);
@@ -13,7 +13,7 @@ const useHome = (initialQuotes: Quote[]) => {
     return data;
   };
 
-  const { refetch, status } = useQuery({
+  const { refetch: refetchQuotes, status } = useQuery({
     queryFn: fetchQuotes,
 
     onSuccess: (data) => {
@@ -35,7 +35,7 @@ const useHome = (initialQuotes: Quote[]) => {
       if (page > maxPage) {
         return;
       } else {
-        refetch();
+        refetchQuotes();
       }
     }
   };
@@ -48,9 +48,7 @@ const useHome = (initialQuotes: Quote[]) => {
     };
   }, [page, maxPage]);
 
-  const mappedQuotes = quotes.length > 0 ? quotes : initialQuotes;
   return {
-    mappedQuotes,
     status,
     quotes,
   };

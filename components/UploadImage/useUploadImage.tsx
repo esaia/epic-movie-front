@@ -1,8 +1,11 @@
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
 
 const useUploadImage = () => {
+  const v = useTranslations("Validations");
+
   const {
     register,
     formState: { isSubmitted },
@@ -38,6 +41,7 @@ const useUploadImage = () => {
     isDragAccept,
     isDragReject,
     isFileUploaded,
+    v,
   };
 };
 
