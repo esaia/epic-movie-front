@@ -41,8 +41,7 @@ const useEditMovieModal = (
     return axiosAPI.get("/genres");
   };
 
-  const genresQuery = useQuery({
-    queryKey: "genres",
+  const genresQuery = useQuery(["genres"], {
     queryFn: getAllgenres,
   });
 

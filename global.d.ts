@@ -92,6 +92,7 @@ export interface comment {
   quote_id: string;
   comment: string;
   user: User;
+  id: number;
 }
 
 enum NotificationStatus {

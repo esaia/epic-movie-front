@@ -91,9 +91,11 @@ const Profile = () => {
                   <p>{t("Password")}</p>
                   <div className="flex justify-between items-center">
                     <p>••••••••••••</p>
-                    <button onClick={() => setStatus("EDITPASSWORD")}>
-                      {t("Edit")}
-                    </button>
+                    {!user?.google_id && (
+                      <button onClick={() => setStatus("EDITPASSWORD")}>
+                        {t("Edit")}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

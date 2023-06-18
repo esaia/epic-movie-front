@@ -1,19 +1,27 @@
 import { AuthContext } from "context/AuthContext";
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { Quote, commentForm } from "global";
+import { useContext, useEffect } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { Quote, comment, commentForm } from "global";
 import { useForm } from "react-hook-form";
+import echo from "lib/pusher";
 
 const useQuotePost = (quote: Quote) => {
   const { locale } = useRouter();
   const { user } = useContext(AuthContext);
-
-  const [comments, setComments] = useState([]);
-  const [fetchComments, setfetchComments] = useState(false);
+  const queryClient = useQueryClient();
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
+
+  const fetchQuoteComments = async () => {
+    const { data } = await axiosAPI.get("/comments/" + quote.id);
+    return data;
+  };
+
+  const { data: comments } = useQuery(["fetchQuoteComments", quote.id], {
+    queryFn: fetchQuoteComments,
+  });
 
   const postComment = async (comment: commentForm) => {
     const { data } = await axiosAPI.post("/comments", comment);
@@ -23,8 +31,8 @@ const useQuotePost = (quote: Quote) => {
   const { mutate } = useMutation({
     mutationFn: postComment,
     onSuccess: () => {
-      setfetchComments(!fetchComments);
       setValue("comment", "");
+      queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
     },
   });
 
@@ -38,15 +46,27 @@ const useQuotePost = (quote: Quote) => {
       });
   };
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      const { data } = await axiosAPI.get("/comments/" + quote.id);
-      setComments(data);
-      return data;
-    };
+  // useEffect(() => {
+  //   const handleCommentEvent = (payload: { comment: comment }) => {
+  //     if (+payload.comment.quote_id === quote.id) {
+  //       queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
+  //       console.log("inside ", payload);
+  //     }
+  //   };
 
-    fetchComments();
-  }, [fetchComments]);
+  //   echo
+  //     .channel("comments")
+  //     .listen("CommentEvent", (payload: { comment: comment }) => {
+  //       handleCommentEvent(payload);
+  //     });
+
+  //   return () => {
+  //     echo
+  //       .channel("comments")
+  //       .stopListening("CommentEvent", handleCommentEvent);
+  //     echo.leaveChannel("comments");
+  //   };
+  // }, []);
 
   return {
     locale,

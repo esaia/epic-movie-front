@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { AuthContext } from "context/AuthContext";
 import { useQuery } from "react-query";
 import { Quote, notification } from "global";
+import echo from "lib/pusher";
 
 const useNewsFeedHeader = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const useNewsFeedHeader = () => {
     return data;
   };
 
-  const { data: notifications, refetch } = useQuery(
+  const { data: notifications, refetch: refetchNotifications } = useQuery(
     "fetchNotification",
     fetchNotiifcations
   );
@@ -60,7 +61,7 @@ const useNewsFeedHeader = () => {
   const seenNotification = async (id: number) => {
     try {
       await axiosAPI("/seen/" + id);
-      refetch();
+      refetchNotifications();
     } catch (error) {
       console.error(error);
     }
@@ -76,6 +77,18 @@ const useNewsFeedHeader = () => {
         seenNotification(+id);
       }
   };
+
+  useEffect(() => {
+    echo.channel("comments").listen("CommentEvent", (data: any) => {
+      console.log("data", data);
+
+      refetchNotifications();
+    });
+
+    return () => {
+      echo.leaveChannel("CommentEvent");
+    };
+  }, []);
 
   useEffect(() => {
     if (notifications) {

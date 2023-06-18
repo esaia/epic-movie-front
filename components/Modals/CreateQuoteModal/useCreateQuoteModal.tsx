@@ -3,7 +3,6 @@ import { Movie, quoteForm } from "global";
 import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { relative } from "path";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
@@ -30,7 +29,7 @@ const useCreateQuoteModal = () => {
     return data;
   };
 
-  const { data: movies } = useQuery("movies", fetchMovies);
+  const { data: movies } = useQuery(["movies"], fetchMovies);
 
   const addQuote = async () => {
     return await axiosAPI.post("/quotes", formData, {
@@ -42,8 +41,7 @@ const useCreateQuoteModal = () => {
   const { mutate } = useMutation({
     mutationFn: addQuote,
     onSuccess: () => {
-      push("/");
-      reload();
+      window.location.href = "/";
     },
   });
 

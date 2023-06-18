@@ -2,18 +2,28 @@ import { AuthContext } from "context/AuthContext";
 import { Quote, commentForm } from "global";
 import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 const useViewQuote = (quote: Quote) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
 
-  const [comments, setComments] = useState([]);
-  const [fetchComments, setfetchComments] = useState(false);
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
+
+  const fetchQuoteComments = async () => {
+    const { data } = await axiosAPI.get("/comments/" + quote.id);
+    return data;
+  };
+
+  const { data: comments, refetch: refetchComments } = useQuery(
+    "fetchQuoteComments" + quote.id,
+    {
+      queryFn: fetchQuoteComments,
+    }
+  );
 
   const postComment = async (comment: commentForm) => {
     const { data } = await axiosAPI.post("/comments", comment);
@@ -23,8 +33,8 @@ const useViewQuote = (quote: Quote) => {
   const { mutate } = useMutation({
     mutationFn: postComment,
     onSuccess: () => {
-      setfetchComments(!fetchComments);
       setValue("comment", "");
+      refetchComments();
     },
   });
 
@@ -36,16 +46,6 @@ const useViewQuote = (quote: Quote) => {
         quote_id: quote.id.toString(),
       });
   };
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      const { data } = await axiosAPI.get("/comments/" + quote.id);
-      setComments(data);
-      return data;
-    };
-
-    fetchComments();
-  }, [fetchComments]);
 
   return { user, t, comments, handleSubmit, register, submitForm };
 };

@@ -7,13 +7,7 @@ import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Quote } from "global";
 
-const SingleQuote = ({
-  quote,
-  reFetchMovie,
-}: {
-  quote: Quote;
-  reFetchMovie: () => void;
-}) => {
+const SingleQuote = ({ quote }: { quote: Quote }) => {
   const {
     showDetails,
     setshowDetails,
@@ -28,7 +22,7 @@ const SingleQuote = ({
     seteditQuote,
     t,
     deleteQuote,
-  } = useSingleQuote(quote, reFetchMovie);
+  } = useSingleQuote(quote);
 
   return (
     <div className="bg-[#11101a] p-4 rounded-md relative mb-5  z-4">
@@ -45,7 +39,6 @@ const SingleQuote = ({
         <EditQuote
           quote={quote}
           closeModal={closeModal}
-          reFetchMovie={reFetchMovie}
           deleteQuote={deleteQuote}
         />
       </DashboaradPortal>

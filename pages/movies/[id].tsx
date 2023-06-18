@@ -25,7 +25,6 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
     showAddQuotes,
     movie,
     deleteMovie,
-    reFetchMovie,
   } = useMovie();
 
   return (
@@ -72,13 +71,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
               <h1>There are not quotes</h1>
             ) : (
               movie?.quote?.map((quote: Quote) => {
-                return (
-                  <SingleQuote
-                    key={quote.id}
-                    quote={quote}
-                    reFetchMovie={reFetchMovie}
-                  />
-                );
+                return <SingleQuote key={quote.id} quote={quote} />;
               })
             )}
           </div>
@@ -158,13 +151,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             <h1>There are not quotes</h1>
           ) : (
             movie?.quote?.map((quote: Quote) => {
-              return (
-                <SingleQuote
-                  key={quote.id}
-                  quote={quote}
-                  reFetchMovie={reFetchMovie}
-                />
-              );
+              return <SingleQuote key={quote.id} quote={quote} />;
             })
           )}
         </div>

@@ -27,7 +27,7 @@ const useCreateMovieModal = () => {
     return axiosAPI.get("/genres");
   };
 
-  const { data: genres } = useQuery({
+  const { data: genres } = useQuery(["genres"], {
     queryFn: getAllgenres,
   });
 

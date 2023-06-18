@@ -68,7 +68,7 @@ const ViewQuote = ({
 
         <div className="flex gap-4 border-b border-gray-700 pb-3 my-3">
           <div className="flex items-center gap-1">
-            <p>{comments.length}</p>
+            <p>{comments?.length}</p>
             <VscComment className="text-2xl" />
           </div>
           <div className="flex items-center gap-1">

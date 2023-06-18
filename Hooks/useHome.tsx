@@ -13,7 +13,7 @@ const useHome = () => {
     return data;
   };
 
-  const { refetch: refetchQuotes, status } = useQuery({
+  const { refetch: refetchQuotes, status } = useQuery(["fetchQuotes"], {
     queryFn: fetchQuotes,
 
     onSuccess: (data) => {

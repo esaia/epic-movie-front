@@ -7,16 +7,14 @@ import { AiOutlineCamera } from "react-icons/ai";
 const EditQuote = ({
   quote,
   closeModal,
-  reFetchMovie,
   deleteQuote,
 }: {
   quote: Quote;
   closeModal: () => void;
-  reFetchMovie: () => void;
   deleteQuote: () => void;
 }) => {
   const { v, t, user, handleSubmit, register, errors, submitForm } =
-    useEditQuote(quote, closeModal, reFetchMovie);
+    useEditQuote(quote, closeModal);
 
   return (
     <form
