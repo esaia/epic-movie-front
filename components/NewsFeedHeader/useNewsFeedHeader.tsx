@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { AuthContext } from "context/AuthContext";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { Quote, notification } from "global";
 import echo from "lib/pusher";
 
@@ -13,6 +13,7 @@ const useNewsFeedHeader = () => {
   const { asPath } = router;
   const { user } = useContext(AuthContext);
   const t = useTranslations("Notifications");
+  const queryClient = useQueryClient();
   const [showNotification, setShowNotification] = useState(false);
   const [showNotificationMobile, setShowNotificationMobile] = useState(false);
   const [showMobileMenu, setshowMobileMenu] = useState(false);
@@ -48,20 +49,20 @@ const useNewsFeedHeader = () => {
     router.reload();
   };
 
-  const fetchNotiifcations = async (): Promise<notification[]> => {
+  const fetchNotifcations = async (): Promise<notification[]> => {
     const { data } = await axiosAPI.get("/notifications");
     return data;
   };
 
-  const { data: notifications, refetch: refetchNotifications } = useQuery(
-    "fetchNotification",
-    fetchNotiifcations
+  const { data: notifications } = useQuery(
+    ["fetchNotification"],
+    fetchNotifcations
   );
 
   const seenNotification = async (id: number) => {
     try {
       await axiosAPI("/seen/" + id);
-      refetchNotifications();
+      queryClient.invalidateQueries(["fetchNotification"]);
     } catch (error) {
       console.error(error);
     }
@@ -72,21 +73,35 @@ const useNewsFeedHeader = () => {
       ?.filter((item) => !item.seen)
       .map((item) => item.id);
 
-    if (ids)
+    if (ids) {
       for (const id of ids) {
         seenNotification(+id);
       }
+      queryClient.invalidateQueries(["fetchNotification"]);
+    }
   };
 
   useEffect(() => {
-    echo.channel("comments").listen("CommentEvent", (data: any) => {
-      console.log("data", data);
+    const handleCommentEvent = ({ quoteUserId }: { quoteUserId: number }) => {
+      if (quoteUserId === user?.id) {
+        queryClient.invalidateQueries(["fetchNotification"]);
+      }
+    };
 
-      refetchNotifications();
-    });
+    echo
+      .channel("comments")
+      .listen(
+        "CommentNotificationEvent",
+        (quoteUserID: { quoteUserId: number }) => {
+          handleCommentEvent(quoteUserID);
+        }
+      );
 
     return () => {
-      echo.leaveChannel("CommentEvent");
+      echo
+        .channel("comments")
+        .stopListening("CommentNotificationEvent", handleCommentEvent);
+      echo.leaveChannel("comments");
     };
   }, []);
 

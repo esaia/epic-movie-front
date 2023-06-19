@@ -1,15 +1,16 @@
 import { AuthContext } from "context/AuthContext";
-import { Quote, commentForm } from "global";
+import { Quote, comment, commentForm } from "global";
 import axiosAPI from "lib/axios";
+import echo from "lib/pusher";
 import { useTranslations } from "next-intl";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 const useViewQuote = (quote: Quote) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
-
+  const queryClient = useQueryClient();
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
 
@@ -18,23 +19,20 @@ const useViewQuote = (quote: Quote) => {
     return data;
   };
 
-  const { data: comments, refetch: refetchComments } = useQuery(
-    "fetchQuoteComments" + quote.id,
-    {
-      queryFn: fetchQuoteComments,
-    }
-  );
+  const { data: comments } = useQuery(["fetchQuoteComments", quote.id], {
+    queryFn: fetchQuoteComments,
+  });
 
   const postComment = async (comment: commentForm) => {
     const { data } = await axiosAPI.post("/comments", comment);
     return data;
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading: loadingPostComment } = useMutation({
     mutationFn: postComment,
     onSuccess: () => {
       setValue("comment", "");
-      refetchComments();
+      queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
     },
   });
 
@@ -47,7 +45,36 @@ const useViewQuote = (quote: Quote) => {
       });
   };
 
-  return { user, t, comments, handleSubmit, register, submitForm };
+  useEffect(() => {
+    const handleCommentEvent = (payload: { comment: comment }) => {
+      if (+payload.comment.quote_id === quote.id) {
+        queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
+      }
+    };
+
+    echo
+      .channel("comments")
+      .listen("CommentEvent", (payload: { comment: comment }) => {
+        handleCommentEvent(payload);
+      });
+
+    return () => {
+      echo
+        .channel("comments")
+        .stopListening("CommentEvent", handleCommentEvent);
+      echo.leaveChannel("comments");
+    };
+  }, []);
+
+  return {
+    user,
+    t,
+    comments,
+    handleSubmit,
+    register,
+    submitForm,
+    loadingPostComment,
+  };
 };
 
 export default useViewQuote;

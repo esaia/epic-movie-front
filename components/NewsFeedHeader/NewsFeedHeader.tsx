@@ -112,8 +112,8 @@ const NewsFeedHeader = () => {
           onClick={handleToggleNotification}
         >
           {notificationTotalNumber > 0 && (
-            <div className="bg-red-600 rounded-full w-4 h-4 absolute right-0 text-white flex justify-center items-center text-sm">
-              {notificationTotalNumber}
+            <div className="bg-red-600 rounded-full w-1 h-1 p-2  absolute top-[-2px] right-0 text-white flex justify-center items-center text-sm">
+              <p className="text-xs ">{notificationTotalNumber}</p>
             </div>
           )}
 
@@ -179,7 +179,7 @@ const NewsFeedHeader = () => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className="absolute  top-16 left-0  min-h-fit w-full select-none  bg-black p-4   md:hidden"
+              className="absolute  top-16 left-0 min-h-fit w-full select-none  bg-black p-4   md:hidden"
             >
               <RiArrowUpSFill className=" absolute top-[-1rem] right-[4.5rem] text-black text-3xl " />
               <div className=" mb-5 ">
@@ -194,7 +194,7 @@ const NewsFeedHeader = () => {
                 </div>
               </div>
 
-              <div className="overflow-y-auto h-fit max-h-[25rem]">
+              <div className="overflow-y-auto h-fit max-h-[70vh]">
                 {notifications && notifications.length === 0 ? (
                   <h2>You do not have notifications </h2>
                 ) : (

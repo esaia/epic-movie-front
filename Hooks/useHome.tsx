@@ -17,7 +17,7 @@ const useHome = () => {
     queryFn: fetchQuotes,
 
     onSuccess: (data) => {
-      if (data.quotes.length === 0) return;
+      if (data.quotes?.length === 0) return;
 
       const combinedArray = quotes.concat(data.quotes);
       setQuotes(combinedArray);

@@ -6,8 +6,14 @@ import { Quote, comment } from "global";
 import useQuotePost from "./useQuotePost";
 
 const QuotePost = ({ quote }: { quote: Quote }) => {
-  const { locale, register, handleSubmit, submitForm, comments } =
-    useQuotePost(quote);
+  const {
+    locale,
+    register,
+    handleSubmit,
+    submitForm,
+    comments,
+    loadingPostComment,
+  } = useQuotePost(quote);
 
   return (
     <div className="mt-5 bg-[#11101a] p-4 rounded-md">
@@ -78,8 +84,9 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
           <input
             type="text"
             placeholder="Write a comment"
+            disabled={loadingPostComment}
             {...register("comment")}
-            className="w-full px-5 py-2 bg-transparent outline-none"
+            className="w-full px-5 py-2 bg-transparent outline-none disabled:bg-gray-400 disabled:text-gray-500 rounded-md"
           />
         </form>
       </div>

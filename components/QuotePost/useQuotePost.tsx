@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Quote, comment, commentForm } from "global";
 import { useForm } from "react-hook-form";
 import echo from "lib/pusher";
+import { changeLanguage } from "i18next";
 
 const useQuotePost = (quote: Quote) => {
   const { locale } = useRouter();
@@ -28,7 +29,7 @@ const useQuotePost = (quote: Quote) => {
     return data;
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading: loadingPostComment } = useMutation({
     mutationFn: postComment,
     onSuccess: () => {
       setValue("comment", "");
@@ -46,27 +47,26 @@ const useQuotePost = (quote: Quote) => {
       });
   };
 
-  // useEffect(() => {
-  //   const handleCommentEvent = (payload: { comment: comment }) => {
-  //     if (+payload.comment.quote_id === quote.id) {
-  //       queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
-  //       console.log("inside ", payload);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleCommentEvent = (payload: { comment: comment }) => {
+      if (+payload.comment.quote_id === quote.id) {
+        queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
+      }
+    };
 
-  //   echo
-  //     .channel("comments")
-  //     .listen("CommentEvent", (payload: { comment: comment }) => {
-  //       handleCommentEvent(payload);
-  //     });
+    echo
+      .channel("comments")
+      .listen("CommentEvent", (payload: { comment: comment }) => {
+        handleCommentEvent(payload);
+      });
 
-  //   return () => {
-  //     echo
-  //       .channel("comments")
-  //       .stopListening("CommentEvent", handleCommentEvent);
-  //     echo.leaveChannel("comments");
-  //   };
-  // }, []);
+    return () => {
+      echo
+        .channel("comments")
+        .stopListening("CommentEvent", handleCommentEvent);
+      echo.leaveChannel("comments");
+    };
+  }, []);
 
   return {
     locale,
@@ -74,6 +74,7 @@ const useQuotePost = (quote: Quote) => {
     handleSubmit,
     submitForm,
     comments,
+    loadingPostComment,
   };
 };
 

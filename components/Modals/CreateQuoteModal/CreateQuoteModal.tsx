@@ -4,7 +4,6 @@ import { AiOutlineCaretDown } from "react-icons/ai";
 import { BsCameraReels } from "react-icons/bs";
 import useCreateQuoteModal from "./useCreateQuoteModal";
 import { FormProvider } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 
 const CreateQuoteModal = () => {
   const {
@@ -22,9 +21,9 @@ const CreateQuoteModal = () => {
     movies,
     setMovieId,
     movieId,
-    control,
+    setErrorMessage,
+    errorMessage,
   } = useCreateQuoteModal();
-
   return (
     <FormProvider {...form}>
       <div className="w-full text-center z-40">
@@ -100,7 +99,10 @@ const CreateQuoteModal = () => {
                       return (
                         <h2
                           key={movie.id}
-                          onClick={() => setMovieId(movie.id)}
+                          onClick={() => {
+                            setMovieId(movie.id);
+                            setErrorMessage("");
+                          }}
                           className="p-2 border border-gray-500 m-2 hover:bg-secondary  "
                         >
                           {movie.title[`${locale}`]}
@@ -111,13 +113,16 @@ const CreateQuoteModal = () => {
               )}
             </div>
 
-            <button type="submit" className="w-full bg-red-600 p-1 mt-5">
+            <p className="text-sm text-left h-8 text-red-500 ml-3">
+              {errorMessage}
+            </p>
+
+            <button type="submit" className="w-full  bg-red-600 p-1 mt-5">
               {t("Post")}
             </button>
           </form>
         </div>
       </div>
-      <DevTool control={control} />
     </FormProvider>
   );
 };

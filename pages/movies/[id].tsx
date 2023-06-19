@@ -58,7 +58,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
               <span>|</span>
               <div
-                className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md "
+                className="bg-red-600 w-44 flex justify-center items-center px-1 py-1  gap-3 rounded-md "
                 onClick={showAddQuotes}
               >
                 <AiOutlinePlusSquare />

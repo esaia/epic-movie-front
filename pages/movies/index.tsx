@@ -46,16 +46,16 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
         {movies
           ? movies.map((movie) => {
               return (
-                <a key={movie.id} href={`/movies/${movie.id}`}>
+                <Link key={movie.id} href={`/movies/${movie.id}`}>
                   <MoviePost movie={movie} />
-                </a>
+                </Link>
               );
             })
           : initialMovies.map((movie) => {
               return (
-                <a key={movie.id} href={`/movies/${movie.id}`}>
+                <Link key={movie.id} href={`/movies/${movie.id}`}>
                   <MoviePost movie={movie} />
-                </a>
+                </Link>
               );
             })}
       </div>

@@ -18,8 +18,15 @@ const ViewQuote = ({
   seteditQuote?: Dispatch<SetStateAction<boolean>>;
   deleteQuote?: () => void;
 }) => {
-  const { user, t, comments, handleSubmit, register, submitForm } =
-    useViewQuote(quote);
+  const {
+    user,
+    t,
+    comments,
+    handleSubmit,
+    register,
+    submitForm,
+    loadingPostComment,
+  } = useViewQuote(quote);
 
   return (
     <div className="w-full text-center h-screen md:h-fit md:max-h-[90vh] ">
@@ -53,11 +60,11 @@ const ViewQuote = ({
       <div className="m-3">
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">Eng</p>
-          <p>{quote.quote.en}</p>
+          <p>“{quote.quote.en}”</p>
         </div>
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">ქარ</p>
-          <p>“{quote.quote["ka"]}”</p>
+          <p>“{quote.quote.ka}”</p>
         </div>
 
         <img
@@ -95,8 +102,9 @@ const ViewQuote = ({
             <input
               type="text"
               placeholder="Write a comment"
+              disabled={loadingPostComment}
               {...register("comment")}
-              className="w-full px-5 py-2 bg-transparent outline-none"
+              className="w-full px-5 py-2 bg-transparent outline-none  disabled:bg-gray-400 disabled:text-gray-500 rounded-md"
             />
           </form>
         </div>

@@ -3,7 +3,7 @@ import { Movie, quoteForm } from "global";
 import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 
@@ -12,16 +12,16 @@ const useCreateQuoteModal = () => {
   const v = useTranslations("Validations");
   const [showMovies, setShowMovies] = useState(false);
   const [movieId, setMovieId] = useState<null | number>(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const { user } = useContext(AuthContext);
-  const { locale, push, reload } = useRouter();
+  const { locale } = useRouter();
   const formData = new FormData();
 
   const form = useForm<quoteForm>();
   const {
     handleSubmit,
     register,
-    control,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = form;
 
   const fetchMovies = async (): Promise<Movie[]> => {
@@ -46,6 +46,11 @@ const useCreateQuoteModal = () => {
   });
 
   const onSubmit = (quote: quoteForm) => {
+    if (!movieId) {
+      setErrorMessage(v("This field is required"));
+      return;
+    }
+
     Object.entries(quote).map((item) => {
       return formData.append(item[0], item[1]);
     });
@@ -55,6 +60,12 @@ const useCreateQuoteModal = () => {
     formData.append("img", quote.img[0]);
     mutate();
   };
+
+  useEffect(() => {
+    if (isSubmitted && !movieId) {
+      setErrorMessage(v("This field is required"));
+    }
+  }, [errors]);
 
   return {
     v,
@@ -71,7 +82,8 @@ const useCreateQuoteModal = () => {
     movies,
     setMovieId,
     movieId,
-    control,
+    setErrorMessage,
+    errorMessage,
   };
 };
 
