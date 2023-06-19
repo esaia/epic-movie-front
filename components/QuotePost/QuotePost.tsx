@@ -45,7 +45,7 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
       <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
         alt=""
-        className="w-full h-[400px] object-cover rounded-md my-6"
+        className="w-full h-60 md:h-[400px] object-cover rounded-md my-6"
       />
 
       <div className="flex gap-4 border-b border-gray-700 pb-3 mb-3">
