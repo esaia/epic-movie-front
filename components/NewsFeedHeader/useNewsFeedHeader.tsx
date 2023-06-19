@@ -7,6 +7,7 @@ import { AuthContext } from "context/AuthContext";
 import { useQuery, useQueryClient } from "react-query";
 import { Quote, notification } from "global";
 import echo from "lib/pusher";
+import { json } from "stream/consumers";
 
 const useNewsFeedHeader = () => {
   const router = useRouter();
@@ -83,7 +84,8 @@ const useNewsFeedHeader = () => {
 
   useEffect(() => {
     const handleCommentEvent = ({ quoteUserId }: { quoteUserId: number }) => {
-      if (quoteUserId === user?.id) {
+      console.log();
+      if (quoteUserId === JSON.parse(localStorage.getItem("user") || "{}").id) {
         queryClient.invalidateQueries(["fetchNotification"]);
       }
     };

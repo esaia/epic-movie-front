@@ -118,3 +118,7 @@ export interface profileInputType {
   password_confirmation: string;
   img: string;
 }
+
+export interface Window {
+  Echo: any;
+}

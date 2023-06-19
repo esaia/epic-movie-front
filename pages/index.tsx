@@ -1,21 +1,29 @@
 import { CreateQuote, DashboardWrapper, QuotePost } from "@/components";
-import axios from "axios";
 import { Quote } from "global";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { destroyCookie, parseCookies } from "nookies";
+import { destroyCookie } from "nookies";
 import { useHome } from "@/hooks";
 
 const Home = () => {
-  const { status, quotes } = useHome();
-
+  const { quotes, hasNextPage, status } = useHome();
   return (
     <DashboardWrapper>
       <CreateQuote />
 
       {quotes &&
-        quotes.map((quotePost: Quote, i) => {
-          return <QuotePost key={i} quote={quotePost} />;
+        quotes.pages.map((item, i) => {
+          return (
+            <div key={i}>
+              {item.quotes.map((quote: Quote, i: number) => {
+                return <QuotePost key={i} quote={quote} />;
+              })}
+            </div>
+          );
         })}
+
+      {!hasNextPage && (
+        <div className="text-xl text-center py-6">No more posts to show</div>
+      )}
 
       {status === "loading" && (
         <div className="mt-5 flex justify-center">
@@ -47,18 +55,6 @@ export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const { req } = context;
-
-    const cookies = parseCookies({ req });
-    const cookiesString = Object.keys(cookies)
-      .map((key) => `${key}=${cookies[key]}`)
-      .join("; ");
-
-    await axios.get(process.env.NEXT_PUBLIC_BASE_URL_API + "/quotes?page=1", {
-      headers: {
-        Cookie: cookiesString,
-      },
-    });
     return {
       props: {
         messages: (await import(`../locales/${context.locale}/common.json`))

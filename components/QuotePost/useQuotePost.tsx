@@ -1,28 +1,15 @@
 import { AuthContext } from "context/AuthContext";
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { Quote, comment, commentForm } from "global";
+import { useContext } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { Quote, commentForm } from "global";
 import { useForm } from "react-hook-form";
-import echo from "lib/pusher";
-import { changeLanguage } from "i18next";
-
 const useQuotePost = (quote: Quote) => {
   const { locale } = useRouter();
   const { user } = useContext(AuthContext);
-  const queryClient = useQueryClient();
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
-
-  const fetchQuoteComments = async () => {
-    const { data } = await axiosAPI.get("/comments/" + quote.id);
-    return data;
-  };
-
-  const { data: comments } = useQuery(["fetchQuoteComments", quote.id], {
-    queryFn: fetchQuoteComments,
-  });
 
   const postComment = async (comment: commentForm) => {
     const { data } = await axiosAPI.post("/comments", comment);
@@ -31,9 +18,9 @@ const useQuotePost = (quote: Quote) => {
 
   const { mutate, isLoading: loadingPostComment } = useMutation({
     mutationFn: postComment,
-    onSuccess: () => {
+    onSuccess: (comment) => {
       setValue("comment", "");
-      queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
+      quote.comment?.push(comment);
     },
   });
 
@@ -47,33 +34,11 @@ const useQuotePost = (quote: Quote) => {
       });
   };
 
-  useEffect(() => {
-    const handleCommentEvent = (payload: { comment: comment }) => {
-      if (+payload.comment.quote_id === quote.id) {
-        queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
-      }
-    };
-
-    echo
-      .channel("comments")
-      .listen("CommentEvent", (payload: { comment: comment }) => {
-        handleCommentEvent(payload);
-      });
-
-    return () => {
-      echo
-        .channel("comments")
-        .stopListening("CommentEvent", handleCommentEvent);
-      echo.leaveChannel("comments");
-    };
-  }, []);
-
   return {
     locale,
     register,
     handleSubmit,
     submitForm,
-    comments,
     loadingPostComment,
   };
 };

@@ -6,14 +6,8 @@ import { Quote, comment } from "global";
 import useQuotePost from "./useQuotePost";
 
 const QuotePost = ({ quote }: { quote: Quote }) => {
-  const {
-    locale,
-    register,
-    handleSubmit,
-    submitForm,
-    comments,
-    loadingPostComment,
-  } = useQuotePost(quote);
+  const { locale, register, handleSubmit, submitForm, loadingPostComment } =
+    useQuotePost(quote);
 
   return (
     <div className="mt-5 bg-[#11101a] p-4 rounded-md">
@@ -56,7 +50,7 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
 
       <div className="flex gap-4 border-b border-gray-700 pb-3 mb-3">
         <div className="flex items-center gap-1">
-          <p>{comments?.length}</p>
+          <p>{quote.comment?.length}</p>
           <VscComment className="text-2xl" />
         </div>
         <div className="flex items-center gap-1">
@@ -65,8 +59,8 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
         </div>
       </div>
 
-      {comments &&
-        comments.map((comment: comment, i: number) => {
+      {quote.comment &&
+        quote?.comment.map((comment: comment, i: number) => {
           return (
             <Comments key={i} user={comment.user} comment={comment.comment} />
           );

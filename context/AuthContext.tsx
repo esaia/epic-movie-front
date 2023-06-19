@@ -6,6 +6,7 @@ import {
   useEffect,
 } from "react";
 import { User, AuthContextProps } from "./types";
+import axiosAPI from "lib/axios";
 
 export const AuthContext = createContext<AuthContextProps>({
   user: null,
@@ -18,7 +19,6 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     let user;

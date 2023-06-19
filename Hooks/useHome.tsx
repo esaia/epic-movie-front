@@ -1,56 +1,50 @@
-import { Quote } from "global";
 import axiosAPI from "lib/axios";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect } from "react";
+import { useInfiniteQuery } from "react-query";
 
 const useHome = () => {
-  const [quotes, setQuotes] = useState<Quote[]>([]);
-  const [page, setPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(10);
-
-  const fetchQuotes = async () => {
-    const { data } = await axiosAPI.get("/quotes?page=" + page);
+  const fetchQuotes = async ({ pageParam = 1 }) => {
+    const { data } = await axiosAPI.get("/quotes?page=" + pageParam);
     return data;
   };
 
-  const { refetch: refetchQuotes, status } = useQuery(["fetchQuotes"], {
-    queryFn: fetchQuotes,
-
-    onSuccess: (data) => {
-      if (data.quotes?.length === 0) return;
-
-      const combinedArray = quotes.concat(data.quotes);
-      setQuotes(combinedArray);
-
-      setPage((prevPage) => prevPage + 1);
-      setMaxPage(data.maxPage);
-    },
-  });
+  const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ["fetchQuotes"],
+    {
+      queryFn: fetchQuotes,
+      getNextPageParam: (lastPage, pages) => {
+        const totalPage = lastPage.totalpages;
+        const currentPage = lastPage.currentPage;
+        return currentPage > totalPage ? undefined : currentPage + 1;
+      },
+    }
+  );
 
   const handleScroll = () => {
+    if (hasNextPage === false) {
+      window.removeEventListener("scroll", handleScroll);
+      return;
+    }
+
     if (
-      document.documentElement.scrollHeight - window.innerHeight <=
-      document.documentElement.scrollTop
+      Math.round(window.innerHeight + document.documentElement.scrollTop) ===
+      document.documentElement.offsetHeight
     ) {
-      if (page > maxPage) {
-        return;
-      } else {
-        refetchQuotes();
-      }
+      fetchNextPage();
     }
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [page, maxPage]);
+  }, [hasNextPage]);
 
   return {
+    quotes: data,
+    hasNextPage,
     status,
-    quotes,
   };
 };
 
