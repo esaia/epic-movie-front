@@ -1,23 +1,18 @@
 import { AuthContext } from "context/AuthContext";
-import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { Quote, commentForm } from "global";
 import { useForm } from "react-hook-form";
+import { postComment } from "lib";
 const useQuotePost = (quote: Quote) => {
   const { locale } = useRouter();
   const { user } = useContext(AuthContext);
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
 
-  const postComment = async (comment: commentForm) => {
-    const { data } = await axiosAPI.post("/comments", comment);
-    return data;
-  };
-
   const { mutate, isLoading: loadingPostComment } = useMutation({
-    mutationFn: postComment,
+    mutationFn: (comment: commentForm) => postComment(comment),
     onSuccess: (comment) => {
       setValue("comment", "");
       quote.comment?.push(comment);

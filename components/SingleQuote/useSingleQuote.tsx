@@ -1,5 +1,5 @@
 import { Quote } from "global";
-import axiosAPI from "lib/axios";
+import { deleteQuoteRequest } from "lib/index";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -25,15 +25,9 @@ const useSingleQuote = (quote: Quote) => {
     seteditQuote(false);
   };
 
-  const deleteQuote = async () => {
-    try {
-      const res = await axiosAPI.delete(`/quotes/${quote.id}`);
-      queryClient.invalidateQueries(["singleMovie", query.id]);
-
-      return res;
-    } catch (error) {
-      console.error(error);
-    }
+  const deleteQuote = () => {
+    deleteQuoteRequest(quote.id);
+    queryClient.invalidateQueries(["singleMovie", query.id]);
   };
 
   return {

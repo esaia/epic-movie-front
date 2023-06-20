@@ -1,40 +1,36 @@
 import { AuthContext } from "context/AuthContext";
-import { Quote, comment, commentForm } from "global";
-import axiosAPI from "lib/axios";
-import echo from "lib/pusher";
+import { Quote, commentForm } from "global";
 import { useTranslations } from "next-intl";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteQuoteRequest, postComment } from "lib/index";
+import { useRouter } from "next/router";
 
-const useViewQuote = (quote: Quote) => {
+const useViewQuote = (quote: Quote, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
   const queryClient = useQueryClient();
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
-
-  const fetchQuoteComments = async () => {
-    const { data } = await axiosAPI.get("/comments/" + quote.id);
-    return data;
-  };
-
-  const { data: comments } = useQuery(["fetchQuoteComments", quote.id], {
-    queryFn: fetchQuoteComments,
-  });
-
-  const postComment = async (comment: commentForm) => {
-    const { data } = await axiosAPI.post("/comments", comment);
-    return data;
-  };
+  const { query } = useRouter();
 
   const { mutate, isLoading: loadingPostComment } = useMutation({
-    mutationFn: postComment,
-    onSuccess: () => {
+    mutationFn: (comment: commentForm) => postComment(comment),
+    onSuccess: (comment) => {
       setValue("comment", "");
-      queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
+      quote.comment?.push(comment);
+
+      queryClient.invalidateQueries(["fetchQuotes"]);
+      queryClient.invalidateQueries(["singleMovie", query?.id]);
     },
   });
+
+  const deleteQuote = () => {
+    deleteQuoteRequest(quote.id);
+    queryClient.invalidateQueries(["singleMovie", query?.id]);
+    closeModal();
+  };
 
   const submitForm = (data: { comment: string }) => {
     if (user)
@@ -45,35 +41,14 @@ const useViewQuote = (quote: Quote) => {
       });
   };
 
-  useEffect(() => {
-    const handleCommentEvent = (payload: { comment: comment }) => {
-      if (+payload.comment.quote_id === quote.id) {
-        queryClient.invalidateQueries(["fetchQuoteComments", quote.id]);
-      }
-    };
-
-    echo
-      .channel("comments")
-      .listen("CommentEvent", (payload: { comment: comment }) => {
-        handleCommentEvent(payload);
-      });
-
-    return () => {
-      echo
-        .channel("comments")
-        .stopListening("CommentEvent", handleCommentEvent);
-      echo.leaveChannel("comments");
-    };
-  }, []);
-
   return {
     user,
     t,
-    comments,
     handleSubmit,
     register,
     submitForm,
     loadingPostComment,
+    deleteQuote,
   };
 };
 

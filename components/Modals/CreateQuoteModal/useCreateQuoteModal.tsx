@@ -1,11 +1,12 @@
 import { AuthContext } from "context/AuthContext";
 import { Movie, quoteForm } from "global";
-import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
+import { fetchMovies, addQuote } from "lib/index";
+import { AxiosResponse } from "axios";
 
 const useCreateQuoteModal = () => {
   const t = useTranslations("Home");
@@ -24,22 +25,10 @@ const useCreateQuoteModal = () => {
     formState: { errors, isSubmitted },
   } = form;
 
-  const fetchMovies = async (): Promise<Movie[]> => {
-    const { data } = await axiosAPI.get("/movies");
-    return data;
-  };
+  const { data: movies } = useQuery<Movie[]>(["movies"], fetchMovies);
 
-  const { data: movies } = useQuery(["movies"], fetchMovies);
-
-  const addQuote = async () => {
-    return await axiosAPI.post("/quotes", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-  };
   const { mutate } = useMutation({
-    mutationFn: addQuote,
+    mutationFn: (formdata: FormData) => addQuote(formdata),
     onSuccess: () => {
       window.location.href = "/";
     },
@@ -58,7 +47,7 @@ const useCreateQuoteModal = () => {
     if (movieId) formData.append("movie_id", movieId.toString());
     if (user?.id !== undefined) formData.append("user_id", String(user.id));
     formData.append("img", quote.img[0]);
-    mutate();
+    mutate(formData);
   };
 
   useEffect(() => {

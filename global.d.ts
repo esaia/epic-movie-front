@@ -122,3 +122,27 @@ export interface profileInputType {
 export interface Window {
   Echo: any;
 }
+
+export interface loginDataType {
+  email: string;
+  password: string;
+  remember?: boolean;
+}
+
+export interface registerUserType {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
+export interface recoveryPassType {
+  password: string;
+  password_confirmation: string;
+  email: string | string[] | undefined;
+  token: string | string[] | undefined;
+}
+
+export interface forgetPasswordType {
+  email: string;
+}

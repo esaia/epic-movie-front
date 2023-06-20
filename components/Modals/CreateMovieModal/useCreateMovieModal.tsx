@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import axiosAPI from "lib/axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { movieTypeForm } from "./types";
@@ -7,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
+import { getAllgenres, addMovie } from "lib/index";
 
 const useCreateMovieModal = () => {
   const { user } = useContext(AuthContext);
@@ -23,25 +23,12 @@ const useCreateMovieModal = () => {
     formState: { errors },
   } = form;
 
-  const getAllgenres = () => {
-    return axiosAPI.get("/genres");
-  };
-
   const { data: genres } = useQuery(["genres"], {
     queryFn: getAllgenres,
   });
 
-  const storeMovie = () => {
-    return axiosAPI.post("/movies", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      withCredentials: true,
-    });
-  };
-
   const { mutate } = useMutation({
-    mutationFn: storeMovie,
+    mutationFn: (formData: FormData) => addMovie(formData),
     onSuccess: () => {
       push(pathname);
     },
@@ -61,7 +48,7 @@ const useCreateMovieModal = () => {
     formData.append("img", movie.img[0]);
     formData.append("genre", JSON.stringify(movie.genre));
 
-    return mutate();
+    return mutate(formData);
   };
 
   return {

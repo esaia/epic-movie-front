@@ -8,6 +8,7 @@ import "../styles/globals.css";
 import { AuthProvider } from "context/AuthContext";
 import { NextIntlProvider } from "next-intl";
 import { useRouter } from "next/router";
+import { NewsFeedHeader } from "components/NewsFeedHeader";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

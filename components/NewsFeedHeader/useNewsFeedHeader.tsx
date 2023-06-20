@@ -1,13 +1,16 @@
-import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { AuthContext } from "context/AuthContext";
 import { useQuery, useQueryClient } from "react-query";
-import { Quote, notification } from "global";
+import { Quote } from "global";
 import echo from "lib/pusher";
-import { json } from "stream/consumers";
+import {
+  logoutRequest,
+  seenNotificationRequest,
+  fetchNotifcations,
+} from "lib/index";
 
 const useNewsFeedHeader = () => {
   const router = useRouter();
@@ -42,27 +45,18 @@ const useNewsFeedHeader = () => {
   const logout = () => {
     Cookies.remove("user-email", { path: "" });
     localStorage.removeItem("user");
-    const logout = async () => {
-      await axiosAPI.get("/logout");
-    };
-    logout();
+    logoutRequest();
     router.push("/landing");
     router.reload();
   };
 
-  const fetchNotifcations = async (): Promise<notification[]> => {
-    const { data } = await axiosAPI.get("/notifications");
-    return data;
-  };
-
-  const { data: notifications } = useQuery(
-    ["fetchNotification"],
-    fetchNotifcations
-  );
+  const { data: notifications } = useQuery(["fetchNotification"], {
+    queryFn: fetchNotifcations,
+  });
 
   const seenNotification = async (id: number) => {
     try {
-      await axiosAPI("/seen/" + id);
+      seenNotificationRequest(id);
       queryClient.invalidateQueries(["fetchNotification"]);
     } catch (error) {
       console.error(error);

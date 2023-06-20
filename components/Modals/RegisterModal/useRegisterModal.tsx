@@ -1,11 +1,11 @@
 import { AxiosError } from "axios";
-import axiosAPI from "lib/axios";
+import { registerUserType } from "global";
+import { storeUser } from "lib";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useMutation } from "react-query";
-import { registerUserType } from "./types";
 
 const useRegisterModal = () => {
   const t = useTranslations("Register");
@@ -16,12 +16,8 @@ const useRegisterModal = () => {
   const { handleSubmit, register, control } = form;
   const router = useRouter();
 
-  const storeUser = (user: registerUserType) => {
-    return axiosAPI.post("/register", user);
-  };
-
   const { mutate, isLoading } = useMutation("login", {
-    mutationFn: storeUser,
+    mutationFn: (user: registerUserType) => storeUser(user),
     onSuccess: () => {
       router.push("/landing?modal=emailcheck");
     },
