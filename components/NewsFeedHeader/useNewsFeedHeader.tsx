@@ -84,7 +84,6 @@ const useNewsFeedHeader = () => {
 
   useEffect(() => {
     const handleCommentEvent = ({ quoteUserId }: { quoteUserId: number }) => {
-      console.log();
       if (quoteUserId === JSON.parse(localStorage.getItem("user") || "{}").id) {
         queryClient.invalidateQueries(["fetchNotification"]);
       }
