@@ -1,17 +1,13 @@
 import { AuthContext } from "context/AuthContext";
 import axiosAPI from "lib/axios";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import { useContext } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { Quote, commentForm } from "global";
 import { useForm } from "react-hook-form";
-
 const useQuotePost = (quote: Quote) => {
   const { locale } = useRouter();
   const { user } = useContext(AuthContext);
-
-  const [comments, setComments] = useState([]);
-  const [fetchComments, setfetchComments] = useState(false);
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
 
@@ -20,15 +16,16 @@ const useQuotePost = (quote: Quote) => {
     return data;
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading: loadingPostComment } = useMutation({
     mutationFn: postComment,
-    onSuccess: () => {
-      setfetchComments(!fetchComments);
+    onSuccess: (comment) => {
       setValue("comment", "");
+      quote.comment?.push(comment);
     },
   });
 
   const submitForm = (data: { comment: string }) => {
+    if (!data.comment) return;
     if (user)
       mutate({
         ...data,
@@ -37,22 +34,12 @@ const useQuotePost = (quote: Quote) => {
       });
   };
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      const { data } = await axiosAPI.get("/comments/" + quote.id);
-      setComments(data);
-      return data;
-    };
-
-    fetchComments();
-  }, [fetchComments]);
-
   return {
     locale,
     register,
     handleSubmit,
     submitForm,
-    comments,
+    loadingPostComment,
   };
 };
 

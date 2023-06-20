@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import axiosAPI from "lib/axios";
 import { AxiosResponse } from "axios";
 import { Movie } from "global";
@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 const useMovies = () => {
   const [createMovieModal, setcreateMovieModal] = useState<boolean>(false);
   const t = useTranslations("Movies");
-
   const { push, query } = useRouter();
   const closeModal = () => {
     push("/movies");
@@ -21,10 +20,9 @@ const useMovies = () => {
     });
   };
 
-  const { data: movies, refetch } = useQuery<AxiosResponse<Movie[]>>(
-    "users",
-    fetchMovies
-  );
+  const { data: movies, refetch: refetchMovies } = useQuery<
+    AxiosResponse<Movie[]>
+  >(["movies"], fetchMovies);
 
   useEffect(() => {
     const { modal } = query;
@@ -32,7 +30,7 @@ const useMovies = () => {
   }, [query]);
 
   useEffect(() => {
-    refetch();
+    refetchMovies();
   }, [createMovieModal]);
 
   return {

@@ -19,7 +19,8 @@
     "log out": "Log out",
     "Edit your profile": "Edit your profile",
     "News feed": "News feed",
-    "List of movies": "List of movies"
+    "List of movies": "List of movies",
+    "You do not have notifications": "You do not have notifications"
   },
 
   "Movies": {
@@ -53,7 +54,11 @@
     "Passwords should contain": "Passwords should contain:",
     "8 or more characters": "8 or more characters",
     "15 lowercase character": "15 lowercase character",
-    "Enter new usarname": "Enter new usarname"
+    "Enter new usarname": "Enter new usarname",
+    "cancel": "cancel",
+    "save changes": "save changes",
+    "Are you sure to make changes": "Are you sure to make changes",
+    "Changes updated succsessfully": "Changes updated succsessfully"
   },
 
   "Header": {

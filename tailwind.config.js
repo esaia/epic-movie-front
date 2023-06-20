@@ -27,7 +27,7 @@ module.exports = {
       },
 
       gridTemplateColumns: {
-        column2: "250px 1fr",
+        column2: "220px 1fr",
         column3: "250px 1fr 250px",
         column4: "55% 45%",
       },

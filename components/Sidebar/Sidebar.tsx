@@ -31,7 +31,8 @@ const Sidebar = () => {
         <div className="flex items-center gap-4 my-9 text-md cursor-pointer text-md">
           <BsCameraReels
             className={`text-2xl ${
-              router.route === "/movies" && "text-red-600"
+              (router.route === "/movies" || router.route === "/movies/[id]") &&
+              "text-red-600"
             }`}
           />
           <p>{t("List of movies")}</p>

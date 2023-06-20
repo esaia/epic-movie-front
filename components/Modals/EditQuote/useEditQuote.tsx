@@ -2,19 +2,17 @@ import { AuthContext } from "context/AuthContext";
 import { Quote, quoteForm } from "global";
 import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
-const useEditQuote = (
-  quote: Quote,
-  closeModal: () => void,
-  reFetchMovie: () => void
-) => {
+const useEditQuote = (quote: Quote, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
+  const { query } = useRouter();
   const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
-
+  const queryClient = useQueryClient();
   const formData = new FormData();
   const form = useForm<quoteForm>({
     defaultValues: {
@@ -41,7 +39,8 @@ const useEditQuote = (
   const { mutate } = useMutation({
     mutationFn: editQuote,
     onSuccess: () => {
-      reFetchMovie();
+      queryClient.invalidateQueries(["singleMovie", query.id]);
+
       closeModal();
     },
   });

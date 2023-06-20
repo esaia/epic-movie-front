@@ -28,7 +28,9 @@ const NotificationModal = ({
       </Link>
       {desc ===
         "We have sent a password recover instructions to your email" && (
-        <p className="text-gray-500 cursor-pointer">Skip, I’ll confirm later</p>
+        <p className="text-gray-500 cursor-pointer">
+          Skip, I will confirm later
+        </p>
       )}
     </div>
   );

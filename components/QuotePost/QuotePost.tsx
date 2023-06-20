@@ -6,7 +6,7 @@ import { Quote, comment } from "global";
 import useQuotePost from "./useQuotePost";
 
 const QuotePost = ({ quote }: { quote: Quote }) => {
-  const { locale, register, handleSubmit, submitForm, comments } =
+  const { locale, register, handleSubmit, submitForm, loadingPostComment } =
     useQuotePost(quote);
 
   return (
@@ -45,12 +45,12 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
       <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
         alt=""
-        className="w-full h-[400px] object-cover rounded-md my-6"
+        className="w-full h-60 md:h-[400px] object-cover rounded-md my-6"
       />
 
       <div className="flex gap-4 border-b border-gray-700 pb-3 mb-3">
         <div className="flex items-center gap-1">
-          <p>{comments.length}</p>
+          <p>{quote.comment?.length}</p>
           <VscComment className="text-2xl" />
         </div>
         <div className="flex items-center gap-1">
@@ -59,8 +59,8 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
         </div>
       </div>
 
-      {comments &&
-        comments.map((comment: comment, i: number) => {
+      {quote.comment &&
+        quote?.comment.map((comment: comment, i: number) => {
           return (
             <Comments key={i} user={comment.user} comment={comment.comment} />
           );
@@ -78,8 +78,9 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
           <input
             type="text"
             placeholder="Write a comment"
+            disabled={loadingPostComment}
             {...register("comment")}
-            className="w-full px-5 py-2 bg-transparent outline-none"
+            className="w-full px-5 py-2 bg-transparent outline-none disabled:bg-gray-400 disabled:text-gray-500 rounded-md"
           />
         </form>
       </div>

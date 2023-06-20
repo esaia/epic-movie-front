@@ -1,7 +1,6 @@
 import React from "react";
 import { FormProvider, Controller } from "react-hook-form";
 import useCreateMovieModal from "./useCreateMovieModal";
-import { AiOutlineCamera } from "react-icons/ai";
 import Select from "react-select";
 import {
   DashboardInput,

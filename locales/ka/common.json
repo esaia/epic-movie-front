@@ -19,7 +19,8 @@
     "log out": "გასვლა",
     "Edit your profile": "პროფილის რედაქტირება",
     "News feed": "სიახლეები",
-    "List of movies": "ფილმების სია"
+    "List of movies": "ფილმების სია",
+    "You do not have notifications": "თქვენ არ გაქვთ შეტყობინებები"
   },
 
   "Movies": {
@@ -53,7 +54,11 @@
     "Passwords should contain": "პაროლი უნდა შეიცავდეს:",
     "8 or more characters": "8 ან მეტ სიმბოლოს",
     "15 lowercase character": "15 დაბალი რეგისტრის სიმბოლოებს",
-    "Enter new usarname": "ჩაწერეთ ახალი სახელი"
+    "Enter new usarname": "ჩაწერეთ ახალი სახელი",
+    "cancel": "გამოსვლა",
+    "save changes": "შენიახე ცვლილებები",
+    "Are you sure to make changes": "ნამდვილად გსურთ ცვლილებების შენახვა?",
+    "Changes updated succsessfully": "ცვლილებები წარმატებით დარედაქტირდა"
   },
 
   "Header": {

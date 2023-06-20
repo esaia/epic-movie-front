@@ -3,6 +3,7 @@ import useUploadImage from "./useUploadImage";
 
 const UploadImage = () => {
   const {
+    v,
     register,
     isSubmitted,
     getRootProps,
@@ -37,7 +38,7 @@ const UploadImage = () => {
         />
 
         <div className="flex items-center">
-          <AiOutlineCamera className="text-xl min-w-[30px]" />
+          <AiOutlineCamera className="text-2xl mr-2 min-w-[30px]" />
 
           {isDragAccept && <p>upload</p>}
           {isDragReject && <p>This file not supported</p>}
@@ -60,7 +61,7 @@ const UploadImage = () => {
       <div className="h-5">
         {!isFileUploaded && isSubmitted && (
           <p className="text-sm text-red-500 ml-3 text-left">
-            This field is required
+            {v("This field is required")}
           </p>
         )}
       </div>

@@ -4,7 +4,7 @@ import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
 const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {

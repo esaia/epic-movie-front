@@ -92,6 +92,24 @@ export interface comment {
   quote_id: string;
   comment: string;
   user: User;
+  id: number;
+}
+
+enum NotificationStatus {
+  Comment = "comment",
+  Like = "like",
+}
+
+export interface notification {
+  id: number;
+  sender_id: number;
+  quote_id: number;
+  seen: number;
+  status: NotificationStatus;
+  sender: User;
+  quote: Quote;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface profileInputType {
@@ -99,4 +117,8 @@ export interface profileInputType {
   password: string;
   password_confirmation: string;
   img: string;
+}
+
+export interface Window {
+  Echo: any;
 }

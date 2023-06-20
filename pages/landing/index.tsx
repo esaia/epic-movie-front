@@ -13,8 +13,7 @@ import {
   RegisterModal,
 } from "@/components";
 import { GetServerSidePropsContext } from "next";
-
-import { useLanding } from "hooks";
+import { useLanding } from "@/hooks";
 
 const Landing = () => {
   const {

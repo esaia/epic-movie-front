@@ -3,13 +3,15 @@ import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useQueryClient } from "react-query";
 
-const useSingleQuote = (quote: Quote, reFetchMovie: () => void) => {
-  const [showDetails, setshowDetails] = useState(false);
-  const [showDetailsMobile, setshowDetailsMobile] = useState(false);
+const useSingleQuote = (quote: Quote) => {
   const { locale, query } = useRouter();
   const t = useTranslations("SingleMovie");
+  const queryClient = useQueryClient();
 
+  const [showDetails, setshowDetails] = useState(false);
+  const [showDetailsMobile, setshowDetailsMobile] = useState(false);
   const [viewQuote, setViewQuote] = useState<boolean>(false);
   const [editQuote, seteditQuote] = useState<boolean>(false);
 
@@ -26,7 +28,8 @@ const useSingleQuote = (quote: Quote, reFetchMovie: () => void) => {
   const deleteQuote = async () => {
     try {
       const res = await axiosAPI.delete(`/quotes/${quote.id}`);
-      reFetchMovie();
+      queryClient.invalidateQueries(["singleMovie", query.id]);
+
       return res;
     } catch (error) {
       console.error(error);

@@ -20,7 +20,7 @@ const useRegisterModal = () => {
     return axiosAPI.post("/register", user);
   };
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading } = useMutation("login", {
     mutationFn: storeUser,
     onSuccess: () => {
       router.push("/landing?modal=emailcheck");

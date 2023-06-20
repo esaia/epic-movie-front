@@ -8,7 +8,7 @@ import {
 import { BiPencil } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlusSquare } from "react-icons/ai";
-import { useMovie } from "hooks";
+import { useMovie } from "@/hooks";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import type { Genre, Movie, Quote } from "global";
 import { destroyCookie, parseCookies } from "nookies";
@@ -25,7 +25,6 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
     showAddQuotes,
     movie,
     deleteMovie,
-    reFetchMovie,
   } = useMovie();
 
   return (
@@ -59,7 +58,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
               <span>|</span>
               <div
-                className="bg-red-600 w-fit flex justify-center items-center px-3 py-1  gap-3 rounded-md "
+                className="bg-red-600 w-44 flex justify-center items-center px-1 py-1  gap-3 rounded-md "
                 onClick={showAddQuotes}
               >
                 <AiOutlinePlusSquare />
@@ -72,13 +71,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
               <h1>There are not quotes</h1>
             ) : (
               movie?.quote?.map((quote: Quote) => {
-                return (
-                  <SingleQuote
-                    key={quote.id}
-                    quote={quote}
-                    reFetchMovie={reFetchMovie}
-                  />
-                );
+                return <SingleQuote key={quote.id} quote={quote} />;
               })
             )}
           </div>
@@ -86,7 +79,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
         <div className="mt-4 md:mt-0 md:pl-3">
           <div className="flex justify-between items-center">
-            <div className="flex justify-between">
+            <div className="flex justify-between text-orange-200">
               {movie
                 ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
                 : `${
@@ -158,13 +151,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             <h1>There are not quotes</h1>
           ) : (
             movie?.quote?.map((quote: Quote) => {
-              return (
-                <SingleQuote
-                  key={quote.id}
-                  quote={quote}
-                  reFetchMovie={reFetchMovie}
-                />
-              );
+              return <SingleQuote key={quote.id} quote={quote} />;
             })
           )}
         </div>
