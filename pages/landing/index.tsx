@@ -14,6 +14,7 @@ import {
 } from "@/components";
 import { GetServerSidePropsContext } from "next";
 import { useLanding } from "@/hooks";
+import Link from "next/link";
 
 const Landing = () => {
   const {
@@ -111,9 +112,11 @@ const Landing = () => {
         <h2 className="text-orange-200 text-4xl md:text-6xl md:leading-[80px] font-Helvetica  font-bold md:w-[700px] text-center">
           {t("Find any quote")}
         </h2>
-        <button className="px-5 py-2 bg-red-500 text-white rounded-md w-32">
-          {t("Get started")}
-        </button>
+        <Link href={"/landing?modal=register"}>
+          <button className="px-5 py-2 bg-red-500 text-white rounded-md w-32">
+            {t("Get started")}
+          </button>
+        </Link>
       </div>
       <LandingQuote
         quote="“You have to leave somethig behind to go forward”"

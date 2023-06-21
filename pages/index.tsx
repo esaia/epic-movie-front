@@ -5,10 +5,10 @@ import { destroyCookie } from "nookies";
 import { useHome } from "@/hooks";
 
 const Home = () => {
-  const { quotes, hasNextPage, status } = useHome();
+  const { quotes, hasNextPage, status, setSearchQuery } = useHome();
   return (
     <DashboardWrapper>
-      <CreateQuote />
+      <CreateQuote setSearchQuery={setSearchQuery} />
 
       {quotes &&
         quotes.pages.map((item, i) => {
@@ -21,7 +21,11 @@ const Home = () => {
           );
         })}
 
-      {!hasNextPage && (
+      {quotes?.pages[0].totalpages === 0 && (
+        <div className="text-xl text-center py-6">Nothing found</div>
+      )}
+
+      {!hasNextPage && status !== "loading" && (
         <div className="text-xl text-center py-6">No more posts to show</div>
       )}
 
@@ -62,7 +66,6 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   } catch (error: any) {
-    console.log(error);
     if (error?.response?.status === 401) {
       destroyCookie(context, "user-email");
 

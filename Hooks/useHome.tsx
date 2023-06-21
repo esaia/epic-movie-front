@@ -1,19 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { fetchQuotes } from "lib/index";
 
 const useHome = () => {
-  const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    ["fetchQuotes"],
-    {
-      queryFn: fetchQuotes,
-      getNextPageParam: (lastPage, pages) => {
-        const totalPage = lastPage.totalpages;
-        const currentPage = lastPage.currentPage;
-        return currentPage > totalPage ? undefined : currentPage + 1;
-      },
-    }
-  );
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const {
+    data,
+    status,
+    fetchNextPage,
+    hasNextPage,
+    refetch: refetchQuotes,
+  } = useInfiniteQuery(["fetchQuotes"], {
+    queryFn: ({ pageParam = 1 }) => {
+      return fetchQuotes(pageParam, searchQuery);
+    },
+    getNextPageParam: (lastPage, pages) => {
+      const totalPage = lastPage.totalpages;
+      const currentPage = lastPage.currentPage;
+      return currentPage === totalPage ? undefined : currentPage + 1;
+    },
+  });
+
+  useEffect(() => {
+    refetchQuotes();
+  }, [searchQuery]);
 
   const handleScroll = () => {
     if (hasNextPage === false) {
@@ -40,6 +51,7 @@ const useHome = () => {
     quotes: data,
     hasNextPage,
     status,
+    setSearchQuery,
   };
 };
 

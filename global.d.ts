@@ -146,3 +146,7 @@ export interface recoveryPassType {
 export interface forgetPasswordType {
   email: string;
 }
+
+export interface queryType {
+  searchQuery: string;
+}
