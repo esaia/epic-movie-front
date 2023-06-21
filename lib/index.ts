@@ -9,8 +9,13 @@ import {
 import axiosAPI from "./axios";
 import axios from "axios";
 
-export const fetchQuotes = async ({ pageParam = 1 }) => {
-  const { data } = await axiosAPI.get("/quotes?page=" + pageParam);
+export const fetchQuotes = async (
+  pageParam: { pageParam: number },
+  searchQuery?: string
+) => {
+  const { data } = await axiosAPI.get("/quotes", {
+    params: { page: pageParam, searchQuery: searchQuery },
+  });
   return data;
 };
 

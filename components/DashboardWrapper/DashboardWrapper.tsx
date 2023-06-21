@@ -12,7 +12,7 @@ const DashboardWrapper: React.FC<DashboardWrapperProps> = ({ children }) => {
       <div className="pt-16"></div>
 
       <div className="grid md:grid-cols-column2 xl:grid-cols-column3  py-5 px-8  max-w-[1920px] m-auto ">
-        <div className="py-5 hidden md:block min-w-[200px]  ">
+        <div className=" hidden md:block min-w-[200px]  ">
           <Sidebar />
         </div>
 
