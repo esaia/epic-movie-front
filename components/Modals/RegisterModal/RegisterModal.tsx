@@ -100,10 +100,12 @@ const RegisterModal = () => {
         >
           {t("Get started")}
         </button>
-        <div className="px-5 py-2 bg-transparent text-white border border-white rounded-md w-full mt-5 flex justify-center items-center gap-3 cursor-pointer">
-          <AiOutlineGoogle />
-          {t("Sign up with google")}
-        </div>
+        <Link href={`${process.env.NEXT_PUBLIC_BASE_URL_API}/auth/redirect`}>
+          <div className="px-5 py-2 bg-transparent text-white border border-white rounded-md w-full mt-5 flex justify-center items-center gap-3 cursor-pointer">
+            <AiOutlineGoogle />
+            {t("Sign up with google")}
+          </div>
+        </Link>
         <div className="mt-5 flex justify-center items-center gap-2 text-gray-500">
           <p> {t("Already have an account")}</p>
           <Link href={"/landing?modal=login"}>

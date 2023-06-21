@@ -24,6 +24,7 @@ const CreateQuoteModal = () => {
     setErrorMessage,
     errorMessage,
   } = useCreateQuoteModal();
+
   return (
     <FormProvider {...form}>
       <div className="w-full text-center z-40">
@@ -85,7 +86,7 @@ const CreateQuoteModal = () => {
 
                 <p>
                   {movies &&
-                    movies.find((movie) => movie.id === movieId)?.title[
+                    movies?.find((movie) => movie.id === movieId)?.title[
                       `${locale}`
                     ]}
                 </p>

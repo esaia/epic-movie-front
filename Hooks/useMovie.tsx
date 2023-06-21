@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 import { useQuery, useQueryClient } from "react-query";
-import axiosAPI from "lib/axios";
-import { Movie } from "global";
+import { deleteMovieRequest, fetchMovie } from "lib/index";
 
 const useMovie = () => {
   const [editMovieModal, setEditMovieModal] = useState<boolean>(false);
@@ -25,13 +24,8 @@ const useMovie = () => {
     setAddQuote(true);
   };
 
-  const fetchMovie = async (): Promise<Movie> => {
-    const { data } = await axiosAPI.get(`/movies/${query.id}`);
-    return data;
-  };
-
   const { data: movie } = useQuery(["singleMovie", query.id], {
-    queryFn: fetchMovie,
+    queryFn: () => fetchMovie(query.id),
   });
 
   useEffect(() => {
@@ -39,12 +33,8 @@ const useMovie = () => {
   }, [editMovieModal, addQuote]);
 
   const deleteMovie = async () => {
-    try {
-      await axiosAPI.delete(`movies/${query.id}`);
-      push("/movies");
-    } catch (error) {
-      console.error(error);
-    }
+    deleteMovieRequest(query.id);
+    push("/movies");
   };
 
   return {

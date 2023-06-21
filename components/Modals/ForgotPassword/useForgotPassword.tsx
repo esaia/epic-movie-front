@@ -1,13 +1,10 @@
-import axiosAPI from "lib/axios";
+import { forgetPasswordType } from "global";
+import { forgetPassword } from "lib";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-
-interface forgetPasswordType {
-  email: string;
-}
 
 const useForgotPassword = () => {
   const t = useTranslations("Forgot");
@@ -19,19 +16,15 @@ const useForgotPassword = () => {
 
   const router = useRouter();
 
-  const loginUser = (email: forgetPasswordType) => {
-    return axiosAPI.post("/forgot-password", email);
-  };
-
   const { mutate, isLoading } = useMutation({
-    mutationFn: loginUser,
+    mutationFn: (email: string) => forgetPassword(email),
     onSuccess: () => {
       router.push("/landing?modal=forgot-password-check");
     },
     onError: () => seterrorMessage("email not found"),
   });
 
-  const onSubmit: SubmitHandler<forgetPasswordType> = (email) => {
+  const onSubmit = (email: string) => {
     mutate(email);
   };
 

@@ -1,18 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import { AuthContext } from "context/AuthContext";
+import { loginDataType } from "global";
 import Cookies from "js-cookie";
-import axiosAPI from "lib/axios";
+import { addCsrf, loginUser } from "lib";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
-interface loginDataType {
-  email: string;
-  password: string;
-  remember?: boolean;
-}
 interface axiosRes {
   user: User;
 }
@@ -37,10 +33,6 @@ const useLoginModal = () => {
 
   const router = useRouter();
 
-  const loginUser = (user: loginDataType) => {
-    return axiosAPI.post("/login", user);
-  };
-
   const { mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: ({ data }: AxiosResponse<axiosRes>) => {
@@ -55,16 +47,7 @@ const useLoginModal = () => {
   });
 
   const onSubmit: SubmitHandler<loginDataType> = (user) => {
-    const fetch = async () => {
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/sanctum/csrf-cookie`,
-        {
-          headers: { Accept: "application/json" },
-          withCredentials: true,
-        }
-      );
-    };
-    fetch();
+    addCsrf();
 
     return mutate(user);
   };

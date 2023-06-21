@@ -1,13 +1,8 @@
-import axiosAPI from "lib/axios";
 import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
+import { fetchQuotes } from "lib/index";
 
 const useHome = () => {
-  const fetchQuotes = async ({ pageParam = 1 }) => {
-    const { data } = await axiosAPI.get("/quotes?page=" + pageParam);
-    return data;
-  };
-
   const { data, status, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ["fetchQuotes"],
     {

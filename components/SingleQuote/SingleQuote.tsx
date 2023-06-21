@@ -31,16 +31,12 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
           quote={quote}
           setViewQuote={setViewQuote}
           seteditQuote={seteditQuote}
-          deleteQuote={deleteQuote}
+          closeModal={closeModal}
         />
       </DashboaradPortal>
 
       <DashboaradPortal isOpen={editQuote} closeModal={closeModal}>
-        <EditQuote
-          quote={quote}
-          closeModal={closeModal}
-          deleteQuote={deleteQuote}
-        />
+        <EditQuote quote={quote} closeModal={closeModal} />
       </DashboaradPortal>
 
       <div

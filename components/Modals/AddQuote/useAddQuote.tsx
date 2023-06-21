@@ -1,36 +1,27 @@
 import { AuthContext } from "context/AuthContext";
 import { Movie, quoteForm } from "global";
-import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { addQuote } from "lib/index";
 
 const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
-
+  const formData = new FormData();
   const form = useForm<quoteForm>();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = form;
-
-  const formData = new FormData();
   const { locale } = useRouter();
 
-  const addQuote = async () => {
-    return await axiosAPI.post("/quotes", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-  };
   const { mutate } = useMutation({
-    mutationFn: addQuote,
+    mutationFn: (formdata: FormData) => addQuote(formdata),
     onSuccess: () => {
       closeModal();
     },
@@ -44,7 +35,7 @@ const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
     if (user?.id !== undefined) formData.append("user_id", String(user.id));
     formData.append("img", quote.img[0]);
 
-    mutate();
+    mutate(formData);
   };
 
   return {

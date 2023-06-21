@@ -11,27 +11,27 @@ const ViewQuote = ({
   quote,
   setViewQuote,
   seteditQuote,
-  deleteQuote,
+  closeModal,
 }: {
   quote: Quote;
   setViewQuote?: Dispatch<SetStateAction<boolean>>;
   seteditQuote?: Dispatch<SetStateAction<boolean>>;
-  deleteQuote?: () => void;
+  closeModal: () => void;
 }) => {
   const {
     user,
     t,
-    comments,
     handleSubmit,
     register,
     submitForm,
     loadingPostComment,
-  } = useViewQuote(quote);
+    deleteQuote,
+  } = useViewQuote(quote, closeModal);
 
   return (
     <div className="w-full text-center h-screen md:h-fit md:max-h-[90vh] ">
       <div className="absolute left-4 top-4 flex items-center gap-2">
-        {setViewQuote && seteditQuote && deleteQuote && (
+        {setViewQuote && seteditQuote && (
           <>
             <TfiPencil
               className="cursor-pointer"
@@ -75,7 +75,7 @@ const ViewQuote = ({
 
         <div className="flex gap-4 border-b border-gray-700 pb-3 my-3">
           <div className="flex items-center gap-1">
-            <p>{comments?.length}</p>
+            <p>{quote.comment?.length}</p>
             <VscComment className="text-2xl" />
           </div>
           <div className="flex items-center gap-1">
@@ -83,8 +83,8 @@ const ViewQuote = ({
             <AiOutlineHeart className="text-2xl" />
           </div>
         </div>
-        {comments &&
-          comments.map((comment: comment, i: number) => {
+        {quote &&
+          quote.comment?.map((comment: comment, i: number) => {
             return (
               <Comments key={i} user={comment.user} comment={comment.comment} />
             );

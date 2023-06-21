@@ -1,11 +1,11 @@
 import { AuthContext } from "context/AuthContext";
-import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import type { movieTypeForm, Movie } from "global";
 import { useRouter } from "next/router";
+import { getAllgenres, updateMovie } from "lib/index";
 
 const useEditMovieModal = (
   movie: Movie | undefined,
@@ -37,25 +37,12 @@ const useEditMovieModal = (
     formState: { errors },
   } = form;
 
-  const getAllgenres = () => {
-    return axiosAPI.get("/genres");
-  };
-
   const genresQuery = useQuery(["genres"], {
     queryFn: getAllgenres,
   });
 
-  const updateMovie = async (data: movieTypeForm) => {
-    return axiosAPI.post(`/movies/${query.id}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      withCredentials: true,
-    });
-  };
-
   const { mutate } = useMutation({
-    mutationFn: updateMovie,
+    mutationFn: (formData: FormData) => updateMovie(formData, query.id),
     onSuccess: () => {
       closeModal();
     },
@@ -74,7 +61,7 @@ const useEditMovieModal = (
     }
     formData.append("genre", JSON.stringify(movie.genre));
 
-    mutate(movie);
+    mutate(formData);
   };
 
   return {

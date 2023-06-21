@@ -14,7 +14,7 @@ const LanguageSwitcher = () => {
 
   return (
     <div
-      className="hidden md:flex justify-center items-center gap-2 cursor-pointer relative "
+      className="hidden w-10 md:flex justify-center items-center gap-2 cursor-pointer relative "
       onClick={() => setShowLanguageDropDown(true)}
     >
       <p className="text-white"> {locale}</p>

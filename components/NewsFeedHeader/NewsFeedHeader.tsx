@@ -45,7 +45,7 @@ const NewsFeedHeader = () => {
     <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary py-5 px-8 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
       {modalQuote && (
         <DashboaradPortal isOpen={showViewQuoteModal} closeModal={closeModal}>
-          <ViewQuote quote={modalQuote} />
+          <ViewQuote quote={modalQuote} closeModal={closeModal} />
         </DashboaradPortal>
       )}
 

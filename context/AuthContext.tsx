@@ -6,7 +6,6 @@ import {
   useEffect,
 } from "react";
 import { User, AuthContextProps } from "./types";
-import axiosAPI from "lib/axios";
 
 export const AuthContext = createContext<AuthContextProps>({
   user: null,

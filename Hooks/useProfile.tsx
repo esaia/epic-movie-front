@@ -1,9 +1,9 @@
 import { AuthContext } from "context/AuthContext";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
-import axiosAPI from "lib/axios";
 import { profileInputType } from "global";
 import { useTranslations } from "next-intl";
+import { updateUserRequest } from "lib/index";
 
 const useProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -58,16 +58,7 @@ const useProfile = () => {
 
     const update = async () => {
       try {
-        const { data } = await axiosAPI.post(
-          `/updateUser/${user?.id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            withCredentials: true,
-          }
-        );
+        const data = await updateUserRequest(formData, user?.id);
 
         setUser(data);
         localStorage.setItem("user", JSON.stringify(data));
@@ -82,6 +73,7 @@ const useProfile = () => {
         console.error(error);
       }
     };
+
     update();
   };
 

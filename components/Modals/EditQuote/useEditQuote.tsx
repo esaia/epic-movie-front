@@ -1,11 +1,12 @@
 import { AuthContext } from "context/AuthContext";
 import { Quote, quoteForm } from "global";
-import axiosAPI from "lib/axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
+import { editQuote } from "lib/index";
+import { deleteQuoteRequest } from "lib/index";
 
 const useEditQuote = (quote: Quote, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
@@ -27,20 +28,10 @@ const useEditQuote = (quote: Quote, closeModal: () => void) => {
     formState: { errors },
   } = form;
 
-  const editQuote = async () => {
-    const { data } = await axiosAPI.post(`quotes/${quote.id}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return data;
-  };
-
   const { mutate } = useMutation({
-    mutationFn: editQuote,
+    mutationFn: (formData: FormData) => editQuote(formData, quote.id),
     onSuccess: () => {
       queryClient.invalidateQueries(["singleMovie", query.id]);
-
       closeModal();
     },
   });
@@ -57,10 +48,25 @@ const useEditQuote = (quote: Quote, closeModal: () => void) => {
     if (quote.img.length > 0) {
       formData.append("img", quote.img[0]);
     }
-    mutate();
+    mutate(formData);
   };
 
-  return { v, t, user, handleSubmit, register, errors, submitForm };
+  const deleteQuote = () => {
+    deleteQuoteRequest(quote.id);
+    queryClient.invalidateQueries(["singleMovie", query.id]);
+    closeModal();
+  };
+
+  return {
+    v,
+    t,
+    user,
+    handleSubmit,
+    register,
+    errors,
+    submitForm,
+    deleteQuote,
+  };
 };
 
 export default useEditQuote;

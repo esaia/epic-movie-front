@@ -1,9 +1,9 @@
-import axiosAPI from "lib/axios";
+import { recoveryPassType } from "global";
+import { recoverPass } from "lib/index";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { useMutation } from "react-query";
-import { recoveryPassType } from "./types";
 
 const useRecoverPassword = () => {
   const n = useTranslations("NotificationModal");
@@ -18,13 +18,10 @@ const useRecoverPassword = () => {
     name: "password",
   });
 
-  const recoverPass = (data: recoveryPassType) => {
-    return axiosAPI.post("/update-password", { ...data, email, token });
-  };
-
   const { mutate, isLoading } = useMutation({
-    mutationFn: recoverPass,
-    onSuccess: (data) => {
+    mutationFn: (data: recoveryPassType) =>
+      recoverPass({ ...data, email, token }),
+    onSuccess: () => {
       router.push("/landing?modal=password-change-notification");
     },
   });
