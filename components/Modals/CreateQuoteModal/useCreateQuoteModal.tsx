@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { fetchMovies, addQuote } from "lib/index";
-import { AxiosResponse } from "axios";
 
 const useCreateQuoteModal = () => {
   const t = useTranslations("Home");
@@ -25,7 +24,9 @@ const useCreateQuoteModal = () => {
     formState: { errors, isSubmitted },
   } = form;
 
-  const { data: movies } = useQuery<Movie[]>(["movies"], fetchMovies);
+  const { data: movies } = useQuery<Movie[]>(["movies"], {
+    queryFn: () => fetchMovies(),
+  });
 
   const { mutate } = useMutation({
     mutationFn: (formdata: FormData) => addQuote(formdata),
