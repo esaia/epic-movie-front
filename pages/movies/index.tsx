@@ -14,7 +14,16 @@ import { Movie } from "global";
 import axios from "axios";
 
 const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
-  const { createMovieModal, closeModal, movies, t } = useMovies();
+  const {
+    createMovieModal,
+    closeModal,
+    movies,
+    t,
+    onSubmit,
+    register,
+    handleSubmit,
+    isLoading,
+  } = useMovies();
 
   return (
     <MovieWrapper>
@@ -29,10 +38,17 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
           })}
         </p>
         <div className="flex items-center md:gap-6 gap-3">
-          <div className=" justify-center items-center gap-2 text-gray-200 hidden md:flex">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className=" justify-center items-center gap-2 text-gray-200 hidden md:flex"
+          >
             <BiSearch />
-            <p className="text-gray">{t("Search")}</p>
-          </div>
+            <input
+              placeholder={t("Search")}
+              className="text-gray outline-none bg-transparent w-20"
+              {...register("searchQuery")}
+            />
+          </form>
 
           <Link href={"/movies?modal=create-movie"}>
             <div className="bg-red-600 flex justify-center items-center  py-1  md:gap-3 gap-1 min-w-[120px] w-44 ">
@@ -42,6 +58,10 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
           </Link>
         </div>
       </div>
+
+      {movies?.length === 0 && (
+        <div className="text-xl text-center py-6">No movie to show</div>
+      )}
       <div className="grid md:grid-cols-3 gap-6">
         {movies
           ? movies.map((movie) => {
