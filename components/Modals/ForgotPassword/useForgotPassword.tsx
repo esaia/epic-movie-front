@@ -3,7 +3,7 @@ import { forgetPassword } from "lib";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
 const useForgotPassword = () => {
@@ -24,7 +24,7 @@ const useForgotPassword = () => {
     onError: () => seterrorMessage("email not found"),
   });
 
-  const onSubmit = (email: string) => {
+  const onSubmit = ({ email }: { email: string }) => {
     mutate(email);
   };
 
