@@ -19,8 +19,10 @@ export const fetchQuotes = async (
   return data;
 };
 
-export const fetchMovies = async (): Promise<Movie[]> => {
-  const { data } = await axiosAPI.get("/movies");
+export const fetchMovies = async (movieQuery?: string): Promise<Movie[]> => {
+  const { data } = await axiosAPI.get("/movies", {
+    params: { searchQuery: movieQuery },
+  });
   return data;
 };
 
