@@ -72,6 +72,7 @@ const useNewsFeedHeader = () => {
         seenNotification(+id);
       }
       queryClient.invalidateQueries(["fetchNotification"]);
+      queryClient.invalidateQueries(["fetchQuotes"]);
     }
   };
 
@@ -91,11 +92,24 @@ const useNewsFeedHeader = () => {
         }
       );
 
+    echo
+      .channel("likes")
+      .listen(
+        "LikeNotificationEvent",
+        (quoteUserID: { quoteUserId: number }) => {
+          handleCommentEvent(quoteUserID);
+        }
+      );
+
     return () => {
       echo
         .channel("comments")
         .stopListening("CommentNotificationEvent", handleCommentEvent);
+      echo
+        .channel("likes")
+        .stopListening("LikeNotificationEvent", handleCommentEvent);
       echo.leaveChannel("comments");
+      echo.leaveChannel("likes");
     };
   }, []);
 

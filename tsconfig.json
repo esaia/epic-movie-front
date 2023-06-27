@@ -22,9 +22,6 @@
     ],
     "paths": {
       "@/*": ["./*"]
-
-      // "@/components": ["components/index"],
-      // "@/hooks": ["hooks/index"]
     }
   },
   "include": [
