@@ -4,7 +4,12 @@ import { useTranslations } from "next-intl";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteQuoteRequest, postComment } from "lib/index";
+import {
+  deleteLike,
+  deleteQuoteRequest,
+  postComment,
+  postLike,
+} from "lib/index";
 import { useRouter } from "next/router";
 
 const useViewQuote = (quote: Quote, closeModal: () => void) => {
@@ -28,17 +33,44 @@ const useViewQuote = (quote: Quote, closeModal: () => void) => {
 
   const deleteQuote = () => {
     deleteQuoteRequest(quote.id);
-    queryClient.invalidateQueries(["singleMovie", query?.id]);
+    queryClient.invalidateQueries(["singleMovie", query?.id?.toString()]);
     closeModal();
   };
 
   const submitForm = (data: { comment: string }) => {
+    if (!data.comment) return;
     if (user)
       mutate({
         ...data,
         user_id: user?.id?.toString(),
         quote_id: quote.id.toString(),
       });
+  };
+
+  const handleClickLike = async () => {
+    try {
+      const likeAttributes = { user_id: user?.id, quote_id: quote.id };
+      if (!quote.like.some((item) => item.user_id === user?.id)) {
+        await postLike(likeAttributes);
+        queryClient.invalidateQueries(["singleMovie", query?.id]);
+        queryClient.invalidateQueries(["quote", quote?.id]);
+        queryClient.invalidateQueries(["fetchNotification"]);
+        queryClient.invalidateQueries(["fetchQuotes"]);
+      } else {
+        if (user) {
+          const likeID = quote.like.find(
+            (item) => item.user_id === user?.id
+          )?.id;
+          await deleteLike(likeID);
+          queryClient.invalidateQueries(["singleMovie", query?.id]);
+          queryClient.invalidateQueries(["quote", quote?.id.toString()]);
+          queryClient.invalidateQueries(["fetchNotification"]);
+          queryClient.invalidateQueries(["fetchQuotes"]);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return {
@@ -49,6 +81,8 @@ const useViewQuote = (quote: Quote, closeModal: () => void) => {
     submitForm,
     loadingPostComment,
     deleteQuote,
+    handleClickLike,
+    quote,
   };
 };
 

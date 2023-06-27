@@ -21,8 +21,10 @@
       }
     ],
     "paths": {
-      "@/components": ["components/index"],
-      "@/hooks": ["hooks/index"]
+      "@/*": ["./*"]
+
+      // "@/components": ["components/index"],
+      // "@/hooks": ["hooks/index"]
     }
   },
   "include": [

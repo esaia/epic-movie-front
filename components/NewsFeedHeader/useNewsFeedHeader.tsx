@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { AuthContext } from "context/AuthContext";
 import { useQuery, useQueryClient } from "react-query";
-import { Quote } from "global";
 import echo from "lib/pusher";
 import {
   logoutRequest,
@@ -20,8 +19,8 @@ const useNewsFeedHeader = () => {
   const queryClient = useQueryClient();
   const [showNotification, setShowNotification] = useState(false);
   const [showNotificationMobile, setShowNotificationMobile] = useState(false);
+  const [notificationNumber, setNotificationNumber] = useState(-1);
   const [showMobileMenu, setshowMobileMenu] = useState(false);
-  const [modalQuote, setModalQuote] = useState<Quote | null>(null);
   const [showViewQuoteModal, setShowViewQuoteModal] = useState(false);
   const [notificationTotalNumber, setNotificationTotalNumber] = useState(0);
 
@@ -125,16 +124,16 @@ const useNewsFeedHeader = () => {
     setshowMobileMenu,
     asPath,
     notifications,
-    modalQuote,
-    setModalQuote,
-    showViewQuoteModal,
-    setShowViewQuoteModal,
     closeModal,
     seenNotification,
     notificationTotalNumber,
     showNotificationMobile,
     handleClickOutsideNotificationMobile,
     markNotificationAsRead,
+    showViewQuoteModal,
+    setShowViewQuoteModal,
+    notificationNumber,
+    setNotificationNumber,
   };
 };
 

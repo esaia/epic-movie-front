@@ -29,23 +29,26 @@ const NewsFeedHeader = () => {
     asPath,
     setshowMobileMenu,
     notifications,
-    modalQuote,
-    setModalQuote,
-    showViewQuoteModal,
-    setShowViewQuoteModal,
-    closeModal,
     seenNotification,
     notificationTotalNumber,
     showNotificationMobile,
     handleClickOutsideNotificationMobile,
     markNotificationAsRead,
+    showViewQuoteModal,
+    setShowViewQuoteModal,
+    closeModal,
+    notificationNumber,
+    setNotificationNumber,
   } = useNewsFeedHeader();
 
   return (
     <div className=" max-w-[1920px] left-[50%] translate-x-[-50%] h-16 bg-secondary py-5 px-8 flex justify-between items-center w-full  font-Helvetica  fixed top-0 z-[20]">
-      {modalQuote && (
+      {notifications && (
         <DashboaradPortal isOpen={showViewQuoteModal} closeModal={closeModal}>
-          <ViewQuote quote={modalQuote} closeModal={closeModal} />
+          <ViewQuote
+            quote={notifications[notificationNumber]?.quote}
+            closeModal={closeModal}
+          />
         </DashboaradPortal>
       )}
 
@@ -148,15 +151,15 @@ const NewsFeedHeader = () => {
                   {notifications && notifications?.length === 0 ? (
                     <h2>{t("You do not have notifications")} </h2>
                   ) : (
-                    notifications?.map((notification: notification) => {
+                    notifications?.map((notification: notification, i) => {
                       return (
                         <div
                           key={notification.id}
                           onClick={() => {
-                            setModalQuote(notification.quote);
-                            setShowViewQuoteModal(true);
                             handleClickOutside();
                             seenNotification(notification.id);
+                            setShowViewQuoteModal(true);
+                            setNotificationNumber(i);
                           }}
                         >
                           <Notification notification={notification} />
@@ -198,15 +201,15 @@ const NewsFeedHeader = () => {
                 {notifications && notifications.length === 0 ? (
                   <h2>You do not have notifications </h2>
                 ) : (
-                  notifications?.map((notification: notification) => {
+                  notifications?.map((notification: notification, i) => {
                     return (
                       <div
                         key={notification.id}
                         onClick={() => {
-                          setModalQuote(notification.quote);
-                          setShowViewQuoteModal(true);
                           handleClickOutside();
                           seenNotification(notification.id);
+                          setShowViewQuoteModal(true);
+                          setNotificationNumber(i);
                         }}
                       >
                         <Notification notification={notification} />

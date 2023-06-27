@@ -1,5 +1,5 @@
 import { notification } from "global";
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { BsChatQuote } from "react-icons/bs";
 import moment from "moment";
