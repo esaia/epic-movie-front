@@ -45,6 +45,7 @@ export interface Quote {
   created_at: string;
   updated_at: string;
   comment?: comment[];
+  like: likes[];
 }
 
 export interface Movie {
@@ -145,6 +146,11 @@ export interface recoveryPassType {
 
 export interface forgetPasswordType {
   email: string;
+}
+export interface likes {
+  id?: number;
+  user_id: number | undefined;
+  quote_id: number;
 }
 
 export interface queryType {

@@ -26,6 +26,7 @@ const ViewQuote = ({
     submitForm,
     loadingPostComment,
     deleteQuote,
+    handleClickLike,
   } = useViewQuote(quote, closeModal);
 
   return (
@@ -60,27 +61,35 @@ const ViewQuote = ({
       <div className="m-3">
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">Eng</p>
-          <p>“{quote.quote.en}”</p>
+          <p>“{quote?.quote.en}”</p>
         </div>
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">ქარ</p>
-          <p>“{quote.quote.ka}”</p>
+          <p>“{quote?.quote.ka}”</p>
         </div>
 
         <img
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote?.img}`}
           alt="profile"
           className="w-full h-72 rounded-md object-cover "
         />
 
         <div className="flex gap-4 border-b border-gray-700 pb-3 my-3">
           <div className="flex items-center gap-1">
-            <p>{quote.comment?.length}</p>
+            <p>{quote?.comment?.length}</p>
             <VscComment className="text-2xl" />
           </div>
-          <div className="flex items-center gap-1">
-            <p>10</p>
-            <AiOutlineHeart className="text-2xl" />
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={handleClickLike}
+          >
+            <p className="w-4">{quote?.like.length}</p>
+            <AiOutlineHeart
+              className={`text-2xl ${
+                quote?.like.some((item) => item.user_id === user?.id) &&
+                "text-red-600"
+              } `}
+            />
           </div>
         </div>
         {quote &&

@@ -22,7 +22,6 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
     onSubmit,
     register,
     handleSubmit,
-    isLoading,
   } = useMovies();
 
   return (

@@ -6,8 +6,15 @@ import { Quote, comment } from "global";
 import useQuotePost from "./useQuotePost";
 
 const QuotePost = ({ quote }: { quote: Quote }) => {
-  const { locale, register, handleSubmit, submitForm, loadingPostComment } =
-    useQuotePost(quote);
+  const {
+    locale,
+    register,
+    handleSubmit,
+    submitForm,
+    loadingPostComment,
+    handleClickLike,
+    user,
+  } = useQuotePost(quote);
 
   return (
     <div className="mt-5 bg-[#11101a] p-4 rounded-md">
@@ -53,9 +60,18 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
           <p>{quote.comment?.length}</p>
           <VscComment className="text-2xl" />
         </div>
-        <div className="flex items-center gap-1">
-          <p>10</p>
-          <AiOutlineHeart className="text-2xl" />
+
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={handleClickLike}
+        >
+          <p className="w-4">{quote.like.length}</p>
+          <AiOutlineHeart
+            className={`text-2xl ${
+              quote.like.some((item) => item.user_id === user?.id) &&
+              "text-red-600"
+            } `}
+          />
         </div>
       </div>
 

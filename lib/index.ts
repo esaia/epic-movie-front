@@ -1,6 +1,7 @@
 import {
   Movie,
   commentForm,
+  likes,
   loginDataType,
   notification,
   recoveryPassType,
@@ -16,6 +17,11 @@ export const fetchQuotes = async (
   const { data } = await axiosAPI.get("/quotes", {
     params: { page: pageParam, searchQuery: searchQuery },
   });
+  return data;
+};
+
+export const fetchQuote = async (id: string | undefined) => {
+  const { data } = await axiosAPI.get("/quotes/" + id);
   return data;
 };
 
@@ -111,6 +117,16 @@ export const postComment = async (comment: commentForm) => {
   return data;
 };
 
+export const postLike = async (likesData: likes) => {
+  const { data } = await axiosAPI.post("/like", likesData);
+  return data;
+};
+
+export const deleteLike = async (id: number | undefined) => {
+  const { data } = await axiosAPI.delete("/like/" + id);
+  return data;
+};
+
 export const logoutRequest = async () => {
   await axiosAPI.get("/logout");
 };
@@ -145,7 +161,7 @@ export const recoverPass = (data: recoveryPassType) => {
 };
 
 export const forgetPassword = (email: string) => {
-  return axiosAPI.post("/forgot-password", email);
+  return axiosAPI.post("/forgot-password", { email });
 };
 
 export const loginUser = async (user: loginDataType) => {
