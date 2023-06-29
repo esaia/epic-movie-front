@@ -6,7 +6,6 @@ import { useQuote } from "@/context/QuoteContext";
 
 const useHome = () => {
   const { searchQuery, setSearchQuery } = useQuote();
-
   const {
     data,
     status,

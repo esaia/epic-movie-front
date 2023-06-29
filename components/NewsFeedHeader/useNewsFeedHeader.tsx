@@ -35,6 +35,7 @@ const useNewsFeedHeader = () => {
 
   const onSubmit = async (query: queryType) => {
     setSearchQuery(query.searchQuery);
+    router.push("/");
     setshowMobileSearch(false);
   };
 
