@@ -95,7 +95,7 @@ const RegisterModal = () => {
 
         <button
           className={`px-10 md:px-28 py-2  text-white rounded-md w-full mt-5  
-          ${isLoading ? "bg-gray-600" : "bg-red-500"} `}
+          ${isLoading ? "bg-red-300" : "bg-red-500"} `}
           disabled={isLoading}
         >
           {t("Get started")}

@@ -88,7 +88,8 @@
     "Sign in with google": "გაიარეთ ავტორიზაცია გუგლით",
     "Don't have an account": "არ გაქვთ ექაუნთი?",
     "Sign up": "რეგისტრაცია",
-    "Unauthorized": "ასეთი მომხმარებელი არ არსებობს"
+    "Unauthorized": "ასეთი მომხმარებელი არ არსებობს",
+    "verify email": "მეილი არ არის დადასტურებული"
   },
 
   "Register": {

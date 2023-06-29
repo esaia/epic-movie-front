@@ -5,8 +5,16 @@ import useLoginModal from "./useLoginModal";
 import Link from "next/link";
 
 const LoginModal = () => {
-  const { handleSubmit, register, onSubmit, form, errorMessage, t, v } =
-    useLoginModal();
+  const {
+    handleSubmit,
+    register,
+    onSubmit,
+    form,
+    errorMessage,
+    t,
+    v,
+    isLoading,
+  } = useLoginModal();
 
   return (
     <FormProvider {...form}>
@@ -52,7 +60,11 @@ const LoginModal = () => {
             </Link>
           </div>
         </div>
-        <button className="px-5 py-2 bg-red-500 text-white rounded-md w-full mt-5">
+        <button
+          className={`px-5 py-2 text-white rounded-md w-full mt-5  ${
+            isLoading ? "bg-red-300" : "bg-red-500"
+          } `}
+        >
           {t("Sign in")}
         </button>
         <Link href={`${process.env.NEXT_PUBLIC_BASE_URL_API}/auth/redirect`}>

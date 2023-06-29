@@ -88,7 +88,8 @@
     "Sign in with google": "Sign in with google",
     "Don't have an account": "Don't have an account",
     "Sign up": "Sign up",
-    "Unauthorized": "Please check your credentials."
+    "Unauthorized": "Please check your credentials.",
+    "verify email": "user email is not verified"
   },
 
   "Register": {
