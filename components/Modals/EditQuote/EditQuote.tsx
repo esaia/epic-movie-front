@@ -93,7 +93,9 @@ const EditQuote = ({
           </div>
         </div>
 
-        <button className="w-full py-1 bg-red-600 mt-5">Save changes</button>
+        <button className="w-full py-1 bg-red-600 mt-5">
+          {t("save changes")}
+        </button>
       </div>
     </form>
   );

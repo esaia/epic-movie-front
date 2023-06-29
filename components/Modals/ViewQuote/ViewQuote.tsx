@@ -21,6 +21,7 @@ const ViewQuote = ({
   const {
     user,
     t,
+    h,
     handleSubmit,
     register,
     submitForm,
@@ -110,7 +111,7 @@ const ViewQuote = ({
           >
             <input
               type="text"
-              placeholder="Write a comment"
+              placeholder={h("Write a comment")}
               disabled={loadingPostComment}
               {...register("comment")}
               className="w-full px-5 py-2 bg-transparent outline-none  disabled:bg-gray-400 disabled:text-gray-500 rounded-md"

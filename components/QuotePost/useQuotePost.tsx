@@ -5,7 +5,10 @@ import { useMutation, useQueryClient } from "react-query";
 import { Quote, commentForm } from "global";
 import { useForm } from "react-hook-form";
 import { deleteLike, postComment, postLike } from "lib";
+import { useTranslations } from "next-intl";
 const useQuotePost = (quote: Quote) => {
+  const t = useTranslations("Home");
+
   const { locale } = useRouter();
   const { user } = useContext(AuthContext);
   const queryClient = useQueryClient();
@@ -56,6 +59,7 @@ const useQuotePost = (quote: Quote) => {
     loadingPostComment,
     handleClickLike,
     user,
+    t,
   };
 };
 
