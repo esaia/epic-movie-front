@@ -3,9 +3,12 @@ import { useInfiniteQuery } from "react-query";
 import { fetchQuotes, getUser } from "lib/index";
 import Cookies from "js-cookie";
 import { useQuote } from "@/context/QuoteContext";
+import { useTranslations } from "next-intl";
 
 const useHome = () => {
   const { searchQuery, setSearchQuery } = useQuote();
+  const t = useTranslations("Home");
+
   const {
     data,
     status,
@@ -62,6 +65,7 @@ const useHome = () => {
     hasNextPage,
     status,
     setSearchQuery,
+    t,
   };
 };
 

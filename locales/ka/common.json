@@ -5,7 +5,9 @@
     "add quote placeholder": "ჩაწერე @ ფილმების ხოლო # ციტატების მოსაძებნად",
     "write new quote": "დაამატე ახალი ციტატა",
     "Post": "დამატება",
-    "Write a comment": "დააკომენტარე"
+    "Write a comment": "დააკომენტარე",
+    "Nothing found": "არაფერი მოძებნა",
+    "No more posts to show": "მეტი პოსტი აღარ არის"
   },
 
   "Sidebar": {

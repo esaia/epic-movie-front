@@ -5,7 +5,7 @@ import { destroyCookie } from "nookies";
 import { useHome } from "@/hooks";
 
 const Home = () => {
-  const { quotes, hasNextPage, status, setSearchQuery } = useHome();
+  const { t, quotes, hasNextPage, status, setSearchQuery } = useHome();
   return (
     <DashboardWrapper>
       <CreateQuote setSearchQuery={setSearchQuery} />
@@ -22,11 +22,13 @@ const Home = () => {
         })}
 
       {quotes?.pages[0].totalpages === 0 && (
-        <div className="text-xl text-center py-6">Nothing found</div>
+        <div className="text-xl text-center py-6">{t("Nothing found")}</div>
       )}
 
       {!hasNextPage && status !== "loading" && (
-        <div className="text-xl text-center py-6">No more posts to show</div>
+        <div className="text-xl text-center py-6">
+          {t("No more posts to show")}
+        </div>
       )}
 
       {status === "loading" && (

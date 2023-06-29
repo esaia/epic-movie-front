@@ -123,7 +123,7 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
             <VscComment className="text-2xl" />
           </div>
           <div className="flex items-center gap-1">
-            <p>10</p>
+            <p>{quote.like?.length}</p>
             <AiOutlineHeart className="text-2xl" />
           </div>
         </div>

@@ -5,7 +5,9 @@
     "add quote placeholder": "Enter @ to search movies, Enter # to search quotes",
     "write new quote": "write new quote",
     "Post": "Post",
-    "Write a comment": "Write a comment"
+    "Write a comment": "Write a comment",
+    "Nothing found": "Nothing found",
+    "No more posts to show": "No more posts to show"
   },
 
   "Sidebar": {
