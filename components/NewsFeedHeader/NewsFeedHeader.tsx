@@ -114,7 +114,7 @@ const NewsFeedHeader = () => {
         </div>
       )}
 
-      <div className="flex  w-80  justify-end items-center ">
+      <div className="flex  w-80  justify-end items-center md:gap-3">
         <div
           className="relative cursor-pointer"
           onClick={handleToggleNotification}
