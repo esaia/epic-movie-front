@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
-import { fetchQuotes } from "lib/index";
+import { fetchQuotes, getUser } from "lib/index";
+import Cookies from "js-cookie";
+import { useQuote } from "@/context/QuoteContext";
 
 const useHome = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const { searchQuery, setSearchQuery } = useQuote();
 
   const {
     data,
@@ -46,6 +48,15 @@ const useHome = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [hasNextPage]);
+
+  useEffect(() => {
+    const getUserFromDb = async () => {
+      const { data } = await getUser();
+      Cookies.set("user-email", data.user.email, { expires: 600 });
+      localStorage.setItem("user", JSON.stringify(data.user));
+    };
+    getUserFromDb();
+  }, []);
 
   return {
     quotes: data,

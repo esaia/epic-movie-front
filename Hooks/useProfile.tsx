@@ -4,6 +4,7 @@ import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { profileInputType } from "global";
 import { useTranslations } from "next-intl";
 import { updateUserRequest } from "lib/index";
+import { useMutation } from "react-query";
 
 const useProfile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -15,6 +16,7 @@ const useProfile = () => {
   const [showSuccessNotif, setshowSuccessNotif] = useState(false);
 
   const [editUsername, seteditUsername] = useState(false);
+  const [editEmail, seteditEmail] = useState(false);
   const [editPassword, seteditPassword] = useState(false);
   const [errorMsg, seterrorMsg] = useState("");
   const form = useForm<profileInputType>();
@@ -35,6 +37,14 @@ const useProfile = () => {
   const password = useWatch({
     control,
     name: "password",
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: (formdata: FormData) => updateUserRequest(formdata, user?.id),
+    onSuccess: (data) => {
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+    },
   });
 
   const updateUser: SubmitHandler<profileInputType> = (data) => {
@@ -58,11 +68,9 @@ const useProfile = () => {
 
     const update = async () => {
       try {
-        const data = await updateUserRequest(formData, user?.id);
-
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));
+        mutate(formData);
         seteditUsername(false);
+        seteditEmail(false);
         seteditPassword(false);
         setshowSuccessNotif(true);
         setShowConfirmationModal(false);
@@ -80,15 +88,24 @@ const useProfile = () => {
   const resetFields = () => {
     resetField("password");
     resetField("password_confirmation");
+    resetField("email");
     resetField("name");
   };
   const usernameEditFn = () => {
     seteditPassword(false);
+    seteditEmail(false);
     seteditUsername(!editUsername);
+    resetFields();
+  };
+  const emailEditFn = () => {
+    seteditPassword(false);
+    seteditUsername(false);
+    seteditEmail(!editEmail);
     resetFields();
   };
   const passwordEditFn = () => {
     seteditUsername(false);
+    seteditEmail(false);
     seteditPassword(!editPassword);
     resetFields();
   };
@@ -104,8 +121,10 @@ const useProfile = () => {
     password,
     updateUser,
     usernameEditFn,
+    emailEditFn,
     passwordEditFn,
     editUsername,
+    editEmail,
     register,
     editPassword,
     img,

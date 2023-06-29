@@ -13,7 +13,7 @@ import useNewsFeedHeader from "./useNewsFeedHeader";
 import OutsideClickHandler from "react-outside-click-handler";
 import Link from "next/link";
 import { BsCameraReels, BsHouseDoor } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineClose } from "react-icons/ai";
 import { notification } from "global";
 
 const NewsFeedHeader = () => {
@@ -39,6 +39,11 @@ const NewsFeedHeader = () => {
     closeModal,
     notificationNumber,
     setNotificationNumber,
+    showMobileSearch,
+    setshowMobileSearch,
+    handleSubmit,
+    register,
+    onSubmit,
   } = useNewsFeedHeader();
 
   return (
@@ -226,7 +231,36 @@ const NewsFeedHeader = () => {
           <LanguageSwitcher />
         </div>
 
-        <BiSearch className="md:hidden block text-2xl " />
+        <BiSearch
+          className="md:hidden block text-2xl cursor-pointer "
+          onClick={() => setshowMobileSearch(true)}
+        />
+
+        {showMobileSearch && (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="absolute w-full h-screen bg-background top-0 left-0 z-40  md:hidden"
+          >
+            <div className="flex items-center p-3 border-b border-gray-600">
+              <AiOutlineArrowLeft
+                onClick={() => setshowMobileSearch(false)}
+                className="text-2xl cursor-pointer"
+              />
+
+              <input
+                type="text"
+                className="bg-transparent w-full p-2 ring-0 outline-none"
+                placeholder="search..."
+                {...register("searchQuery")}
+              />
+            </div>
+
+            <div className="px-10 py-5 text-gray-400">
+              <h2>Enter @ to search movies</h2>
+              <h2>Enter # to search quotes </h2>
+            </div>
+          </form>
+        )}
 
         <button
           className="px-5 py-2 text-sm bg-transparent text-white rounded-md border border-white md:block hidden w-28"

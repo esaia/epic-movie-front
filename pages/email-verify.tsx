@@ -7,7 +7,12 @@ const Veirfy = () => {
 
   useEffect(() => {
     const verify = async () => {
-      const url = router.query.url + "&signature=" + router.query.signature;
+      const url =
+        router.query.url +
+        "&signature=" +
+        router.query.signature +
+        "&email=" +
+        router.query.email;
 
       try {
         await axios.get(url);

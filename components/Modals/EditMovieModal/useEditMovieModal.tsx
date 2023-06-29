@@ -25,8 +25,8 @@ const useEditMovieModal = (
       date: movie?.date,
       director_en: movie?.director.en,
       director_ka: movie?.director.ka,
-      description_en: movie?.director.en,
-      description_ka: movie?.director.ka,
+      description_en: movie?.description.en,
+      description_ka: movie?.description.ka,
     },
   });
 

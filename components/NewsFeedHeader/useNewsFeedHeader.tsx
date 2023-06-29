@@ -10,6 +10,9 @@ import {
   seenNotificationRequest,
   fetchNotifcations,
 } from "lib/index";
+import { useForm } from "react-hook-form";
+import { queryType } from "@/global";
+import { useQuote } from "@/context/QuoteContext";
 
 const useNewsFeedHeader = () => {
   const router = useRouter();
@@ -21,8 +24,19 @@ const useNewsFeedHeader = () => {
   const [showNotificationMobile, setShowNotificationMobile] = useState(false);
   const [notificationNumber, setNotificationNumber] = useState(-1);
   const [showMobileMenu, setshowMobileMenu] = useState(false);
+  const [showMobileSearch, setshowMobileSearch] = useState(false);
   const [showViewQuoteModal, setShowViewQuoteModal] = useState(false);
   const [notificationTotalNumber, setNotificationTotalNumber] = useState(0);
+
+  const form = useForm<queryType>();
+  const { handleSubmit, register } = form;
+
+  const { setSearchQuery } = useQuote();
+
+  const onSubmit = async (query: queryType) => {
+    setSearchQuery(query.searchQuery);
+    setshowMobileSearch(false);
+  };
 
   const closeModal = () => {
     setShowViewQuoteModal(false);
@@ -66,7 +80,6 @@ const useNewsFeedHeader = () => {
     const ids = notifications
       ?.filter((item) => !item.seen)
       .map((item) => item.id);
-
     if (ids) {
       for (const id of ids) {
         seenNotification(+id);
@@ -148,6 +161,11 @@ const useNewsFeedHeader = () => {
     setShowViewQuoteModal,
     notificationNumber,
     setNotificationNumber,
+    showMobileSearch,
+    setshowMobileSearch,
+    handleSubmit,
+    register,
+    onSubmit,
   };
 };
 
