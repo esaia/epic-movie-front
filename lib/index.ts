@@ -167,3 +167,7 @@ export const forgetPassword = (email: string) => {
 export const loginUser = async (user: loginDataType) => {
   return await axiosAPI.post("/login", user);
 };
+
+export const getUser = async () => {
+  return await axiosAPI.get("/user");
+};

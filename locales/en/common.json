@@ -4,7 +4,8 @@
     "Search by": "Search by",
     "add quote placeholder": "Enter @ to search movies, Enter # to search quotes",
     "write new quote": "write new quote",
-    "Post": "Post"
+    "Post": "Post",
+    "Write a comment": "Write a comment"
   },
 
   "Sidebar": {
@@ -26,7 +27,8 @@
   "Movies": {
     "My list of movies": "My list of movies (Total {number})",
     "Search": "Search",
-    "Add movie": "Add movie"
+    "Add movie": "Add movie",
+    "No movie to show": "No movie to show"
   },
 
   "SingleMovie": {
@@ -38,7 +40,9 @@
     "Edit quote": "Edit quote",
     "Edit": "Edit",
     "Delete": "Delete",
-    "Update Movie": "Update Movie"
+    "Update Movie": "Update Movie",
+    "There are not quotes": "There are not quotes",
+    "save changes": "Save changes"
   },
 
   "Profile": {
@@ -49,12 +53,14 @@
     "Password": "Password",
     "Edit": "Edit",
     "New username": "New username",
+    "New email": "New email",
     "New password": "New password",
     "Confirm new password": "Confirm new password",
     "Passwords should contain": "Passwords should contain:",
     "8 or more characters": "8 or more characters",
     "15 lowercase character": "15 lowercase character",
     "Enter new usarname": "Enter new usarname",
+    "Enter new email": "Enter new email",
     "cancel": "cancel",
     "save changes": "save changes",
     "Are you sure to make changes": "Are you sure to make changes",

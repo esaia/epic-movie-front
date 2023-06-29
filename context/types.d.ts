@@ -13,3 +13,12 @@ export interface AuthContextProps {
   user: User | null;
   setUser: (user: User | null) => void;
 }
+
+export interface quoteContextProps {
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+}
+
+export interface AuthProviderProps {
+  children: ReactNode;
+}

@@ -22,6 +22,8 @@ const Profile = () => {
     password,
     updateUser,
     usernameEditFn,
+    emailEditFn,
+    editEmail,
     passwordEditFn,
     editUsername,
     register,
@@ -84,6 +86,11 @@ const Profile = () => {
                   <p>{t("Email")}</p>
                   <div className="flex justify-between items-center">
                     <p>{user?.email}</p>
+                    {!user?.google_id && (
+                      <button onClick={() => setStatus("EDITEMAIL")}>
+                        {t("Edit")}
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -99,6 +106,58 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {status === "EDITEMAIL" && (
+            <div className="">
+              <form id="updateUserFrom" onSubmit={handleSubmit(updateUser)}>
+                {showConfirmationModal && (
+                  <UpdateUserConfirmation
+                    setShowConfirmationModal={setShowConfirmationModal}
+                  />
+                )}
+
+                <div className="bg-secondary p-10 mt-7">
+                  <div className="flex flex-col gap-2">
+                    <Input
+                      name="email"
+                      label={t("New email")}
+                      placeholder={t("Enter new email")}
+                      registerOptions={{
+                        required: v("This field is required"),
+                        pattern: {
+                          value:
+                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                          message: v("Enter the email in the correct format"),
+                        },
+                      }}
+                    />
+                  </div>
+
+                  <ErrorMessage
+                    errors={errors}
+                    name="name"
+                    render={({ message }) => (
+                      <p className="text-sm mt-2 text-red-500 ml-3">
+                        {message}
+                      </p>
+                    )}
+                  />
+                </div>
+
+                <div className="flex justify-between items-center px-10 py-6">
+                  <div className="cursor-pointer" onClick={() => setStatus("")}>
+                    {t("cancel")}
+                  </div>
+                  <div
+                    onClick={() => setShowConfirmationModal(true)}
+                    className="bg-red-500 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
+                  >
+                    {t("Edit")}
+                  </div>
+                </div>
+              </form>
             </div>
           )}
 
@@ -318,8 +377,35 @@ const Profile = () => {
                 <div className="bg-gray-200 text-black rounded-sm w-full p-2 ">
                   {user?.email}
                 </div>
-                <div className="w-36"></div>
+                <div className="w-36">
+                  {!user?.google_id && (
+                    <button onClick={emailEditFn}>{t("Edit")}</button>
+                  )}
+                </div>
               </div>
+
+              {editEmail && (
+                <>
+                  <form id="updateUserFrom" onSubmit={handleSubmit(updateUser)}>
+                    <div className="mt-2 flex items-center gap-2 ">
+                      <Input
+                        name="email"
+                        label={t("New email")}
+                        placeholder={t("Enter new email")}
+                        registerOptions={{
+                          required: v("This field is required"),
+                          pattern: {
+                            value:
+                              /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                            message: v("Enter the email in the correct format"),
+                          },
+                        }}
+                      />
+                      <div className="w-36"></div>
+                    </div>
+                  </form>
+                </>
+              )}
 
               {!user?.google_id && (
                 <>
@@ -401,7 +487,7 @@ const Profile = () => {
             </div>
           </div>
 
-          {(editUsername || editPassword || img) && (
+          {(editUsername || editEmail || editPassword || img) && (
             <div className="flex w-full items-center justify-end">
               <button
                 onClick={hideInputes}

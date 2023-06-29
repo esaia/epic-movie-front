@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 const useViewQuote = (quote: Quote, closeModal: () => void) => {
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
+  const h = useTranslations("Home");
   const queryClient = useQueryClient();
   const form = useForm<commentForm>();
   const { handleSubmit, register, setValue } = form;
@@ -83,6 +84,7 @@ const useViewQuote = (quote: Quote, closeModal: () => void) => {
     deleteQuote,
     handleClickLike,
     quote,
+    h,
   };
 };
 

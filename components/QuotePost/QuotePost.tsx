@@ -14,6 +14,7 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
     loadingPostComment,
     handleClickLike,
     user,
+    t,
   } = useQuotePost(quote);
 
   return (
@@ -93,7 +94,7 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
         >
           <input
             type="text"
-            placeholder="Write a comment"
+            placeholder={t("Write a comment")}
             disabled={loadingPostComment}
             {...register("comment")}
             className="w-full px-5 py-2 bg-transparent outline-none disabled:bg-gray-400 disabled:text-gray-500 rounded-md"

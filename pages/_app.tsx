@@ -8,7 +8,7 @@ import "../styles/globals.css";
 import { AuthProvider } from "context/AuthContext";
 import { NextIntlProvider } from "next-intl";
 import { useRouter } from "next/router";
-import { NewsFeedHeader } from "components/NewsFeedHeader";
+import { QuoteProvider } from "@/context/QuoteContext";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -27,14 +27,16 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <NextIntlProvider messages={pageProps.messages}>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Head>
-            <title>Epic movie</title>
-            <meta name="referrer" content="no-referrer" />
-          </Head>
-          <div className={locale === "ka" ? "font-Helvetica" : ""}>
-            <Component {...pageProps} />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </div>
+          <QuoteProvider>
+            <Head>
+              <title>Epic movie</title>
+              <meta name="referrer" content="no-referrer" />
+            </Head>
+            <div className={locale === "ka" ? "font-Helvetica" : ""}>
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </div>
+          </QuoteProvider>
         </AuthProvider>
       </QueryClientProvider>
     </NextIntlProvider>

@@ -117,6 +117,7 @@ export interface profileInputType {
   name: string;
   password: string;
   password_confirmation: string;
+  email: string;
   img: string;
 }
 
