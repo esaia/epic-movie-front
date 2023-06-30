@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { AuthContext } from "context/AuthContext";
 import { loginDataType } from "global";
 import Cookies from "js-cookie";
@@ -33,7 +33,7 @@ const useLoginModal = () => {
 
   const router = useRouter();
 
-  const { mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: loginUser,
     onSuccess: ({ data }: AxiosResponse<axiosRes>) => {
       Cookies.set("user-email", data.user.email, { expires: 600 });
@@ -41,8 +41,14 @@ const useLoginModal = () => {
       localStorage.setItem("user", JSON.stringify(data.user));
       router.push("/");
     },
-    onError: () => {
-      setErrorMessage(t("Unauthorized"));
+    onError: (err: AxiosError) => {
+      if (err.response?.data.message === "Email or password is incorrect") {
+        setErrorMessage(t("Unauthorized"));
+      } else if (err.response?.data.message === "user email is not verified") {
+        setErrorMessage(t("verify email"));
+      } else {
+        setErrorMessage("somthing went wrong");
+      }
     },
   });
 
@@ -59,6 +65,7 @@ const useLoginModal = () => {
     form,
     control,
     errorMessage,
+    isLoading,
     t,
     v,
   };

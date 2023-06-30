@@ -43,14 +43,14 @@ const EditQuote = ({
       </div>
       <div className="m-5">
         <div
-          className={`relative w-full  border rounded-md ${
+          className={`relative flex w-full  border rounded-md ${
             errors.quote_en ? "border-red-600" : "border-gray-600"
           }`}
         >
           <p className="absolute right-2 top-1 text-gray-400">eng</p>
 
           <textarea
-            className="w-full outline-none bg-transparent placeholder:italic p-2 "
+            className="w-11/12  outline-none bg-transparent placeholder:italic p-2  "
             placeholder="quote..."
             {...register("quote_en", {
               required: v("This field is required"),
@@ -60,11 +60,11 @@ const EditQuote = ({
       </div>
 
       <div className="m-5">
-        <div className="relative w-full  border border-gray-600 rounded-md">
+        <div className="relative w-full flex  border border-gray-600 rounded-md">
           <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
           <textarea
-            className="w-full outline-none bg-transparent placeholder:italic p-2 "
+            className="w-11/12 outline-none bg-transparent placeholder:italic p-2 "
             placeholder="ციტატა..."
             {...register("quote_ka", {
               required: v("This field is required"),

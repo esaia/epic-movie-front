@@ -21,7 +21,7 @@ const DashboaradPortal = ({ children, isOpen, closeModal }: PortalProps) => {
           <div className="fixed top-0 w-full h-full backdrop-blur-[2px]  "></div>
 
           <div
-            className="md:max-w-xl w-full md:h-fit h-screen bg-[#11101a] text-white  relative  rounded-md  overflow-y-auto  "
+            className="md:max-w-2xl w-full md:h-fit h-screen bg-[#11101a] text-white  relative  rounded-md  overflow-y-auto  "
             onClick={(e) => e.stopPropagation()}
           >
             <div

@@ -54,7 +54,13 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
           <div className="hidden md:block ">
             <div className="flex gap-3  items-center py-6 ">
-              <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
+              {!movie ? (
+                <p>
+                  {t("Quotes total", { number: initialMovie?.quote?.length })}
+                </p>
+              ) : (
+                <p>{t("Quotes total", { number: movie?.quote?.length })}</p>
+              )}
 
               <span>|</span>
               <div
@@ -67,7 +73,15 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
               </div>
             </div>
 
-            {movie?.quote?.length === 0 ? (
+            {!movie ? (
+              initialMovie?.quote?.length === 0 ? (
+                <h1>{t("There are not quotes")}</h1>
+              ) : (
+                initialMovie?.quote?.map((quote: Quote) => {
+                  return <SingleQuote key={quote.id} quote={quote} />;
+                })
+              )
+            ) : movie?.quote?.length === 0 ? (
               <h1>{t("There are not quotes")}</h1>
             ) : (
               movie?.quote?.map((quote: Quote) => {
@@ -148,7 +162,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             </div>
           </div>
           {movie?.quote?.length === 0 ? (
-            <h1>There are not quotes</h1>
+            <h1>{t("There are not quotes")}</h1>
           ) : (
             movie?.quote?.map((quote: Quote) => {
               return <SingleQuote key={quote.id} quote={quote} />;

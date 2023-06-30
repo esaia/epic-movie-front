@@ -12,7 +12,7 @@ const useGoogleAuth = () => {
     const asPath = { path: router.asPath.slice(21).toString() };
 
     axiosAPI
-      .get("/auth/callback?" + asPath.path)
+      .get("/auth/callback" + asPath.path)
       .then(({ data }) => {
         Cookies.set("user-email", data.user.email, { expires: 120 });
         setUser(data.user);

@@ -113,7 +113,11 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
             className="rounded-sm object-cover w-full h-full "
           />
         </div>
-        <p className="w-full">{quote.quote[`${locale}`]}</p>
+        <p className="w-full text-gray-300 italic mr-5">{`"${
+          quote.quote[`${locale}`].length < 170
+            ? quote.quote[`${locale}`]
+            : quote.quote[`${locale}`].substring(0, 170) + "..."
+        }"`}</p>
       </div>
 
       <div className="flex justify-between  mt-2">
@@ -123,7 +127,7 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
             <VscComment className="text-2xl" />
           </div>
           <div className="flex items-center gap-1">
-            <p>10</p>
+            <p>{quote.like?.length}</p>
             <AiOutlineHeart className="text-2xl" />
           </div>
         </div>

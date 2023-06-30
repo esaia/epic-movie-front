@@ -66,10 +66,10 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
           className="flex items-center cursor-pointer"
           onClick={handleClickLike}
         >
-          <p className="w-4">{quote.like.length}</p>
+          <p className="w-4">{quote.like?.length}</p>
           <AiOutlineHeart
             className={`text-2xl ${
-              quote.like.some((item) => item.user_id === user?.id) &&
+              quote.like?.some((item) => item.user_id === user?.id) &&
               "text-red-600"
             } `}
           />

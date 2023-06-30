@@ -111,6 +111,7 @@ const useProfile = () => {
   };
   const hideInputes = () => {
     seteditUsername(false);
+    seteditEmail(false);
     seteditPassword(false);
   };
 

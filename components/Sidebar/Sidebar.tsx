@@ -7,7 +7,7 @@ const Sidebar = () => {
   const { router, user, t } = useSidebar();
 
   return (
-    <div>
+    <div className="fixed">
       <div className="flex items-center gap-5">
         <ProfilePic size="12" />
 
