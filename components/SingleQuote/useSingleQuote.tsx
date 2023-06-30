@@ -25,8 +25,9 @@ const useSingleQuote = (quote: Quote) => {
     seteditQuote(false);
   };
 
-  const deleteQuote = () => {
-    deleteQuoteRequest(quote.id);
+  const deleteQuote = async () => {
+    await deleteQuoteRequest(quote.id);
+
     queryClient.invalidateQueries(["singleMovie", query.id]);
   };
 

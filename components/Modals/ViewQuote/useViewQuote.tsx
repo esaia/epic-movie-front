@@ -32,8 +32,8 @@ const useViewQuote = (quote: Quote, closeModal: () => void) => {
     },
   });
 
-  const deleteQuote = () => {
-    deleteQuoteRequest(quote.id);
+  const deleteQuote = async () => {
+    await deleteQuoteRequest(quote.id);
     queryClient.invalidateQueries(["singleMovie", query?.id?.toString()]);
     closeModal();
   };

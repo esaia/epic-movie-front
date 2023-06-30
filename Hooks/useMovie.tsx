@@ -33,7 +33,8 @@ const useMovie = () => {
   }, [editMovieModal, addQuote]);
 
   const deleteMovie = async () => {
-    deleteMovieRequest(query.id);
+    await deleteMovieRequest(query.id);
+    queryClient.invalidateQueries(["singleMovie", query.id]);
     push("/movies");
   };
 

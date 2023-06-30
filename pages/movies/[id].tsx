@@ -73,15 +73,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
               </div>
             </div>
 
-            {!movie ? (
-              initialMovie?.quote?.length === 0 ? (
-                <h1>{t("There are not quotes")}</h1>
-              ) : (
-                initialMovie?.quote?.map((quote: Quote) => {
-                  return <SingleQuote key={quote.id} quote={quote} />;
-                })
-              )
-            ) : movie?.quote?.length === 0 ? (
+            {movie?.quote?.length === 0 ? (
               <h1>{t("There are not quotes")}</h1>
             ) : (
               movie?.quote?.map((quote: Quote) => {
@@ -161,13 +153,9 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
               <button>{t("Add quote")}</button>
             </div>
           </div>
-          {movie?.quote?.length === 0 ? (
-            <h1>{t("There are not quotes")}</h1>
-          ) : (
-            movie?.quote?.map((quote: Quote) => {
-              return <SingleQuote key={quote.id} quote={quote} />;
-            })
-          )}
+          {movie?.quote?.map((quote: Quote) => {
+            return <SingleQuote key={quote.id} quote={quote} />;
+          })}
         </div>
       </div>
     </MovieWrapper>

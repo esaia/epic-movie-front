@@ -20,7 +20,7 @@ const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
   } = form;
   const { locale } = useRouter();
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (formdata: FormData) => addQuote(formdata),
     onSuccess: () => {
       closeModal();
@@ -48,6 +48,7 @@ const useAddQuote = (movie: Movie | undefined, closeModal: () => void) => {
     handleSubmit,
     onSubmit,
     form,
+    isLoading,
   };
 };
 
