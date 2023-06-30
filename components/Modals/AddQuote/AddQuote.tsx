@@ -10,8 +10,18 @@ const AddQuote = ({
   movie: Movie | undefined;
   closeModal: () => void;
 }) => {
-  const { user, locale, t, v, register, errors, handleSubmit, onSubmit, form } =
-    useAddQuote(movie, closeModal);
+  const {
+    user,
+    locale,
+    t,
+    v,
+    register,
+    errors,
+    handleSubmit,
+    onSubmit,
+    form,
+    isLoading,
+  } = useAddQuote(movie, closeModal);
 
   return (
     <FormProvider {...form}>
@@ -101,7 +111,13 @@ const AddQuote = ({
 
           <UploadImage />
 
-          <button type="submit" className="w-full py-1 bg-red-600 mt-3">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full py-1 mt-3 ${
+              isLoading ? "bg-red-300" : "bg-red-600"
+            }`}
+          >
             {t("Add quote")}
           </button>
         </form>

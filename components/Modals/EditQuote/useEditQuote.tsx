@@ -51,8 +51,8 @@ const useEditQuote = (quote: Quote, closeModal: () => void) => {
     mutate(formData);
   };
 
-  const deleteQuote = () => {
-    deleteQuoteRequest(quote.id);
+  const deleteQuote = async () => {
+    await deleteQuoteRequest(quote.id);
     queryClient.invalidateQueries(["singleMovie", query.id]);
     closeModal();
   };

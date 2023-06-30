@@ -135,7 +135,7 @@ const Landing = () => {
       />
 
       <div className="w-full bg-background p-3 ">
-        <p className="text-orange-300 pl-5">
+        <p className="text-orange-200 pl-5">
           {" "}
           © 2022 movie quotes. All rights reserved.
         </p>
