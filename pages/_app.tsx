@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
 import { AuthProvider } from "context/AuthContext";
 import { NextIntlProvider } from "next-intl";
@@ -34,7 +33,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             </Head>
             <div className={locale === "ka" ? "font-Helvetica" : ""}>
               <Component {...pageProps} />
-              <ReactQueryDevtools initialIsOpen={false} />
             </div>
           </QuoteProvider>
         </AuthProvider>
