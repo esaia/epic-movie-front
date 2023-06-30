@@ -42,7 +42,6 @@ const useLoginModal = () => {
       router.push("/");
     },
     onError: (err: AxiosError) => {
-      console.log(err.response?.data.message);
       if (err.response?.data.message === "Email or password is incorrect") {
         setErrorMessage(t("Unauthorized"));
       } else if (err.response?.data.message === "user email is not verified") {
