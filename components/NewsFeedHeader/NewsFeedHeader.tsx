@@ -114,7 +114,7 @@ const NewsFeedHeader = () => {
         </div>
       )}
 
-      <div className="flex  w-80  justify-end items-center md:gap-3">
+      <div className="flex   justify-between items-center  ">
         <div
           className="relative cursor-pointer"
           onClick={handleToggleNotification}
@@ -138,7 +138,7 @@ const NewsFeedHeader = () => {
                 }}
                 className=" hidden md:block  max-w-xl w-[800px] select-none min-h-fit absolute top-10 right-[-150px] bg-black rounded-md p-3 "
               >
-                <RiArrowUpSFill className="absolute top-[-.8rem] right-[9.5rem] text-black text-2xl " />
+                <RiArrowUpSFill className="absolute top-[-.8rem] right-[9.6rem] text-black text-2xl " />
 
                 <div className="mb-5 ">
                   <div className="flex justify-between items-center">
@@ -189,7 +189,7 @@ const NewsFeedHeader = () => {
               }}
               className="absolute  top-16 left-0 min-h-fit w-full select-none  bg-black p-4   md:hidden"
             >
-              <RiArrowUpSFill className=" absolute top-[-1rem] right-[4.5rem] text-black text-3xl " />
+              <RiArrowUpSFill className=" absolute top-[-1rem] right-[5rem] text-black text-3xl " />
               <div className=" mb-5 ">
                 <div className="flex justify-between items-center  ">
                   <p className="text-xl">{t("notifications")}</p>
@@ -227,7 +227,7 @@ const NewsFeedHeader = () => {
           </OutsideClickHandler>
         )}
 
-        <div className="px-2">
+        <div className=" px-3 md:px-7">
           <LanguageSwitcher />
         </div>
 
