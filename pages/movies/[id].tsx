@@ -1,6 +1,7 @@
 import {
   AddQuote,
   DashboaradPortal,
+  DeleteConfirmation,
   EditMovieModal,
   MovieWrapper,
   SingleQuote,
@@ -25,7 +26,10 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
     showAddQuotes,
     movie,
     deleteMovie,
+    deleteMovieFromDB,
+    deleteConfirmation,
   } = useMovie();
+
   return (
     <MovieWrapper>
       <DashboaradPortal isOpen={editMovieModal} closeModal={closeModal}>
@@ -33,6 +37,13 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
       </DashboaradPortal>
       <DashboaradPortal isOpen={addQuote} closeModal={closeModal}>
         <AddQuote movie={movie} closeModal={closeModal} />
+      </DashboaradPortal>
+
+      <DashboaradPortal isOpen={deleteConfirmation} closeModal={closeModal}>
+        <DeleteConfirmation
+          closeModal={closeModal}
+          deleteFromDB={deleteMovieFromDB}
+        />
       </DashboaradPortal>
 
       <h1 className="text-xl">{t("Movie discription")}</h1>

@@ -14,6 +14,7 @@ const useSingleQuote = (quote: Quote) => {
   const [showDetailsMobile, setshowDetailsMobile] = useState(false);
   const [viewQuote, setViewQuote] = useState<boolean>(false);
   const [editQuote, seteditQuote] = useState<boolean>(false);
+  const [deleteConfirmation, setdeleteConfirmation] = useState<boolean>(false);
 
   const closeShowDetails = () => {
     setshowDetails(false);
@@ -23,9 +24,14 @@ const useSingleQuote = (quote: Quote) => {
   const closeModal = () => {
     setViewQuote(false);
     seteditQuote(false);
+    setdeleteConfirmation(false);
   };
 
   const deleteQuote = async () => {
+    setdeleteConfirmation(true);
+  };
+
+  const deleteQuoteFromDb = async () => {
     await deleteQuoteRequest(quote.id);
 
     queryClient.invalidateQueries(["singleMovie", query.id]);
@@ -44,6 +50,8 @@ const useSingleQuote = (quote: Quote) => {
     setViewQuote,
     seteditQuote,
     deleteQuote,
+    deleteConfirmation,
+    deleteQuoteFromDb,
     t,
   };
 };

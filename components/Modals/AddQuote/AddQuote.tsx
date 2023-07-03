@@ -58,14 +58,14 @@ const AddQuote = ({
               </h2>
 
               <div className="flex gap-2">
-                {movie?.genre.map((genre: Genre) => {
+                {movie?.genres?.map((genre: Genre) => {
                   return (
-                    <p
-                      className="px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
+                    <h4
+                      className=" px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
                       key={genre.value}
                     >
-                      {genre.label}
-                    </p>
+                      {genre.label[`${locale}`]}
+                    </h4>
                   );
                 })}
               </div>

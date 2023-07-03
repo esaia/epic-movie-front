@@ -7,6 +7,7 @@ import { deleteMovieRequest, fetchMovie } from "lib/index";
 const useMovie = () => {
   const [editMovieModal, setEditMovieModal] = useState<boolean>(false);
   const [addQuote, setAddQuote] = useState<boolean>(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const t = useTranslations("SingleMovie");
   const queryClient = useQueryClient();
   const { locale, query, push } = useRouter();
@@ -14,6 +15,7 @@ const useMovie = () => {
   const closeModal = () => {
     setAddQuote(false);
     setEditMovieModal(false);
+    setDeleteConfirmation(false);
   };
 
   const showEditMovie = () => {
@@ -32,7 +34,11 @@ const useMovie = () => {
     queryClient.invalidateQueries(["singleMovie", query.id]);
   }, [editMovieModal, addQuote]);
 
-  const deleteMovie = async () => {
+  const deleteMovie = () => {
+    setDeleteConfirmation(true);
+  };
+
+  const deleteMovieFromDB = async () => {
     await deleteMovieRequest(query.id);
     queryClient.invalidateQueries(["singleMovie", query.id]);
     push("/movies");
@@ -48,6 +54,8 @@ const useMovie = () => {
     showAddQuotes,
     movie,
     deleteMovie,
+    deleteMovieFromDB,
+    deleteConfirmation,
   };
 };
 

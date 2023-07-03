@@ -4,7 +4,7 @@ import { MouseEventHandler, useState } from "react";
 const useLanguageSwitcher = () => {
   const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
   const router = useRouter();
-  const { push, locale, locales, asPath } = router;
+  const { push, locale, locales, asPath, reload } = router;
 
   const handleClickOutside = () => {
     setShowLanguageDropDown(false);
@@ -16,6 +16,7 @@ const useLanguageSwitcher = () => {
       locale: locales?.find((localee) => localee !== locale),
     });
     setShowLanguageDropDown(false);
+    reload();
   };
 
   return {

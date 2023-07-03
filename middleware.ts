@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest): Promise<NextResponseType> {
   const hasCookie = req.cookies.has("user-email");
 
   if (!hasCookie) {
-    const signinUrl = new URL("/landing?modal=login", req.url);
+    const signinUrl = new URL("/landing", req.url);
     return NextResponse.redirect(signinUrl);
   }
 

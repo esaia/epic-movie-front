@@ -3,25 +3,18 @@ import { BsTrash3 } from "react-icons/bs";
 import useEditQuote from "./useEditQuote";
 import { ErrorText, ProfilePic } from "@/components";
 import { AiOutlineCamera } from "react-icons/ai";
-import { ErrorMessage } from "@hookform/error-message";
 
 const EditQuote = ({
   quote,
   closeModal,
+  deleteQuote,
 }: {
   quote: Quote;
   closeModal: () => void;
+  deleteQuote: () => void;
 }) => {
-  const {
-    v,
-    t,
-    user,
-    handleSubmit,
-    register,
-    errors,
-    submitForm,
-    deleteQuote,
-  } = useEditQuote(quote, closeModal);
+  const { v, t, user, handleSubmit, register, errors, submitForm } =
+    useEditQuote(quote, closeModal);
 
   return (
     <form
