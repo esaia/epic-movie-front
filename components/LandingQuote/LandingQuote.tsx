@@ -5,7 +5,7 @@ import { propsType } from "./types";
 const LandingMovie = ({ quote, movie, image }: propsType) => {
   return (
     <div
-      className={`md:h-screen h-[50vh] bg-gray-200  bg-center bg-cover bg-no-repeat snap-y  md:bg-fixed relative   z-30 ${image}`}
+      className={`md:h-screen h-[50vh] bg-gray-200  bg-center bg-cover bg-no-repeat snap-y  md:bg-fixed relative  z-30 ${image}`}
     >
       <div className="gradient w-full h-full  z-40  "></div>
       <div className="w-fit  md:pl-20 left-0 absolute top-[50%] translate-y-[-50%] md:top-[30%] px-4 m-4 ">

@@ -51,6 +51,10 @@ const CreateQuoteModal = () => {
                 placeholder="quote..."
                 {...register("quote_en", {
                   required: v("This field is required"),
+                  pattern: {
+                    value: /^[A-Za-z0-9\s]+$/,
+                    message: v("only English"),
+                  },
                 })}
               ></textarea>
             </div>
@@ -67,6 +71,10 @@ const CreateQuoteModal = () => {
                 placeholder="ციტატა..."
                 {...register("quote_ka", {
                   required: v("This field is required"),
+                  pattern: {
+                    value: /^[ა-ჰ0-9\s]+$/,
+                    message: v("only Georgia"),
+                  },
                 })}
               ></textarea>
             </div>

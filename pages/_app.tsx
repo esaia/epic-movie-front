@@ -30,6 +30,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             <Head>
               <title>Epic movie</title>
               <meta name="referrer" content="no-referrer" />
+              <link rel="icon" href="/static/favicon.ico" sizes="any" />
             </Head>
             <div className={locale === "ka" ? "font-Helvetica" : ""}>
               <Component {...pageProps} />

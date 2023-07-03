@@ -62,7 +62,7 @@ const LoginModal = () => {
         </div>
         <button
           className={`px-5 py-2 text-white rounded-md w-full mt-5  ${
-            isLoading ? "bg-red-300" : "bg-red-500"
+            isLoading ? "bg-red-300" : "bg-red-600"
           } `}
         >
           {t("Sign in")}

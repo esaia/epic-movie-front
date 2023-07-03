@@ -14,14 +14,16 @@ const useEditMovieModal = (
   const { user } = useContext(AuthContext);
   const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
-  const { query } = useRouter();
+  const { query, locale } = useRouter();
   const formData = new FormData();
 
   const form = useForm<movieTypeForm>({
     defaultValues: {
       title_en: movie?.title.en,
       title_ka: movie?.title.ka,
-      genre: movie?.genre,
+      genre: movie?.genres.map((item) => {
+        return { ...item, label: item.label[`${locale}`], pivot: "" };
+      }),
       date: movie?.date,
       director_en: movie?.director.en,
       director_ka: movie?.director.ka,
@@ -37,7 +39,7 @@ const useEditMovieModal = (
     formState: { errors },
   } = form;
 
-  const genresQuery = useQuery(["genres"], {
+  const { data: genres } = useQuery(["genres"], {
     queryFn: getAllgenres,
   });
 
@@ -59,7 +61,11 @@ const useEditMovieModal = (
     if (movie.img.length !== 0) {
       formData.append("img", movie.img[0]);
     }
-    formData.append("genre", JSON.stringify(movie.genre));
+
+    const genresId = movie.genre.map((item) => {
+      return item.id;
+    });
+    formData.append("genre", JSON.stringify(genresId));
 
     mutate(formData);
   };
@@ -74,7 +80,8 @@ const useEditMovieModal = (
     v,
     t,
     control,
-    genres: genresQuery.data,
+    genres,
+    locale,
   };
 };
 

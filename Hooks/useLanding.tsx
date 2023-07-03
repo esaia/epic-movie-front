@@ -6,6 +6,7 @@ const useLanding = () => {
   const router = useRouter();
   const t = useTranslations("Header");
   const n = useTranslations("NotificationModal");
+  const l = useTranslations("landing");
 
   const [loginModal, setloginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
@@ -56,6 +57,7 @@ const useLanding = () => {
     linkExpired,
     t,
     n,
+    l,
   };
 };
 

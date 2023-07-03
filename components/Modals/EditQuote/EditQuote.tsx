@@ -1,8 +1,9 @@
 import { Quote } from "global";
 import { BsTrash3 } from "react-icons/bs";
 import useEditQuote from "./useEditQuote";
-import { ProfilePic } from "@/components";
+import { ErrorText, ProfilePic } from "@/components";
 import { AiOutlineCamera } from "react-icons/ai";
+import { ErrorMessage } from "@hookform/error-message";
 
 const EditQuote = ({
   quote,
@@ -54,13 +55,24 @@ const EditQuote = ({
             placeholder="quote..."
             {...register("quote_en", {
               required: v("This field is required"),
+              pattern: {
+                value: /^[A-Za-z0-9\s]+$/,
+                message: v("only English"),
+              },
             })}
           ></textarea>
+        </div>
+        <div className="pt-2">
+          <ErrorText name="quote_en" errors={errors} />
         </div>
       </div>
 
       <div className="m-5">
-        <div className="relative w-full flex  border border-gray-600 rounded-md">
+        <div
+          className={`relative flex w-full  border rounded-md ${
+            errors.quote_ka ? "border-red-600" : "border-gray-600"
+          }`}
+        >
           <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
           <textarea
@@ -68,8 +80,15 @@ const EditQuote = ({
             placeholder="ციტატა..."
             {...register("quote_ka", {
               required: v("This field is required"),
+              pattern: {
+                value: /^[ა-ჰ0-9\s]+$/,
+                message: v("only Georgia"),
+              },
             })}
           ></textarea>
+        </div>
+        <div className="pt-2">
+          <ErrorText name="quote_ka" errors={errors} />
         </div>
 
         <div className="relative w-full h-72">

@@ -27,6 +27,7 @@ const EditMovieModal = ({
     t,
     control,
     genres,
+    locale,
   } = useEditMovieModal(movie, closeModal);
 
   return (
@@ -53,6 +54,10 @@ const EditMovieModal = ({
               placeholder="Movie name"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[A-Za-z0-9\s]+$/,
+                  message: v("only English"),
+                },
               }}
               prefix="Movie name"
             />
@@ -62,6 +67,10 @@ const EditMovieModal = ({
               placeholder="ფილმის სახელი"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[ა-ჰ0-9\s]+$/,
+                  message: v("only Georgia"),
+                },
               }}
               prefix="ფილმის სახელი"
             />
@@ -78,7 +87,11 @@ const EditMovieModal = ({
                   <Select
                     {...field}
                     isMulti
-                    options={genres?.data}
+                    options={genres?.data.map(
+                      (item: { label: { [locale: string]: string } }) => {
+                        return { ...item, label: item?.label[`${locale}`] };
+                      }
+                    )}
                     className="my-react-select-container"
                     classNamePrefix="my-react-select"
                   />
@@ -109,6 +122,10 @@ const EditMovieModal = ({
               placeholder="Director"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[A-Za-z0-9\s]+$/,
+                  message: v("only English"),
+                },
               }}
               prefix="Director"
             />
@@ -118,6 +135,10 @@ const EditMovieModal = ({
               placeholder="რეჟისორი"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[ა-ჰ0-9\s]+$/,
+                  message: v("only Georgia"),
+                },
               }}
               prefix="რეჟისორი"
             />
@@ -135,6 +156,11 @@ const EditMovieModal = ({
                 placeholder="Movie discription"
                 {...register("description_en", {
                   required: v("This field is required"),
+
+                  pattern: {
+                    value: /^[A-Za-z0-9\s]+$/,
+                    message: v("only English"),
+                  },
                 })}
               ></textarea>
             </div>
@@ -156,6 +182,10 @@ const EditMovieModal = ({
                 placeholder="ფილმის აღწერა"
                 {...register("description_ka", {
                   required: v("This field is required"),
+                  pattern: {
+                    value: /^[ა-ჰ0-9\s]+$/,
+                    message: v("only Georgia"),
+                  },
                 })}
               ></textarea>
             </div>

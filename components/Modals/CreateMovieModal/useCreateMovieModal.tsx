@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
-import { movieTypeForm } from "./types";
 import { useContext } from "react";
 import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 import { getAllgenres, addMovie } from "lib/index";
+import { movieTypeForm } from "@/global";
 
 const useCreateMovieModal = () => {
   const { user } = useContext(AuthContext);
@@ -14,7 +14,7 @@ const useCreateMovieModal = () => {
   const v = useTranslations("Validations");
 
   const formData = new FormData();
-  const { push, pathname } = useRouter();
+  const { push, pathname, locale } = useRouter();
   const form = useForm<movieTypeForm>();
   const {
     handleSubmit,
@@ -46,7 +46,10 @@ const useCreateMovieModal = () => {
       formData.append("user_id", String(user.id));
     }
     formData.append("img", movie.img[0]);
-    formData.append("genre", JSON.stringify(movie.genre));
+    const genresId = movie.genre.map((item) => {
+      return item.id;
+    });
+    formData.append("genre", JSON.stringify(genresId));
 
     return mutate(formData);
   };
@@ -60,6 +63,7 @@ const useCreateMovieModal = () => {
     errors,
     control,
     onSubmit,
+    locale,
     t,
     v,
   };

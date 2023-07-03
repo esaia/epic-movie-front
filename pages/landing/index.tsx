@@ -31,6 +31,7 @@ const Landing = () => {
     closeModal,
     t,
     n,
+    l,
   } = useLanding();
   return (
     <div className="bg-gray-950 max-h-screen  overflow-y-scroll   ">
@@ -119,26 +120,27 @@ const Landing = () => {
         </Link>
       </div>
       <LandingQuote
-        quote="“You have to leave somethig behind to go forward”"
-        movie="Interstellar, 2014"
+        quote={l("You have to leave somethig behind to go forward")}
+        movie={l("Interstellar, 2014")}
         image="bg-imageOne"
       />
       <LandingQuote
-        quote="I think we’re just gonna have to be secretly in love with earch other and leave it that"
-        movie="The Royal Tenenbaums,2001 "
+        quote={l(
+          "I think we’re just gonna have to be secretly in love with earch other and leave it that"
+        )}
+        movie={l("The Royal Tenenbaums,2001")}
         image="bg-imageTwo"
       />
       <LandingQuote
-        quote="I think we’re just gonna have to be secretly in love with earch otherand leave it that"
-        movie="The Royal Tenenbaums,2001 "
+        quote={l(
+          "I think we’re just gonna have to be secretly in love with earch other and leave it that"
+        )}
+        movie={l("The Royal Tenenbaums,2001")}
         image="bg-imageThree"
       />
 
       <div className="w-full bg-background p-3 ">
-        <p className="text-orange-200 pl-5">
-          {" "}
-          © 2022 movie quotes. All rights reserved.
-        </p>
+        <p className="text-orange-200 pl-5"> © {l("All rights reserved")}</p>
       </div>
     </div>
   );

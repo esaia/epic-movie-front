@@ -335,7 +335,9 @@ const Profile = () => {
                   {user?.name}
                 </div>
                 <div className="w-36">
-                  <button onClick={usernameEditFn}>{t("Edit")}</button>
+                  <button onClick={usernameEditFn}>
+                    {editUsername ? t("cancel") : t("Edit")}
+                  </button>
                 </div>
               </div>
 
@@ -379,7 +381,9 @@ const Profile = () => {
                 </div>
                 <div className="w-36">
                   {!user?.google_id && (
-                    <button onClick={emailEditFn}>{t("Edit")}</button>
+                    <button onClick={emailEditFn}>
+                      {editEmail ? t("cancel") : t("Edit")}
+                    </button>
                   )}
                 </div>
               </div>
@@ -417,7 +421,9 @@ const Profile = () => {
                     </div>
 
                     <div className="w-36">
-                      <button onClick={passwordEditFn}>{t("Edit")}</button>
+                      <button onClick={passwordEditFn}>
+                        {editPassword ? t("cancel") : t("Edit")}
+                      </button>
                     </div>
                   </div>
                 </>

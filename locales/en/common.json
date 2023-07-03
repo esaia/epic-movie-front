@@ -76,6 +76,14 @@
     "Get started": "Get started"
   },
 
+  "landing": {
+    "You have to leave somethig behind to go forward": "You have to leave somethig behind to go forward",
+    "Interstellar, 2014": "Interstellar, 2014",
+    "I think we’re just gonna have to be secretly in love with earch other and leave it that": "I think we’re just gonna have to be secretly in love with earch other and leave it that",
+    "The Royal Tenenbaums,2001": "The Royal Tenenbaums,2001",
+    "All rights reserved": "2022 movie quotes. All rights reserved."
+  },
+
   "Login": {
     "Log in to your account": "Log in to your account",
     "Welcome back! Please enter your details": "Welcome back! Please enter your details",
@@ -116,7 +124,9 @@
     "Enter the email in the correct format": "Enter the email in the correct format",
     "Enter at least 8 characters": "Enter at least 8 characters",
     "Enter a lower case character or number": "Enter a lower case character or number",
-    "Password does not match": "Password does not match"
+    "Password does not match": "Password does not match",
+    "only Georgia": "Only Georgian characters are allowed",
+    "only English": "Only English characters are allowed"
   },
 
   "Forgot": {
