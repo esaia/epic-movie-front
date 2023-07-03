@@ -19,7 +19,7 @@ const ViewQuote = ({
   seteditQuote?: Dispatch<SetStateAction<boolean>>;
 
   closeModal: () => void;
-  deleteQuote: () => void;
+  deleteQuote?: () => void;
 }) => {
   const {
     user,

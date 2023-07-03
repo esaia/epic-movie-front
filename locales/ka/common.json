@@ -44,7 +44,10 @@
     "Delete": "წაშლა",
     "Update Movie": "ფილმის რედაქტირება",
     "There are not quotes": "ციტატა არ მოიძებნა",
-    "save changes": "შეინახეთ ცვლილებები"
+    "save changes": "შეინახეთ ცვლილებები",
+    "are you sure you want to delete": "დარწმუნებული ხართ რომ გინდათ წაშლა?",
+    "cancel": "გამოსვლა",
+    "delete": "წაშლა"
   },
 
   "Profile": {

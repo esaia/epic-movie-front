@@ -10,9 +10,9 @@ const useLanguageSwitcher = () => {
     setShowLanguageDropDown(false);
   };
 
-  const changeLanguage: MouseEventHandler<HTMLDivElement> = (e) => {
+  const changeLanguage: MouseEventHandler<HTMLDivElement> = async (e) => {
     e.stopPropagation();
-    push(asPath, undefined, {
+    await push(asPath, undefined, {
       locale: locales?.find((localee) => localee !== locale),
     });
     setShowLanguageDropDown(false);

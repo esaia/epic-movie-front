@@ -109,7 +109,7 @@ const Landing = () => {
         />
       </Portal>
 
-      <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20  ">
+      <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20 relative ">
         <h2 className="text-orange-200 text-4xl md:text-6xl md:leading-[80px] font-Helvetica  font-bold md:w-[700px] text-center">
           {t("Find any quote")}
         </h2>
@@ -118,7 +118,9 @@ const Landing = () => {
             {t("Get started")}
           </button>
         </Link>
+        <div className="w-full h-32 absolute bottom-[-125px] z-40 bg-gradient-to-t from-gray-900/0 via-gray-900/10 to-gray-950/70"></div>
       </div>
+
       <LandingQuote
         quote={l("You have to leave somethig behind to go forward")}
         movie={l("Interstellar, 2014")}

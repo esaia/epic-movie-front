@@ -44,7 +44,10 @@
     "Delete": "Delete",
     "Update Movie": "Update Movie",
     "There are not quotes": "There are not quotes",
-    "save changes": "Save changes"
+    "save changes": "Save changes",
+    "are you sure you want to delete": "დარწმუნებული ხართ რომ გინდათ წაშლა?",
+    "cancel": "cancel",
+    "delete": "delete"
   },
 
   "Profile": {
