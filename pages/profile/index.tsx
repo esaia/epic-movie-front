@@ -40,6 +40,7 @@ const Profile = () => {
     setShowConfirmationModal,
     showSuccessNotif,
     setshowSuccessNotif,
+    goBack,
   } = useProfile();
 
   return (
@@ -47,7 +48,7 @@ const Profile = () => {
       <DashboardWrapper>
         <div className="md:hidden mx-[-2rem]">
           <AiOutlineArrowLeft
-            onClick={() => setStatus("")}
+            onClick={goBack}
             className="text-2xl cursor-pointer min-w-[20px] ml-7"
           />
           {!status && (

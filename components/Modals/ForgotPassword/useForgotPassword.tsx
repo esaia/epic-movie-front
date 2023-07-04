@@ -21,7 +21,9 @@ const useForgotPassword = () => {
     onSuccess: () => {
       router.push("/landing?modal=forgot-password-check");
     },
-    onError: () => seterrorMessage("email not found"),
+    onError: () => {
+      seterrorMessage(v("email not found"));
+    },
   });
 
   const onSubmit = ({ email }: { email: string }) => {

@@ -29,8 +29,9 @@ const ForgotPassword = () => {
             },
           }}
         />
-
-        {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
+        <div className="h-5 pl-3 pt-2 text-sm ">
+          {errorMessage && <p className="mb-3 text-red-500">{errorMessage}</p>}
+        </div>
 
         <button
           type="submit"

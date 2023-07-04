@@ -84,7 +84,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             </div>
 
             {movie?.quote?.length === 0 ? (
-              <h1>{t("There are not quotes")}</h1>
+              <h1 className="text-gray-600">{t("There are not quotes")}</h1>
             ) : (
               movie?.quote?.map((quote: Quote) => {
                 return <SingleQuote key={quote.id} quote={quote} />;

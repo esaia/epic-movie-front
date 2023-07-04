@@ -22,11 +22,13 @@ const Home = () => {
         })}
 
       {quotes?.pages[0].totalpages === 0 && (
-        <div className="text-xl text-center py-6">{t("Nothing found")}</div>
+        <div className="text-xl text-center py-6 text-gray-600">
+          {t("Nothing found")}
+        </div>
       )}
 
       {!hasNextPage && status !== "loading" && (
-        <div className="text-xl text-center py-6">
+        <div className="text-xl text-gray-600 text-center py-6">
           {t("No more posts to show")}
         </div>
       )}

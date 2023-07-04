@@ -59,7 +59,9 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
       </div>
 
       {movies?.length === 0 && (
-        <div className="text-xl text-center py-6">{t("No movie to show")}</div>
+        <div className="text-xl text-center py-6 text-gray-600">
+          {t("No movie to show")}
+        </div>
       )}
       <div className="grid md:grid-cols-3 gap-6">
         {movies
