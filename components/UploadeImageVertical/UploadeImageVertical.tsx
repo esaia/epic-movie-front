@@ -10,6 +10,7 @@ const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
     isDragAccept,
     isDragReject,
     register,
+    v,
   } = useUploadImageVertical();
 
   return (
@@ -26,17 +27,17 @@ const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
           </div>
 
           <div className="flex flex-2 flex-col justify-center items-center gap-2">
-            <p className="text-orange-200">REPLACE PHOTO</p>
+            <p className="text-orange-200 uppercase">{v("replace photo")}</p>
 
             <div className="flex items-center gap-1">
               <AiOutlineCamera className="text-xl min-w-[30px]" />
-              {isDragAccept && <p>upload</p>}
-              {isDragReject && <p>This file not supported</p>}
+              {isDragAccept && <p>{v("upload")}</p>}
+              {isDragReject && <p>{v("This file not supported")}</p>}
               {!isDragActive && (
                 <>
-                  <p className="md:hidden">Upload image </p>
+                  <p className="md:hidden">{v("Upload image")} </p>
                   <p className="hidden md:block">
-                    Drag & drop your image here or
+                    {v("Drag & drop your image here or")}
                   </p>
                 </>
               )}
@@ -46,7 +47,7 @@ const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
               htmlFor="file"
               className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
             >
-              Choose file
+              {v("Choose file")}
             </label>
           </div>
         </div>

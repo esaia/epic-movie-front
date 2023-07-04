@@ -31,6 +31,7 @@ const Landing = () => {
     closeModal,
     t,
     n,
+    l,
   } = useLanding();
   return (
     <div className="bg-gray-950 max-h-screen  overflow-y-scroll   ">
@@ -108,7 +109,7 @@ const Landing = () => {
         />
       </Portal>
 
-      <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20  ">
+      <div className="w-full h-[70vh] flex justify-center items-center flex-col gap-10 p-20 relative ">
         <h2 className="text-orange-200 text-4xl md:text-6xl md:leading-[80px] font-Helvetica  font-bold md:w-[700px] text-center">
           {t("Find any quote")}
         </h2>
@@ -117,28 +118,31 @@ const Landing = () => {
             {t("Get started")}
           </button>
         </Link>
+        <div className="w-full h-32 absolute bottom-[-125px] z-40 bg-gradient-to-t from-gray-900/0 via-gray-900/10 to-gray-950/70"></div>
       </div>
+
       <LandingQuote
-        quote="“You have to leave somethig behind to go forward”"
-        movie="Interstellar, 2014"
+        quote={l("You have to leave somethig behind to go forward")}
+        movie={l("Interstellar, 2014")}
         image="bg-imageOne"
       />
       <LandingQuote
-        quote="I think we’re just gonna have to be secretly in love with earch other and leave it that"
-        movie="The Royal Tenenbaums,2001 "
+        quote={l(
+          "I think we’re just gonna have to be secretly in love with earch other and leave it that"
+        )}
+        movie={l("The Royal Tenenbaums,2001")}
         image="bg-imageTwo"
       />
       <LandingQuote
-        quote="I think we’re just gonna have to be secretly in love with earch otherand leave it that"
-        movie="The Royal Tenenbaums,2001 "
+        quote={l(
+          "I think we’re just gonna have to be secretly in love with earch other and leave it that"
+        )}
+        movie={l("The Royal Tenenbaums,2001")}
         image="bg-imageThree"
       />
 
       <div className="w-full bg-background p-3 ">
-        <p className="text-orange-200 pl-5">
-          {" "}
-          © 2022 movie quotes. All rights reserved.
-        </p>
+        <p className="text-orange-200 pl-5"> © {l("All rights reserved")}</p>
       </div>
     </div>
   );

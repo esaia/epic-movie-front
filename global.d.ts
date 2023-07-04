@@ -5,10 +5,13 @@ interface Title {
 
 export interface Genre {
   id: number;
-  label: string;
+  label: genreLabel;
   value: string;
   created_at: string;
   updated_at: string;
+}
+interface genreLabel {
+  [locale: string]: string;
 }
 
 interface Director {
@@ -52,7 +55,7 @@ export interface Movie {
   id: number;
   user_id: number;
   title: Title;
-  genre: Genre[];
+  genres: Genre[];
   date: string;
   director: Director;
   description: Description;
@@ -66,7 +69,7 @@ export interface Movie {
 export interface movieTypeForm {
   title_en: string;
   title_ka: string;
-  genre: genresOption[];
+  genre: Genres[];
   date: date;
   director_en: string;
   director_ka: string;

@@ -32,12 +32,6 @@ const useViewQuote = (quote: Quote, closeModal: () => void) => {
     },
   });
 
-  const deleteQuote = async () => {
-    await deleteQuoteRequest(quote.id);
-    queryClient.invalidateQueries(["singleMovie", query?.id?.toString()]);
-    closeModal();
-  };
-
   const submitForm = (data: { comment: string }) => {
     if (!data.comment) return;
     if (user)
@@ -81,7 +75,6 @@ const useViewQuote = (quote: Quote, closeModal: () => void) => {
     register,
     submitForm,
     loadingPostComment,
-    deleteQuote,
     handleClickLike,
     quote,
     h,

@@ -58,14 +58,14 @@ const AddQuote = ({
               </h2>
 
               <div className="flex gap-2">
-                {movie?.genre.map((genre: Genre) => {
+                {movie?.genres?.map((genre: Genre) => {
                   return (
-                    <p
-                      className="px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
+                    <h4
+                      className=" px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
                       key={genre.value}
                     >
-                      {genre.label}
-                    </p>
+                      {genre.label[`${locale}`]}
+                    </h4>
                   );
                 })}
               </div>
@@ -88,6 +88,11 @@ const AddQuote = ({
               placeholder="quote..."
               {...register("quote_en", {
                 required: v("This field is required"),
+
+                pattern: {
+                  value: /^[A-Za-z0-9\s]+$/,
+                  message: v("only English"),
+                },
               })}
             ></textarea>
           </div>
@@ -104,6 +109,10 @@ const AddQuote = ({
               placeholder="ციტატა..."
               {...register("quote_ka", {
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[ა-ჰ0-9\s]+$/,
+                  message: v("only Georgia"),
+                },
               })}
             ></textarea>
           </div>

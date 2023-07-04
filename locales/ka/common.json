@@ -7,7 +7,8 @@
     "Post": "დამატება",
     "Write a comment": "დააკომენტარე",
     "Nothing found": "არაფერი მოძებნა",
-    "No more posts to show": "მეტი პოსტი აღარ არის"
+    "No more posts to show": "მეტი პოსტი აღარ არის",
+    "Choose movie": "აირჩიე ფილმი"
   },
 
   "Sidebar": {
@@ -44,7 +45,10 @@
     "Delete": "წაშლა",
     "Update Movie": "ფილმის რედაქტირება",
     "There are not quotes": "ციტატა არ მოიძებნა",
-    "save changes": "შეინახეთ ცვლილებები"
+    "save changes": "შეინახეთ ცვლილებები",
+    "are you sure you want to delete": "დარწმუნებული ხართ რომ გინდათ წაშლა?",
+    "cancel": "გამოსვლა",
+    "delete": "წაშლა"
   },
 
   "Profile": {
@@ -76,13 +80,21 @@
     "Get started": "დაიწყე"
   },
 
+  "landing": {
+    "You have to leave somethig behind to go forward": "წინ წასასვლელად რაღაც უნდა დატოვო",
+    "Interstellar, 2014": "ინტერსტელარი, 2014",
+    "I think we’re just gonna have to be secretly in love with earch other and leave it that": "მე ვფიქრობ, რომ ჩვენ უბრალოდ უნდა ვიყოთ ფარულად შეყვარებული ერთმანეთზე და ასე დავტოვოთ",
+    "The Royal Tenenbaums,2001": "ტენენბაუმების ოჯახი, 2001",
+    "All rights reserved": "2022 წლის ფილმის ციტატები. ყველა უფლება დაცულია."
+  },
+
   "Login": {
     "Log in to your account": "შედით თქვენს ექაუნთში",
     "Welcome back! Please enter your details": "მოგესალმებით! გთხოვთ შეიყვანეთ მონაცემები",
     "name": "სახელი",
     "Enter your email": "შეიყვანეთ თქვენი მეილი",
     "password": "პაროლი",
-    "Rememer me": "Rememer me",
+    "Rememer me": "დამახსოვრება",
     "Forgot password": "დამავიწყდა პაროლი",
     "Sign in": "შესვლა",
     "Sign in with google": "გაიარეთ ავტორიზაცია გუგლით",
@@ -116,7 +128,15 @@
     "Enter the email in the correct format": "ჩაწერეთ მეილი სწორი ფორმატით",
     "Enter at least 8 characters": "შეიყვანეთ მინიმუმ 8 სიმბოლო",
     "Enter a lower case character or number": "შეიყვანეთ დაბალი რეგისტრის სიმბოლო ან რიცხვი",
-    "Password does not match": "პაროლი არ ემთხვევა"
+    "Password does not match": "პაროლი არ ემთხვევა",
+    "only Georgia": "მხოლოდ ქართული სიმბოლოები",
+    "only English": "მხოლოდ ინგლისური სიმბოლოები",
+    "upload": "ატვირთვა",
+    "This file not supported": "თქვენ ვერ ატვირთავთ ასეთ ფაილს",
+    "Upload image": "სურათის ატვირთვა",
+    "Drag & drop your image here or": "ჩააგდე სურათი ან",
+    "Choose file": "არჩევა",
+    "replace photo": "შეცვალე ფოტო"
   },
 
   "Forgot": {

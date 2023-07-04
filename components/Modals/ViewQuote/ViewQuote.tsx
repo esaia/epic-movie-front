@@ -12,11 +12,14 @@ const ViewQuote = ({
   setViewQuote,
   seteditQuote,
   closeModal,
+  deleteQuote,
 }: {
   quote: Quote;
   setViewQuote?: Dispatch<SetStateAction<boolean>>;
   seteditQuote?: Dispatch<SetStateAction<boolean>>;
+
   closeModal: () => void;
+  deleteQuote?: () => void;
 }) => {
   const {
     user,
@@ -26,7 +29,6 @@ const ViewQuote = ({
     register,
     submitForm,
     loadingPostComment,
-    deleteQuote,
     handleClickLike,
   } = useViewQuote(quote, closeModal);
 

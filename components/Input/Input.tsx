@@ -51,12 +51,7 @@ const Input = ({
               className="outline-none placeholder:text-gray-400 bg-transparent w-full px-2 py-2   mr-14 "
               placeholder={placeholder}
             />
-            <div
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 cursor-pointer "
-            >
-              {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-            </div>
+
             <div className="absolute right-7 cursor-pointer">
               {errors[name] ? (
                 <BiErrorCircle className="text-red-600 text-xl" />
@@ -66,6 +61,12 @@ const Input = ({
                   <IoMdCheckmark className="text-green-600 text-xl" />
                 )
               )}
+            </div>
+            <div
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2 cursor-pointer "
+            >
+              {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
             </div>
           </>
         ) : (

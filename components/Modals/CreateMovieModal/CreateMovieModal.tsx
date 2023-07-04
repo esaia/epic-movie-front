@@ -19,10 +19,10 @@ const CreateMovieModal = () => {
     control,
     errors,
     onSubmit,
+    locale,
     t,
     v,
   } = useCreateMovieModal();
-
   return (
     <FormProvider {...form}>
       <form
@@ -47,6 +47,10 @@ const CreateMovieModal = () => {
               placeholder="Movie name"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[A-Za-z0-9\s]+$/,
+                  message: v("only English"),
+                },
               }}
             />
             <DashboardInput
@@ -55,6 +59,10 @@ const CreateMovieModal = () => {
               placeholder="ფილმის სახელი"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[ა-ჰ0-9\s]+$/,
+                  message: v("only Georgia"),
+                },
               }}
             />
             <div
@@ -70,7 +78,11 @@ const CreateMovieModal = () => {
                   <Select
                     {...field}
                     isMulti
-                    options={genres?.data}
+                    options={genres?.data.map(
+                      (item: { label: { [locale: string]: string } }) => {
+                        return { ...item, label: item?.label[`${locale}`] };
+                      }
+                    )}
                     className="my-react-select-container"
                     classNamePrefix="my-react-select"
                   />
@@ -101,6 +113,10 @@ const CreateMovieModal = () => {
               placeholder="Director"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[A-Za-z0-9\s]+$/,
+                  message: v("only English"),
+                },
               }}
             />
             <DashboardInput
@@ -109,6 +125,10 @@ const CreateMovieModal = () => {
               placeholder="რეჟისორი"
               registerOptions={{
                 required: v("This field is required"),
+                pattern: {
+                  value: /^[ა-ჰ0-9\s]+$/,
+                  message: v("only Georgia"),
+                },
               }}
             />
             <div
@@ -123,6 +143,10 @@ const CreateMovieModal = () => {
                 placeholder="Movie discription"
                 {...register("description_en", {
                   required: v("This field is required"),
+                  pattern: {
+                    value: /^[A-Za-z0-9\s]+$/,
+                    message: v("only English"),
+                  },
                 })}
               ></textarea>
             </div>
@@ -140,6 +164,10 @@ const CreateMovieModal = () => {
                 placeholder="ფილმის აღწერა"
                 {...register("description_ka", {
                   required: v("This field is required"),
+                  pattern: {
+                    value: /^[ა-ჰ0-9\s]+$/,
+                    message: v("only Georgia"),
+                  },
                 })}
               ></textarea>
             </div>
@@ -147,7 +175,7 @@ const CreateMovieModal = () => {
 
             <UploadImage />
 
-            <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
+            <button className="w-full bg-red-600 p-1 mt-5  rounded-md">
               {t("Add movie")}
             </button>
           </div>

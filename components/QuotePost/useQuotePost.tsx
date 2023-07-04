@@ -33,6 +33,8 @@ const useQuotePost = (quote: Quote) => {
   };
   const handleClickLike = async () => {
     try {
+      queryClient.invalidateQueries("fetchQuotes");
+
       const likeAttributes = { user_id: user?.id, quote_id: quote.id };
       if (!quote.like.some((item) => item.user_id === user?.id)) {
         await postLike(likeAttributes);

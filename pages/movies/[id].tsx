@@ -1,6 +1,7 @@
 import {
   AddQuote,
   DashboaradPortal,
+  DeleteConfirmation,
   EditMovieModal,
   MovieWrapper,
   SingleQuote,
@@ -25,6 +26,8 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
     showAddQuotes,
     movie,
     deleteMovie,
+    deleteMovieFromDB,
+    deleteConfirmation,
   } = useMovie();
 
   return (
@@ -34,6 +37,13 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
       </DashboaradPortal>
       <DashboaradPortal isOpen={addQuote} closeModal={closeModal}>
         <AddQuote movie={movie} closeModal={closeModal} />
+      </DashboaradPortal>
+
+      <DashboaradPortal isOpen={deleteConfirmation} closeModal={closeModal}>
+        <DeleteConfirmation
+          closeModal={closeModal}
+          deleteFromDB={deleteMovieFromDB}
+        />
       </DashboaradPortal>
 
       <h1 className="text-xl">{t("Movie discription")}</h1>
@@ -102,23 +112,23 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
           <div className="flex gap-2 pb-4 my-3">
             <div className="flex flex-wrap gap-3">
               {movie
-                ? movie?.genre.map((genre: Genre) => {
+                ? movie?.genres?.map((genre: Genre) => {
                     return (
                       <h4
                         className=" px-3 py-1 bg-gray-500 text-white w-fit rounded-sm cursor-pointer text-sm"
                         key={genre.value}
                       >
-                        {genre.label}
+                        {genre.label[`${locale}`]}
                       </h4>
                     );
                   })
-                : initialMovie?.genre.map((genre: Genre) => {
+                : initialMovie?.genres?.map((genre: Genre) => {
                     return (
                       <h4
                         className=" px-3 bg-gray-600 text-white w-fit rounded-sm cursor-pointer text-sm"
                         key={genre.value}
                       >
-                        {genre.label}
+                        {genre.label[`${locale}`]}
                       </h4>
                     );
                   })}

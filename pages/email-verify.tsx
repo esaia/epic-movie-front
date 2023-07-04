@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 
 const Veirfy = () => {
   const router = useRouter();
-
   useEffect(() => {
     const verify = async () => {
       const url =

@@ -10,3 +10,4 @@ export * from "./ViewQuote";
 export * from "./EditQuote";
 export * from "./AddQuote";
 export * from "./UpdateUserConfirmation";
+export * from "./DeleteConfirmation";

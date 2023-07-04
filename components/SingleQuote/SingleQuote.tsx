@@ -3,7 +3,12 @@ import { BsThreeDots, BsTrash3 } from "react-icons/bs";
 import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { RiPencilLine } from "react-icons/ri";
 import useSingleQuote from "./useSingleQuote";
-import { DashboaradPortal, EditQuote, ViewQuote } from "@/components";
+import {
+  DashboaradPortal,
+  DeleteConfirmation,
+  EditQuote,
+  ViewQuote,
+} from "@/components";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Quote } from "global";
 
@@ -22,6 +27,8 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
     seteditQuote,
     t,
     deleteQuote,
+    deleteConfirmation,
+    deleteQuoteFromDb,
   } = useSingleQuote(quote);
 
   return (
@@ -32,11 +39,23 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
           setViewQuote={setViewQuote}
           seteditQuote={seteditQuote}
           closeModal={closeModal}
+          deleteQuote={deleteQuote}
         />
       </DashboaradPortal>
 
       <DashboaradPortal isOpen={editQuote} closeModal={closeModal}>
-        <EditQuote quote={quote} closeModal={closeModal} />
+        <EditQuote
+          quote={quote}
+          closeModal={closeModal}
+          deleteQuote={deleteQuote}
+        />
+      </DashboaradPortal>
+
+      <DashboaradPortal isOpen={deleteConfirmation} closeModal={closeModal}>
+        <DeleteConfirmation
+          closeModal={closeModal}
+          deleteFromDB={deleteQuoteFromDb}
+        />
       </DashboaradPortal>
 
       <div

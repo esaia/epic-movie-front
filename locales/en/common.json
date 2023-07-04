@@ -7,7 +7,8 @@
     "Post": "Post",
     "Write a comment": "Write a comment",
     "Nothing found": "Nothing found",
-    "No more posts to show": "No more posts to show"
+    "No more posts to show": "No more posts to show",
+    "Choose movie": "Choose movie"
   },
 
   "Sidebar": {
@@ -44,7 +45,10 @@
     "Delete": "Delete",
     "Update Movie": "Update Movie",
     "There are not quotes": "There are not quotes",
-    "save changes": "Save changes"
+    "save changes": "Save changes",
+    "are you sure you want to delete": "are you sure you want to delete?",
+    "cancel": "cancel",
+    "delete": "delete"
   },
 
   "Profile": {
@@ -74,6 +78,14 @@
     "Log In": "Log in",
     "Find any quote": "Find any quote in millions of movie lines",
     "Get started": "Get started"
+  },
+
+  "landing": {
+    "You have to leave somethig behind to go forward": "You have to leave somethig behind to go forward",
+    "Interstellar, 2014": "Interstellar, 2014",
+    "I think we’re just gonna have to be secretly in love with earch other and leave it that": "I think we’re just gonna have to be secretly in love with earch other and leave it that",
+    "The Royal Tenenbaums,2001": "The Royal Tenenbaums,2001",
+    "All rights reserved": "2022 movie quotes. All rights reserved."
   },
 
   "Login": {
@@ -116,7 +128,15 @@
     "Enter the email in the correct format": "Enter the email in the correct format",
     "Enter at least 8 characters": "Enter at least 8 characters",
     "Enter a lower case character or number": "Enter a lower case character or number",
-    "Password does not match": "Password does not match"
+    "Password does not match": "Password does not match",
+    "only Georgia": "Only Georgian characters are allowed",
+    "only English": "Only English characters are allowed",
+    "upload": "upload",
+    "This file not supported": "This file not supported",
+    "Upload image": "Upload image",
+    "Drag & drop your image here or": "Drag & drop your image here or",
+    "Choose file": "Choose file",
+    "replace photo": "replace photo"
   },
 
   "Forgot": {

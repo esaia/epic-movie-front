@@ -57,8 +57,8 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
       />
 
       <div className="flex gap-4 border-b border-gray-700 pb-3 mb-3">
-        <div className="flex items-center gap-1">
-          <p>{quote.comment?.length}</p>
+        <div className="flex items-center gap-1 ">
+          <p className="w-4">{quote.comment?.length}</p>
           <VscComment className="text-2xl" />
         </div>
 

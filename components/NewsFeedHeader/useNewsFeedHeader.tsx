@@ -70,8 +70,7 @@ const useNewsFeedHeader = () => {
 
   const seenNotification = async (id: number) => {
     try {
-      seenNotificationRequest(id);
-      queryClient.invalidateQueries(["fetchNotification"]);
+      await seenNotificationRequest(id);
     } catch (error) {
       console.error(error);
     }
