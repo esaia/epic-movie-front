@@ -89,7 +89,7 @@ const CreateQuoteModal = () => {
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-3">
                   <BsCameraReels className="text-2xl min-w-[10px] " />
-                  <p>Choose movie</p>
+                  <p>{t("Choose movie")}</p>
                 </div>
 
                 <p>
