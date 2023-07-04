@@ -48,7 +48,7 @@ const CreateMovieModal = () => {
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[A-Za-z0-9\s]+$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                   message: v("only English"),
                 },
               }}
@@ -60,7 +60,7 @@ const CreateMovieModal = () => {
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9\s]+$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                   message: v("only Georgia"),
                 },
               }}
@@ -114,7 +114,7 @@ const CreateMovieModal = () => {
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[A-Za-z0-9\s]+$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                   message: v("only English"),
                 },
               }}
@@ -126,7 +126,7 @@ const CreateMovieModal = () => {
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9\s]+$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                   message: v("only Georgia"),
                 },
               }}
@@ -144,7 +144,7 @@ const CreateMovieModal = () => {
                 {...register("description_en", {
                   required: v("This field is required"),
                   pattern: {
-                    value: /^[A-Za-z0-9\s]+$/,
+                    value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                     message: v("only English"),
                   },
                 })}
@@ -165,7 +165,7 @@ const CreateMovieModal = () => {
                 {...register("description_ka", {
                   required: v("This field is required"),
                   pattern: {
-                    value: /^[ა-ჰ0-9\s]+$/,
+                    value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                     message: v("only Georgia"),
                   },
                 })}

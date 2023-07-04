@@ -81,7 +81,7 @@ const AddQuote = ({
               errors.quote_en ? "border-red-600" : "border-gray-600"
             }  `}
           >
-            <p className="absolute right-2 top-1 text-gray-400">eng</p>
+            <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
             <textarea
               className="w-full outline-none bg-transparent placeholder:italic p-2 "
@@ -90,7 +90,7 @@ const AddQuote = ({
                 required: v("This field is required"),
 
                 pattern: {
-                  value: /^[A-Za-z0-9\s]+$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                   message: v("only English"),
                 },
               })}
@@ -110,7 +110,7 @@ const AddQuote = ({
               {...register("quote_ka", {
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9\s]+$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                   message: v("only Georgia"),
                 },
               })}
@@ -123,7 +123,7 @@ const AddQuote = ({
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-1 mt-3 ${
+            className={`w-full py-1 mt-3 rounded-md ${
               isLoading ? "bg-red-300" : "bg-red-600"
             }`}
           >

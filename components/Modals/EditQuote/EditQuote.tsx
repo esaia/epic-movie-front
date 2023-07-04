@@ -49,7 +49,7 @@ const EditQuote = ({
             {...register("quote_en", {
               required: v("This field is required"),
               pattern: {
-                value: /^[A-Za-z0-9\s]+$/,
+                value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                 message: v("only English"),
               },
             })}
@@ -74,7 +74,7 @@ const EditQuote = ({
             {...register("quote_ka", {
               required: v("This field is required"),
               pattern: {
-                value: /^[ა-ჰ0-9\s]+$/,
+                value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
                 message: v("only Georgia"),
               },
             })}
