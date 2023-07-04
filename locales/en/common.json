@@ -129,7 +129,13 @@
     "Enter a lower case character or number": "Enter a lower case character or number",
     "Password does not match": "Password does not match",
     "only Georgia": "Only Georgian characters are allowed",
-    "only English": "Only English characters are allowed"
+    "only English": "Only English characters are allowed",
+    "upload": "upload",
+    "This file not supported": "This file not supported",
+    "Upload image": "Upload image",
+    "Drag & drop your image here or": "Drag & drop your image here or",
+    "Choose file": "Choose file",
+    "replace photo": "replace photo"
   },
 
   "Forgot": {

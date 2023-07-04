@@ -129,7 +129,13 @@
     "Enter a lower case character or number": "შეიყვანეთ დაბალი რეგისტრის სიმბოლო ან რიცხვი",
     "Password does not match": "პაროლი არ ემთხვევა",
     "only Georgia": "მხოლოდ ქართული სიმბოლოები",
-    "only English": "მხოლოდ ინგლისური სიმბოლოები"
+    "only English": "მხოლოდ ინგლისური სიმბოლოები",
+    "upload": "ატვირთვა",
+    "This file not supported": "თქვენ ვერ ატვირთავთ ასეთ ფაილს",
+    "Upload image": "სურათის ატვირთვა",
+    "Drag & drop your image here or": "ჩააგდე სურათი ან",
+    "Choose file": "არჩევა",
+    "replace photo": "შეცვალე ფოტო"
   },
 
   "Forgot": {

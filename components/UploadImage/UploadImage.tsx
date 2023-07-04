@@ -40,12 +40,14 @@ const UploadImage = () => {
         <div className="flex items-center">
           <AiOutlineCamera className="text-2xl mr-2 min-w-[30px]" />
 
-          {isDragAccept && <p>upload</p>}
-          {isDragReject && <p>This file not supported</p>}
+          {isDragAccept && <p>{v("upload")}</p>}
+          {isDragReject && <p>{v("This file not supported")}</p>}
           {!isDragActive && (
             <>
-              <p className="md:hidden">Upload image </p>
-              <p className="hidden md:block">Drag & drop your image here or</p>
+              <p className="md:hidden">{v("Upload image")} </p>
+              <p className="hidden md:block">
+                {v("Drag & drop your image here or")}
+              </p>
             </>
           )}
         </div>
@@ -54,7 +56,7 @@ const UploadImage = () => {
           htmlFor="file"
           className="px-2 py-1 bg-purple-900 cursor-pointer rounded-sm"
         >
-          Choose file
+          {v("Choose file")}
         </label>
       </div>
 
