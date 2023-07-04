@@ -49,7 +49,7 @@ const EditQuote = ({
             {...register("quote_en", {
               required: v("This field is required"),
               pattern: {
-                value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                 message: v("only English"),
               },
             })}
@@ -74,7 +74,7 @@ const EditQuote = ({
             {...register("quote_ka", {
               required: v("This field is required"),
               pattern: {
-                value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                 message: v("only Georgia"),
               },
             })}
@@ -105,7 +105,7 @@ const EditQuote = ({
           </div>
         </div>
 
-        <button className="w-full py-1 bg-red-600 mt-5">
+        <button className="w-full py-1 bg-red-600 mt-5 rounded-md">
           {t("save changes")}
         </button>
       </div>

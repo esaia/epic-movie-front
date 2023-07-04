@@ -114,7 +114,7 @@ const Landing = () => {
           {t("Find any quote")}
         </h2>
         <Link href={"/landing?modal=register"}>
-          <button className="px-5 py-2 bg-red-500 text-white rounded-md w-32">
+          <button className="px-5 py-2 bg-red-600 text-white rounded-md w-32">
             {t("Get started")}
           </button>
         </Link>

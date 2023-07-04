@@ -360,7 +360,8 @@ const Profile = () => {
                             message: v("Enter a maximum of 15 characters"),
                           },
                           pattern: {
-                            value: /^[a-z]+$/,
+                            value:
+                              /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                             message: v("Enter lower case characters"),
                           },
                         }}

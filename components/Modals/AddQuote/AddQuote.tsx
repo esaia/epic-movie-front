@@ -90,7 +90,7 @@ const AddQuote = ({
                 required: v("This field is required"),
 
                 pattern: {
-                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only English"),
                 },
               })}
@@ -110,7 +110,7 @@ const AddQuote = ({
               {...register("quote_ka", {
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only Georgia"),
                 },
               })}

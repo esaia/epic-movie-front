@@ -55,7 +55,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only English"),
                 },
               }}
@@ -68,7 +68,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only Georgia"),
                 },
               }}
@@ -123,7 +123,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only English"),
                 },
               }}
@@ -136,7 +136,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only Georgia"),
                 },
               }}
@@ -158,7 +158,7 @@ const EditMovieModal = ({
                   required: v("This field is required"),
 
                   pattern: {
-                    value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                    value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only English"),
                   },
                 })}
@@ -183,7 +183,7 @@ const EditMovieModal = ({
                 {...register("description_ka", {
                   required: v("This field is required"),
                   pattern: {
-                    value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                    value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only Georgia"),
                   },
                 })}

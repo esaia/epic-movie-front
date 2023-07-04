@@ -97,9 +97,15 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
           <div className="flex justify-between items-center">
             <div className="flex justify-between text-orange-200">
               {movie
-                ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
+                ? `${
+                    movie?.title[`${locale}`].length < 4
+                      ? movie?.title[`${locale}`]
+                      : movie?.title[`${locale}`].substring(0, 4) + "..."
+                  } (${movie?.date?.slice(0, 4)})`
                 : `${
-                    initialMovie?.title[`${locale}`]
+                    initialMovie?.title[`${locale}`].length < 4
+                      ? initialMovie?.title[`${locale}`]
+                      : initialMovie?.title[`${locale}`].substring(0, 4) + "..."
                   } (${initialMovie?.date?.slice(0, 4)})`}
             </div>
             <div className="flex bg-secondary items-center gap-3 px-4 py-2 rounded-md">

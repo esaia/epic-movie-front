@@ -52,7 +52,7 @@ const CreateQuoteModal = () => {
                 {...register("quote_en", {
                   required: v("This field is required"),
                   pattern: {
-                    value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                    value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only English"),
                   },
                 })}
@@ -72,7 +72,7 @@ const CreateQuoteModal = () => {
                 {...register("quote_ka", {
                   required: v("This field is required"),
                   pattern: {
-                    value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?]*$/,
+                    value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only Georgia"),
                   },
                 })}
@@ -114,7 +114,9 @@ const CreateQuoteModal = () => {
                           }}
                           className="p-2 border border-gray-500 m-2 hover:bg-secondary  "
                         >
-                          {movie.title[`${locale}`]}
+                          {movie.title[`${locale}`].length < 20
+                            ? movie.title[`${locale}`]
+                            : movie.title[`${locale}`].substring(0, 20) + "..."}
                         </h2>
                       );
                     })}
@@ -126,7 +128,10 @@ const CreateQuoteModal = () => {
               {errorMessage}
             </p>
 
-            <button type="submit" className="w-full  bg-red-600 p-1 mt-5">
+            <button
+              type="submit"
+              className="w-full  bg-red-600 p-1 mt-5 rounded-md"
+            >
               {t("Post")}
             </button>
           </form>

@@ -126,16 +126,16 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
       )}
 
       <div className="flex items-center md:flex-row flex-col gap-6 border-b border-gray-600 pb-5 select-none">
-        <div className="w-full h-48 md:h-24 md:w-60">
+        <div className="w-full h-48 md:h-24 md:w-60 min-w-max">
           <img
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
             className="rounded-sm object-cover w-full h-full "
           />
         </div>
         <p className="w-full text-gray-300 italic mr-5">{`"${
-          quote.quote[`${locale}`].length < 170
+          quote.quote[`${locale}`].length < 30
             ? quote.quote[`${locale}`]
-            : quote.quote[`${locale}`].substring(0, 170) + "..."
+            : quote.quote[`${locale}`].substring(0, 30) + "..."
         }"`}</p>
       </div>
 
