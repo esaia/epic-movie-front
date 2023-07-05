@@ -34,7 +34,7 @@ const Landing = () => {
     l,
   } = useLanding();
   return (
-    <div className="bg-gray-950 max-h-screen  overflow-y-scroll   ">
+    <div className="bg-gray-950   ">
       <Header />
       <Portal isOpen={loginModal} closeModal={closeModal}>
         <LoginModal />
@@ -125,6 +125,7 @@ const Landing = () => {
         quote={l("You have to leave somethig behind to go forward")}
         movie={l("Interstellar, 2014")}
         image="bg-imageOne"
+        fixed={false}
       />
       <LandingQuote
         quote={l(

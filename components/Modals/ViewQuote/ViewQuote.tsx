@@ -64,11 +64,11 @@ const ViewQuote = ({
       <div className="m-3">
         <div className="w-full flex relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">Eng</p>
-          <p className="text-start mr-6">“{quote?.quote.en}”</p>
+          <p className="text-start mr-10 break-all">“{quote?.quote.en}”</p>
         </div>
         <div className="w-full flex  relative border border-gray-600 rounded-md px-3 py-1 mb-4 ">
           <p className="absolute right-3">ქარ</p>
-          <p className="text-start mr-6">“{quote?.quote.ka}”</p>
+          <p className="text-start mr-10 break-all">“{quote?.quote.ka}”</p>
         </div>
 
         <img

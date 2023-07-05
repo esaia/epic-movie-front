@@ -13,7 +13,7 @@ const EditQuote = ({
   closeModal: () => void;
   deleteQuote: () => void;
 }) => {
-  const { v, t, user, handleSubmit, register, errors, submitForm } =
+  const { v, t, user, handleSubmit, register, errors, submitForm, image } =
     useEditQuote(quote, closeModal);
 
   return (
@@ -86,7 +86,11 @@ const EditQuote = ({
 
         <div className="relative w-full h-72">
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
+            src={
+              image
+                ? URL.createObjectURL(image[0])
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`
+            }
             alt="profile"
             className="w-full h-full object-cover my-7 "
           />

@@ -55,10 +55,12 @@ const Profile = () => {
             <div className="bg-secondary flex justify-center flex-col items-center gap-2 mt-5 p-5 ">
               {showSuccessNotif && (
                 <div className="absolute top-20 translate-x-[-50%] left-[50%] w-11/12 bg-green-100 flex items-center justify-between p-3">
-                  <AiFillCheckCircle className="text-green-800 text-2xl" />
-                  <p className="text-green-700">
-                    {t("Changes updated succsessfully")}
-                  </p>
+                  <div className="flex justify-center gap-1">
+                    <AiFillCheckCircle className="text-green-800 text-2xl" />
+                    <p className="text-green-700 text-left">
+                      {t("Changes updated succsessfully")}
+                    </p>
+                  </div>
                   <AiOutlineClose
                     onClick={() => setshowSuccessNotif(false)}
                     className="text-gray-600 text-2xl cursor-pointer"
@@ -437,9 +439,16 @@ const Profile = () => {
                     <div className=" rounded-sm w-full  ">
                       <div className="px-5 py-3 border border-gray-800 rounded-sm">
                         <p className="mb-4"> {t("Passwords should contain")}</p>
-                        <li className="text-gray-400">
+                        <li
+                          className={` ${
+                            password?.length > 8 && password?.length < 15
+                              ? "text-green-500"
+                              : "text-gray-400"
+                          } `}
+                        >
                           {t("8 or more characters")}
                         </li>
+
                         <li> {t("15 lowercase character")}</li>
                       </div>
                     </div>

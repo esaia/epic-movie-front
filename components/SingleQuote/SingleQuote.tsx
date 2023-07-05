@@ -132,7 +132,7 @@ const SingleQuote = ({ quote }: { quote: Quote }) => {
             className="rounded-sm object-cover w-full h-full "
           />
         </div>
-        <p className="w-full text-gray-300 italic mr-5">{`"${
+        <p className="w-full text-gray-300 italic mr-5 break-all">{`"${
           quote.quote[`${locale}`].length < 30
             ? quote.quote[`${locale}`]
             : quote.quote[`${locale}`].substring(0, 30) + "..."
