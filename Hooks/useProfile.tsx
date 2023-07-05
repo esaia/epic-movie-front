@@ -5,12 +5,13 @@ import { profileInputType } from "global";
 import { useTranslations } from "next-intl";
 import { updateUserRequest } from "lib/index";
 import { useMutation } from "react-query";
+import { useRouter } from "next/router";
 
 const useProfile = () => {
   const { user, setUser } = useContext(AuthContext);
   const t = useTranslations("Profile");
   const v = useTranslations("Validations");
-
+  const { push } = useRouter();
   const [status, setStatus] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showSuccessNotif, setshowSuccessNotif] = useState(false);
@@ -115,6 +116,14 @@ const useProfile = () => {
     seteditPassword(false);
   };
 
+  const goBack = () => {
+    if (status) {
+      return setStatus("");
+    } else {
+      push("/");
+    }
+  };
+
   return {
     form,
     handleSubmit,
@@ -140,6 +149,7 @@ const useProfile = () => {
     setShowConfirmationModal,
     showSuccessNotif,
     setshowSuccessNotif,
+    goBack,
   };
 };
 

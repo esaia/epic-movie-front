@@ -55,7 +55,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[A-Za-z0-9\s]+$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only English"),
                 },
               }}
@@ -68,7 +68,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9\s]+$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only Georgia"),
                 },
               }}
@@ -123,7 +123,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[A-Za-z0-9\s]+$/,
+                  value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only English"),
                 },
               }}
@@ -136,7 +136,7 @@ const EditMovieModal = ({
               registerOptions={{
                 required: v("This field is required"),
                 pattern: {
-                  value: /^[ა-ჰ0-9\s]+$/,
+                  value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                   message: v("only Georgia"),
                 },
               }}
@@ -149,7 +149,7 @@ const EditMovieModal = ({
             >
               <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
-              <p className="text-xs pl-2 pt-3">Discription: </p>
+              <p className="text-xs pl-2 pt-3 text-gray-400">Discription: </p>
 
               <textarea
                 className="w-full outline-none bg-transparent placeholder:italic p-2  mr-12 "
@@ -158,7 +158,7 @@ const EditMovieModal = ({
                   required: v("This field is required"),
 
                   pattern: {
-                    value: /^[A-Za-z0-9\s]+$/,
+                    value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only English"),
                   },
                 })}
@@ -173,7 +173,7 @@ const EditMovieModal = ({
             >
               <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
-              <p className="text-xs pl-2 pt-3 whitespace-nowrap">
+              <p className="text-xs pl-2 pt-3 whitespace-nowrap text-gray-400">
                 ფილმის აღწერა:
               </p>
 
@@ -183,7 +183,7 @@ const EditMovieModal = ({
                 {...register("description_ka", {
                   required: v("This field is required"),
                   pattern: {
-                    value: /^[ა-ჰ0-9\s]+$/,
+                    value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only Georgia"),
                   },
                 })}

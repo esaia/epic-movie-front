@@ -3,7 +3,7 @@ import { Quote, quoteForm } from "global";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { editQuote } from "lib/index";
 import { deleteQuoteRequest } from "lib/index";
@@ -13,6 +13,7 @@ const useEditQuote = (quote: Quote, closeModal: () => void) => {
   const { query } = useRouter();
   const t = useTranslations("SingleMovie");
   const v = useTranslations("Validations");
+
   const queryClient = useQueryClient();
   const formData = new FormData();
   const form = useForm<quoteForm>({
@@ -26,7 +27,10 @@ const useEditQuote = (quote: Quote, closeModal: () => void) => {
     handleSubmit,
     register,
     formState: { errors },
+    control,
   } = form;
+
+  const image = useWatch({ control, name: "img" });
 
   const { mutate } = useMutation({
     mutationFn: (formData: FormData) => editQuote(formData, quote.id),
@@ -66,6 +70,7 @@ const useEditQuote = (quote: Quote, closeModal: () => void) => {
     errors,
     submitForm,
     deleteQuote,
+    image,
   };
 };
 

@@ -50,7 +50,7 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
           </form>
 
           <Link href={"/movies?modal=create-movie"}>
-            <div className="bg-red-600 flex justify-center items-center  py-1  md:gap-3 gap-1 min-w-[120px] w-44 rounded-md ">
+            <div className="bg-red-600 flex justify-center items-center  py-1  md:gap-3 gap-1 min-w-[120px]  px-3 rounded-md ">
               <AiOutlinePlusSquare className="text-xl" />
               <button>{t("Add movie")}</button>
             </div>
@@ -59,7 +59,9 @@ const Movies = ({ initialMovies }: { initialMovies: Movie[] }) => {
       </div>
 
       {movies?.length === 0 && (
-        <div className="text-xl text-center py-6">{t("No movie to show")}</div>
+        <div className="text-xl text-center py-6 text-gray-600">
+          {t("No movie to show")}
+        </div>
       )}
       <div className="grid md:grid-cols-3 gap-6">
         {movies

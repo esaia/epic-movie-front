@@ -27,7 +27,7 @@ const UpdateUserConfirmation = ({
               type="submit"
               className="bg-red-500 w-40 px-4 py-2 rounded-md"
             >
-              {t("Edit")}
+              {t("confirm")}
             </button>
           </div>
         </div>

@@ -58,6 +58,7 @@
     "Email": "ელ-ფოსტა",
     "Password": "პაროლი",
     "Edit": "რედაქტირება",
+    "confirm": "დადასტურება",
     "New username": "ახალი სახელი",
     "New email": "ახალი ელ-ფოსტა",
     "New password": "ახალი პაროლი",
@@ -136,7 +137,8 @@
     "Upload image": "სურათის ატვირთვა",
     "Drag & drop your image here or": "ჩააგდე სურათი ან",
     "Choose file": "არჩევა",
-    "replace photo": "შეცვალე ფოტო"
+    "replace photo": "შეცვალე ფოტო",
+    "email not found": "ელ-ფოსტა ვერ მოიძებნა"
   },
 
   "Forgot": {

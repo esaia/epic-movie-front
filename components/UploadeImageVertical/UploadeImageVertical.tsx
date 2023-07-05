@@ -10,6 +10,7 @@ const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
     isDragAccept,
     isDragReject,
     register,
+    image,
     v,
   } = useUploadImageVertical();
 
@@ -21,7 +22,11 @@ const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
 
           <div className="flex-1 h-28 ">
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie?.img}`}
+              src={
+                image
+                  ? URL.createObjectURL(image[0])
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${movie?.img}`
+              }
               className="w-full h-full object-cover"
             />
           </div>

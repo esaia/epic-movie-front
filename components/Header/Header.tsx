@@ -6,12 +6,12 @@ const Header = () => {
   const { t } = useHeader();
 
   return (
-    <div className="h-16 px-4 py-3 md:px-7 md:py-5 flex justify-between items-center absolute top-0 left-[50%] translate-x-[-50%] w-full max-w-[1920px] font-Helvetica  z-50">
+    <div className="h-16 px-4 py-3 md:px-7 md:py-5 flex justify-between items-center absolute top-0 left-[50%] translate-x-[-50%] w-full max-w-[1920px] font-Helvetica  z-40">
       <h1 className="uppercase text-white">Movie quotes</h1>
       <div className="flex gap-4 ">
         <LanguageSwitcher />
         <Link href={"/landing?modal=register"}>
-          <button className=" py-2 bg-red-500 text-white  rounded-md text-sm w-28  ">
+          <button className=" py-2 bg-red-600 text-white  rounded-md text-sm w-28  ">
             {t("Sign Up")}
           </button>
         </Link>

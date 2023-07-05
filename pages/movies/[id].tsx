@@ -84,7 +84,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             </div>
 
             {movie?.quote?.length === 0 ? (
-              <h1>{t("There are not quotes")}</h1>
+              <h1 className="text-gray-600">{t("There are not quotes")}</h1>
             ) : (
               movie?.quote?.map((quote: Quote) => {
                 return <SingleQuote key={quote.id} quote={quote} />;
@@ -95,7 +95,7 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
         <div className="mt-4 md:mt-0 md:pl-3">
           <div className="flex justify-between items-center">
-            <div className="flex justify-between text-orange-200">
+            <div className="flex justify-between text-orange-200 break-all">
               {movie
                 ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
                 : `${

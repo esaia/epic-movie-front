@@ -161,7 +161,9 @@ export const recoverPass = (data: recoveryPassType) => {
 };
 
 export const forgetPassword = (email: string) => {
-  return axiosAPI.post("/forgot-password", { email });
+  return axios.post(process.env.NEXT_PUBLIC_BASE_URL_API + "/forgot-password", {
+    email,
+  });
 };
 
 export const loginUser = async (user: loginDataType) => {

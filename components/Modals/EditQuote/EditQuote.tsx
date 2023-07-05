@@ -13,7 +13,7 @@ const EditQuote = ({
   closeModal: () => void;
   deleteQuote: () => void;
 }) => {
-  const { v, t, user, handleSubmit, register, errors, submitForm } =
+  const { v, t, user, handleSubmit, register, errors, submitForm, image } =
     useEditQuote(quote, closeModal);
 
   return (
@@ -49,7 +49,7 @@ const EditQuote = ({
             {...register("quote_en", {
               required: v("This field is required"),
               pattern: {
-                value: /^[A-Za-z0-9\s]+$/,
+                value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                 message: v("only English"),
               },
             })}
@@ -74,7 +74,7 @@ const EditQuote = ({
             {...register("quote_ka", {
               required: v("This field is required"),
               pattern: {
-                value: /^[ა-ჰ0-9\s]+$/,
+                value: /^[ა-ჰ0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                 message: v("only Georgia"),
               },
             })}
@@ -86,7 +86,11 @@ const EditQuote = ({
 
         <div className="relative w-full h-72">
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`}
+            src={
+              image
+                ? URL.createObjectURL(image[0])
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${quote.img}`
+            }
             alt="profile"
             className="w-full h-full object-cover my-7 "
           />
@@ -105,7 +109,7 @@ const EditQuote = ({
           </div>
         </div>
 
-        <button className="w-full py-1 bg-red-600 mt-5">
+        <button className="w-full py-1 bg-red-600 mt-5 rounded-md">
           {t("save changes")}
         </button>
       </div>

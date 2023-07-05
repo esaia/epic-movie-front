@@ -34,7 +34,7 @@ const Landing = () => {
     l,
   } = useLanding();
   return (
-    <div className="bg-gray-950 max-h-screen  overflow-y-scroll   ">
+    <div className="bg-gray-950   ">
       <Header />
       <Portal isOpen={loginModal} closeModal={closeModal}>
         <LoginModal />
@@ -114,7 +114,7 @@ const Landing = () => {
           {t("Find any quote")}
         </h2>
         <Link href={"/landing?modal=register"}>
-          <button className="px-5 py-2 bg-red-500 text-white rounded-md w-32">
+          <button className="px-5 py-2 bg-red-600 text-white rounded-md w-32">
             {t("Get started")}
           </button>
         </Link>
@@ -125,6 +125,7 @@ const Landing = () => {
         quote={l("You have to leave somethig behind to go forward")}
         movie={l("Interstellar, 2014")}
         image="bg-imageOne"
+        fixed={false}
       />
       <LandingQuote
         quote={l(

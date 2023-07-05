@@ -38,9 +38,9 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
       </div>
 
       {quote.quote ? (
-        <p>
+        <p className=" break-all">
           “{quote.quote[`${locale}`]}” movie -
-          <span className="text-orange-200">
+          <span className="text-orange-200 break-all">
             {" "}
             {quote.movie.title[`${locale}`]}
           </span>{" "}

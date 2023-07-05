@@ -12,7 +12,9 @@ const UploadImage = () => {
     isDragAccept,
     isDragReject,
     isFileUploaded,
+    image,
   } = useUploadImage();
+
   return (
     <div>
       <div
@@ -37,7 +39,7 @@ const UploadImage = () => {
           })}
         />
 
-        <div className="flex items-center">
+        <div className="flex items-center md:w-80">
           <AiOutlineCamera className="text-2xl mr-2 min-w-[30px]" />
 
           {isDragAccept && <p>{v("upload")}</p>}
@@ -49,6 +51,15 @@ const UploadImage = () => {
                 {v("Drag & drop your image here or")}
               </p>
             </>
+          )}
+        </div>
+
+        <div className="h-10">
+          {image && (
+            <img
+              src={URL.createObjectURL(image[0])}
+              className="h-full w-full max-h-[50px] max-w-[80px] object-cover"
+            />
           )}
         </div>
 

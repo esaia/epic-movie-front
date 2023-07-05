@@ -25,7 +25,7 @@ const DashboardInput = ({
         <p className="absolute right-2 top-1 text-gray-400">{lang}</p>
 
         {prefix && (
-          <p className="text-xs pl-2 text-left w-fit whitespace-nowrap">
+          <p className="text-xs text-gray-400 pl-2 text-left w-fit whitespace-nowrap">
             {prefix}:{" "}
           </p>
         )}

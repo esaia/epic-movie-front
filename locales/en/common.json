@@ -58,6 +58,7 @@
     "Email": "Email",
     "Password": "Password",
     "Edit": "Edit",
+    "confirm": "Confirm",
     "New username": "New username",
     "New email": "New email",
     "New password": "New password",
@@ -136,7 +137,8 @@
     "Upload image": "Upload image",
     "Drag & drop your image here or": "Drag & drop your image here or",
     "Choose file": "Choose file",
-    "replace photo": "replace photo"
+    "replace photo": "replace photo",
+    "email not found": "email not found"
   },
 
   "Forgot": {
