@@ -13,10 +13,12 @@ const MoviePost = ({ movie }: { movie: Movie }) => {
         alt=""
         className="rounded-md aspect-square w-full md:h-56 xl:h-80 object-cover"
       />
-      <p className="py-2 text-xl break-all">
-        {movie.title[`${locale}`].length < 30
-          ? movie.title[`${locale}`]
-          : movie.title[`${locale}`].substring(0, 30) + "..."}{" "}
+      <p className="py-2 text-xl ">
+        <span className="break-all">
+          {movie.title[`${locale}`].length < 30
+            ? movie.title[`${locale}`]
+            : movie.title[`${locale}`].substring(0, 30) + "..."}{" "}
+        </span>
         ({movie.date.slice(0, 4)})
       </p>
       <div className="flex items-center gap-2 text-xl">

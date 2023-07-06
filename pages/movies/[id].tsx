@@ -95,12 +95,22 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
 
         <div className="mt-4 md:mt-0 md:pl-3">
           <div className="flex justify-between items-center">
-            <div className="flex justify-between text-orange-200 break-all">
-              {movie
-                ? `${movie?.title[`${locale}`]} (${movie?.date?.slice(0, 4)})`
-                : `${
-                    initialMovie?.title[`${locale}`]
-                  } (${initialMovie?.date?.slice(0, 4)})`}
+            <div className="flex justify-between text-orange-200">
+              {movie ? (
+                <p>
+                  <span className="break-all">
+                    `${movie?.title[`${locale}`]}
+                  </span>{" "}
+                  ({movie?.date?.slice(0, 4)})
+                </p>
+              ) : (
+                <p>
+                  <span className="break-all">
+                    `${initialMovie?.title[`${locale}`]}
+                  </span>{" "}
+                  ({initialMovie?.date?.slice(0, 4)})
+                </p>
+              )}
             </div>
             <div className="flex bg-secondary items-center gap-3 px-4 py-2 rounded-md">
               <BiPencil className="cursor-pointer" onClick={showEditMovie} />
