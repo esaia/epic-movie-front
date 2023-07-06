@@ -51,10 +51,13 @@ const AddQuote = ({
               />
             </div>
             <div className="flex gap-3 flex-col flex-2  justify-center  items-start text-left">
-              <h2 className="text-orange-200 ">
-                {movie?.title[`${locale}`] +
-                  " " +
-                  `(${movie?.date?.slice(0, 4)})`}
+              <h2 className="text-orange-200  break-all">
+                {movie && movie?.title[`${locale}`].length < 20
+                  ? movie?.title[`${locale}`]
+                  : movie?.title[`${locale}`].substring(0, 20) +
+                    "..." +
+                    " " +
+                    `(${movie?.date?.slice(0, 4)})`}
               </h2>
 
               <div className="flex gap-2">
@@ -77,14 +80,14 @@ const AddQuote = ({
             </div>
           </div>
           <div
-            className={`relative w-full  border rounded-md my-2  mt-6  ${
+            className={`relative w-full flex  border rounded-md my-2  mt-6  ${
               errors.quote_en ? "border-red-600" : "border-gray-600"
             }  `}
           >
             <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
             <textarea
-              className="w-full outline-none bg-transparent placeholder:italic p-2 "
+              className="outline-none bg-transparent placeholder:italic p-2 w-11/12 "
               placeholder="quote..."
               {...register("quote_en", {
                 required: v("This field is required"),
@@ -98,14 +101,14 @@ const AddQuote = ({
           </div>
           <ErrorText errors={errors} name="quote_en" />
           <div
-            className={`relative w-full  border rounded-md my-2  ${
+            className={`relative w-full flex  border rounded-md my-2  ${
               errors.quote_ka ? "border-red-600" : "border-gray-600"
             }`}
           >
             <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
             <textarea
-              className="w-full outline-none bg-transparent placeholder:italic p-2 "
+              className="w-11/12 outline-none bg-transparent placeholder:italic p-2 "
               placeholder="ციტატა..."
               {...register("quote_ka", {
                 required: v("This field is required"),

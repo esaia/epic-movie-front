@@ -2,7 +2,7 @@ import { AuthContext } from "context/AuthContext";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 
-const ProfilePic = ({ size }: { size: string }) => {
+const ProfilePic = ({ size, src }: { size: string; src?: string }) => {
   const { user } = useContext(AuthContext);
   const widthClass = `w-${size}`;
   const heightClass = `h-${size}`;
@@ -13,7 +13,9 @@ const ProfilePic = ({ size }: { size: string }) => {
       {user?.img && (
         <img
           src={
-            user?.google_id
+            src
+              ? src
+              : user?.google_id
               ? user?.img
               : `${process.env.NEXT_PUBLIC_BASE_URL}/storage/${user?.img}`
           }

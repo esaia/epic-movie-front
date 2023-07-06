@@ -23,6 +23,7 @@ const CreateQuoteModal = () => {
     movieId,
     setErrorMessage,
     errorMessage,
+    isLoading,
   } = useCreateQuoteModal();
 
   return (
@@ -44,7 +45,7 @@ const CreateQuoteModal = () => {
                 errors.quote_en ? "border-red-600" : "border-gray-600"
               }  `}
             >
-              <p className="absolute right-2 top-1 text-gray-400">eng</p>
+              <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
               <textarea
                 className="w-full outline-none bg-transparent placeholder:italic p-2 "
@@ -92,15 +93,21 @@ const CreateQuoteModal = () => {
                   <p>{t("Choose movie")}</p>
                 </div>
 
-                <p>
-                  {movies &&
-                    movies?.find((movie) => movie.id === movieId)?.title[
-                      `${locale}`
-                    ]}
+                <p className="break-all">
+                  {!movies?.find((movie) => movie.id === movieId)?.title[
+                    `${locale}`
+                  ]?.length ?? 0 < 20
+                    ? movies?.find((movie) => movie.id === movieId)?.title[
+                        `${locale}`
+                      ]
+                    : movies
+                        ?.find((movie) => movie.id === movieId)
+                        ?.title[`${locale}`].substring(0, 20) + "..."}
                 </p>
 
                 <AiOutlineCaretDown className="text-white" />
               </div>
+
               {showMovies && (
                 <div className="absolute w-full h-fit bg-background top-16 rounded-md left-0 overflow-hidden">
                   {movies &&
@@ -130,7 +137,8 @@ const CreateQuoteModal = () => {
 
             <button
               type="submit"
-              className="w-full  bg-red-600 p-1 mt-5 rounded-md"
+              className="w-full  bg-red-600 p-1 mt-5 rounded-md disabled:bg-red-300"
+              disabled={isLoading}
             >
               {t("Post")}
             </button>

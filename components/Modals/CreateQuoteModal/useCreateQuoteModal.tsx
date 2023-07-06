@@ -28,7 +28,7 @@ const useCreateQuoteModal = () => {
     queryFn: () => fetchMovies(),
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (formdata: FormData) => addQuote(formdata),
     onSuccess: () => {
       window.location.href = "/";
@@ -74,6 +74,7 @@ const useCreateQuoteModal = () => {
     movieId,
     setErrorMessage,
     errorMessage,
+    isLoading,
   };
 };
 

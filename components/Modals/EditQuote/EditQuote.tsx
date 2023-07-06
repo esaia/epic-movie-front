@@ -41,7 +41,7 @@ const EditQuote = ({
             errors.quote_en ? "border-red-600" : "border-gray-600"
           }`}
         >
-          <p className="absolute right-2 top-1 text-gray-400">eng</p>
+          <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
           <textarea
             className="w-11/12  outline-none bg-transparent placeholder:italic p-2  "

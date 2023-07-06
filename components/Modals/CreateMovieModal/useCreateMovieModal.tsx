@@ -27,7 +27,7 @@ const useCreateMovieModal = () => {
     queryFn: getAllgenres,
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (formData: FormData) => addMovie(formData),
     onSuccess: () => {
       push(pathname);
@@ -64,6 +64,7 @@ const useCreateMovieModal = () => {
     control,
     onSubmit,
     locale,
+    isLoading,
     t,
     v,
   };

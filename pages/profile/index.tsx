@@ -68,7 +68,11 @@ const Profile = () => {
                 </div>
               )}
 
-              <ProfilePic size="32" />
+              <ProfilePic
+                size="32"
+                src={img && URL.createObjectURL(new Blob([img[0]]))}
+              />
+
               {!user?.google_id && (
                 <label className="cursor-pointer" htmlFor="profile">
                   {t("Upload new photo")}
@@ -142,7 +146,7 @@ const Profile = () => {
                     errors={errors}
                     name="name"
                     render={({ message }) => (
-                      <p className="text-sm mt-2 text-red-500 ml-3">
+                      <p className="text-sm mt-2 text-red-600 ml-3">
                         {message}
                       </p>
                     )}
@@ -155,7 +159,7 @@ const Profile = () => {
                   </div>
                   <div
                     onClick={() => setShowConfirmationModal(true)}
-                    className="bg-red-500 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
+                    className="bg-red-600 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
                   >
                     {t("Edit")}
                   </div>
@@ -175,11 +179,11 @@ const Profile = () => {
 
                 <div className="bg-secondary p-10 mt-7">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="">{t("Enter new usarname")}</label>
-                    <input
-                      type="text"
-                      className="p-2 bg-gray-300 rounded-md text-black outline-none"
-                      {...register("name", {
+                    <Input
+                      name="name"
+                      label={t("Enter new usarname")}
+                      placeholder={t("New username")}
+                      registerOptions={{
                         required: v("This field is required"),
                         minLength: {
                           value: 3,
@@ -190,22 +194,13 @@ const Profile = () => {
                           message: v("Enter a maximum of 15 characters"),
                         },
                         pattern: {
-                          value: /^[a-z]+$/,
+                          value:
+                            /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                           message: v("Enter lower case characters"),
                         },
-                      })}
+                      }}
                     />
                   </div>
-
-                  <ErrorMessage
-                    errors={errors}
-                    name="name"
-                    render={({ message }) => (
-                      <p className="text-sm mt-2 text-red-500 ml-3">
-                        {message}
-                      </p>
-                    )}
-                  />
                 </div>
 
                 <div className="flex justify-between items-center px-10 py-6">
@@ -214,7 +209,7 @@ const Profile = () => {
                   </div>
                   <div
                     onClick={() => setShowConfirmationModal(true)}
-                    className="bg-red-500 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
+                    className="bg-red-600 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
                   >
                     {t("Edit")}
                   </div>
@@ -261,7 +256,7 @@ const Profile = () => {
                       errors={errors}
                       name="password"
                       render={({ message }) => (
-                        <p className="text-sm  text-red-500 ">{message}</p>
+                        <p className="text-sm  text-red-600 ">{message}</p>
                       )}
                     />
                   </div>
@@ -284,7 +279,7 @@ const Profile = () => {
                       errors={errors}
                       name="password_confirmation"
                       render={({ message }) => (
-                        <p className="text-sm  text-red-500 ">{message}</p>
+                        <p className="text-sm  text-red-600 ">{message}</p>
                       )}
                     />
                   </div>
@@ -296,7 +291,7 @@ const Profile = () => {
                   </div>
                   <div
                     onClick={() => setShowConfirmationModal(true)}
-                    className="bg-red-500 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
+                    className="bg-red-600 flex items-center justify-center cursor-pointer w-40 px-4 py-2 rounded-md"
                   >
                     {t("Edit")}
                   </div>
@@ -313,7 +308,10 @@ const Profile = () => {
             <form id="updateUserFrom" onSubmit={handleSubmit(updateUser)}>
               <div className="flex justify-center items-center flex-col">
                 <div className="mb-4 top-[-40px] mt-[-40px] ">
-                  <ProfilePic size="32" />
+                  <ProfilePic
+                    size="32"
+                    src={img && URL.createObjectURL(new Blob([img[0]]))}
+                  />
                 </div>
 
                 {!user?.google_id && (
@@ -515,7 +513,7 @@ const Profile = () => {
               <button
                 type="submit"
                 form="updateUserFrom"
-                className="px-2 py-2 w-48 bg-red-500  text-white rounded-md mt-5"
+                className="px-2 py-2 w-48 bg-red-600  text-white rounded-md mt-5"
               >
                 {t("save changes")}
               </button>

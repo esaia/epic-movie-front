@@ -34,7 +34,7 @@ const EditMovieModal = ({
     <FormProvider {...form}>
       <form
         onSubmit={handleSubmit(submitForm)}
-        className="w-full text-center h-screen md:h-[90vh]"
+        className="w-full text-center h-screen md:h-fit"
       >
         <h2 className="py-5 border-b border-gray-600 text-xl">
           {t("Update Movie")}
