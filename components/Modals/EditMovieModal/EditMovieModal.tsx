@@ -5,7 +5,7 @@ import {
   DashboardInput,
   ErrorText,
   ProfilePic,
-  UploadeImageVertical,
+  UploadImageVertical,
 } from "@/components";
 import { Movie } from "global";
 
@@ -191,7 +191,7 @@ const EditMovieModal = ({
             </div>
             <ErrorText errors={errors} name="description_ka" />
 
-            <UploadeImageVertical movie={movie} />
+            <UploadImageVertical movie={movie} />
 
             <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
               {t("Edit")}

@@ -20,4 +20,4 @@ export * from "./Input";
 export * from "./ErrorText";
 export * from "./LanguageSwitcher";
 export * from "./UploadImage";
-export * from "./UploadeImageVertical";
+export * from "./UploadImageVertical";
