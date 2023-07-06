@@ -98,15 +98,13 @@ const SingleMovie = ({ initialMovie }: { initialMovie: Movie }) => {
             <div className="flex justify-between text-orange-200">
               {movie ? (
                 <p>
-                  <span className="break-all">
-                    `${movie?.title[`${locale}`]}
-                  </span>{" "}
+                  <span className="break-all">{movie?.title[`${locale}`]}</span>{" "}
                   ({movie?.date?.slice(0, 4)})
                 </p>
               ) : (
                 <p>
                   <span className="break-all">
-                    `${initialMovie?.title[`${locale}`]}
+                    {initialMovie?.title[`${locale}`]}
                   </span>{" "}
                   ({initialMovie?.date?.slice(0, 4)})
                 </p>
