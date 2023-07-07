@@ -23,6 +23,7 @@ const RegisterModal = () => {
         <p className="text-center text-sm text-gray-600 mb-5">
           {t("Start your journey!")}
         </p>
+
         <Input
           name="name"
           label={t("name")}
@@ -30,13 +31,16 @@ const RegisterModal = () => {
           placeholder={t("At least 3 max 15 characters")}
           registerOptions={{
             required: v("This field is required"),
-            minLength: { value: 3, message: v("Enter at least 3 characters") },
+            minLength: {
+              value: 3,
+              message: v("Enter at least 3 characters"),
+            },
             maxLength: {
               value: 15,
               message: v("Enter a maximum of 15 characters"),
             },
             pattern: {
-              value: /^[a-z]+$/,
+              value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
               message: v("Enter lower case characters"),
             },
           }}
