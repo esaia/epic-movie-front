@@ -11,7 +11,7 @@ const useDashboardPortal = ({ isOpen }: propsType) => {
     setIsClient(true);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       document.querySelector("#bodyid")!.classList.add("overflow-hidden");
     } else {
