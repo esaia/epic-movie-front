@@ -16,7 +16,7 @@ const useCreateQuoteModal = () => {
   const { user } = useContext(AuthContext);
   const { locale } = useRouter();
   const formData = new FormData();
-
+  const [movieTitle, setmovieTitle] = useState("");
   const form = useForm<quoteForm>();
   const {
     handleSubmit,
@@ -57,6 +57,16 @@ const useCreateQuoteModal = () => {
     }
   }, [errors]);
 
+  useEffect(() => {
+    if (movies) {
+      const movie = movies.find((movie) => movie.id === movieId);
+      if (movie && movie.title && movie.title.en) {
+        console.log(movie.title.en.length < 20);
+        setmovieTitle(movie.title[`${locale}`]);
+      }
+    }
+  }, [movieId]);
+
   return {
     v,
     t,
@@ -75,6 +85,7 @@ const useCreateQuoteModal = () => {
     setErrorMessage,
     errorMessage,
     isLoading,
+    movieTitle,
   };
 };
 

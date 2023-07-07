@@ -1,5 +1,5 @@
 import { ErrorText, ProfilePic, UploadImage } from "@/components";
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { BsCameraReels } from "react-icons/bs";
 import useCreateQuoteModal from "./useCreateQuoteModal";
@@ -24,6 +24,7 @@ const CreateQuoteModal = () => {
     setErrorMessage,
     errorMessage,
     isLoading,
+    movieTitle,
   } = useCreateQuoteModal();
 
   return (
@@ -93,17 +94,13 @@ const CreateQuoteModal = () => {
                   <p>{t("Choose movie")}</p>
                 </div>
 
-                <p className="break-all">
-                  {!movies?.find((movie) => movie.id === movieId)?.title[
-                    `${locale}`
-                  ]?.length ?? 0 < 20
-                    ? movies?.find((movie) => movie.id === movieId)?.title[
-                        `${locale}`
-                      ]
-                    : movies
-                        ?.find((movie) => movie.id === movieId)
-                        ?.title[`${locale}`].substring(0, 20) + "..."}
-                </p>
+                <div className="break-all">
+                  {movieTitle.length < 20 ? (
+                    <p>{movieTitle}</p>
+                  ) : (
+                    <p>{movieTitle.substring(0, 20) + "..."}</p>
+                  )}
+                </div>
 
                 <AiOutlineCaretDown className="text-white" />
               </div>
