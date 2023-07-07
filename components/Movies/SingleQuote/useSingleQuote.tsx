@@ -33,7 +33,7 @@ const useSingleQuote = (quote: Quote) => {
 
   const deleteQuoteFromDb = async () => {
     await deleteQuoteRequest(quote.id);
-
+    setdeleteConfirmation(false);
     queryClient.invalidateQueries(["singleMovie", query.id]);
   };
 

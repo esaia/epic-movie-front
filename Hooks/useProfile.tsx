@@ -55,9 +55,9 @@ const useProfile = () => {
 
     const formData = new FormData();
 
-    if (inputes.img.length === 0) {
+    if (inputes.img && inputes?.img?.length === 0) {
       delete inputes.img;
-    } else {
+    } else if (inputes.img) {
       formData.append("img", inputes.img[0]);
     }
 
@@ -87,6 +87,7 @@ const useProfile = () => {
   };
 
   const resetFields = () => {
+    resetField("img");
     resetField("password");
     resetField("password_confirmation");
     resetField("email");
@@ -114,6 +115,7 @@ const useProfile = () => {
     seteditUsername(false);
     seteditEmail(false);
     seteditPassword(false);
+    resetFields();
   };
 
   const goBack = () => {

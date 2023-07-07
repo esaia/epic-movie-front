@@ -38,13 +38,13 @@ const QuotePost = ({ quote }: { quote: Quote }) => {
       </div>
 
       {quote.quote ? (
-        <p className=" break-all">
+        <p className="">
           “{quote.quote[`${locale}`]}” movie -
           <span className="text-orange-200 break-all">
             {" "}
             {quote.movie.title[`${locale}`]}
           </span>{" "}
-          ({quote.movie.date.slice(0, 4)})
+          <span>({quote.movie.date.slice(0, 4)})</span>
         </p>
       ) : (
         <p>quote not found</p>

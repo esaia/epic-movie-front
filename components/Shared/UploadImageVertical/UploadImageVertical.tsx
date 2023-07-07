@@ -2,7 +2,7 @@ import { Movie } from "global";
 import { AiOutlineCamera } from "react-icons/ai";
 import useUploadImageVertical from "./useUploadImageVertical";
 
-const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
+const UploadImageVertical = ({ movie }: { movie: Movie | undefined }) => {
   const {
     getRootProps,
     getInputProps,
@@ -61,4 +61,4 @@ const UploadeImageVertical = ({ movie }: { movie: Movie | undefined }) => {
   );
 };
 
-export default UploadeImageVertical;
+export default UploadImageVertical;

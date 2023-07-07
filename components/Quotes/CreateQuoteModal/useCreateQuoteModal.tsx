@@ -16,7 +16,7 @@ const useCreateQuoteModal = () => {
   const { user } = useContext(AuthContext);
   const { locale } = useRouter();
   const formData = new FormData();
-
+  const [movieTitle, setmovieTitle] = useState("");
   const form = useForm<quoteForm>();
   const {
     handleSubmit,
@@ -28,7 +28,7 @@ const useCreateQuoteModal = () => {
     queryFn: () => fetchMovies(),
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (formdata: FormData) => addQuote(formdata),
     onSuccess: () => {
       window.location.href = "/";
@@ -57,6 +57,15 @@ const useCreateQuoteModal = () => {
     }
   }, [errors]);
 
+  useEffect(() => {
+    if (movies) {
+      const movie = movies.find((movie) => movie.id === movieId);
+      if (movie && movie.title && movie.title.en) {
+        setmovieTitle(movie.title[`${locale}`]);
+      }
+    }
+  }, [movieId]);
+
   return {
     v,
     t,
@@ -74,6 +83,8 @@ const useCreateQuoteModal = () => {
     movieId,
     setErrorMessage,
     errorMessage,
+    isLoading,
+    movieTitle,
   };
 };
 

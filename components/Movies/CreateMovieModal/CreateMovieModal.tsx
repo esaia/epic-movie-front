@@ -1,43 +1,37 @@
-import { Controller, FormProvider } from "react-hook-form";
-import useEditMovieModal from "./useEditMovieModal";
+import React from "react";
+import { FormProvider, Controller } from "react-hook-form";
+import useCreateMovieModal from "./useCreateMovieModal";
 import Select from "react-select";
 import {
   DashboardInput,
   ErrorText,
   ProfilePic,
-  UploadeImageVertical,
+  UploadImage,
 } from "@/components";
-import { Movie } from "global";
 
-const EditMovieModal = ({
-  movie,
-  closeModal,
-}: {
-  movie: Movie | undefined;
-  closeModal: () => void;
-}) => {
+const CreateMovieModal = () => {
   const {
     user,
     handleSubmit,
     register,
-    submitForm,
     form,
-    errors,
-    v,
-    t,
-    control,
     genres,
+    control,
+    errors,
+    onSubmit,
+    isLoading,
     locale,
-  } = useEditMovieModal(movie, closeModal);
-
+    t,
+    v,
+  } = useCreateMovieModal();
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={handleSubmit(submitForm)}
-        className="w-full text-center h-screen md:h-[90vh]"
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full text-center h-screen md:h-fit"
       >
         <h2 className="py-5 border-b border-gray-600 text-xl">
-          {t("Update Movie")}
+          {t("Add movie")}
         </h2>
 
         <div className="p-5">
@@ -59,7 +53,6 @@ const EditMovieModal = ({
                   message: v("only English"),
                 },
               }}
-              prefix="Movie name"
             />
             <DashboardInput
               name="title_ka"
@@ -72,7 +65,6 @@ const EditMovieModal = ({
                   message: v("only Georgia"),
                 },
               }}
-              prefix="ფილმის სახელი"
             />
             <div
               className={`border rounded-md ${
@@ -127,7 +119,6 @@ const EditMovieModal = ({
                   message: v("only English"),
                 },
               }}
-              prefix="Director"
             />
             <DashboardInput
               name="director_ka"
@@ -140,23 +131,19 @@ const EditMovieModal = ({
                   message: v("only Georgia"),
                 },
               }}
-              prefix="რეჟისორი"
             />
             <div
-              className={`relative w-full  border  rounded-md flex  items-start ${
+              className={`relative flex w-full  border  rounded-md ${
                 errors.description_en ? "border-red-600" : "border-gray-600"
               }`}
             >
               <p className="absolute right-2 top-1 text-gray-400">Eng</p>
 
-              <p className="text-xs pl-2 pt-3 text-gray-400">Discription: </p>
-
               <textarea
-                className="w-full outline-none bg-transparent placeholder:italic p-2  mr-12 "
+                className="w-full outline-none bg-transparent placeholder:italic p-2 mr-12"
                 placeholder="Movie discription"
                 {...register("description_en", {
                   required: v("This field is required"),
-
                   pattern: {
                     value: /^[a-zA-Z0-9!@#$%^&*()-=_+~`[\]{}|;:'",.<>/?\s]*$/,
                     message: v("only English"),
@@ -167,18 +154,14 @@ const EditMovieModal = ({
             <ErrorText errors={errors} name="description_en" />
 
             <div
-              className={`relative w-full  border  rounded-md flex items-start ${
+              className={`relative flex w-full  border  rounded-md ${
                 errors.description_ka ? "border-red-600" : "border-gray-600"
               }`}
             >
               <p className="absolute right-2 top-1 text-gray-400">ქარ</p>
 
-              <p className="text-xs pl-2 pt-3 whitespace-nowrap text-gray-400">
-                ფილმის აღწერა:
-              </p>
-
               <textarea
-                className="w-full outline-none bg-transparent placeholder:italic p-2 mr-12 "
+                className="w-full outline-none bg-transparent placeholder:italic p-2 mr-12"
                 placeholder="ფილმის აღწერა"
                 {...register("description_ka", {
                   required: v("This field is required"),
@@ -191,10 +174,13 @@ const EditMovieModal = ({
             </div>
             <ErrorText errors={errors} name="description_ka" />
 
-            <UploadeImageVertical movie={movie} />
+            <UploadImage />
 
-            <button className="w-full bg-red-600 p-1 mt-5 rounded-md">
-              {t("Edit")}
+            <button
+              className="w-full p-1 mt-5  rounded-md  bg-red-600 disabled:bg-red-300 "
+              disabled={isLoading}
+            >
+              {t("Add movie")}
             </button>
           </div>
         </div>
@@ -203,4 +189,4 @@ const EditMovieModal = ({
   );
 };
 
-export default EditMovieModal;
+export default CreateMovieModal;
