@@ -61,7 +61,6 @@ const useCreateQuoteModal = () => {
     if (movies) {
       const movie = movies.find((movie) => movie.id === movieId);
       if (movie && movie.title && movie.title.en) {
-        console.log(movie.title.en.length < 20);
         setmovieTitle(movie.title[`${locale}`]);
       }
     }
